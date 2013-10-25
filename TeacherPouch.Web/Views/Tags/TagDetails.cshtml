@@ -1,0 +1,50 @@
+﻿@model TagDetailsViewModel
+
+@{
+    ViewBag.Title = "Tag: " + Model.Tag.Name;
+}
+
+<div id="tagDetails">
+    <header>
+        <h1>@Html.TagButton(Model.Tag)</h1>
+    </header>
+
+    @if (SecurityHelper.UserCanSeePrivateRecords(base.User))
+    {
+        <div>
+            @if (Model.Tag.IsPrivate)
+            {
+                <span>Is Private: <strong>Yes</strong></span>
+            }
+            else
+            {
+                <span>Is Private: No</span>
+            }
+        </div>
+    }
+
+    @if (Model.TaggedPhotos.SafeAny())
+    {
+        <div>
+            <ul class="photo-thumbs">
+                @foreach (var photo in Model.TaggedPhotos)
+                {
+                    <li>@Html.PhotoThumb_SearchResult(photo, Model.Tag)</li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div>No photos found for this tag.</div>
+    }
+
+    @if (SecurityHelper.UserIsAdmin(base.User))
+    {
+        <div>
+            <a href="@Url.TagEdit(Model.Tag)">Edit</a> |
+            <a href="@Url.TagDelete(Model.Tag)">Delete</a> |
+            <a href="@Url.TagIndex()">Tag Index</a>
+        </div>
+    }
+</div>

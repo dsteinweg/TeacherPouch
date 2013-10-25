@@ -1,0 +1,55 @@
+﻿@model SearchResults
+
+@{
+    ViewBag.Title = "Search Results - " + Model.SearchTerm;
+}
+
+<div id="searchResults">
+    <h1>Search Results</h1>
+
+    @if (Model.ExactTagResult != null)
+    {
+        <div class="search-result">
+            <h2>@Html.TagButton(Model.ExactTagResult.Tag)</h2>
+            @{ Html.RenderPartial(MVC.Search.Views._PhotoThumbnails, Model.ExactTagResult); }
+        </div>
+    }
+
+    @if (Model.PluralTagResult != null)
+    {
+        <div class="search-result">
+            <h2>@Html.TagButton(Model.PluralTagResult.Tag)</h2>
+            @{ Html.RenderPartial(MVC.Search.Views._PhotoThumbnails, Model.PluralTagResult); }
+        </div>
+    }
+
+    @if (Model.SingularTagResult != null)
+    {
+        <div class="search-result">
+            <h2>@Html.TagButton(Model.SingularTagResult.Tag)</h2>
+            @{ Html.RenderPartial(MVC.Search.Views._PhotoThumbnails, Model.SingularTagResult); }
+        </div>
+    }
+
+    @if (Model.StartsWithTagResults.SafeAny())
+    {
+        foreach (var tagResult in Model.StartsWithTagResults)
+        {
+            <div class="search-result">
+                <h2>@Html.TagButton(tagResult.Tag)</h2>
+                @{ Html.RenderPartial(MVC.Search.Views._PhotoThumbnails, tagResult); }
+            </div>
+        }
+    }
+
+    @if (Model.EndsWithTagResults.SafeAny())
+    {
+        foreach (var tagResult in Model.EndsWithTagResults)
+        {
+            <div class="search-result">
+                <h2>@Html.TagButton(tagResult.Tag)</h2>
+                @{ Html.RenderPartial(MVC.Search.Views._PhotoThumbnails, tagResult); }
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,18 @@
+﻿@model ErrorViewModel
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h3>Oops! Something went wrong.</h3>
+<p>
+    An error occurred on the server. It's probably not your fault.
+</p>
+
+@if (!String.IsNullOrWhiteSpace(Model.ExceptionDetails))
+{
+    <div style="margin-top:20px">
+        <h4>Exception details:</h4>
+        @Model.ExceptionDetails
+    </div>
+}

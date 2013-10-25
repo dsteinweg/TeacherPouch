@@ -1,0 +1,38 @@
+﻿@model AdminViewModel
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div id="admin">
+    <h2>Admin Home</h2>
+
+    <h4>Welcome, @Model.UserName!</h4>
+
+    <fieldset>
+        <legend>Your Account</legend>
+        <p>Assigned Roles: @Model.Roles</p>
+    </fieldset>    
+
+    <fieldset>
+        <legend>Photos</legend>
+        @if (SecurityHelper.UserIsAdmin(base.User))
+        {
+            <a href="@Url.PhotoCreate()">Create New Photo</a> <br>
+        }
+        <a href="@Url.PhotoIndex()">View All Photos</a>
+    </fieldset>
+
+    <fieldset>
+        <legend>Tags</legend>
+        @if (SecurityHelper.UserIsAdmin(base.User))
+        {
+            <a href="@Url.TagCreate()">Create New Tag</a> <br>
+        }
+        <a href="@Url.TagIndex()">View All Tags</a>
+    </fieldset>
+
+    <p>
+        <a href="@Url.AdminLogout()">Log out</a>
+    </p>
+</div>

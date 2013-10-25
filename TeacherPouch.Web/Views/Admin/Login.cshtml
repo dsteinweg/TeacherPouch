@@ -1,0 +1,32 @@
+﻿@model LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div id="login">
+    <h1>Site Administration</h1>
+
+    <h3>Login</h3>
+
+    @using (Html.BeginForm())
+    {
+        <div>
+            <label for="userName">User Name:</label>
+            <input id="userName" name="userName" type="text" placeholder="user name" value="@Model.UserName" autofocus>
+        </div>
+    
+        <div>
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password" placeholder="password">
+        </div>
+    
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    
+        if (Model.LoginErrorMessage != null) { 
+            <div style="color:red;margin-top:15px;">@Model.LoginErrorMessage</div>
+        }
+    }
+</div>

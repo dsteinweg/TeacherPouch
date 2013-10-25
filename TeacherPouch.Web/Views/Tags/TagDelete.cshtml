@@ -1,0 +1,32 @@
+﻿@model Tag
+
+@{
+    ViewBag.Title = "Delete Tag";
+}
+
+<div id="tagDelete">
+
+    <h2>Are you sure you want to delete this tag?</h2>
+
+    <h3>@Model.Name</h3>
+
+    <div>
+        @if (Model.IsPrivate)
+        {
+            <span>Is Private: <strong>Yes</strong></span>
+        }
+        else
+        {
+            <span>Is Private: No</span>
+        }
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <input type="submit" value="Delete" /> |
+            <a href="@Url.TagDetails(Model)">Cancel</a>
+        </div>
+    }
+</div>

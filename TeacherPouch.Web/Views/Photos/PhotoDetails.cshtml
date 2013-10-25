@@ -1,0 +1,58 @@
+﻿@model PhotoDetailsViewModel
+
+@{
+    ViewBag.Title = "Photo Details";
+}
+
+<div id="photoDetails">
+    <header>
+        <h1>@Model.Photo.Name</h1>
+    </header>
+
+    <table class="photo-details-tbl">
+        <tr>
+            <td class="prev-arrow-cell">
+                @if (Model.PreviousPhoto != null)
+                {
+                    <a href="@Url.PhotoDetails(Model.PreviousPhoto, Model.SearchResultTag)">&lt;</a>
+                }
+            </td>
+            <td class="photo-cell">
+                @Html.LargePhoto(Model.Photo)
+
+                <div>
+                    @{ Html.RenderPartial(MVC.Tags.Views._TagButtons, Model.PhotoTags); }
+                </div>
+            </td>
+            <td class="next-arrow-cell">
+                @if (Model.NextPhoto != null)
+                {
+                    <a href="@Url.PhotoDetails(Model.NextPhoto, Model.SearchResultTag)">&gt;</a>
+                }
+            </td>
+        </tr>
+    </table>
+
+    @if (SecurityHelper.UserCanSeePrivateRecords(base.User))
+    {
+        <div>
+            @if (Model.Photo.IsPrivate)
+            {
+                <span>Is Private: <strong>Yes</strong></span>
+            }
+            else
+            {
+                <span>Is Private: No</span>
+            }
+        </div>
+    }
+
+    @if (SecurityHelper.UserIsAdmin(base.User))
+    {
+        <div>
+            <a href="@Url.PhotoEdit(Model.Photo)">Edit</a> |
+            <a href="@Url.PhotoDelete(Model.Photo)">Delete</a> | 
+            <a href="@Url.PhotoIndex()">Photo index</a>
+        </div>
+    }
+</div>

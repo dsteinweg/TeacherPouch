@@ -1,0 +1,316 @@
+﻿/*
+    General
+*/
+body {
+    font-family: 'Pompiere';
+    font-size: 20px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+
+/*
+    Home Page
+*/
+#home .hero-unit {
+    padding:40px 60px 40px 60px;
+    text-align:center;
+}
+
+.featured-tags-preview {
+    margin-bottom: 20px;
+}
+
+
+/* 
+    About
+*/
+#About {
+     font-family:Arial;
+     font-weight:normal;
+     font-size:14px;
+}
+#About .big {
+    font-size:20px;
+}
+
+
+/*
+    Category Pages
+*/
+#category .hero-unit {
+    padding:20px 0 20px 0;
+    text-align:center;
+}
+    #category .hero-unit header h3 {
+        margin:20px 0 0 0;
+    }
+
+
+/*
+    Admin
+*/
+#login label {
+    font-size:20px;
+}
+
+#login div {
+    margin-bottom:15px;
+}
+
+#admin fieldset{
+    margin-bottom:20px;
+}
+
+
+/*
+    Photos
+*/
+.photo-thumb img {
+    border: 5px solid transparent;
+}
+.photo-thumb.private img {
+    border: 5px solid red;
+}
+
+#createPhoto textarea {
+    height: 200px;
+    width: 300px;
+}
+#createPhoto table div {
+    padding-bottom:20px;
+}
+#createPhoto label {
+    font-size:20px;
+}
+
+#editPhoto label {
+    font-size:20px;
+}
+#editPhoto input[type='checkbox'] {
+    margin:0;
+}
+#editPhoto form > div {
+    margin-bottom:20px;
+}
+
+#photoIndexTable {
+        border-collapse: collapse;
+    }
+
+    #photoIndexTable th {
+        text-align: left;
+    }
+
+    #photoIndexTable th, #photoIndexTable td {
+        padding: 10px 30px 10px 10px;
+    }
+
+    #photoIndexTable tbody tr td:nth-child(2) {
+        text-align:center;
+    }
+
+    #photoIndexTable tbody tr:nth-child(odd) {
+        background-color: #f5f5f5;
+    }
+
+
+#photoDetails header h1 {
+    font-size:50px;
+    padding-bottom:20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+#photoDetails div {
+    margin-bottom:20px;
+}
+#photoDetails .tag-buttons {
+    max-width: 800px;
+}
+
+.photo-details-tbl, .photo-details-tbl td {
+    border-spacing:0 !important;
+    border-collapse:collapse !important;
+    border:0;
+}
+    .photo-details-tbl td {
+        padding:0;
+    }
+    .photo-details-tbl .prev-arrow-cell, .photo-details-tbl .next-arrow-cell {
+        vertical-align:top;
+    }
+    .photo-details-tbl .prev-arrow-cell a, .photo-details-tbl .next-arrow-cell a {
+        height:100%;
+        display:inline-block;
+        font-size:72px;
+        width:60px;
+        text-align:center;
+        text-decoration:none;
+    }
+    .photo-details-tbl .prev-arrow-cell:hover, .photo-details-tbl .next-arrow-cell:hover {
+        background-color:#f5f5f5;
+    }
+    .photo-details-tbl .photo-cell {
+        width:810px;
+        text-align:center;
+    }
+
+
+/*
+    Tags
+*/
+.tag {
+    border:1px solid #ddd;
+    color:black;
+    margin:5px;
+    padding:3px 5px 3px 5px;
+}
+.tag:hover {
+    border:1px solid #aaa;
+}
+
+.tag.private {
+    border:3px solid red;
+    margin:3px;
+}
+.tag.private:hover { }
+
+
+#createTag h2 {
+    margin-bottom:20px;
+}
+#createTag form > div {
+    margin-bottom:15px;
+}
+#createTag label {
+    font-size:20px;
+}
+
+.tag-buttons {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+.tag-buttons:after {
+    clear:both;
+}
+    .tag-buttons li {
+        float:left;
+        margin:0 2px 20px 0;
+    }
+    .tag-buttons li.private:hover {
+        
+    }
+
+
+#tags input {
+    height:200px;
+    width:300px;
+}
+
+
+#tagTable {
+    border-collapse:collapse;
+}
+
+    #tagTable th {
+        text-align: left;
+    }
+    
+    #tagTable th, #tagTable td {
+        padding:5px;
+    }
+
+
+
+#tagDetails header h1 {
+    font-size:50px;
+    padding-bottom:20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+#tagDetails header h1 .tag  {
+    padding:3px 10px 3px 10px;
+}
+#tagDetails div {
+    margin-bottom:20px;
+}
+
+
+#tagEdit label {
+    font-size:20px;
+}
+#tagEdit div {
+    margin-bottom:20px;
+}
+
+
+#tagDelete div {
+    margin-bottom:20px;
+}
+
+
+ul.photo-thumbs {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+    ul.photo-thumbs:before,
+    ul.photo-thumbs:after {
+      display: table;
+      line-height: 0;
+      content: "";
+    }
+    ul.photo-thumbs:after {
+        clear:both;
+    }
+    ul.photo-thumbs li {
+        padding:3px;
+        float:left;
+        margin:5px;
+        height: 200px;
+        width:200px;
+        text-align:center;
+    }
+
+
+
+/*
+    Search
+*/
+#searchResults h1 {
+    margin-bottom: 40px;
+}
+.search-result {
+    margin-bottom:60px;
+}
+    .search-result h2 {
+        border-bottom: 1px solid #e5e5e5;
+        padding-bottom:10px;
+    }
+
+
+/*
+    Contact
+*/
+#contact {
+    text-align:center;
+}
+    #contact #instructions {
+        font-size:24px;
+        margin-bottom:40px;
+    }
+
+    #contact input, #contact textarea, #contact select {
+        width:500px;
+    }
+
+    #contact textarea {
+        height:300px;
+    }
+
+    #contact label {
+        font-size:20px;
+    }
+
+    #contact form > div{
+        margin-bottom:20px;
+    }

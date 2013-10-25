@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D4A90CC5-8079-4C1C-AB1E-460225E2CD41}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TeacherPouch.Web</RootNamespace>
+    <AssemblyName>TeacherPouch.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.SQLite, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.88.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.88.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="T4MVCExtensions">
+      <HintPath>..\packages\T4MVCExtensions.3.7.4\lib\net40\T4MVCExtensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSS\bootstrap-theme.css" />
+    <Content Include="CSS\bootstrap-theme.min.css" />
+    <Content Include="CSS\bootstrap.css" />
+    <Content Include="CSS\bootstrap.min.css" />
+    <Content Include="CSS\styles.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="Global.asax" />
+    <Content Include="IMG\glyphicons-halflings-white.png" />
+    <Content Include="IMG\glyphicons-halflings.png" />
+    <Content Include="IMG\Header\AnimalsHeader2S.jpg" />
+    <Content Include="IMG\Header\AnimalsHeaderS.jpg" />
+    <Content Include="IMG\Header\BeachHeaderS.jpg" />
+    <Content Include="IMG\Header\ChicksHeaderS.jpg" />
+    <Content Include="IMG\Header\FallHeader2.jpg" />
+    <Content Include="IMG\Header\FallHeader2S.jpg" />
+    <Content Include="IMG\Header\FallHeaderSP.jpg" />
+    <Content Include="IMG\Header\FarmHeader2S.jpg" />
+    <Content Include="IMG\Header\FarmHeaderSP.jpg" />
+    <Content Include="IMG\Header\FlowersPlantsS.jpg" />
+    <Content Include="IMG\Header\FoodHeaderS.jpg" />
+    <Content Include="IMG\Header\GardenS.jpg" />
+    <Content Include="IMG\Header\GlacierS.jpg" />
+    <Content Include="IMG\Header\OceanHeaderS.jpg" />
+    <Content Include="IMG\Header\parkS.jpg" />
+    <Content Include="IMG\Header\SpringHeaderS.jpg" />
+    <Content Include="IMG\Header\SummerHeaderS.jpg" />
+    <Content Include="IMG\Header\WeatherHeaderS.jpg" />
+    <Content Include="IMG\Header\WinterHeaderS.jpg" />
+    <Content Include="IMG\Header\ZooS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\aboveandbelowS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\aboveontopofS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\aboveS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\accessoriesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\allclothingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\allfallS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\allflowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\AllFoodS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\allgardenS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\AllSummerS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\allzooS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\AppleOrchardS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ArtS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\AutomobilesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\baseballS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\BeachS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\belowS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\belowunderS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\BeveragesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\birthdayS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\blackS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\blueS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\boatsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\bootsandshoesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\bouquetsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\brownS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\campfiresS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\CampingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\CandyS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\CanningS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\CarsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\CelebrationsAndHolidaysS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ChichenItzaS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ChristmasS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ClothingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ColorfulS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\colorsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\CraftingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\CreativeCommonsLicense.jpg" />
+    <Content Include="IMG\OtherPageHeaders\DessertsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\EasterS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\FallActivitiesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\fallleavesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\FamilyS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\FishingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\fiveS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\FlorenceS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\FlowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\fourS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\FranceS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\FruitS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\gamesS %282%29.jpg" />
+    <Content Include="IMG\OtherPageHeaders\gamesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\GivernyS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\GlacierS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\graduationS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\grayS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\greenS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\GrillingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\growingfvS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\HalloweenS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\householdgoodsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\inS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\IrelandS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ItalyS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\LakesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\lotsmanyS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\mathS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\mathsuppliesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\MeatS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\morecomingsoonS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\nexttoS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\numbersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\OceanS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\oneS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\onS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\orangeflowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\orangeS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\pantsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ParisS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\PetsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\pinkflowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\pinkS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\PlanesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\plantsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\playgroundS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\PompeiiS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\poolS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\PrepositionsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\purpleflowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\purpleS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ReadingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\redflowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\redS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\relaxS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\RomeS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\SchoolS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\SchoolSuppliesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ScotlandS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\SeafoodS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\searchnumbersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ShapesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\shirtsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ShoesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\shortsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\snowS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\spaceS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\SpainS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\sportsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\SummerActivitiesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\SummerfunS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\TeachingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ThanksgivingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\threeS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\throughS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\ToysS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\TrainsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\TransportationS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\treesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\TwoS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\vacationS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\VegetablesS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\VeniceS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\walkS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\WashingtonDCS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\whiteflowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\whiteS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\winterclothingS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\yardworkS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\yellowflowersS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\yellowS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\zooanimalsS.jpg" />
+    <Content Include="IMG\OtherPageHeaders\zooridesS.jpg" />
+    <Content Include="JS\jquery-2.0.0.min.map" />
+    <Content Include="IMG\Web.config" />
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SMTP.config" />
+    <None Include="Properties\PublishProfiles\www.TeacherPouch.com.pubxml" />
+    <None Include="T4MVC\T4MVC.tt.settings.xml" />
+    <Content Include="JS\bootstrap.js" />
+    <Content Include="JS\bootstrap.min.js" />
+    <None Include="JS\jquery-2.0.0.intellisense.js" />
+    <Content Include="JS\jquery-2.0.0.js" />
+    <Content Include="JS\jquery-2.0.0.min.js" />
+    <Content Include="robots.txt" />
+    <Content Include="Web.config" />
+    <Content Include="Views\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Category\CelebrationsAndHolidays.cshtml" />
+    <Content Include="Views\Category\Clothing.cshtml" />
+    <Content Include="Views\Category\Colors.cshtml" />
+    <Content Include="Views\Category\Fall.cshtml" />
+    <Content Include="Views\Category\Flowers.cshtml" />
+    <Content Include="Views\Category\Food.cshtml" />
+    <Content Include="Views\Category\Garden.cshtml" />
+    <Content Include="Views\Category\Math.cshtml" />
+    <Content Include="Views\Category\Numbers.cshtml" />
+    <Content Include="Views\Category\Prepositions.cshtml" />
+    <Content Include="Views\Category\School.cshtml" />
+    <Content Include="Views\Category\Summer.cshtml" />
+    <Content Include="Views\Category\Transportation.cshtml" />
+    <Content Include="Views\Category\Vacation.cshtml" />
+    <Content Include="Views\Category\Winter.cshtml" />
+    <Content Include="Views\Category\Zoo.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Pages\About.cshtml" />
+    <Content Include="Views\Pages\Contact.cshtml" />
+    <Content Include="Views\Pages\ContactThanks.cshtml" />
+    <Content Include="Views\Pages\Copyright.cshtml" />
+    <Content Include="Views\Pages\Home.cshtml" />
+    <Content Include="Views\Photos\PhotoCreate.cshtml" />
+    <Content Include="Views\Photos\PhotoDelete.cshtml" />
+    <Content Include="Views\Photos\PhotoDetails.cshtml" />
+    <Content Include="Views\Photos\PhotoEdit.cshtml" />
+    <Content Include="Views\Photos\PhotoIndex.cshtml" />
+    <Content Include="Views\Search\NoneFound.cshtml" />
+    <Content Include="Views\Search\SearchResults.cshtml" />
+    <Content Include="Views\Search\_PhotoThumbnails.cshtml" />
+    <Content Include="Views\Tags\TagCreate.cshtml" />
+    <Content Include="Views\Tags\TagDelete.cshtml" />
+    <Content Include="Views\Tags\TagDetails.cshtml" />
+    <Content Include="Views\Tags\TagEdit.cshtml" />
+    <Content Include="Views\Tags\TagIndex.cshtml" />
+    <Content Include="Views\Tags\_FeaturedCategoriesMenu.cshtml" />
+    <Content Include="Views\Tags\_TagButtons.cshtml" />
+    <Content Include="Views\Tags\_TagEditor_Photo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\RepositoryControllerBase.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ErrorHelper.cs" />
+    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Helpers\UrlHelperExtensions.cs" />
+    <Compile Include="Misc\CustomMvcControllerFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="T4MVC\T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PhotoCreateViewModel.cs" />
+    <Compile Include="ViewModels\PhotoDetailsViewModel.cs" />
+    <Compile Include="ViewModels\TagCreateViewModel.cs" />
+    <Compile Include="ViewModels\TagDetailsViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Web.config" />
+    <Content Include="packages.config" />
+    <None Include="T4MVC\T4MVC.tt.hooks.t4" />
+    <None Include="T4MVC\T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TeacherPouch.Models\TeacherPouch.Models.csproj">
+      <Project>{fa21ba1d-f4d4-47f3-91de-c0366a35af4d}</Project>
+      <Name>TeacherPouch.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeacherPouch.Providers\TeacherPouch.Providers.csproj">
+      <Project>{6e211fe8-3bc4-4a79-bb6d-04da98f4eb50}</Project>
+      <Name>TeacherPouch.Providers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeacherPouch.Repositories\TeacherPouch.Repositories.csproj">
+      <Project>{089f31f1-bffa-47e9-a4db-e1893c2dd0a1}</Project>
+      <Name>TeacherPouch.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeacherPouch.Utilities\TeacherPouch.Utilities.csproj">
+      <Project>{4c89de3e-1b01-40dd-8d8e-40f29e75e216}</Project>
+      <Name>TeacherPouch.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2847</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

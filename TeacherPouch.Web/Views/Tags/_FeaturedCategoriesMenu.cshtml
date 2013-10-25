@@ -1,0 +1,80 @@
+﻿<ul class="nav nav-list" style="font-size:20px;">
+    <li class="nav-header">Featured Categories</li>
+    <li>
+        <a href="@Url.Search("Animals")">Animals</a>
+    </li>
+        <li>
+        <a href="@Url.Category("CelebrationsAndHolidays")">Celebrations and Holidays</a>
+    </li>
+    <li>
+        <a href="@Url.Search("Chicks")">Chicks</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Clothing")">Clothing</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Colors")">Colors</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Fall")">Fall</a>
+    </li>
+    <li>
+        <a href="@Url.Search("Farm")">Farm</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Flowers")">Flowers</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Food")">Food</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Garden")">Garden</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Math")">Math</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Numbers")">Numbers</a>
+    </li>
+    <li>
+        <a href="@Url.Search("Park")">Park</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Prepositions")">Prepositions</a>
+    </li>
+    <li>
+        <a href="@Url.Category("School")">School</a>
+    </li>
+    <li>
+        <a href="@Url.Search("Spring")">Spring</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Summer")">Summer</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Transportation")">Transportation</a>
+    </li>
+    <li>
+        <a href="@Url.Search("Weather")">Weather</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Winter")">Winter</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Vacation")">Vacation</a>
+    </li>
+    <li>
+        <a href="@Url.Category("Zoo")">Zoo</a>
+    </li>
+
+    @if (base.User.Identity.IsAuthenticated)
+    {
+        <li class="nav-header">Administration</li>
+        <li><a href="@Url.Admin()">Admin Home</a></li>
+        
+        if (SecurityHelper.UserIsAdmin(base.User))
+        {
+            <li><a href="@Url.PhotoCreate()">Add new Photo</a></li>
+        }
+    }
+</ul>

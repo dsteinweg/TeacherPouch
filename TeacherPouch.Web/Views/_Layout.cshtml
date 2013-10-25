@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - TeacherPouch</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="@Url.VersionedContent("~/css/bootstrap.css")" rel="stylesheet" media="screen">
+    <link href="@Url.VersionedContent("~/css/styles.css")" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet" type="text/css">
+
+    @{ RenderSection(name: "Head", required: false); }
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="brand" href="/">TeacherPouch</a>
+
+                <ul class="nav" style="font-size:20px;">
+                    <li class="@ViewBag.HomeActiveClass"><a href="/">Home</a></li>
+                    <li class="@ViewBag.AboutActiveClass"><a href="@Url.About()">About</a></li>
+                    <li class="@ViewBag.CopyrightActiveClass"><a href="@Url.Copyright()">Copyright</a></li>
+                    <li class="@ViewBag.ContactActiveClass"><a href="@Url.Contact()">Contact</a></li>
+                </ul>
+
+                <form action="/Search" method="get" class="navbar-search pull-left">
+                    <input id="q" name="q" type="text" class="search-query" placeholder="Search">
+                </form>
+
+                @if (base.User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav" style="float:right;">
+                        <li style="padding-top:10px;">
+                            <span style="color:white;">Hello, @base.User.Identity.Name.ToTitleCase()!</span>
+                            <a href="@Url.AdminLogout(Request.RawUrl)" style="display:inline;">Log out</a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <div class="span2">
+                <div class="well sidebar-nav">
+                    @{ Html.RenderPartial(MVC.Tags.Views._FeaturedCategoriesMenu); }
+                </div>
+            </div>
+
+            <div class="span10">
+                @RenderBody()
+            </div>
+        </div>
+
+        <hr>
+        <footer style="font-size:16px; text-align:center;">
+            <div>&copy; @DateTime.Now.Year TeacherPouch</div>
+            <br>
+            <div>
+                <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">
+                    <img alt="Creative Commons License" style="border-width:0;" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png">
+                </a>
+            </div>
+            <br>
+            <div>
+                Photography by <a href="/">TeacherPouch</a> is licensed under a
+                <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+            </div>
+            <br>
+            <div>
+                <a href="@Url.Admin()">Site Administration</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="@Url.VersionedContent("~/js/jquery-2.0.0.js")"></script>
+    <script src="@Url.VersionedContent("~/js/bootstrap.js")"></script>
+    @RenderSection("Script", required: false)
+</body>
+</html>

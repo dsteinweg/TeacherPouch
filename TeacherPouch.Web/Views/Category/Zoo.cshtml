@@ -1,0 +1,28 @@
+@{
+    ViewBag.Title = "Zoo - Category";
+}
+
+<div id="category">
+    <div class="hero-unit">
+        <header>
+            <img src="@Url.VersionedContent("~/img/Header/ZooS.jpg")">
+        </header>
+        <header>
+            <h3>Let's go to the zoo!</h3>
+        </header>
+    </div>
+
+    <div class="row-fluid featured-tags-preview">
+        <div class="span4">
+            <a href="@Url.Search("animal")"><img src="@Url.VersionedContent("~/img/OtherPageHeaders/zooanimalsS.jpg")"></a>
+        </div>
+
+        <div class="span4">
+            <a href="@Url.Search("ride")"><img src="@Url.VersionedContent("~/img/OtherPageHeaders/zooridesS.jpg")"></a>
+        </div>
+
+        <div class="span4">
+            <a href="@Url.Search("zoo")"><img src="@Url.VersionedContent("~/img/OtherPageHeaders/allzooS.jpg")"></a>
+        </div>
+    </div>
+</div>
