@@ -1,2 +1,4 @@
-PhotoSite
+TeacherPouch
 =========
+
+<http://www.teacherpouch.com>
