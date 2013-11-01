@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 using TeacherPouch.Models;
@@ -19,8 +21,13 @@ namespace TeacherPouch.Web.Helpers
                 title = " title=\"This tag is private.\"";
             }
 
-            var buttonHtmlFormat = "<a href=\"{0}\" class=\"{1}\"{2}><span>{3}</span></a>";
-            var buttonHtml = String.Format(buttonHtmlFormat, urlHelper.TagDetails(tag), cssClasses, title, tag.Name);
+            var buttonHtml = String.Format(
+                "<a href=\"{0}\" class=\"{1}\"{2}><span>{3}</span></a>",
+                urlHelper.TagDetails(tag),
+                cssClasses,
+                title,
+                tag.Name
+            );
 
             return new MvcHtmlString(buttonHtml);
         }
@@ -35,15 +42,21 @@ namespace TeacherPouch.Web.Helpers
                 title = " title=\"This tag is private.\"";
             }
 
-            var buttonHtmlFormat = "<span class=\"{0}\"{1}>{2}</span>";
-            var buttonHtml = String.Format(buttonHtmlFormat, cssClasses, title, tag.Name);
+            var buttonHtml = String.Format(
+                "<span class=\"{0}\"{1}>{2}</span>",
+                cssClasses,
+                title,
+                tag.Name
+            );
 
             return new MvcHtmlString(buttonHtml);
         }
 
-        public static MvcHtmlString LargePhoto(this HtmlHelper htmlHelper, Photo photo)
+        public static MvcHtmlString LargePhoto(this HtmlHelper htmlHelper, Photo photo, IEnumerable<Tag> photoTags)
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+
+            var tagNames = String.Join(" ", photoTags.Select(tag => tag.Name)).Replace("\"", String.Empty);
 
             var cssClasses = "photo-thumb";
             string title = null;
@@ -53,8 +66,14 @@ namespace TeacherPouch.Web.Helpers
                 title = " title=\"This photo is private.\"";
             }
 
-            var thumbHtmlFormat = "<div href=\"{0}\" class=\"{1}\"><img src=\"{2}\"{3}></div>";
-            var thumbHtml = String.Format(thumbHtmlFormat, urlHelper.PhotoDetails(photo), cssClasses, urlHelper.VersionedContent(urlHelper.LargePhotoUrl(photo)), title);
+            var thumbHtml = String.Format(
+                "<div href=\"{0}\" class=\"{1}\"><img alt=\"{2}\" src=\"{3}\"{4}></div>",
+                urlHelper.PhotoDetails(photo),
+                cssClasses,
+                tagNames,
+                urlHelper.VersionedPhoto(photo, PhotoSizes.Large),
+                title
+            );
 
             return new MvcHtmlString(thumbHtml);
         }
@@ -71,8 +90,13 @@ namespace TeacherPouch.Web.Helpers
                 title = " title=\"This photo is private.\"";
             }
 
-            var thumbHtmlFormat = "<a href=\"{0}\" class=\"{1}\"><img src=\"{2}\"{3}></a>";
-            var thumbHtml = String.Format(thumbHtmlFormat, urlHelper.PhotoDetails(photo), cssClasses, urlHelper.VersionedContent(urlHelper.SmallPhotoUrl(photo)), title);
+            var thumbHtml = String.Format(
+                "<a href=\"{0}\" class=\"{1}\"><img src=\"{2}\"{3}></a>",
+                urlHelper.PhotoDetails(photo),
+                cssClasses,
+                urlHelper.VersionedPhoto(photo, PhotoSizes.Small),
+                title
+            );
 
             return new MvcHtmlString(thumbHtml);
         }
@@ -89,14 +113,12 @@ namespace TeacherPouch.Web.Helpers
                 title = " title=\"This photo is private.\"";
             }
 
-            var photoUrl = urlHelper.SmallPhotoUrl(photo);
-
             var thumbHtml = String.Format(
                 "<a href=\"{0}?tag={1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
                 urlHelper.PhotoDetails(photo),
                 tag.Name,
                 cssClasses,
-                urlHelper.VersionedContent(photoUrl),
+                urlHelper.VersionedPhoto(photo, PhotoSizes.Small),
                 title
             );
 
