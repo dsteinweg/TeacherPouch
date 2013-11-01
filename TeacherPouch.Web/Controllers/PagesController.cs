@@ -56,10 +56,10 @@ namespace TeacherPouch.Web.Controllers
             return View(Views.ContactThanks);
         }
 
-        // GET: /Copyright
-        public virtual ViewResult Copyright()
+        // GET: /License
+        public virtual ViewResult License()
         {
-            return View(Views.Copyright);
+            return View(Views.License);
         }
     }
 }
