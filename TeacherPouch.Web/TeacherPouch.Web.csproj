@@ -295,7 +295,7 @@
     <Content Include="Views\Pages\About.cshtml" />
     <Content Include="Views\Pages\Contact.cshtml" />
     <Content Include="Views\Pages\ContactThanks.cshtml" />
-    <Content Include="Views\Pages\Copyright.cshtml" />
+    <Content Include="Views\Pages\License.cshtml" />
     <Content Include="Views\Pages\Home.cshtml" />
     <Content Include="Views\Photos\PhotoCreate.cshtml" />
     <Content Include="Views\Photos\PhotoDelete.cshtml" />
