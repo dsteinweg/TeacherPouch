@@ -32,9 +32,9 @@ namespace TeacherPouch.Web
                 defaults: MVC.Pages.ContactThanks()
             );
             routes.MapRoute(
-                name: "Pages - Copyright",
-                url: "Copyright",
-                defaults: MVC.Pages.Copyright()
+                name: "Pages - License",
+                url: "License",
+                defaults: MVC.Pages.License()
             );
 
 
@@ -84,9 +84,21 @@ namespace TeacherPouch.Web
 
             // Photo routes
             routes.MapRoute(
+                name: "Photo Image",
+                url: "Photos/{id}/{fileName}.jpg",
+                defaults: MVC.Photos.PhotoImage(),
+                constraints: new { id = @"\d+" }
+            );
+            routes.MapRoute(
+                name: "Photo Image Download",
+                url: "Photos/{id}/Download/{fileName}.jpg",
+                defaults: MVC.Photos.PhotoImageDownload(),
+                constraints: new { id = @"\d+" }
+            );
+            routes.MapRoute(
                 name: "Photo Details",
-                url: "Photos/Details/{id}",
-                defaults: MVC.Photos.PhotoDetails(),
+                url: "Photos/{id}/{photoName}",
+                defaults: new { controller = MVC.Photos.Name, action = MVC.Photos.ActionNames.PhotoDetails, photoName = UrlParameter.Optional },
                 constraints: new { id = @"\d+" }
             );
             routes.MapRoute(
