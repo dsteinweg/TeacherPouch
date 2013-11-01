@@ -5,12 +5,14 @@ using TeacherPouch.Models;
 using System.Web.Caching;
 using System.IO;
 using TeacherPouch.Utilities.Caching;
+using TeacherPouch.Utilities;
 
 namespace TeacherPouch.Web.Helpers
 {
     public static class UrlHelperExtensions
     {
-        private const string BASE_PHOTO_URL_FORMAT = "/photos/{0}/{1}";
+        private const string BASE_PHOTO_URL_FORMAT = "/Photos/{0}/{1}_{2}.jpg";
+        private const string BASE_PHOTO_DOWNLOAD_URL_FORMAT = "/Photos/{0}/Download/{1}_{2}.jpg";
 
 
         /// <summary>
@@ -24,7 +26,7 @@ namespace TeacherPouch.Web.Helpers
             if (File.Exists(fullFilePath))
             {
                 return CacheHelper.RetrieveFromCache(
-                    "Versioned Script/CSS File - " + contentPath,
+                    "Versioned Content File - " + contentPath,
                     delegate()
                     {
                         var fileInfo = new FileInfo(fullFilePath);
@@ -40,16 +42,51 @@ namespace TeacherPouch.Web.Helpers
             }
         }
 
+        /// <summary>
+        /// Produces a versioned photo URL, based off the photo's last modified timestamp.
+        /// </summary>
+        public static string VersionedPhoto(this UrlHelper urlHelper, Photo photo, PhotoSizes size)
+        {
+            var path = PhotoHelper.GetPhotoFilePath(photo, size);
+
+            if (File.Exists(path))
+            {
+                return CacheHelper.RetrieveFromCache(
+                    "Versioned Photo - " + path,
+                    delegate()
+                    {
+                        var fileInfo = new FileInfo(path);
+                        return urlHelper.PhotoUrl(photo, size) + String.Format("?v={0}", fileInfo.LastWriteTime.Ticks);
+                    },
+                    new CacheDependency(path),
+                    TimeSpan.Zero
+                );
+            }
+            else
+            {
+                return path;
+            }
+        }
+
+        public static string PhotoUrl(this UrlHelper urlHelper, Photo photo, PhotoSizes size)
+        {
+            return String.Format(BASE_PHOTO_URL_FORMAT, photo.ID.ToString(), photo.Name.Replace(' ', '-'), size.ToString());
+        }
+
         public static string SmallPhotoUrl(this UrlHelper urlHelper, Photo photo)
         {
-            return String.Format(BASE_PHOTO_URL_FORMAT, photo.UniqueID.ToString(), PhotoSizes.Small.ToString() + ".jpg").ToLower();
+            return urlHelper.PhotoUrl(photo, PhotoSizes.Small);
         }
 
         public static string LargePhotoUrl(this UrlHelper urlHelper, Photo photo)
         {
-            return String.Format(BASE_PHOTO_URL_FORMAT, photo.UniqueID.ToString(), PhotoSizes.Large.ToString() + ".jpg").ToLower();
+            return urlHelper.PhotoUrl(photo, PhotoSizes.Large);
         }
 
+        public static string PhotoDownloadUrl(this UrlHelper urlhelper, Photo photo, PhotoSizes size)
+        {
+            return String.Format(BASE_PHOTO_DOWNLOAD_URL_FORMAT, photo.ID.ToString(), photo.Name.Replace(' ', '-'), size.ToString());
+        }
 
         public static string PhotoIndex(this UrlHelper urlHelper)
         {
@@ -68,7 +105,7 @@ namespace TeacherPouch.Web.Helpers
 
         public static string PhotoDetails(this UrlHelper urlHelper, Photo photo, string tagName = null)
         {
-            var url = String.Format("/Photos/Details/{0}", photo.ID);
+            var url = String.Format("/Photos/{0}/{1}", photo.ID, photo.Name.Replace(' ', '-'));
 
             if (!String.IsNullOrWhiteSpace(tagName))
             {
@@ -156,9 +193,9 @@ namespace TeacherPouch.Web.Helpers
             return String.Format("/Category/{0}", name);
         }
 
-        public static string Copyright(this UrlHelper urlHelper)
+        public static string License(this UrlHelper urlHelper)
         {
-            return "/Copyright";
+            return "/License";
         }
     }
 }
