@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-
+using System.Web.UI;
 using TeacherPouch.Models;
 using TeacherPouch.Models.Exceptions;
 using TeacherPouch.Providers;
@@ -33,9 +33,9 @@ namespace TeacherPouch.Web.Controllers
             return View(Views.PhotoIndex, photos);
         }
 
-        // GET: /Photos/Details/5?tag=garden
+        // GET: /Photos/5/Flowers?tag=garden
         [AllowAnonymous]
-        public virtual ViewResult PhotoDetails(int id, string tag = null)
+        public virtual ViewResult PhotoDetails(int id, string photoName = null, string tag = null)
         {
             bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
 
@@ -176,7 +176,62 @@ namespace TeacherPouch.Web.Controllers
                 return InvokeHttp404();
             }
         }
-        
+
+        // GET: /Photos/1234/Flowers_Large.jpg?v=1234567890
+        [OutputCache(CacheProfile = "Forever", Location = OutputCacheLocation.Downstream)]
+        [AllowAnonymous]
+        public virtual ActionResult PhotoImage(int id, string fileName)
+        {
+            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
+
+            var fileNameParts = fileName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            PhotoSizes size;
+            if (fileNameParts.Length == 0 || !Enum.TryParse<PhotoSizes>(fileNameParts[fileNameParts.Length - 1], true, out size))
+                return InvokeHttp404();
+
+            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            if (photo != null)
+            {
+                var bytes = PhotoHelper.GetPhotoBytes(photo, size);
+
+                if (bytes != null)
+                    return File(bytes, "image/jpeg");
+                else
+                    return InvokeHttp404();
+            }
+            else
+            {
+                return InvokeHttp404();
+            }
+        }
+
+        // GET: /Photos/1234/Download/Flowers_Large.jpg
+        [AllowAnonymous]
+        public virtual ActionResult PhotoImageDownload(int id, string fileName)
+        {
+            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
+
+            var fileNameParts = fileName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            PhotoSizes size;
+            if (fileNameParts.Length == 0 || !Enum.TryParse<PhotoSizes>(fileNameParts[fileNameParts.Length - 1], true, out size))
+                return InvokeHttp404();
+
+            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            if (photo != null)
+            {
+                var bytes = PhotoHelper.GetPhotoBytes(photo, size);
+
+                if (bytes != null)
+                    return File(bytes, "image/jpeg", fileName + ".jpg");
+                else
+                    return InvokeHttp404();
+            }
+            else
+            {
+                return InvokeHttp404();
+            }
+        }
+
 
         private List<string> SplitTagNames(string tagNames)
         {
