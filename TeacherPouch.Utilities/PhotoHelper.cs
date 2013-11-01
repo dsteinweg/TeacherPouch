@@ -17,25 +17,51 @@ namespace TeacherPouch.Utilities
         static PhotoHelper()
         {
             PhotoPath = ConfigurationManager.AppSettings["PhotoPath"];
-
             if (String.IsNullOrWhiteSpace(PhotoPath))
                 throw new ConfigurationErrorsException("\"PhotoPath\" app setting missing.");
 
-
             PendingPhotoPath = ConfigurationManager.AppSettings["PendingPhotoPath"];
-
             if (String.IsNullOrWhiteSpace(PendingPhotoPath))
                 throw new ConfigurationErrorsException("\"PendingPhotoPath\" app setting missing.");
         }
 
 
-        private static void AssertPhotoFoldersExist()
+        public static string GetPhotoFilePath(Photo photo, PhotoSizes size)
         {
-            if (!Directory.Exists(PendingPhotoPath))
-                throw new DirectoryNotFoundException("Pending photos directory not found.  App setting value: " + PendingPhotoPath);
+            return Path.Combine(PhotoPath, photo.UniqueID.ToString(), size.ToString() + ".jpg");
+        }
 
-            if (!Directory.Exists(PhotoPath))
-                throw new DirectoryNotFoundException("Photos directory not found.  App setting value: " + PhotoPath);
+        public static string GetPhotoFileSize(Photo photo, PhotoSizes size)
+        {
+            var photoPath = GetPhotoFilePath(photo, size);
+            var photoFileInfo = new FileInfo(photoPath);
+            if (photoFileInfo.Exists)
+            {
+                string[] sizes = { "B", "KB", "MB", "GB" };
+                double len = photoFileInfo.Length;
+                int order = 0;
+                while (len >= 1024 && order + 1 < sizes.Length)
+                {
+                    order++;
+                    len = len / 1024;
+                }
+
+                return String.Format("{0:0.##} {1}", len, sizes[order]);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static byte[] GetPhotoBytes(Photo photo, PhotoSizes size)
+        {
+            var photoPath = GetPhotoFilePath(photo, size);
+
+            if (File.Exists(photoPath))
+                return File.ReadAllBytes(photoPath);
+            else
+                return null;
         }
 
         public static void MovePhoto(string fileName, Photo photo)
@@ -61,7 +87,6 @@ namespace TeacherPouch.Utilities
             }
         }
 
-
         public static void GeneratePhotoSizes(Photo photo)
         {
             AssertPhotoFoldersExist();
@@ -76,6 +101,16 @@ namespace TeacherPouch.Utilities
                 ResizeImage(file.FullName, PhotoSizes.Small);
                 ResizeImage(file.FullName, PhotoSizes.Large);
             }
+        }
+
+
+        private static void AssertPhotoFoldersExist()
+        {
+            if (!Directory.Exists(PendingPhotoPath))
+                throw new DirectoryNotFoundException("Pending photos directory not found.  App setting value: " + PendingPhotoPath);
+
+            if (!Directory.Exists(PhotoPath))
+                throw new DirectoryNotFoundException("Photos directory not found.  App setting value: " + PhotoPath);
         }
 
         private static void ResizeImage(string pathToOriginalPhoto, PhotoSizes size)
