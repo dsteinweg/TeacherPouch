@@ -559,7 +559,7 @@ namespace TeacherPouch.Web.Controllers
             public readonly string About = "About";
             public readonly string Contact = "Contact";
             public readonly string ContactThanks = "ContactThanks";
-            public readonly string Copyright = "Copyright";
+            public readonly string License = "License";
             public readonly string InvokeHttp404 = "InvokeHttp404";
         }
 
@@ -570,7 +570,7 @@ namespace TeacherPouch.Web.Controllers
             public const string About = "About";
             public const string Contact = "Contact";
             public const string ContactThanks = "ContactThanks";
-            public const string Copyright = "Copyright";
+            public const string License = "License";
             public const string InvokeHttp404 = "InvokeHttp404";
         }
 
@@ -596,14 +596,14 @@ namespace TeacherPouch.Web.Controllers
                 public readonly string About = "About";
                 public readonly string Contact = "Contact";
                 public readonly string ContactThanks = "ContactThanks";
-                public readonly string Copyright = "Copyright";
                 public readonly string Home = "Home";
+                public readonly string License = "License";
             }
             public readonly string About = "~/Views/Pages/About.cshtml";
             public readonly string Contact = "~/Views/Pages/Contact.cshtml";
             public readonly string ContactThanks = "~/Views/Pages/ContactThanks.cshtml";
-            public readonly string Copyright = "~/Views/Pages/Copyright.cshtml";
             public readonly string Home = "~/Views/Pages/Home.cshtml";
+            public readonly string License = "~/Views/Pages/License.cshtml";
         }
     }
 
@@ -658,12 +658,12 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
-        partial void CopyrightOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+        partial void LicenseOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
-        public override System.Web.Mvc.ViewResult Copyright()
+        public override System.Web.Mvc.ViewResult License()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Copyright);
-            CopyrightOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.License);
+            LicenseOverride(callInfo);
             return callInfo;
         }
 
@@ -718,6 +718,18 @@ namespace TeacherPouch.Web.Controllers
         {
             return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoDelete);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult PhotoImage()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoImage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult PhotoImageDownload()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoImageDownload);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PhotosController Actions { get { return MVC.Photos; } }
@@ -739,6 +751,8 @@ namespace TeacherPouch.Web.Controllers
             public readonly string PhotoCreate = "PhotoCreate";
             public readonly string PhotoEdit = "PhotoEdit";
             public readonly string PhotoDelete = "PhotoDelete";
+            public readonly string PhotoImage = "PhotoImage";
+            public readonly string PhotoImageDownload = "PhotoImageDownload";
             public readonly string InvokeHttp404 = "InvokeHttp404";
         }
 
@@ -750,6 +764,8 @@ namespace TeacherPouch.Web.Controllers
             public const string PhotoCreate = "PhotoCreate";
             public const string PhotoEdit = "PhotoEdit";
             public const string PhotoDelete = "PhotoDelete";
+            public const string PhotoImage = "PhotoImage";
+            public const string PhotoImageDownload = "PhotoImageDownload";
             public const string InvokeHttp404 = "InvokeHttp404";
         }
 
@@ -761,6 +777,7 @@ namespace TeacherPouch.Web.Controllers
         public class ActionParamsClass_PhotoDetails
         {
             public readonly string id = "id";
+            public readonly string photoName = "photoName";
             public readonly string tag = "tag";
         }
         static readonly ActionParamsClass_PhotoCreate s_params_PhotoCreate = new ActionParamsClass_PhotoCreate();
@@ -788,6 +805,24 @@ namespace TeacherPouch.Web.Controllers
         {
             public readonly string id = "id";
             public readonly string collection = "collection";
+        }
+        static readonly ActionParamsClass_PhotoImage s_params_PhotoImage = new ActionParamsClass_PhotoImage();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PhotoImage PhotoImageParams { get { return s_params_PhotoImage; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PhotoImage
+        {
+            public readonly string id = "id";
+            public readonly string fileName = "fileName";
+        }
+        static readonly ActionParamsClass_PhotoImageDownload s_params_PhotoImageDownload = new ActionParamsClass_PhotoImageDownload();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PhotoImageDownload PhotoImageDownloadParams { get { return s_params_PhotoImageDownload; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PhotoImageDownload
+        {
+            public readonly string id = "id";
+            public readonly string fileName = "fileName";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -827,14 +862,15 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
-        partial void PhotoDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id, string tag);
+        partial void PhotoDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id, string photoName, string tag);
 
-        public override System.Web.Mvc.ViewResult PhotoDetails(int id, string tag)
+        public override System.Web.Mvc.ViewResult PhotoDetails(int id, string photoName, string tag)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoDetails);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "photoName", photoName);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tag", tag);
-            PhotoDetailsOverride(callInfo, id, tag);
+            PhotoDetailsOverride(callInfo, id, photoName, tag);
             return callInfo;
         }
 
@@ -896,6 +932,28 @@ namespace TeacherPouch.Web.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "collection", collection);
             PhotoDeleteOverride(callInfo, id, collection);
+            return callInfo;
+        }
+
+        partial void PhotoImageOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, string fileName);
+
+        public override System.Web.Mvc.ActionResult PhotoImage(int id, string fileName)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoImage);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "fileName", fileName);
+            PhotoImageOverride(callInfo, id, fileName);
+            return callInfo;
+        }
+
+        partial void PhotoImageDownloadOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, string fileName);
+
+        public override System.Web.Mvc.ActionResult PhotoImageDownload(int id, string fileName)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoImageDownload);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "fileName", fileName);
+            PhotoImageDownloadOverride(callInfo, id, fileName);
             return callInfo;
         }
 
