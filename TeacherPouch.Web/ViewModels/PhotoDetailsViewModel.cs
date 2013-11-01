@@ -4,12 +4,15 @@ using System.Linq;
 
 using TeacherPouch.Models;
 using TeacherPouch.Repositories;
+using TeacherPouch.Utilities;
 
 namespace TeacherPouch.Web.ViewModels
 {
     public class PhotoDetailsViewModel
     {
         public Photo Photo { get; set; }
+        public string SmallFileSize { get; set; }
+        public string LargeFileSize { get; set; }
         public List<Tag> PhotoTags { get; set; }
         public Tag SearchResultTag { get; set; }
         public Photo PreviousPhoto { get; set; }
@@ -18,6 +21,9 @@ namespace TeacherPouch.Web.ViewModels
         public PhotoDetailsViewModel(IRepository repository, Photo photo, bool allowPrivate, string tagName = null)
         {
             this.Photo = photo;
+
+            this.SmallFileSize = PhotoHelper.GetPhotoFileSize(photo, PhotoSizes.Small);
+            this.LargeFileSize = PhotoHelper.GetPhotoFileSize(photo, PhotoSizes.Large);
 
             if (!String.IsNullOrWhiteSpace(tagName))
             {
