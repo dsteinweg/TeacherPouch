@@ -9,7 +9,6 @@
 
     <link href="@Url.VersionedContent("~/css/bootstrap.css")" rel="stylesheet" media="screen">
     <link href="@Url.VersionedContent("~/css/styles.css")" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet" type="text/css">
 
     @{ RenderSection(name: "Head", required: false); }
 </head>
@@ -19,10 +18,10 @@
             <div class="container-fluid">
                 <a class="brand" href="/">TeacherPouch</a>
 
-                <ul class="nav" style="font-size:20px;">
+                <ul class="nav">
                     <li class="@ViewBag.HomeActiveClass"><a href="/">Home</a></li>
                     <li class="@ViewBag.AboutActiveClass"><a href="@Url.About()">About</a></li>
-                    <li class="@ViewBag.CopyrightActiveClass"><a href="@Url.Copyright()">Copyright</a></li>
+                    <li class="@ViewBag.LicenseActiveClass"><a href="@Url.License()">License</a></li>
                     <li class="@ViewBag.ContactActiveClass"><a href="@Url.Contact()">Contact</a></li>
                 </ul>
 
@@ -47,7 +46,7 @@
         <div class="row-fluid">
 
             <div class="span2">
-                <div class="well sidebar-nav">
+                <div id="side-nav" class="well sidebar-nav">
                     @{ Html.RenderPartial(MVC.Tags.Views._FeaturedCategoriesMenu); }
                 </div>
             </div>
@@ -58,7 +57,7 @@
         </div>
 
         <hr>
-        <footer style="font-size:16px; text-align:center;">
+        <footer>
             <div>&copy; @DateTime.Now.Year TeacherPouch LLC</div>
             <br>
             <div>
