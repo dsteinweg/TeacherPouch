@@ -18,7 +18,7 @@
                 }
             </td>
             <td class="photo-cell">
-                @Html.LargePhoto(Model.Photo)
+                @Html.LargePhoto(Model.Photo, Model.PhotoTags)
 
                 <div>
                     @{ Html.RenderPartial(MVC.Tags.Views._TagButtons, Model.PhotoTags); }
@@ -32,6 +32,12 @@
             </td>
         </tr>
     </table>
+
+    <div id="download">
+        Download this photo:
+        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Small)"><i class="icon-download-alt"></i>Small</a> <span class="file-size">(@Model.SmallFileSize)</span></span> |
+        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Large)"><i class="icon-download-alt"></i>Large</a> <span class="file-size">(@Model.LargeFileSize)</span></span>
+    </div>
 
     @if (SecurityHelper.UserCanSeePrivateRecords(base.User))
     {
