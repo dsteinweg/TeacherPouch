@@ -2,10 +2,23 @@
     General
 */
 body {
-    font-family: 'Pompiere';
-    font-size: 20px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 16px;
     padding-top: 60px;
     padding-bottom: 40px;
+}
+.nav li {
+    line-height:inherit;
+    font-size:16px;
+}
+footer {
+    text-align:center;
+}
+h1 {
+    font-size:35px !important;
+}
+h2 {
+    font-size:30px !important;
 }
 
 
@@ -15,6 +28,19 @@ body {
 #home .hero-unit {
     padding:40px 60px 40px 60px;
     text-align:center;
+}
+#home .hero-unit h1 {
+    font-size: 40px;
+}
+#home .hero-unit h4 {
+    font-size: 20px;
+}
+#home .hero-unit h5 {
+    font-size: 15px;
+}
+#home .hero-unit header > * {
+    margin:0 0 15px 0;
+    line-height:normal;
 }
 
 .featured-tags-preview {
@@ -29,6 +55,9 @@ body {
      font-family:Arial;
      font-weight:normal;
      font-size:14px;
+}
+#About section {
+    margin-bottom:30px;
 }
 #About .big {
     font-size:20px;
@@ -126,6 +155,18 @@ body {
 #photoDetails .tag-buttons {
     max-width: 800px;
 }
+#photoDetails #download .download-link {
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#photoDetails #download i {
+    margin-top:5px;
+    margin-right:3px;
+}
+#photoDetails #download .file-size {
+    font-size:16px;
+}
 
 .photo-details-tbl, .photo-details-tbl td {
     border-spacing:0 !important;
@@ -141,10 +182,11 @@ body {
     .photo-details-tbl .prev-arrow-cell a, .photo-details-tbl .next-arrow-cell a {
         height:100%;
         display:inline-block;
-        font-size:72px;
+        font-size:60px;
         width:60px;
         text-align:center;
         text-decoration:none;
+        padding-top:20px;
     }
     .photo-details-tbl .prev-arrow-cell:hover, .photo-details-tbl .next-arrow-cell:hover {
         background-color:#f5f5f5;
