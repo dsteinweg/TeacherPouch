@@ -1,2 +1,4 @@
 ﻿User-Agent: *
 Disallow: /Admin/
+
+Sitemap: http://www.teacherpouch.com/sitemap.xml

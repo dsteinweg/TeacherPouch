@@ -330,6 +330,7 @@
     </Compile>
     <Compile Include="Helpers\ErrorHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Helpers\SiteMapHelper.cs" />
     <Compile Include="Helpers\UrlHelperExtensions.cs" />
     <Compile Include="Misc\CustomMvcControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

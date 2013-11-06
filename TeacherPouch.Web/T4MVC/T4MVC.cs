@@ -75,6 +75,19 @@ internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.Action
     public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_ContentResult : System.Web.Mvc.ContentResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_ContentResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
 
 
 
@@ -520,9 +533,6 @@ namespace TeacherPouch.Web.Controllers
     public partial class PagesController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public PagesController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected PagesController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -560,6 +570,7 @@ namespace TeacherPouch.Web.Controllers
             public readonly string Contact = "Contact";
             public readonly string ContactThanks = "ContactThanks";
             public readonly string License = "License";
+            public readonly string Sitemap = "Sitemap";
             public readonly string InvokeHttp404 = "InvokeHttp404";
         }
 
@@ -571,6 +582,7 @@ namespace TeacherPouch.Web.Controllers
             public const string Contact = "Contact";
             public const string ContactThanks = "ContactThanks";
             public const string License = "License";
+            public const string Sitemap = "Sitemap";
             public const string InvokeHttp404 = "InvokeHttp404";
         }
 
@@ -664,6 +676,15 @@ namespace TeacherPouch.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.License);
             LicenseOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void SitemapOverride(T4MVC_System_Web_Mvc_ContentResult callInfo);
+
+        public override System.Web.Mvc.ContentResult Sitemap()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ContentResult(Area, Name, ActionNames.Sitemap);
+            SitemapOverride(callInfo);
             return callInfo;
         }
 

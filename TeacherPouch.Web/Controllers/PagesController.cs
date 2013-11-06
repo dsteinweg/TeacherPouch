@@ -1,13 +1,21 @@
-﻿using System;
+﻿using System.Text;
 using System.Web.Mvc;
 
 using TeacherPouch.Models;
+using TeacherPouch.Repositories;
+using TeacherPouch.Web.Helpers;
 using TeacherPouch.Web.ViewModels;
 
 namespace TeacherPouch.Web.Controllers
 {
-    public partial class PagesController : ControllerBase
+    public partial class PagesController : RepositoryControllerBase
     {
+        public PagesController(IRepository repository)
+        {
+            base.Repository = repository;
+        }
+
+
         // GET: /
         public virtual ViewResult Home()
         {
@@ -60,6 +68,12 @@ namespace TeacherPouch.Web.Controllers
         public virtual ViewResult License()
         {
             return View(Views.License);
+        }
+
+        // GET: /sitemap.xml
+        public virtual ContentResult Sitemap()
+        {
+            return Content(SiteMapHelper.GetSiteMap(base.Repository, base.HttpContext), "text/xml", Encoding.UTF8);
         }
     }
 }

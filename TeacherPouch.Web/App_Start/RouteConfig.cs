@@ -36,6 +36,11 @@ namespace TeacherPouch.Web
                 url: "License",
                 defaults: MVC.Pages.License()
             );
+            routes.MapRoute(
+                name: "Pages - Sitemap",
+                url: "sitemap.xml",
+                defaults: MVC.Pages.Sitemap()
+            );
 
 
             // Search routes

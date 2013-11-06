@@ -5,7 +5,7 @@ namespace TeacherPouch.Web.Controllers
 {
     public partial class CategoryController : ControllerBase
     {
-        private enum Category
+        public enum Category
         {
             CelebrationsAndHolidays,
             Clothing,
