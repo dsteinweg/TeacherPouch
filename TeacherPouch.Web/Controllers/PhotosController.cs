@@ -35,14 +35,14 @@ namespace TeacherPouch.Web.Controllers
 
         // GET: /Photos/5/Flowers?tag=garden
         [AllowAnonymous]
-        public virtual ViewResult PhotoDetails(int id, string photoName = null, string tag = null)
+        public virtual ViewResult PhotoDetails(int id, string photoName = null, string tag = null, string tag2 = null)
         {
             bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
 
             var photo = base.Repository.FindPhoto(id, allowPrivate);
 
             if (photo != null)
-                return View(Views.PhotoDetails, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, tag));
+                return View(Views.PhotoDetails, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, tag, tag2));
             else
                 return InvokeHttp404();
         }

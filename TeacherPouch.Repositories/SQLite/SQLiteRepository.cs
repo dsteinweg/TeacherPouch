@@ -301,9 +301,9 @@ namespace TeacherPouch.Repositories.SQLite
 
 
 
-        public SearchResults Search(string query, bool allowPrivate)
+        public SearchResults Search(string query, SearchOperator searchOp, bool allowPrivate)
         {
-            var results = new SearchResults(query);
+            var results = new SearchResults(query, searchOp);
 
             if (String.IsNullOrWhiteSpace(query))
                 return results;
@@ -314,7 +314,7 @@ namespace TeacherPouch.Repositories.SQLite
                 var exactTagResult = new TagSearchResult(exactTagMatch);
                 exactTagResult.Photos = GetPhotosForTag(exactTagMatch, allowPrivate);
 
-                results.ExactTagResult = exactTagResult;
+                results.TagResults.Add(exactTagResult);
             }
 
             Tag pluralSuffixTagMatch = null;
@@ -327,7 +327,7 @@ namespace TeacherPouch.Repositories.SQLite
                     var pluralSearchResult = new TagSearchResult(pluralSuffixTagMatch);
                     pluralSearchResult.Photos = GetPhotosForTag(pluralSuffixTagMatch, allowPrivate);
 
-                    results.PluralTagResult = pluralSearchResult;
+                    results.TagResults.Add(pluralSearchResult);
                 }
             }
             else // ends with 's'
@@ -338,7 +338,7 @@ namespace TeacherPouch.Repositories.SQLite
                     var singularSearchResult = new TagSearchResult(singularSuffixTagMatch);
                     singularSearchResult.Photos = GetPhotosForTag(singularSuffixTagMatch, allowPrivate);
 
-                    results.SingularTagResult = singularSearchResult;
+                    results.TagResults.Add(singularSearchResult);
                 }
             }
 
@@ -354,38 +354,76 @@ namespace TeacherPouch.Repositories.SQLite
 
             if (startsWithTagMatches.SafeAny())
             {
-                var startsWithTagResults = new List<TagSearchResult>(startsWithTagMatches.Count());
                 foreach (var tag in startsWithTagMatches)
                 {
                     var tagSearchResult = new TagSearchResult(tag);
                     tagSearchResult.Photos = GetPhotosForTag(tag, allowPrivate);
 
-                    startsWithTagResults.Add(tagSearchResult);
+                    results.TagResults.Add(tagSearchResult);
                 }
-
-                results.StartsWithTagResults = startsWithTagResults;
             }
 
             var endsWithTagMatches = from tag in allTags
-                                       where (exactTagMatch == null || exactTagMatch.ID != tag.ID)
-                                          && (pluralSuffixTagMatch == null || pluralSuffixTagMatch.ID != tag.ID)
-                                          && (singularSuffixTagMatch == null || singularSuffixTagMatch.ID != tag.ID)
-                                          && tag.Name.EndsWith(query, StringComparison.OrdinalIgnoreCase)
-                                       orderby tag.Name ascending
-                                       select tag;
+                                     where (exactTagMatch == null || exactTagMatch.ID != tag.ID)
+                                        && (pluralSuffixTagMatch == null || pluralSuffixTagMatch.ID != tag.ID)
+                                        && (singularSuffixTagMatch == null || singularSuffixTagMatch.ID != tag.ID)
+                                        && tag.Name.EndsWith(query, StringComparison.OrdinalIgnoreCase)
+                                     orderby tag.Name ascending
+                                     select tag;
 
             if (endsWithTagMatches.SafeAny())
             {
-                var endsWithTagResults = new List<TagSearchResult>(endsWithTagMatches.Count());
                 foreach (var tag in endsWithTagMatches)
                 {
                     var tagSearchResult = new TagSearchResult(tag);
                     tagSearchResult.Photos = GetPhotosForTag(tag, allowPrivate);
 
-                    endsWithTagResults.Add(tagSearchResult);
+                    results.TagResults.Add(tagSearchResult);
+                }
+            }
+
+
+            // If no results were found using exact tag and plural/singular searching, try splitting the search query into tokens
+            // and search for multiple tags, using the provided search operator ("and" or "or").
+            if (!results.HasAnyResults)
+            {
+                var searchWords = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                var tagSearchResults = new List<TagSearchResult>(searchWords.Length);
+                foreach (var searchWord in searchWords)
+                {
+                    var tag = FindTag(searchWord, allowPrivate);
+                    if (tag != null)
+                    {
+                        var tagSearchResult = new TagSearchResult(tag);
+                        tagSearchResult.Photos = GetPhotosForTag(tag, allowPrivate);
+
+                        tagSearchResults.Add(tagSearchResult);
+                    }
                 }
 
-                results.EndsWithTagResults = endsWithTagResults;
+                if (searchOp == SearchOperator.Or)
+                {
+                    results.TagResults.AddRange(tagSearchResults);
+                }
+                else if (searchOp == SearchOperator.And)
+                {
+                    var photosWithAllTags = new List<Photo>();
+                    foreach (var tagSearchResult in tagSearchResults)
+                    {
+                        results.Tags.Add(tagSearchResult.Tag);
+
+                        foreach (var photo in tagSearchResult.Photos)
+                        {
+                            if (tagSearchResults.All(result => result.Photos.Any(p => p.ID == photo.ID)))
+                            {
+                                photosWithAllTags.Add(photo);
+                            }
+                        }
+                    }
+
+                    results.PhotoResultsFromAndedTags = photosWithAllTags.Distinct().ToList();
+                }
             }
 
             return results;

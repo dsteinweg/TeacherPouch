@@ -14,7 +14,7 @@
             <td class="prev-arrow-cell">
                 @if (Model.PreviousPhoto != null)
                 {
-                    <a href="@Url.PhotoDetails(Model.PreviousPhoto, Model.SearchResultTag)">&lt;</a>
+                    <a href="@Url.PhotoDetails(Model.PreviousPhoto, Model.SearchResultTag, Model.SearchResultTag2)">&lt;</a>
                 }
             </td>
             <td class="photo-cell">
@@ -27,7 +27,7 @@
             <td class="next-arrow-cell">
                 @if (Model.NextPhoto != null)
                 {
-                    <a href="@Url.PhotoDetails(Model.NextPhoto, Model.SearchResultTag)">&gt;</a>
+                    <a href="@Url.PhotoDetails(Model.NextPhoto, Model.SearchResultTag, Model.SearchResultTag2)">&gt;</a>
                 }
             </td>
         </tr>

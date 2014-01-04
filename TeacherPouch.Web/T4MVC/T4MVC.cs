@@ -352,6 +352,7 @@ namespace TeacherPouch.Web.Controllers
                 public readonly string Numbers = "Numbers";
                 public readonly string Prepositions = "Prepositions";
                 public readonly string School = "School";
+                public readonly string Sizes = "Sizes";
                 public readonly string Summer = "Summer";
                 public readonly string Transportation = "Transportation";
                 public readonly string Vacation = "Vacation";
@@ -369,6 +370,7 @@ namespace TeacherPouch.Web.Controllers
             public readonly string Numbers = "~/Views/Category/Numbers.cshtml";
             public readonly string Prepositions = "~/Views/Category/Prepositions.cshtml";
             public readonly string School = "~/Views/Category/School.cshtml";
+            public readonly string Sizes = "~/Views/Category/Sizes.cshtml";
             public readonly string Summer = "~/Views/Category/Summer.cshtml";
             public readonly string Transportation = "~/Views/Category/Transportation.cshtml";
             public readonly string Vacation = "~/Views/Category/Vacation.cshtml";
@@ -800,6 +802,7 @@ namespace TeacherPouch.Web.Controllers
             public readonly string id = "id";
             public readonly string photoName = "photoName";
             public readonly string tag = "tag";
+            public readonly string tag2 = "tag2";
         }
         static readonly ActionParamsClass_PhotoCreate s_params_PhotoCreate = new ActionParamsClass_PhotoCreate();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -883,15 +886,16 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
-        partial void PhotoDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id, string photoName, string tag);
+        partial void PhotoDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id, string photoName, string tag, string tag2);
 
-        public override System.Web.Mvc.ViewResult PhotoDetails(int id, string photoName, string tag)
+        public override System.Web.Mvc.ViewResult PhotoDetails(int id, string photoName, string tag, string tag2)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoDetails);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "photoName", photoName);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tag", tag);
-            PhotoDetailsOverride(callInfo, id, photoName, tag);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tag2", tag2);
+            PhotoDetailsOverride(callInfo, id, photoName, tag, tag2);
             return callInfo;
         }
 
@@ -1011,6 +1015,12 @@ namespace TeacherPouch.Web.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult Search()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Search);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SearchController Actions { get { return MVC.Search; } }
@@ -1039,6 +1049,15 @@ namespace TeacherPouch.Web.Controllers
         }
 
 
+        static readonly ActionParamsClass_Search s_params_Search = new ActionParamsClass_Search();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Search SearchParams { get { return s_params_Search; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Search
+        {
+            public readonly string q = "q";
+            public readonly string op = "op";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -1064,12 +1083,14 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
-        partial void SearchOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+        partial void SearchOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, string q, string op);
 
-        public override System.Web.Mvc.ViewResult Search()
+        public override System.Web.Mvc.ViewResult Search(string q, string op)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Search);
-            SearchOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "q", q);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "op", op);
+            SearchOverride(callInfo, q, op);
             return callInfo;
         }
 

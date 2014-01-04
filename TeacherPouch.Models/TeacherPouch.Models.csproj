@@ -60,6 +60,7 @@
     <Compile Include="Photo.cs" />
     <Compile Include="PhotoSizes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchOperator.cs" />
     <Compile Include="SearchResults.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="TagSearchResult.cs" />

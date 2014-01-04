@@ -1,12 +1,10 @@
-﻿using DbExtensions;
-using TeacherPouch.Models;
-using TeacherPouch.Utilities.Caching;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DbExtensions;
+
+using TeacherPouch.Models;
 
 namespace TeacherPouch.Repositories.SQLite
 {

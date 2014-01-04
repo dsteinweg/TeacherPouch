@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 
 using TeacherPouch.Models;
+using TeacherPouch.Utilities.Extensions;
+using System.Text;
 
 namespace TeacherPouch.Web.Helpers
 {
@@ -113,16 +115,68 @@ namespace TeacherPouch.Web.Helpers
                 title = " title=\"This photo is private.\"";
             }
 
-            var thumbHtml = String.Format(
-                "<a href=\"{0}?tag={1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
-                urlHelper.PhotoDetails(photo),
-                tag.Name,
-                cssClasses,
-                urlHelper.VersionedPhoto(photo, PhotoSizes.Small),
-                title
+            return new MvcHtmlString(
+                String.Format(
+                    "<a href=\"{0}?tag={1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
+                    urlHelper.PhotoDetails(photo),
+                    tag.Name,
+                    cssClasses,
+                    urlHelper.VersionedPhoto(photo, PhotoSizes.Small),
+                    title
+                )
             );
+        }
 
-            return new MvcHtmlString(thumbHtml);
+        public static MvcHtmlString PhotoThumb_AndedSearchResults(this HtmlHelper htmlHelper, Photo photo, IEnumerable<Tag> tags)
+        {
+            var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+
+            var cssClasses = "photo-thumb";
+            string title = null;
+            if (photo.IsPrivate)
+            {
+                cssClasses = cssClasses + " private";
+                title = " title=\"This photo is private.\"";
+            }
+
+            string tagsQs = null;
+            for (int i = 0; i < tags.Count(); i++)
+            {
+                if (i == 0)
+                    tagsQs = "tag=" + tags.ElementAt(i).Name;
+                else
+                    tagsQs = tagsQs + "&tag" + (i + 1).ToString() + "=" + tags.ElementAt(i).Name;
+            }
+
+            return new MvcHtmlString(
+                String.Format(
+                    "<a href=\"{0}?{1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
+                    urlHelper.PhotoDetails(photo),
+                    tagsQs,
+                    cssClasses,
+                    urlHelper.VersionedPhoto(photo, PhotoSizes.Small),
+                    title
+                )
+            );
+        }
+
+        public static MvcHtmlString CombinedTags_SearchResult(this HtmlHelper htmlHelper, IEnumerable<Tag> tags)
+        {
+            if (!tags.SafeAny())
+                return MvcHtmlString.Empty;
+
+            var builder = new StringBuilder();
+
+            var tagList = tags.ToList();
+            for (int i = 0; i < tagList.Count - 1; i++)
+            {
+                builder.Append(TagButton(htmlHelper, tagList[i]));
+                builder.Append(" + ");
+            }
+
+            builder.Append(TagButton(htmlHelper, tagList[tagList.Count - 1]));
+
+            return new MvcHtmlString(builder.ToString());
         }
     }
 }

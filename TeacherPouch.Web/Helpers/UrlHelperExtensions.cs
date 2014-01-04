@@ -1,11 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Web.Caching;
 using System.Web.Mvc;
 
 using TeacherPouch.Models;
-using System.Web.Caching;
-using System.IO;
-using TeacherPouch.Utilities.Caching;
 using TeacherPouch.Utilities;
+using TeacherPouch.Utilities.Caching;
 
 namespace TeacherPouch.Web.Helpers
 {
@@ -103,6 +103,16 @@ namespace TeacherPouch.Web.Helpers
             return urlHelper.PhotoDetails(photo, tag.Name);
         }
 
+        public static string PhotoDetails(this UrlHelper urlHelper, Photo photo, Tag tag, Tag tag2)
+        {
+            if (tag != null && tag2 != null)
+                return urlHelper.PhotoDetails(photo, tag.Name, tag2.Name);
+            else if (tag != null)
+                return urlHelper.PhotoDetails(photo, tag.Name);
+            else
+                return urlHelper.PhotoDetails(photo);
+        }
+
         public static string PhotoDetails(this UrlHelper urlHelper, Photo photo, string tagName = null)
         {
             var url = String.Format("/Photos/{0}/{1}", photo.ID, photo.Name.Replace(' ', '-'));
@@ -110,6 +120,18 @@ namespace TeacherPouch.Web.Helpers
             if (!String.IsNullOrWhiteSpace(tagName))
             {
                 url = url + "?tag=" + tagName;
+            }
+
+            return url;
+        }
+
+        public static string PhotoDetails(this UrlHelper urlHelper, Photo photo, string tagName, string tag2Name)
+        {
+            var url = urlHelper.PhotoDetails(photo, tagName);
+
+            if (!String.IsNullOrWhiteSpace(tag2Name))
+            {
+                url = url + "&tag2=" + tag2Name;
             }
 
             return url;
@@ -160,6 +182,11 @@ namespace TeacherPouch.Web.Helpers
         public static string Search(this UrlHelper urlHelper, string query)
         {
             return String.Format("/Search?q={0}", query);
+        }
+
+        public static string CombinedSearch(this UrlHelper urlHelper, string query)
+        {
+            return String.Format("/Search?q={0}&op=and", query);
         }
 
 

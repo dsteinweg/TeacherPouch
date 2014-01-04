@@ -1,35 +1,28 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TeacherPouch.Models
 {
     public class SearchResults
     {
         public string SearchTerm { get; set; }
+        public SearchOperator Operator { get; set; }
+        public List<TagSearchResult> TagResults { get; set; }
 
-        public TagSearchResult ExactTagResult { get; set; }
-        public TagSearchResult PluralTagResult { get; set; }
-        public TagSearchResult SingularTagResult { get; set; }
-        public IEnumerable<TagSearchResult> EndsWithTagResults { get; set; }
-        public IEnumerable<TagSearchResult> StartsWithTagResults { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<Photo> PhotoResultsFromAndedTags { get; set; }
 
-        public bool HasAnyResults
-        {
-            get
-            {
-                return (
-                    this.ExactTagResult != null
-                 || this.PluralTagResult != null
-                 || this.SingularTagResult != null
-                 || (this.StartsWithTagResults != null && this.StartsWithTagResults.Any())
-                 || (this.EndsWithTagResults != null && this.EndsWithTagResults.Any())
-                );
-            }
-        }
+        public bool HasAnyResults { get { return (this.TagResults.Any() || this.PhotoResultsFromAndedTags.Any()); } }
 
-        public SearchResults(string searchTerm)
+        public SearchResults(string searchTerm, SearchOperator searchOp)
         {
             this.SearchTerm = searchTerm;
+            this.Operator = searchOp;
+
+            this.TagResults = new List<TagSearchResult>();
+
+            this.Tags = new List<Tag>();
+            this.PhotoResultsFromAndedTags = new List<Photo>();
         }
     }
 }

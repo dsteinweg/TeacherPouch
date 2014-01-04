@@ -25,8 +25,11 @@
                     <li class="@ViewBag.ContactActiveClass"><a href="@Url.Contact()">Contact</a></li>
                 </ul>
 
-                <form action="/Search" method="get" class="navbar-search pull-left">
+                <form id="search-form" action="/Search" method="get" class="navbar-search pull-left">
                     <input id="q" name="q" type="text" class="search-query" placeholder="Search">
+                    <input id="or" type="radio" name="op" value="Or" checked /><label for="or">Or</label>
+                    <input id="and" type="radio" name="op" value="And" /><label for="and">And</label>
+                    <input type="submit" value="Search" />
                 </form>
 
                 @if (base.User.Identity.IsAuthenticated)

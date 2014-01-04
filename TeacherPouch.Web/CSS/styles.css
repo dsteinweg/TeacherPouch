@@ -60,7 +60,19 @@ h2 {
     margin-bottom:30px;
 }
 #About .big {
-    font-size:20px;
+    font-size:16px;
+    line-height:24px;
+}
+#About p {
+    margin-bottom:20px;
+}
+
+
+/*
+    License
+*/
+#License section {
+    margin-bottom:20px;
 }
 
 
@@ -318,6 +330,12 @@ ul.photo-thumbs {
 /*
     Search
 */
+#search-form label {
+    display:inline;
+    color:white;
+    margin-left:5px;
+    margin-right:10px;
+}
 #searchResults h1 {
     margin-bottom: 40px;
 }
@@ -333,26 +351,28 @@ ul.photo-thumbs {
 /*
     Contact
 */
-#contact {
-    text-align:center;
+#contact #instructions {
+    font-size:20px;
+    margin-bottom:20px;
 }
-    #contact #instructions {
-        font-size:24px;
-        margin-bottom:40px;
-    }
+#contact #form {
+    border:1px solid #ccc;
+    padding:10px;
+    display:inline-block;
+}
 
-    #contact input, #contact textarea, #contact select {
-        width:500px;
-    }
+#contact input, #contact textarea, #contact select {
+    width:500px;
+}
 
-    #contact textarea {
-        height:300px;
-    }
+#contact textarea {
+    height:300px;
+}
 
-    #contact label {
-        font-size:20px;
-    }
+#contact label {
+    font-size:20px;
+}
 
-    #contact form > div{
-        margin-bottom:20px;
-    }
+#contact form > div{
+    margin-bottom:20px;
+}
