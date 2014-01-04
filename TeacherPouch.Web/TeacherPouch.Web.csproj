@@ -156,14 +156,16 @@
     <Content Include="IMG\fourS.jpg" />
     <Content Include="IMG\FranceS.jpg" />
     <Content Include="IMG\FruitS.jpg" />
+    <Content Include="IMG\gardenfruitS.jpg" />
     <Content Include="IMG\GardenS.jpg" />
+    <Content Include="IMG\gardenvegetablesS.jpg" />
     <Content Include="IMG\GlacierS.jpg" />
     <Content Include="IMG\glyphicons-halflings-white.png" />
     <Content Include="IMG\glyphicons-halflings.png" />
+    <Content Include="IMG\graduationS.jpg" />
     <Content Include="IMG\grayS.jpg" />
     <Content Include="IMG\greenS.jpg" />
     <Content Include="IMG\GrillingS.jpg" />
-    <Content Include="IMG\growingfvS.jpg" />
     <Content Include="IMG\HalloweenS.jpg" />
     <Content Include="IMG\howbigS.jpg" />
     <Content Include="IMG\HowManyS.jpg" />
