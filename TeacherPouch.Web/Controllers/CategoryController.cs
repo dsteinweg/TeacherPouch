@@ -7,6 +7,7 @@ namespace TeacherPouch.Web.Controllers
     {
         public enum Category
         {
+            Animals,
             CelebrationsAndHolidays,
             Clothing,
             Colors,
@@ -14,8 +15,10 @@ namespace TeacherPouch.Web.Controllers
             Farm,
             Flowers,
             Food,
+            France,
             Garden,
             Italy,
+            Materials,
             Math,
             Numbers,
             Prepositions,

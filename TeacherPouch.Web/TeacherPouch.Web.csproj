@@ -100,6 +100,7 @@
     <Content Include="google588ddd6f0c1e0a80.html" />
     <Content Include="IMG\aboveontopofS.jpg" />
     <Content Include="IMG\accessoriesS.jpg" />
+    <Content Include="IMG\allanimalsS.jpg" />
     <Content Include="IMG\allclothingS.jpg" />
     <Content Include="IMG\allfallS.jpg" />
     <Content Include="IMG\allflowersS.jpg" />
@@ -110,6 +111,7 @@
     <Content Include="IMG\alltypesofweatherS.jpg" />
     <Content Include="IMG\allzooS.jpg" />
     <Content Include="IMG\AnimalsS.jpg" />
+    <Content Include="IMG\AnimalsSearch2S.jpg" />
     <Content Include="IMG\AppleOrchardS.jpg" />
     <Content Include="IMG\ArtS.jpg" />
     <Content Include="IMG\AutomobilesS.jpg" />
@@ -117,6 +119,7 @@
     <Content Include="IMG\belowunderS.jpg" />
     <Content Include="IMG\BeveragesS.jpg" />
     <Content Include="IMG\BigS.jpg" />
+    <Content Include="IMG\BirdsS.jpg" />
     <Content Include="IMG\birthdayS.jpg" />
     <Content Include="IMG\blackS.jpg" />
     <Content Include="IMG\blueS.jpg" />
@@ -129,6 +132,7 @@
     <Content Include="IMG\CanningS.jpg" />
     <Content Include="IMG\CarsS.jpg" />
     <Content Include="IMG\CelebrationsAndHolidaysS.jpg" />
+    <Content Include="IMG\ceramicS.jpg" />
     <Content Include="IMG\ChichenItzaS.jpg" />
     <Content Include="IMG\ChicksS.jpg" />
     <Content Include="IMG\ChristmasS.jpg" />
@@ -136,8 +140,10 @@
     <Content Include="IMG\cloudyS.jpg" />
     <Content Include="IMG\ColorfulS.jpg" />
     <Content Include="IMG\colorsS.jpg" />
+    <Content Include="IMG\cottonS.jpg" />
     <Content Include="IMG\CreativeCommonsLicense.jpg" />
     <Content Include="IMG\DessertsS.jpg" />
+    <Content Include="IMG\dogsS.jpg" />
     <Content Include="IMG\EasterS.jpg" />
     <Content Include="IMG\FallActivitiesS.jpg" />
     <Content Include="IMG\fallleavesS.jpg" />
@@ -159,7 +165,9 @@
     <Content Include="IMG\gardenfruitS.jpg" />
     <Content Include="IMG\GardenS.jpg" />
     <Content Include="IMG\gardenvegetablesS.jpg" />
+    <Content Include="IMG\GivernyS.jpg" />
     <Content Include="IMG\GlacierS.jpg" />
+    <Content Include="IMG\glassS.jpg" />
     <Content Include="IMG\glyphicons-halflings-white.png" />
     <Content Include="IMG\glyphicons-halflings.png" />
     <Content Include="IMG\graduationS.jpg" />
@@ -173,11 +181,15 @@
     <Content Include="IMG\inS.jpg" />
     <Content Include="IMG\IrelandS.jpg" />
     <Content Include="IMG\ItalyS.jpg" />
+    <Content Include="IMG\laceS.jpg" />
+    <Content Include="IMG\leatherS.jpg" />
     <Content Include="IMG\lotsmanyS.jpg" />
+    <Content Include="IMG\materialsS.jpg" />
     <Content Include="IMG\mathS.jpg" />
     <Content Include="IMG\mathsuppliesS.jpg" />
     <Content Include="IMG\MeatS.jpg" />
     <Content Include="IMG\mediumS.jpg" />
+    <Content Include="IMG\metalS.jpg" />
     <Content Include="IMG\morecomingsoonS.jpg" />
     <Content Include="IMG\nexttoS.jpg" />
     <Content Include="IMG\numbersS.jpg" />
@@ -194,6 +206,7 @@
     <Content Include="IMG\pinkS.jpg" />
     <Content Include="IMG\PlanesS.jpg" />
     <Content Include="IMG\plantsS.jpg" />
+    <Content Include="IMG\plasticS.jpg" />
     <Content Include="IMG\playgroundS.jpg" />
     <Content Include="IMG\PompeiiS.jpg" />
     <Content Include="IMG\poolS.jpg" />
@@ -205,6 +218,7 @@
     <Content Include="IMG\redflowersS.jpg" />
     <Content Include="IMG\redS.jpg" />
     <Content Include="IMG\RomeS.jpg" />
+    <Content Include="IMG\rubberS.jpg" />
     <Content Include="IMG\SchoolS.jpg" />
     <Content Include="IMG\SchoolSuppliesS.jpg" />
     <Content Include="IMG\ScotlandS.jpg" />
@@ -216,6 +230,7 @@
     <Content Include="IMG\shortsS.jpg" />
     <Content Include="IMG\sixS.jpg" />
     <Content Include="IMG\sizesS.jpg" />
+    <Content Include="IMG\smallorlittleS.jpg" />
     <Content Include="IMG\smallS.jpg" />
     <Content Include="IMG\snowS.jpg" />
     <Content Include="IMG\snowyS.jpg" />
@@ -225,6 +240,7 @@
     <Content Include="IMG\sunnyS.jpg" />
     <Content Include="IMG\sunsetS.jpg" />
     <Content Include="IMG\sunshineS.jpg" />
+    <Content Include="IMG\tallS.jpg" />
     <Content Include="IMG\TeachingS.jpg" />
     <Content Include="IMG\ThanksgivingS.jpg" />
     <Content Include="IMG\threeS.jpg" />
@@ -243,12 +259,14 @@
     <Content Include="IMG\Web.config" />
     <Content Include="IMG\whatcolorS.jpg" />
     <Content Include="IMG\whatsizeS.jpg" />
+    <Content Include="IMG\whereS.jpg" />
     <Content Include="IMG\whiteflowersS.jpg" />
     <Content Include="IMG\whiteS.jpg" />
     <Content Include="IMG\windyS.jpg" />
     <Content Include="IMG\winteractivitiesS.jpg" />
     <Content Include="IMG\winterclothingS.jpg" />
     <Content Include="IMG\WinterS.jpg" />
+    <Content Include="IMG\woodS.jpg" />
     <Content Include="IMG\yardworkS.jpg" />
     <Content Include="IMG\yellowflowersS.jpg" />
     <Content Include="IMG\yellowS.jpg" />
@@ -362,6 +380,9 @@
     <Content Include="Views\Category\Farm.cshtml" />
     <Content Include="Views\Category\Weather.cshtml" />
     <Content Include="Views\Category\Italy.cshtml" />
+    <Content Include="Views\Category\Animals.cshtml" />
+    <Content Include="Views\Category\France.cshtml" />
+    <Content Include="Views\Category\Materials.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
