@@ -341,13 +341,18 @@ namespace TeacherPouch.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Animals = "Animals";
                 public readonly string CelebrationsAndHolidays = "CelebrationsAndHolidays";
                 public readonly string Clothing = "Clothing";
                 public readonly string Colors = "Colors";
                 public readonly string Fall = "Fall";
+                public readonly string Farm = "Farm";
                 public readonly string Flowers = "Flowers";
                 public readonly string Food = "Food";
+                public readonly string France = "France";
                 public readonly string Garden = "Garden";
+                public readonly string Italy = "Italy";
+                public readonly string Materials = "Materials";
                 public readonly string Math = "Math";
                 public readonly string Numbers = "Numbers";
                 public readonly string Prepositions = "Prepositions";
@@ -356,16 +361,22 @@ namespace TeacherPouch.Web.Controllers
                 public readonly string Summer = "Summer";
                 public readonly string Transportation = "Transportation";
                 public readonly string Vacation = "Vacation";
+                public readonly string Weather = "Weather";
                 public readonly string Winter = "Winter";
                 public readonly string Zoo = "Zoo";
             }
+            public readonly string Animals = "~/Views/Category/Animals.cshtml";
             public readonly string CelebrationsAndHolidays = "~/Views/Category/CelebrationsAndHolidays.cshtml";
             public readonly string Clothing = "~/Views/Category/Clothing.cshtml";
             public readonly string Colors = "~/Views/Category/Colors.cshtml";
             public readonly string Fall = "~/Views/Category/Fall.cshtml";
+            public readonly string Farm = "~/Views/Category/Farm.cshtml";
             public readonly string Flowers = "~/Views/Category/Flowers.cshtml";
             public readonly string Food = "~/Views/Category/Food.cshtml";
+            public readonly string France = "~/Views/Category/France.cshtml";
             public readonly string Garden = "~/Views/Category/Garden.cshtml";
+            public readonly string Italy = "~/Views/Category/Italy.cshtml";
+            public readonly string Materials = "~/Views/Category/Materials.cshtml";
             public readonly string Math = "~/Views/Category/Math.cshtml";
             public readonly string Numbers = "~/Views/Category/Numbers.cshtml";
             public readonly string Prepositions = "~/Views/Category/Prepositions.cshtml";
@@ -374,6 +385,7 @@ namespace TeacherPouch.Web.Controllers
             public readonly string Summer = "~/Views/Category/Summer.cshtml";
             public readonly string Transportation = "~/Views/Category/Transportation.cshtml";
             public readonly string Vacation = "~/Views/Category/Vacation.cshtml";
+            public readonly string Weather = "~/Views/Category/Weather.cshtml";
             public readonly string Winter = "~/Views/Category/Winter.cshtml";
             public readonly string Zoo = "~/Views/Category/Zoo.cshtml";
         }
@@ -572,6 +584,7 @@ namespace TeacherPouch.Web.Controllers
             public readonly string Contact = "Contact";
             public readonly string ContactThanks = "ContactThanks";
             public readonly string License = "License";
+            public readonly string PrivacyPolicy = "PrivacyPolicy";
             public readonly string Sitemap = "Sitemap";
             public readonly string InvokeHttp404 = "InvokeHttp404";
         }
@@ -584,6 +597,7 @@ namespace TeacherPouch.Web.Controllers
             public const string Contact = "Contact";
             public const string ContactThanks = "ContactThanks";
             public const string License = "License";
+            public const string PrivacyPolicy = "PrivacyPolicy";
             public const string Sitemap = "Sitemap";
             public const string InvokeHttp404 = "InvokeHttp404";
         }
@@ -612,12 +626,14 @@ namespace TeacherPouch.Web.Controllers
                 public readonly string ContactThanks = "ContactThanks";
                 public readonly string Home = "Home";
                 public readonly string License = "License";
+                public readonly string PrivacyPolicy = "PrivacyPolicy";
             }
             public readonly string About = "~/Views/Pages/About.cshtml";
             public readonly string Contact = "~/Views/Pages/Contact.cshtml";
             public readonly string ContactThanks = "~/Views/Pages/ContactThanks.cshtml";
             public readonly string Home = "~/Views/Pages/Home.cshtml";
             public readonly string License = "~/Views/Pages/License.cshtml";
+            public readonly string PrivacyPolicy = "~/Views/Pages/PrivacyPolicy.cshtml";
         }
     }
 
@@ -678,6 +694,15 @@ namespace TeacherPouch.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.License);
             LicenseOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void PrivacyPolicyOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        public override System.Web.Mvc.ViewResult PrivacyPolicy()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PrivacyPolicy);
+            PrivacyPolicyOverride(callInfo);
             return callInfo;
         }
 

@@ -37,8 +37,9 @@ namespace TeacherPouch.Web.Helpers
             // General pages
             root.Add(CreateSiteMapNode("/"));
             root.Add(CreateSiteMapNode(urlHelper.About()));
-            root.Add(CreateSiteMapNode(urlHelper.Contact()));
             root.Add(CreateSiteMapNode(urlHelper.License()));
+            root.Add(CreateSiteMapNode(urlHelper.Contact()));
+            root.Add(CreateSiteMapNode(urlHelper.PrivacyPolicy()));
 
             // Categories
             var categories = Enum.GetNames(typeof(CategoryController.Category));

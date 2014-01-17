@@ -274,14 +274,6 @@
     <Content Include="IMG\zooridesS.jpg" />
     <Content Include="IMG\ZooS.jpg" />
     <Content Include="JS\jquery-2.0.0.min.map" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -290,7 +282,6 @@
     </Content>
     <Content Include="SMTP.config" />
     <None Include="Properties\PublishProfiles\www.TeacherPouch.com.pubxml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="T4MVC\T4MVC.tt.settings.xml" />
     <Content Include="JS\bootstrap.js" />
     <Content Include="JS\bootstrap.min.js" />

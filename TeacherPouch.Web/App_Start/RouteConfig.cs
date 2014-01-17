@@ -37,6 +37,11 @@ namespace TeacherPouch.Web
                 defaults: MVC.Pages.License()
             );
             routes.MapRoute(
+                name: "Pages - Privacy Policy",
+                url: "PrivacyPolicy",
+                defaults: MVC.Pages.PrivacyPolicy()
+            );
+            routes.MapRoute(
                 name: "Pages - Sitemap",
                 url: "sitemap.xml",
                 defaults: MVC.Pages.Sitemap()

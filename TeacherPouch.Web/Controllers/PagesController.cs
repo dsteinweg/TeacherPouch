@@ -70,6 +70,12 @@ namespace TeacherPouch.Web.Controllers
             return View(Views.License);
         }
 
+        // GET: /PrivacyPolicy
+        public virtual ViewResult PrivacyPolicy()
+        {
+            return View(Views.PrivacyPolicy);
+        }
+
         // GET: /sitemap.xml
         public virtual ContentResult Sitemap()
         {
