@@ -70,7 +70,7 @@ namespace TeacherPouch.Web.Helpers
 
         public static string PhotoUrl(this UrlHelper urlHelper, Photo photo, PhotoSizes size)
         {
-            return String.Format(BASE_PHOTO_URL_FORMAT, photo.ID.ToString(), photo.Name.Replace(' ', '-'), size.ToString());
+            return String.Format(BASE_PHOTO_URL_FORMAT, photo.ID.ToString(), photo.Name.Replace(' ', '-').Replace(".", ""), size.ToString());
         }
 
         public static string SmallPhotoUrl(this UrlHelper urlHelper, Photo photo)
