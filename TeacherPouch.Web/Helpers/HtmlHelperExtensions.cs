@@ -178,5 +178,27 @@ namespace TeacherPouch.Web.Helpers
 
             return new MvcHtmlString(builder.ToString());
         }
+
+        public static MvcHtmlString ConditionalAnalyticsScript(this HtmlHelper htmlHelper)
+        {
+            if (htmlHelper.ViewContext.RequestContext.HttpContext.Request.Url.Host.Contains("teacherpouch.com", StringComparison.OrdinalIgnoreCase))
+            {
+                var scriptBody =
+                    "<script>" +
+                    "    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){" +
+                    "    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o)," +
+                    "    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)" +
+                    "    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');" +
+                    "    ga('create', 'UA-47264908-1', 'teacherpouch.com');" +
+                    "    ga('send', 'pageview');" +
+                    "</script>";
+
+                return new MvcHtmlString(scriptBody);
+            }
+            else
+            {
+                return MvcHtmlString.Empty;
+            }
+        }
     }
 }

@@ -80,5 +80,6 @@
 
     <script src="@Url.VersionedContent("~/js/jquery-2.0.0.js")"></script>
     @RenderSection("Script", required: false)
+    @Html.ConditionalAnalyticsScript()
 </body>
 </html>
