@@ -235,6 +235,7 @@
     <Content Include="IMG\snowyS.jpg" />
     <Content Include="IMG\SpainS.jpg" />
     <Content Include="IMG\SpringS.jpg" />
+    <Content Include="IMG\stoneS.jpg" />
     <Content Include="IMG\SummerS.jpg" />
     <Content Include="IMG\sunnyS.jpg" />
     <Content Include="IMG\sunsetS.jpg" />
@@ -273,6 +274,14 @@
     <Content Include="IMG\zooridesS.jpg" />
     <Content Include="IMG\ZooS.jpg" />
     <Content Include="JS\jquery-2.0.0.min.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -281,6 +290,7 @@
     </Content>
     <Content Include="SMTP.config" />
     <None Include="Properties\PublishProfiles\www.TeacherPouch.com.pubxml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="T4MVC\T4MVC.tt.settings.xml" />
     <Content Include="JS\bootstrap.js" />
     <Content Include="JS\bootstrap.min.js" />
@@ -382,6 +392,7 @@
     <Content Include="Views\Category\Animals.cshtml" />
     <Content Include="Views\Category\France.cshtml" />
     <Content Include="Views\Category\Materials.cshtml" />
+    <Content Include="Views\Pages\PrivacyPolicy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
