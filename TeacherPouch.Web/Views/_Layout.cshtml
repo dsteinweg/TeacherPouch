@@ -16,12 +16,9 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="/">TeacherPouch</a>
-
                 <ul class="nav">
-                    <li class="@ViewBag.HomeActiveClass"><a href="/">Home</a></li>
+                    <li class="@ViewBag.HomeActiveClass"><a href="/">TeacherPouch Home</a></li>
                     <li class="@ViewBag.AboutActiveClass"><a href="@Url.About()">About</a></li>
-                    <li class="@ViewBag.LicenseActiveClass"><a href="@Url.License()">License</a></li>
                     <li class="@ViewBag.ContactActiveClass"><a href="@Url.Contact()">Contact</a></li>
                 </ul>
 
@@ -31,6 +28,10 @@
                     <input id="and" type="radio" name="op" value="And" /><label for="and">And</label>
                     <input type="submit" value="Search" />
                 </form>
+
+                <ul class="nav">
+                    <li class="@ViewBag.LicenseActiveClass"><a href="@Url.License()">Credit TeacherPouch.com when using photos</a></li>
+                </ul>
 
                 @if (base.User.Identity.IsAuthenticated)
                 {

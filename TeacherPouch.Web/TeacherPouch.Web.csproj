@@ -183,6 +183,17 @@
     <Content Include="IMG\ItalyS.jpg" />
     <Content Include="IMG\laceS.jpg" />
     <Content Include="IMG\leatherS.jpg" />
+    <Content Include="IMG\Logo\TeacherPouchLogo10.png" />
+    <Content Include="IMG\Logo\TeacherPouchLogo30.png" />
+    <Content Include="IMG\Logo\TeacherPouchLogoKangaroo.png" />
+    <Content Include="IMG\Logo\TeacherPouchLogoKangaroo10.png" />
+    <Content Include="IMG\Logo\TeacherPouchLogoM.jpg" />
+    <Content Include="IMG\Logo\TeacherPouchLogoNoText.png" />
+    <Content Include="IMG\Logo\TeacherPouchLogoS.jpg" />
+    <Content Include="IMG\Logo\TeacherPouchLogoWhite.png" />
+    <Content Include="IMG\Logo\TeacherPouchLogoWhite10.png" />
+    <Content Include="IMG\Logo\TeacherPouchStretched.png" />
+    <Content Include="IMG\Logo\TeacherPouchStretched15.png" />
     <Content Include="IMG\lotsmanyS.jpg" />
     <Content Include="IMG\materialsS.jpg" />
     <Content Include="IMG\mathS.jpg" />

@@ -70,7 +70,7 @@ namespace TeacherPouch.Web.Helpers
 
         public static string PhotoUrl(this UrlHelper urlHelper, Photo photo, PhotoSizes size)
         {
-            return String.Format(BASE_PHOTO_URL_FORMAT, photo.ID.ToString(), photo.Name.Replace(' ', '-').Replace(".", ""), size.ToString());
+            return String.Format(BASE_PHOTO_URL_FORMAT, photo.ID.ToString(), CleansePhotoName(photo.Name), size.ToString());
         }
 
         public static string SmallPhotoUrl(this UrlHelper urlHelper, Photo photo)
@@ -85,7 +85,7 @@ namespace TeacherPouch.Web.Helpers
 
         public static string PhotoDownloadUrl(this UrlHelper urlhelper, Photo photo, PhotoSizes size)
         {
-            return String.Format(BASE_PHOTO_DOWNLOAD_URL_FORMAT, photo.ID.ToString(), photo.Name.Replace(' ', '-'), size.ToString());
+            return String.Format(BASE_PHOTO_DOWNLOAD_URL_FORMAT, photo.ID.ToString(), CleansePhotoName(photo.Name), size.ToString());
         }
 
         public static string PhotoIndex(this UrlHelper urlHelper)
@@ -115,7 +115,7 @@ namespace TeacherPouch.Web.Helpers
 
         public static string PhotoDetails(this UrlHelper urlHelper, Photo photo, string tagName = null)
         {
-            var url = String.Format("/Photos/{0}/{1}", photo.ID, photo.Name.Replace(' ', '-'));
+            var url = String.Format("/Photos/{0}/{1}", photo.ID, CleansePhotoName(photo.Name));
 
             if (!String.IsNullOrWhiteSpace(tagName))
             {
@@ -228,6 +228,15 @@ namespace TeacherPouch.Web.Helpers
         public static string PrivacyPolicy(this UrlHelper urlHelper)
         {
             return "/PrivacyPolicy";
+        }
+
+
+        private static string CleansePhotoName(string photoName)
+        {
+            if (photoName == null)
+                return photoName;
+            else
+                return photoName.Replace(' ', '-').Replace(".", String.Empty);
         }
     }
 }

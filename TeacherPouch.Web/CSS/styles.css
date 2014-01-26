@@ -20,13 +20,19 @@ h1 {
 h2 {
     font-size:30px !important;
 }
+#side-nav {
+    padding:3px;
+}
+#side-nav #logo {
+    margin-bottom:10px;
+}
 
 
 /*
     Home Page
 */
 #home .hero-unit {
-    padding:40px 60px 40px 60px;
+    padding:20px 0 20px 0;
     text-align:center;
 }
 #home .hero-unit h1 {
