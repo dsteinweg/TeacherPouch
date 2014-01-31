@@ -17,6 +17,17 @@ namespace TeacherPouch.Repositories.SQLite
         public int TagID { get; set; }
 
 
+        internal static List<PhotoTagAssociation> GetAll()
+        {
+            var query = SQL.SELECT(PHOTOTAG_COLUMN_NAMES)
+                           .FROM(PHOTOTAG_TABLE_NAME);
+
+            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            {
+                return connection.Map<PhotoTagAssociation>(query).ToList();
+            }
+        }
+
         internal static List<PhotoTagAssociation> GetAll(Photo photo)
         {
             var query = SQL.SELECT(PHOTOTAG_COLUMN_NAMES)

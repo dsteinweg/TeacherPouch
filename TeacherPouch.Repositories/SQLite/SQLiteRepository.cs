@@ -7,6 +7,7 @@ using DbExtensions;
 using TeacherPouch.Models;
 using TeacherPouch.Utilities.Caching;
 using TeacherPouch.Utilities.Extensions;
+using System.Diagnostics;
 
 namespace TeacherPouch.Repositories.SQLite
 {
@@ -301,18 +302,20 @@ namespace TeacherPouch.Repositories.SQLite
 
 
 
-        public SearchResults Search(string query, SearchOperator searchOp, bool allowPrivate)
+        public SearchResultsOr SearchOr(string query, bool allowPrivate)
         {
-            var results = new SearchResults(query, searchOp);
+            query = query.ToLower();
 
-            if (String.IsNullOrWhiteSpace(query))
-                return results;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            var results = new SearchResultsOr(query);
 
             var exactTagMatch = FindTag(query, allowPrivate);
             if (exactTagMatch != null)
             {
                 var exactTagResult = new TagSearchResult(exactTagMatch);
-                exactTagResult.Photos = GetPhotosForTag(exactTagMatch, allowPrivate);
+                exactTagResult.Photos = GetPhotosForTag(exactTagMatch, allowPrivate).ToList();
 
                 results.TagResults.Add(exactTagResult);
             }
@@ -324,10 +327,7 @@ namespace TeacherPouch.Repositories.SQLite
                 pluralSuffixTagMatch = FindTag(query + "s", allowPrivate);
                 if (pluralSuffixTagMatch != null)
                 {
-                    var pluralSearchResult = new TagSearchResult(pluralSuffixTagMatch);
-                    pluralSearchResult.Photos = GetPhotosForTag(pluralSuffixTagMatch, allowPrivate);
-
-                    results.TagResults.Add(pluralSearchResult);
+                    results.TagResults.Add(PopulateTagSearchResult(pluralSuffixTagMatch, allowPrivate));
                 }
             }
             else // ends with 's'
@@ -335,10 +335,7 @@ namespace TeacherPouch.Repositories.SQLite
                 singularSuffixTagMatch = FindTag(query.TrimEnd('s'), allowPrivate);
                 if (singularSuffixTagMatch != null)
                 {
-                    var singularSearchResult = new TagSearchResult(singularSuffixTagMatch);
-                    singularSearchResult.Photos = GetPhotosForTag(singularSuffixTagMatch, allowPrivate);
-
-                    results.TagResults.Add(singularSearchResult);
+                    results.TagResults.Add(PopulateTagSearchResult(singularSuffixTagMatch, allowPrivate));
                 }
             }
 
@@ -356,10 +353,7 @@ namespace TeacherPouch.Repositories.SQLite
             {
                 foreach (var tag in startsWithTagMatches)
                 {
-                    var tagSearchResult = new TagSearchResult(tag);
-                    tagSearchResult.Photos = GetPhotosForTag(tag, allowPrivate);
-
-                    results.TagResults.Add(tagSearchResult);
+                    results.TagResults.Add(PopulateTagSearchResult(tag, allowPrivate));
                 }
             }
 
@@ -375,16 +369,12 @@ namespace TeacherPouch.Repositories.SQLite
             {
                 foreach (var tag in endsWithTagMatches)
                 {
-                    var tagSearchResult = new TagSearchResult(tag);
-                    tagSearchResult.Photos = GetPhotosForTag(tag, allowPrivate);
-
-                    results.TagResults.Add(tagSearchResult);
+                    results.TagResults.Add(PopulateTagSearchResult(tag, allowPrivate));
                 }
             }
 
 
-            // If no results were found using exact tag and plural/singular searching, try splitting the search query into tokens
-            // and search for multiple tags, using the provided search operator ("and" or "or").
+            // If no results were found using exact tag and plural/singular searching, try splitting the search query into tokens and search for multiple tags.
             if (!results.HasAnyResults)
             {
                 var searchWords = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -395,38 +385,76 @@ namespace TeacherPouch.Repositories.SQLite
                     var tag = FindTag(searchWord, allowPrivate);
                     if (tag != null)
                     {
-                        var tagSearchResult = new TagSearchResult(tag);
-                        tagSearchResult.Photos = GetPhotosForTag(tag, allowPrivate);
-
-                        tagSearchResults.Add(tagSearchResult);
+                        results.TagResults.Add(PopulateTagSearchResult(tag, allowPrivate));
                     }
-                }
-
-                if (searchOp == SearchOperator.Or)
-                {
-                    results.TagResults.AddRange(tagSearchResults);
-                }
-                else if (searchOp == SearchOperator.And)
-                {
-                    var photosWithAllTags = new List<Photo>();
-                    foreach (var tagSearchResult in tagSearchResults)
-                    {
-                        results.Tags.Add(tagSearchResult.Tag);
-
-                        foreach (var photo in tagSearchResult.Photos)
-                        {
-                            if (tagSearchResults.All(result => result.Photos.Any(p => p.ID == photo.ID)))
-                            {
-                                photosWithAllTags.Add(photo);
-                            }
-                        }
-                    }
-
-                    results.PhotoResultsFromAndedTags = photosWithAllTags.Distinct().ToList();
                 }
             }
 
+            stopwatch.Stop();
+
+            results.SearchDuration = stopwatch.Elapsed;
+
             return results;
+        }
+
+        public SearchResultsAnd SearchAnd(string query, bool allowPrivate)
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            var allTags = GetAllTags(allowPrivate);
+
+            var searchWords = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var matchingTags = new List<Tag>();
+            foreach (var searchWord in searchWords)
+            {
+                var tag = allTags.FirstOrDefault(t => t.Name.Equals(searchWord, StringComparison.OrdinalIgnoreCase));
+                if (tag != null)
+                    matchingTags.Add(tag);
+            }
+
+            var uniquePhotos = new List<Photo>();
+            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            {
+                foreach (var matchingTag in matchingTags)
+                {
+                    var sqlQuery = SQL.SELECT("DISTINCT Photo.*")
+                                      .FROM("Photo_Tag")
+                                      .INNER_JOIN("Tag on Tag.ID = Photo_Tag.TagID")
+                                      .INNER_JOIN("Photo on Photo.ID = Photo_Tag.PhotoID")
+                                      .WHERE("Tag.ID = {0}", matchingTag.ID);
+
+                    var matches = connection.Map<Photo>(sqlQuery);
+
+                    if (!uniquePhotos.Any())
+                    {
+                        uniquePhotos.AddRange(matches);
+                    }
+                    else
+                    {
+                        uniquePhotos.AddRange(matches.Intersect(uniquePhotos));
+                    }
+                }
+            }
+
+            var results = new SearchResultsAnd(query);
+            results.Tags = matchingTags;
+            results.Photos = uniquePhotos;
+
+            stopwatch.Stop();
+
+            results.SearchDuration = stopwatch.Elapsed;
+
+            return results;
+        }
+
+        private TagSearchResult PopulateTagSearchResult(Tag tag, bool allowPrivate)
+        {
+            var tagResult = new TagSearchResult(tag);
+            tagResult.Photos = GetPhotosForTag(tag, allowPrivate).ToList();
+
+            return tagResult;
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model SearchResultsOr
+
+@{
+    ViewBag.Title = "Search Results - " + Model.SearchTerm;
+}
+
+<div id="searchResults">
+    <header>
+        <h1>Search Results - @Model.SearchTerm</h1>
+        <span class="duration">Searched in @Model.SearchDuration.TotalSeconds.ToString() seconds</span>
+    </header>
+
+    @if (Model.TagResults.SafeAny())
+    {
+        foreach (var tagResult in Model.TagResults)
+        {
+            <div class="search-result">
+                <h2>@Html.TagButton(tagResult.Tag)</h2>
+                @if (tagResult.Photos.SafeAny())
+                {
+                    <ul class="photo-thumbs">
+                        @foreach (var photo in tagResult.Photos)
+                        {
+                            <li>@Html.PhotoThumb_SearchResult(photo, tagResult.Tag)</li>
+                        }
+                    </ul>
+                }
+            </div>
+        }
+    }
+</div>

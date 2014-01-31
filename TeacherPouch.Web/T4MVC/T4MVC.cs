@@ -1093,13 +1093,13 @@ namespace TeacherPouch.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string _PhotoThumbnails = "_PhotoThumbnails";
                 public readonly string NoneFound = "NoneFound";
-                public readonly string SearchResults = "SearchResults";
+                public readonly string SearchResultsAnd = "SearchResultsAnd";
+                public readonly string SearchResultsOr = "SearchResultsOr";
             }
-            public readonly string _PhotoThumbnails = "~/Views/Search/_PhotoThumbnails.cshtml";
             public readonly string NoneFound = "~/Views/Search/NoneFound.cshtml";
-            public readonly string SearchResults = "~/Views/Search/SearchResults.cshtml";
+            public readonly string SearchResultsAnd = "~/Views/Search/SearchResultsAnd.cshtml";
+            public readonly string SearchResultsOr = "~/Views/Search/SearchResultsOr.cshtml";
         }
     }
 

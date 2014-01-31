@@ -32,12 +32,28 @@ namespace TeacherPouch.Web.Controllers
                     searchOperator = parsed;
             }
 
-            var results = base.Repository.Search(q, searchOperator, allowPrivate);
+            if (searchOperator == SearchOperator.Or)
+            {
+                var results = base.Repository.SearchOr(q, allowPrivate);
 
-            if (results.HasAnyResults)
-                return base.View(Views.SearchResults, results);
+                if (results.HasAnyResults)
+                    return base.View(Views.SearchResultsOr, results);
+                else
+                    return base.View(Views.NoneFound);
+            }
+            else if (searchOperator == SearchOperator.And)
+            {
+                var results = base.Repository.SearchAnd(q, allowPrivate);
+
+                if (results.HasAnyResults)
+                    return base.View(Views.SearchResultsAnd, results);
+                else
+                    return base.View(Views.NoneFound);
+            }
             else
-                return base.View(Views.NoneFound);
+            {
+                throw new ApplicationException("Search operator not found.");
+            }
         }
     }
 }

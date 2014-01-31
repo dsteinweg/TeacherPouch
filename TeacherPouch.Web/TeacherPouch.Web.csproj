@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Data.SQLite, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Data.SQLite.1.0.88.0\lib\net45\System.Data.SQLite.dll</HintPath>
@@ -300,7 +301,9 @@
     <Content Include="JS\jquery-2.0.0.js" />
     <Content Include="JS\jquery-2.0.0.min.js" />
     <Content Include="robots.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -334,8 +337,7 @@
     <Content Include="Views\Photos\PhotoEdit.cshtml" />
     <Content Include="Views\Photos\PhotoIndex.cshtml" />
     <Content Include="Views\Search\NoneFound.cshtml" />
-    <Content Include="Views\Search\SearchResults.cshtml" />
-    <Content Include="Views\Search\_PhotoThumbnails.cshtml" />
+    <Content Include="Views\Search\SearchResultsOr.cshtml" />
     <Content Include="Views\Tags\TagCreate.cshtml" />
     <Content Include="Views\Tags\TagDelete.cshtml" />
     <Content Include="Views\Tags\TagDetails.cshtml" />
@@ -395,6 +397,7 @@
     <Content Include="Views\Category\France.cshtml" />
     <Content Include="Views\Category\Materials.cshtml" />
     <Content Include="Views\Pages\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Search\SearchResultsAnd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

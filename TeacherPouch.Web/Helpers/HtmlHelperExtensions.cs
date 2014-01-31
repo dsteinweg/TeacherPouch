@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 
 using TeacherPouch.Models;
 using TeacherPouch.Utilities.Extensions;
-using System.Text;
 
 namespace TeacherPouch.Web.Helpers
 {

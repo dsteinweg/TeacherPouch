@@ -1,0 +1,28 @@
+﻿@model SearchResultsAnd
+
+@{
+    ViewBag.Title = "Search Results - " + Model.SearchTerm;
+}
+
+<section id="searchResults">
+    <header>
+        <h1>Search Results - @Model.SearchTerm</h1>
+        <span class="duration">Searched in @Model.SearchDuration.TotalSeconds.ToString() seconds</span>
+    </header>
+
+    @if (Model.Tags.SafeAny())
+    {
+        <div class="search-result">
+            <h2>@Html.CombinedTags_SearchResult(Model.Tags)</h2>
+            @if (Model.Photos.SafeAny())
+            {
+                <ul class="photo-thumbs">
+                    @foreach (var photo in Model.Photos)
+                    {
+                        <li>@Html.PhotoThumb_AndedSearchResults(photo, Model.Tags)</li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+</section>

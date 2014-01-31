@@ -24,6 +24,7 @@ namespace TeacherPouch.Repositories
         IQueryable<Tag> GetTagsForPhoto(Photo photo, bool allowPrivate);
         IQueryable<Photo> GetPhotosForTag(Tag tag, bool allowPrivate);
 
-        SearchResults Search(string query, SearchOperator searchOp, bool allowPrivate);
+        SearchResultsOr SearchOr(string query, bool allowPrivate);
+        SearchResultsAnd SearchAnd(string query, bool allowPrivate);
     }
 }

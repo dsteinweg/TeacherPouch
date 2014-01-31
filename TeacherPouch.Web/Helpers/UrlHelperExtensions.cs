@@ -23,23 +23,19 @@ namespace TeacherPouch.Web.Helpers
             var path = urlHelper.Content(contentPath);
             var fullFilePath = urlHelper.RequestContext.HttpContext.Server.MapPath(path);
 
-            if (File.Exists(fullFilePath))
-            {
-                return CacheHelper.RetrieveFromCache(
-                    "Versioned Content File - " + contentPath,
-                    delegate()
-                    {
-                        var fileInfo = new FileInfo(fullFilePath);
+            return CacheHelper.RetrieveFromCache(
+                "Versioned Content File - " + contentPath,
+                delegate()
+                {
+                    var fileInfo = new FileInfo(fullFilePath);
+                    if (fileInfo.Exists)
                         return path + String.Format("?v={0}", fileInfo.LastWriteTime.Ticks);
-                    },
-                    new CacheDependency(fullFilePath),
-                    TimeSpan.Zero
-                );
-            }
-            else
-            {
-                return contentPath;
-            }
+                    else
+                        return contentPath;
+                },
+                new CacheDependency(fullFilePath),
+                TimeSpan.Zero
+            );
         }
 
         /// <summary>
@@ -49,23 +45,19 @@ namespace TeacherPouch.Web.Helpers
         {
             var path = PhotoHelper.GetPhotoFilePath(photo, size);
 
-            if (File.Exists(path))
-            {
-                return CacheHelper.RetrieveFromCache(
-                    "Versioned Photo - " + path,
-                    delegate()
-                    {
-                        var fileInfo = new FileInfo(path);
+            return CacheHelper.RetrieveFromCache<string>(
+                "Versioned Photo - " + path,
+                delegate()
+                {
+                    var fileInfo = new FileInfo(path);
+                    if (fileInfo.Exists)
                         return urlHelper.PhotoUrl(photo, size) + String.Format("?v={0}", fileInfo.LastWriteTime.Ticks);
-                    },
-                    new CacheDependency(path),
-                    TimeSpan.Zero
-                );
-            }
-            else
-            {
-                return path;
-            }
+                    else
+                        return path;
+                },
+                new CacheDependency(path),
+                TimeSpan.Zero
+            );
         }
 
         public static string PhotoUrl(this UrlHelper urlHelper, Photo photo, PhotoSizes size)
