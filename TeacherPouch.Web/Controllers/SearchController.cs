@@ -22,6 +22,8 @@ namespace TeacherPouch.Web.Controllers
             if (String.IsNullOrWhiteSpace(q) || q.Length <= 2)
                 return base.View(Views.NoneFound);
 
+            ViewBag.SearchTerm = q;
+
             bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
 
             SearchOperator searchOperator = SearchOperator.Or;
@@ -43,6 +45,8 @@ namespace TeacherPouch.Web.Controllers
             }
             else if (searchOperator == SearchOperator.And)
             {
+                ViewBag.AndChecked = true;
+
                 var results = base.Repository.SearchAnd(q, allowPrivate);
 
                 if (results.HasAnyResults)
