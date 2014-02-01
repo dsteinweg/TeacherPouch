@@ -414,7 +414,7 @@ namespace TeacherPouch.Repositories.SQLite
                     matchingTags.Add(tag);
             }
 
-            var uniquePhotos = new List<Photo>();
+            IEnumerable<Photo> uniquePhotos = new List<Photo>();
             using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
             {
                 foreach (var matchingTag in matchingTags)
@@ -425,22 +425,29 @@ namespace TeacherPouch.Repositories.SQLite
                                       .INNER_JOIN("Photo on Photo.ID = Photo_Tag.PhotoID")
                                       .WHERE("Tag.ID = {0}", matchingTag.ID);
 
+                    if (!allowPrivate)
+                    {
+                        sqlQuery = sqlQuery.WHERE("Photo.IsPrivate = {0}", false);
+                    }
+
                     var matches = connection.Map<Photo>(sqlQuery);
 
                     if (!uniquePhotos.Any())
                     {
-                        uniquePhotos.AddRange(matches);
+                        uniquePhotos = matches.ToList();
                     }
                     else
                     {
-                        uniquePhotos.AddRange(matches.Intersect(uniquePhotos));
+                        uniquePhotos = uniquePhotos.Intersect(matches.ToList());
                     }
                 }
+
+                uniquePhotos = uniquePhotos.Distinct();
             }
 
             var results = new SearchResultsAnd(query);
             results.Tags = matchingTags;
-            results.Photos = uniquePhotos;
+            results.Photos = uniquePhotos.ToList();
 
             stopwatch.Stop();
 
