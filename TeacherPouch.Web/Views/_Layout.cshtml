@@ -23,7 +23,7 @@
                 </ul>
 
                 <form id="search-form" action="/Search" method="get" class="navbar-search pull-left">
-                    <input id="q" name="q" type="text" class="search-query" placeholder="Search" value="@ViewBag.SearchTerm">
+                    <input id="q" name="q" type="text" class="search-query" placeholder="Search" onfocus="this.select();" value="@ViewBag.SearchTerm">
                     @if ((ViewBag.AndChecked as bool?).GetValueOrDefault())
                     {
                         <input id="or" type="radio" name="op" value="Or"><label for="or">Or</label>
@@ -57,7 +57,6 @@
 
     <div class="container-fluid">
         <div class="row-fluid">
-
             <div class="span2">
                 <div id="side-nav" class="well sidebar-nav">
                     @{ Html.RenderPartial(MVC.Tags.Views._FeaturedCategoriesMenu); }
