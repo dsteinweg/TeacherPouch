@@ -26,6 +26,11 @@ h2 {
 #side-nav #logo {
     margin-bottom:10px;
 }
+.ui-autocomplete {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
 
 /*

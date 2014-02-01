@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 using TeacherPouch.Web.Misc;
 using TeacherPouch.Repositories;
 using TeacherPouch.Repositories.SQLite;
+using System.Net.Http.Formatting;
 
 namespace TeacherPouch.Web
 {
@@ -13,16 +15,26 @@ namespace TeacherPouch.Web
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : HttpApplication
     {
+        // Change this variable instance to use a different repository.
+        IRepository repositoryToUse = new SQLiteRepository();
+
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(ConfigureWebApi);
             ConfigureMvc();
+        }
+
+        private void ConfigureWebApi(HttpConfiguration config)
+        {
+            config.Formatters.Clear();
+            config.Formatters.Add(new JsonMediaTypeFormatter());
+
+            config.DependencyResolver = new ApiRepositoryDependencyResolver(repositoryToUse);
+            config.MapHttpAttributeRoutes();
         }
 
         private void ConfigureMvc()
         {
-            // Change this variable instance to use a different repository.
-            IRepository repositoryToUse = new SQLiteRepository();
-
             // Instruct the MVC runtime to use a custom controller factory to create controllers.
             // Our custom controller factory injects the model repository dependency when it instantiates controllers.
             ControllerBuilder.Current.SetControllerFactory(new CustomMvcControllerFactory(repositoryToUse));

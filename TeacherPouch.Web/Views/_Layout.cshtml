@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="@Url.VersionedContent("~/css/bootstrap.css")" rel="stylesheet" media="screen">
+    <link href="@Url.VersionedContent("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet">
     <link href="@Url.VersionedContent("~/css/styles.css")" rel="stylesheet">
 
     @{ RenderSection(name: "Head", required: false); }
@@ -23,7 +24,7 @@
                 </ul>
 
                 <form id="search-form" action="/Search" method="get" class="navbar-search pull-left">
-                    <input id="q" name="q" type="text" class="search-query" placeholder="Search" value="@ViewBag.SearchTerm">
+                    <input id="q" name="q" type="text" class="search-query" placeholder="Search" autocomplete="off" value="@ViewBag.SearchTerm">
                     @if ((ViewBag.AndChecked as bool?).GetValueOrDefault())
                     {
                         <input id="or" type="radio" name="op" value="Or"><label for="or">Or</label>
@@ -37,6 +38,10 @@
                     
                     <input type="submit" value="Search" />
                 </form>
+
+                <div id="suggest" style="">
+
+                </div>
 
                 <ul class="nav">
                     <li class="@ViewBag.LicenseActiveClass"><a href="@Url.License()">Credit TeacherPouch.com when using photos</a></li>
@@ -87,21 +92,9 @@
         </footer>
     </div>
 
-    <script src="@Url.VersionedContent("~/js/jquery-2.0.0.js")"></script>
-    <script>
-        var searchBoxHasFocus = false;
-        $("#q").click(function () {
-            if (searchBoxHasFocus)
-                return;
-
-            searchBoxHasFocus = true;
-
-            this.select();
-
-        }).blur(function () {
-            searchBoxHasFocus = false;
-        });
-    </script>
+    <script src="@Url.VersionedContent("~/Scripts/jquery-2.1.0.min.js")"></script>
+    <script src="@Url.VersionedContent("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
+    <script src="@Url.VersionedContent("~/Scripts/TeacherPouch.js")"></script>
     @RenderSection("Script", required: false)
     @Html.ConditionalAnalyticsScript()
 </body>

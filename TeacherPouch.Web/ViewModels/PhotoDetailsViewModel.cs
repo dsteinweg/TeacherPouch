@@ -35,7 +35,7 @@ namespace TeacherPouch.Web.ViewModels
                 {
                     var photosForTag1 = repository.GetPhotosForTag(this.SearchResultTag, allowPrivate);
 
-                    IQueryable<Photo> photosForTag2 = null;
+                    IEnumerable<Photo> photosForTag2 = null;
                     if (!String.IsNullOrWhiteSpace(tag2Name))
                     {
                         this.SearchResultTag2 = repository.FindTag(tag2Name, allowPrivate);

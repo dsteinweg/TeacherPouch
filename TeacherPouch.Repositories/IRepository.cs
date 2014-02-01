@@ -8,8 +8,8 @@ namespace TeacherPouch.Repositories
 {
     public interface IRepository
     {
-        IQueryable<Photo> GetAllPhotos(bool allowPrivate);
-        IQueryable<Tag> GetAllTags(bool allowPrivate);
+        IEnumerable<Photo> GetAllPhotos(bool allowPrivate);
+        IEnumerable<Tag> GetAllTags(bool allowPrivate);
 
         Photo FindPhoto(int id, bool allowPrivate);
         Photo FindPhoto(Guid uniqueID, bool allowPrivate);
@@ -21,10 +21,12 @@ namespace TeacherPouch.Repositories
         void SaveTag(Tag tag);
         void DeleteTag(Tag tag);
 
-        IQueryable<Tag> GetTagsForPhoto(Photo photo, bool allowPrivate);
-        IQueryable<Photo> GetPhotosForTag(Tag tag, bool allowPrivate);
+        IEnumerable<Tag> GetTagsForPhoto(Photo photo, bool allowPrivate);
+        IEnumerable<Photo> GetPhotosForTag(Tag tag, bool allowPrivate);
 
         SearchResultsOr SearchOr(string query, bool allowPrivate);
         SearchResultsAnd SearchAnd(string query, bool allowPrivate);
+
+        IEnumerable<string> TagAutocompleteSearch(string query, bool allowPrivate);
     }
 }

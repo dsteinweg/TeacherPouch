@@ -23,7 +23,7 @@ namespace TeacherPouch.Repositories.SQLite
         private const string PHOTOTAG_COLUMN_NAMES = "TagID, PhotoID";
 
 
-        public IQueryable<Photo> GetAllPhotos(bool allowPrivate)
+        public IEnumerable<Photo> GetAllPhotos(bool allowPrivate)
         {
             var query = SQL.SELECT(PHOTO_COLUMN_NAMES)
                            .FROM(PHOTO_TABLE_NAME);
@@ -39,10 +39,10 @@ namespace TeacherPouch.Repositories.SQLite
                 photos = connection.Map<Photo>(query).ToList();
             }
 
-            return photos.AsQueryable();
+            return photos;
         }
 
-        public IQueryable<Tag> GetAllTags(bool allowPrivate)
+        public IEnumerable<Tag> GetAllTags(bool allowPrivate)
         {
             var query = SQL.SELECT(TAG_COLUMN_NAMES)
                            .FROM(TAG_TABLE_NAME);
@@ -58,7 +58,7 @@ namespace TeacherPouch.Repositories.SQLite
                 tags = connection.Map<Tag>(query).ToList();
             }
 
-            return tags.AsQueryable();
+            return tags;
         }
 
 
@@ -284,7 +284,7 @@ namespace TeacherPouch.Repositories.SQLite
 
 
 
-        public IQueryable<Tag> GetTagsForPhoto(Photo photo, bool allowPrivate)
+        public IEnumerable<Tag> GetTagsForPhoto(Photo photo, bool allowPrivate)
         {
             var photoTagAssociations = PhotoTagAssociation.GetAll(photo).ToList();
             var tagIDsForPhoto = photoTagAssociations.Where(assoc => assoc.PhotoID == photo.ID).Select(assoc => assoc.TagID);
@@ -292,7 +292,7 @@ namespace TeacherPouch.Repositories.SQLite
             return GetAllTags(allowPrivate).Where(tag => tagIDsForPhoto.Contains(tag.ID));
         }
 
-        public IQueryable<Photo> GetPhotosForTag(Tag tag, bool allowPrivate)
+        public IEnumerable<Photo> GetPhotosForTag(Tag tag, bool allowPrivate)
         {
             var photoTagAssociations = PhotoTagAssociation.GetAll(tag);
             var photoIDsForTag = photoTagAssociations.Where(assoc => assoc.TagID == tag.ID).Select(assoc => assoc.PhotoID);
@@ -454,6 +454,25 @@ namespace TeacherPouch.Repositories.SQLite
             results.SearchDuration = stopwatch.Elapsed;
 
             return results;
+        }
+
+        public IEnumerable<string> TagAutocompleteSearch(string query, bool allowPrivate)
+        {
+            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            {
+                var sqlQuery = SQL.SELECT("*")
+                                  .FROM("Tag")
+                                  .WHERE("Name LIKE {0}", (query + "%"));
+
+                if (!allowPrivate)
+                {
+                    sqlQuery = sqlQuery.WHERE("IsPrivate = {0}", false);
+                }
+
+                sqlQuery = sqlQuery.ORDER_BY("Name");
+
+                return connection.Map<Tag>(sqlQuery).ToList().Select(tag => tag.Name);
+            }
         }
 
         private TagSearchResult PopulateTagSearchResult(Tag tag, bool allowPrivate)
