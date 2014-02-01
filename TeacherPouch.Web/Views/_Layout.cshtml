@@ -23,7 +23,7 @@
                 </ul>
 
                 <form id="search-form" action="/Search" method="get" class="navbar-search pull-left">
-                    <input id="q" name="q" type="text" class="search-query" placeholder="Search" onfocus="this.select();" value="@ViewBag.SearchTerm">
+                    <input id="q" name="q" type="text" class="search-query" placeholder="Search" value="@ViewBag.SearchTerm">
                     @if ((ViewBag.AndChecked as bool?).GetValueOrDefault())
                     {
                         <input id="or" type="radio" name="op" value="Or"><label for="or">Or</label>
@@ -88,6 +88,20 @@
     </div>
 
     <script src="@Url.VersionedContent("~/js/jquery-2.0.0.js")"></script>
+    <script>
+        var searchBoxHasFocus = false;
+        $("#q").click(function () {
+            if (searchBoxHasFocus)
+                return;
+
+            searchBoxHasFocus = true;
+
+            this.select();
+
+        }).blur(function () {
+            searchBoxHasFocus = false;
+        });
+    </script>
     @RenderSection("Script", required: false)
     @Html.ConditionalAnalyticsScript()
 </body>
