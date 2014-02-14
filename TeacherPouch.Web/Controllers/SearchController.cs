@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
 
-using TeacherPouch.Repositories;
-using TeacherPouch.Utilities.Extensions;
-using TeacherPouch.Providers;
 using TeacherPouch.Models;
+using TeacherPouch.Providers;
+using TeacherPouch.Repositories;
 
 namespace TeacherPouch.Web.Controllers
 {
@@ -19,7 +18,7 @@ namespace TeacherPouch.Web.Controllers
         // GET: /Search?q=spring&op=and
         public virtual ViewResult Search(string q, string op)
         {
-            if (String.IsNullOrWhiteSpace(q) || q.Length <= 2)
+            if (String.IsNullOrWhiteSpace(q) || q.Length < 2)
                 return base.View(Views.NoneFound);
 
             ViewBag.SearchTerm = q;
