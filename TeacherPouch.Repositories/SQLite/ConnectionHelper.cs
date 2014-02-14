@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
+using System.Data.SQLite;
 
 namespace TeacherPouch.Models
 {
-    public static class ConnectionStringHelper
+    public static class ConnectionHelper
     {
         private static string _connectionString = null;
 
-        public static string GetConnectionString()
+        public static SQLiteConnection GetSQLiteConnection()
+        {
+            return new SQLiteConnection(GetConnectionString());
+        }
+
+        private static string GetConnectionString()
         {
             if (_connectionString == null)
             {

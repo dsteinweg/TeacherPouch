@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using DbExtensions;
 
@@ -22,7 +21,7 @@ namespace TeacherPouch.Repositories.SQLite
             var query = SQL.SELECT(PHOTOTAG_COLUMN_NAMES)
                            .FROM(PHOTOTAG_TABLE_NAME);
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 return connection.Map<PhotoTagAssociation>(query).ToList();
             }
@@ -35,7 +34,7 @@ namespace TeacherPouch.Repositories.SQLite
                            .WHERE("PhotoID = {0}", photo.ID);
 
             List<PhotoTagAssociation> associations = null;
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 associations = connection.Map<PhotoTagAssociation>(query).ToList();
             }
@@ -50,7 +49,7 @@ namespace TeacherPouch.Repositories.SQLite
                            .WHERE("TagID = {0}", tag.ID);
 
             List<PhotoTagAssociation> associations = null;
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 associations = connection.Map<PhotoTagAssociation>(query).ToList();
             }
@@ -66,7 +65,7 @@ namespace TeacherPouch.Repositories.SQLite
                            .WHERE("PhotoID = {0}", photo.ID)
                            ._("TagID = {0}", tag.ID);
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 var existingAssociation = connection.Map<PhotoTagAssociation>(query).FirstOrDefault();
                 if (existingAssociation == null)
@@ -84,7 +83,7 @@ namespace TeacherPouch.Repositories.SQLite
             var query = SQL.DELETE_FROM(PHOTOTAG_TABLE_NAME)
                            .WHERE("TagID = {0}", tag.ID);
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 connection.Execute(query);
             }
@@ -95,7 +94,7 @@ namespace TeacherPouch.Repositories.SQLite
             var query = SQL.DELETE_FROM(PHOTOTAG_TABLE_NAME)
                            .WHERE("PhotoID = {0}", photo.ID);
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 connection.Execute(query);
             }

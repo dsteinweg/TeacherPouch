@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using System.Diagnostics;
 using System.Linq;
 using DbExtensions;
 
 using TeacherPouch.Models;
-using TeacherPouch.Utilities.Caching;
 using TeacherPouch.Utilities.Extensions;
-using System.Diagnostics;
 
 namespace TeacherPouch.Repositories.SQLite
 {
@@ -34,7 +32,7 @@ namespace TeacherPouch.Repositories.SQLite
             }
 
             List<Photo> photos = null;
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 photos = connection.Map<Photo>(query).ToList();
             }
@@ -53,7 +51,7 @@ namespace TeacherPouch.Repositories.SQLite
             }
 
             List<Tag> tags = null;
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 tags = connection.Map<Tag>(query).ToList();
             }
@@ -74,7 +72,7 @@ namespace TeacherPouch.Repositories.SQLite
                 query = query.WHERE("IsPrivate = {0}", false);
             }
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 return connection.Map<Photo>(query).FirstOrDefault();
             }
@@ -91,7 +89,7 @@ namespace TeacherPouch.Repositories.SQLite
                 query = query.WHERE("IsPrivate = {0}", false);
             }
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 return connection.Map<Photo>(query).FirstOrDefault();
             }
@@ -105,7 +103,7 @@ namespace TeacherPouch.Repositories.SQLite
                 var insertPhotoQuery = SQL.INSERT_INTO(String.Format("{0}({1})", PHOTO_TABLE_NAME, "Name, UniqueID, IsPrivate"))
                                           .VALUES(photo.Name, photo.UniqueID, photo.IsPrivate);
 
-                using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+                using (var connection = ConnectionHelper.GetSQLiteConnection())
                 {
                     connection.Execute(insertPhotoQuery);
                 }
@@ -126,7 +124,7 @@ namespace TeacherPouch.Repositories.SQLite
                                      .SET("IsPrivate = {0}", photo.IsPrivate)
                                      .WHERE("ID = {0}", photo.ID);
 
-                using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+                using (var connection = ConnectionHelper.GetSQLiteConnection())
                 {
                     connection.Execute(updateQuery);
                 }
@@ -178,7 +176,7 @@ namespace TeacherPouch.Repositories.SQLite
                 var deleteQuery = SQL.DELETE_FROM(PHOTO_TABLE_NAME)
                                      .WHERE("ID = {0}", photo.ID);
 
-                using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+                using (var connection = ConnectionHelper.GetSQLiteConnection())
                 {
                     connection.Execute(deleteQuery);
                 }
@@ -198,7 +196,7 @@ namespace TeacherPouch.Repositories.SQLite
                 query = query.WHERE("IsPrivate = {0}", false);
             }
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 return connection.Map<Tag>(query).FirstOrDefault();
             }
@@ -215,7 +213,7 @@ namespace TeacherPouch.Repositories.SQLite
                 query = query.WHERE("IsPrivate = {0}", false);
             }
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 return connection.Map<Tag>(query).FirstOrDefault();
             }
@@ -231,7 +229,7 @@ namespace TeacherPouch.Repositories.SQLite
                     var insertQuery = SQL.INSERT_INTO(String.Format("{0}({1})", TAG_TABLE_NAME, "Name, IsPrivate"))
                                          .VALUES(tag.Name, tag.IsPrivate);
 
-                    using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+                    using (var connection = ConnectionHelper.GetSQLiteConnection())
                     {
                         connection.Execute(insertQuery);
                     }
@@ -259,7 +257,7 @@ namespace TeacherPouch.Repositories.SQLite
                                  .SET("IsPrivate = {0}", tag.IsPrivate)
                                  .WHERE("ID = {0}", tag.ID);
 
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 connection.Execute(updateQuery);
             }
@@ -274,7 +272,7 @@ namespace TeacherPouch.Repositories.SQLite
                 var query = SQL.DELETE_FROM(TAG_TABLE_NAME)
                                .WHERE("ID = {0}", tag.ID);
 
-                using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+                using (var connection = ConnectionHelper.GetSQLiteConnection())
                 {
                     connection.Execute(query);
                 }
@@ -306,8 +304,7 @@ namespace TeacherPouch.Repositories.SQLite
         {
             query = query.ToLower();
 
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
+            var stopwatch = Stopwatch.StartNew();
 
             var results = new SearchResultsOr(query);
 
@@ -399,8 +396,7 @@ namespace TeacherPouch.Repositories.SQLite
 
         public SearchResultsAnd SearchAnd(string query, bool allowPrivate)
         {
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
+            var stopwatch = Stopwatch.StartNew();
 
             var allTags = GetAllTags(allowPrivate);
 
@@ -415,7 +411,7 @@ namespace TeacherPouch.Repositories.SQLite
             }
 
             IEnumerable<Photo> uniquePhotos = new List<Photo>();
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 foreach (var matchingTag in matchingTags)
                 {
@@ -458,7 +454,7 @@ namespace TeacherPouch.Repositories.SQLite
 
         public IEnumerable<string> TagAutocompleteSearch(string query, bool allowPrivate)
         {
-            using (var connection = new SQLiteConnection(ConnectionStringHelper.GetConnectionString()))
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
             {
                 var sqlQuery = SQL.SELECT("*")
                                   .FROM("Tag")
