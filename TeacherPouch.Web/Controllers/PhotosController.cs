@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
+
 using TeacherPouch.Models;
 using TeacherPouch.Models.Exceptions;
 using TeacherPouch.Providers;
 using TeacherPouch.Repositories;
 using TeacherPouch.Utilities;
 using TeacherPouch.Utilities.Caching;
+using TeacherPouch.Web.Helpers;
 using TeacherPouch.Web.ViewModels;
 
 namespace TeacherPouch.Web.Controllers
@@ -51,7 +53,11 @@ namespace TeacherPouch.Web.Controllers
         [HttpGet]
         public virtual ViewResult PhotoCreate()
         {
-            var viewModel = new PhotoCreateViewModel();
+            var viewModel = CacheHelper.RetrieveFromCache<PhotoCreateViewModel>("NewPhotoViewModel");
+            if (viewModel == null)
+            {
+                viewModel = new PhotoCreateViewModel();
+            }
 
             return View(Views.PhotoCreate, viewModel);
         }
@@ -91,9 +97,26 @@ namespace TeacherPouch.Web.Controllers
 
                 base.Repository.SavePhoto(newPhoto, tagNames);
 
-                CacheHelper.Insert("LastTagsInput", tagNamesStr);
+                var photoNameParts = name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                int photoNumber = 0;
+                if (Int32.TryParse(photoNameParts.Last(), out photoNumber))
+                {
+                    photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
+                }
 
-                return RedirectToAction(Actions.PhotoDetails(newPhoto.ID));
+                var newPhotoName = String.Join(" ", photoNameParts);
+
+                var urlHelper = new UrlHelper(Request.RequestContext);
+                var photoUrl = urlHelper.PhotoDetails(newPhoto);
+
+                var nextCreateViewModel = new PhotoCreateViewModel();
+                nextCreateViewModel.Message = String.Format("<a href=\"{0}\">Photo \"{1}\"</a> created.", photoUrl, newPhoto.Name);
+                nextCreateViewModel.LastTagsInput = tagNamesStr;
+                nextCreateViewModel.ProposedPhotoName = newPhotoName;
+
+                CacheHelper.Insert("NewPhotoViewModel", nextCreateViewModel);
+
+                return RedirectToAction(Actions.PhotoCreate());
             }
             catch (PhotoAlreadyExistsException ex)
             {
