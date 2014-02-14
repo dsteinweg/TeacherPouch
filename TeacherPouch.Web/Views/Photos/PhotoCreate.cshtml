@@ -7,6 +7,11 @@
 <div id="createPhoto">
     <h2>Create New Photo</h2>
 
+    @if (!String.IsNullOrWhiteSpace(Model.Message))
+    {
+        <h4>@Html.Raw(Model.Message)</h4>
+    }
+
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
@@ -17,7 +22,7 @@
                     <div>
                         <label for="Name">Photo Name</label>
 
-                        <input type="text" name="Name" id="Name">
+                        <input type="text" name="Name" id="Name" value="@Model.ProposedPhotoName">
                     </div>
                 </td>
             </tr>
@@ -86,6 +91,16 @@
                     this.select();
                 }
             });
+
+            var photoNameHasFocus = false;
+            $("#Name").click(function () {
+                if (photoNameHasFocus)
+                    return;
+
+                photoNameHasFocus = true;
+
+                this.select();
+            })
         });
     </script>
 }
