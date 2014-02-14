@@ -53,6 +53,13 @@ h2 {
     margin:0 0 15px 0;
     line-height:normal;
 }
+#home #intro-video-placeholder {
+    height:315px;
+}
+#home #intro-video {
+    display:none;
+    height:315px;
+}
 
 .featured-tags-preview {
     margin-bottom: 20px;

@@ -6,7 +6,14 @@
 <div id="home">
     <div class="hero-unit">
         <header>
-            <img src="@Url.VersionedContent("~/img/logo/teacherpouchlogo30.png")">
+            <div id="intro-video-placeholder">
+                <a href="javascript:;" onclick="PlayIntroVideo(this);" data-video="//www.youtube.com/embed/0bwl3JaPM8Q?autoplay=1">
+                    <img src="@Url.VersionedContent("~/img/TeacherPouch-Video-Placeholder.png")">
+                </a>
+            </div>
+
+            <div id="intro-video"></div>
+
             <h5>
                 Free stock photos for teachers and non-teachers alike.<br>
                 Come back periodically to see new photos that have been added!

@@ -1,4 +1,12 @@
 ﻿
+function PlayIntroVideo(placeholder) {
+    var videoURL = $(placeholder).data("video");
+
+    var video = '<iframe width="420" height="315" src="' + videoURL + '" frameborder="0" allowfullscreen></iframe>';
+
+    $(placeholder).replaceWith(video);
+}
+
 
 $(document).ready(function () {
     var searchBoxHasFocus = false;
