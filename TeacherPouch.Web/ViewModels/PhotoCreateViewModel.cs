@@ -1,8 +1,5 @@
-﻿using System.Web;
-
-using TeacherPouch.Models;
+﻿using TeacherPouch.Models;
 using TeacherPouch.Utilities;
-using TeacherPouch.Utilities.Caching;
 
 namespace TeacherPouch.Web.ViewModels
 {
@@ -10,7 +7,9 @@ namespace TeacherPouch.Web.ViewModels
     {
         public Photo Photo { get; private set; }
         public string PendingPhotoPath { get; private set; }
-        public string LastTagsInput { get; private set; }
+        public string Message { get; set; }
+        public string ProposedPhotoName { get; set; }
+        public string LastTagsInput { get; set; }
         public string ErrorMessage { get; set; }
 
         public PhotoCreateViewModel()
@@ -22,8 +21,6 @@ namespace TeacherPouch.Web.ViewModels
                 pendingPhotoPath = pendingPhotoPath + @"\";
 
             this.PendingPhotoPath = pendingPhotoPath;
-
-            this.LastTagsInput = CacheHelper.RetrieveFromCache<string>("LastTagsInput");
         }
     }
 }
