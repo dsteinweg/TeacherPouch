@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
@@ -431,6 +437,7 @@
   <ItemGroup>
     <Compile Include="API\ApiRepositoryControllerBase.cs" />
     <Compile Include="API\TagApiController.cs" />
+    <Compile Include="App_Start\MapperConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -438,6 +445,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\RepositoryControllerBase.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
@@ -462,6 +470,10 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PhotoCreateViewModel.cs" />
     <Compile Include="ViewModels\PhotoDetailsViewModel.cs" />
+    <Compile Include="ViewModels\QuestionCreateViewModel.cs" />
+    <Compile Include="ViewModels\QuestionDetailsViewModel.cs" />
+    <Compile Include="ViewModels\QuestionEditViewModel.cs" />
+    <Compile Include="ViewModels\QuestionIndexViewModel.cs" />
     <Compile Include="ViewModels\TagCreateViewModel.cs" />
     <Compile Include="ViewModels\TagDetailsViewModel.cs" />
   </ItemGroup>
@@ -482,6 +494,12 @@
     <Content Include="Views\Category\Materials.cshtml" />
     <Content Include="Views\Pages\PrivacyPolicy.cshtml" />
     <Content Include="Views\Search\SearchResultsAnd.cshtml" />
+    <Content Include="Views\Questions\QuestionIndex.cshtml" />
+    <Content Include="Views\Questions\QuestionCreate.cshtml" />
+    <Content Include="Views\Questions\QuestionsForPhoto.cshtml" />
+    <Content Include="Views\Questions\QuestionEdit.cshtml" />
+    <Content Include="Views\Questions\QuestionDetails.cshtml" />
+    <Content Include="Views\Questions\QuestionDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
