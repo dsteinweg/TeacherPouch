@@ -29,6 +29,7 @@ public static class MVC
     public static TeacherPouch.Web.Controllers.ErrorController Error = new TeacherPouch.Web.Controllers.T4MVC_ErrorController();
     public static TeacherPouch.Web.Controllers.PagesController Pages = new TeacherPouch.Web.Controllers.T4MVC_PagesController();
     public static TeacherPouch.Web.Controllers.PhotosController Photos = new TeacherPouch.Web.Controllers.T4MVC_PhotosController();
+    public static TeacherPouch.Web.Controllers.QuestionsController Questions = new TeacherPouch.Web.Controllers.T4MVC_QuestionsController();
     public static TeacherPouch.Web.Controllers.SearchController Search = new TeacherPouch.Web.Controllers.T4MVC_SearchController();
     public static TeacherPouch.Web.Controllers.TagsController Tags = new TeacherPouch.Web.Controllers.T4MVC_TagsController();
 }
@@ -93,6 +94,143 @@ internal partial class T4MVC_System_Web_Mvc_ContentResult : System.Web.Mvc.Conte
 
 namespace Links
 {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static class Scripts {
+        private const string URLPATH = "~/Scripts";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        public static readonly string jquery_2_1_0_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.0.intellisense.min.js") ? Url("jquery-2.1.0.intellisense.min.js") : Url("jquery-2.1.0.intellisense.js");
+        public static readonly string jquery_2_1_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.0.min.js") ? Url("jquery-2.1.0.min.js") : Url("jquery-2.1.0.js");
+        public static readonly string jquery_2_1_0_min_js = Url("jquery-2.1.0.min.js");
+        public static readonly string jquery_2_1_0_min_map = Url("jquery-2.1.0.min.map");
+        public static readonly string jquery_ui_1_10_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.10.4.min.js") ? Url("jquery-ui-1.10.4.min.js") : Url("jquery-ui-1.10.4.js");
+        public static readonly string jquery_ui_1_10_4_min_js = Url("jquery-ui-1.10.4.min.js");
+        public static readonly string TeacherPouch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/TeacherPouch.min.js") ? Url("TeacherPouch.min.js") : Url("TeacherPouch.js");
+        public static readonly string Web_config = Url("Web.config");
+    }
+
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static class Content {
+        private const string URLPATH = "~/Content";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class themes {
+            private const string URLPATH = "~/Content/themes";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class @base {
+                private const string URLPATH = "~/Content/themes/base";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class images {
+                    private const string URLPATH = "~/Content/themes/base/images";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string animated_overlay_gif = Url("animated-overlay.gif");
+                    public static readonly string ui_bg_flat_0_aaaaaa_40x100_png = Url("ui-bg_flat_0_aaaaaa_40x100.png");
+                    public static readonly string ui_bg_flat_75_ffffff_40x100_png = Url("ui-bg_flat_75_ffffff_40x100.png");
+                    public static readonly string ui_bg_glass_55_fbf9ee_1x400_png = Url("ui-bg_glass_55_fbf9ee_1x400.png");
+                    public static readonly string ui_bg_glass_65_ffffff_1x400_png = Url("ui-bg_glass_65_ffffff_1x400.png");
+                    public static readonly string ui_bg_glass_75_dadada_1x400_png = Url("ui-bg_glass_75_dadada_1x400.png");
+                    public static readonly string ui_bg_glass_75_e6e6e6_1x400_png = Url("ui-bg_glass_75_e6e6e6_1x400.png");
+                    public static readonly string ui_bg_glass_95_fef1ec_1x400_png = Url("ui-bg_glass_95_fef1ec_1x400.png");
+                    public static readonly string ui_bg_highlight_soft_75_cccccc_1x100_png = Url("ui-bg_highlight-soft_75_cccccc_1x100.png");
+                    public static readonly string ui_icons_222222_256x240_png = Url("ui-icons_222222_256x240.png");
+                    public static readonly string ui_icons_2e83ff_256x240_png = Url("ui-icons_2e83ff_256x240.png");
+                    public static readonly string ui_icons_454545_256x240_png = Url("ui-icons_454545_256x240.png");
+                    public static readonly string ui_icons_888888_256x240_png = Url("ui-icons_888888_256x240.png");
+                    public static readonly string ui_icons_cd0a0a_256x240_png = Url("ui-icons_cd0a0a_256x240.png");
+                }
+            
+                public static readonly string jquery_ui_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui.min.css") ? Url("jquery-ui.min.css") : Url("jquery-ui.css");
+                     
+                public static readonly string jquery_ui_accordion_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.accordion.min.css") ? Url("jquery.ui.accordion.min.css") : Url("jquery.ui.accordion.css");
+                     
+                public static readonly string jquery_ui_all_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.all.min.css") ? Url("jquery.ui.all.min.css") : Url("jquery.ui.all.css");
+                     
+                public static readonly string jquery_ui_autocomplete_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.autocomplete.min.css") ? Url("jquery.ui.autocomplete.min.css") : Url("jquery.ui.autocomplete.css");
+                     
+                public static readonly string jquery_ui_base_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.base.min.css") ? Url("jquery.ui.base.min.css") : Url("jquery.ui.base.css");
+                     
+                public static readonly string jquery_ui_button_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.button.min.css") ? Url("jquery.ui.button.min.css") : Url("jquery.ui.button.css");
+                     
+                public static readonly string jquery_ui_core_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.core.min.css") ? Url("jquery.ui.core.min.css") : Url("jquery.ui.core.css");
+                     
+                public static readonly string jquery_ui_datepicker_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.datepicker.min.css") ? Url("jquery.ui.datepicker.min.css") : Url("jquery.ui.datepicker.css");
+                     
+                public static readonly string jquery_ui_dialog_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.dialog.min.css") ? Url("jquery.ui.dialog.min.css") : Url("jquery.ui.dialog.css");
+                     
+                public static readonly string jquery_ui_menu_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.menu.min.css") ? Url("jquery.ui.menu.min.css") : Url("jquery.ui.menu.css");
+                     
+                public static readonly string jquery_ui_progressbar_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.progressbar.min.css") ? Url("jquery.ui.progressbar.min.css") : Url("jquery.ui.progressbar.css");
+                     
+                public static readonly string jquery_ui_resizable_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.resizable.min.css") ? Url("jquery.ui.resizable.min.css") : Url("jquery.ui.resizable.css");
+                     
+                public static readonly string jquery_ui_selectable_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.selectable.min.css") ? Url("jquery.ui.selectable.min.css") : Url("jquery.ui.selectable.css");
+                     
+                public static readonly string jquery_ui_slider_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.slider.min.css") ? Url("jquery.ui.slider.min.css") : Url("jquery.ui.slider.css");
+                     
+                public static readonly string jquery_ui_spinner_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.spinner.min.css") ? Url("jquery.ui.spinner.min.css") : Url("jquery.ui.spinner.css");
+                     
+                public static readonly string jquery_ui_tabs_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.tabs.min.css") ? Url("jquery.ui.tabs.min.css") : Url("jquery.ui.tabs.css");
+                     
+                public static readonly string jquery_ui_theme_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.theme.min.css") ? Url("jquery.ui.theme.min.css") : Url("jquery.ui.theme.css");
+                     
+                public static readonly string jquery_ui_tooltip_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.tooltip.min.css") ? Url("jquery.ui.tooltip.min.css") : Url("jquery.ui.tooltip.css");
+                     
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class minified {
+                    private const string URLPATH = "~/Content/themes/base/minified";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class images {
+                        private const string URLPATH = "~/Content/themes/base/minified/images";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string animated_overlay_gif = Url("animated-overlay.gif");
+                        public static readonly string ui_bg_flat_0_aaaaaa_40x100_png = Url("ui-bg_flat_0_aaaaaa_40x100.png");
+                        public static readonly string ui_bg_flat_75_ffffff_40x100_png = Url("ui-bg_flat_75_ffffff_40x100.png");
+                        public static readonly string ui_bg_glass_55_fbf9ee_1x400_png = Url("ui-bg_glass_55_fbf9ee_1x400.png");
+                        public static readonly string ui_bg_glass_65_ffffff_1x400_png = Url("ui-bg_glass_65_ffffff_1x400.png");
+                        public static readonly string ui_bg_glass_75_dadada_1x400_png = Url("ui-bg_glass_75_dadada_1x400.png");
+                        public static readonly string ui_bg_glass_75_e6e6e6_1x400_png = Url("ui-bg_glass_75_e6e6e6_1x400.png");
+                        public static readonly string ui_bg_glass_95_fef1ec_1x400_png = Url("ui-bg_glass_95_fef1ec_1x400.png");
+                        public static readonly string ui_bg_highlight_soft_75_cccccc_1x100_png = Url("ui-bg_highlight-soft_75_cccccc_1x100.png");
+                        public static readonly string ui_icons_222222_256x240_png = Url("ui-icons_222222_256x240.png");
+                        public static readonly string ui_icons_2e83ff_256x240_png = Url("ui-icons_2e83ff_256x240.png");
+                        public static readonly string ui_icons_454545_256x240_png = Url("ui-icons_454545_256x240.png");
+                        public static readonly string ui_icons_888888_256x240_png = Url("ui-icons_888888_256x240.png");
+                        public static readonly string ui_icons_cd0a0a_256x240_png = Url("ui-icons_cd0a0a_256x240.png");
+                    }
+                
+                    public static readonly string jquery_ui_min_css = Url("jquery-ui.min.css");
+                    public static readonly string jquery_ui_accordion_min_css = Url("jquery.ui.accordion.min.css");
+                    public static readonly string jquery_ui_autocomplete_min_css = Url("jquery.ui.autocomplete.min.css");
+                    public static readonly string jquery_ui_button_min_css = Url("jquery.ui.button.min.css");
+                    public static readonly string jquery_ui_core_min_css = Url("jquery.ui.core.min.css");
+                    public static readonly string jquery_ui_datepicker_min_css = Url("jquery.ui.datepicker.min.css");
+                    public static readonly string jquery_ui_dialog_min_css = Url("jquery.ui.dialog.min.css");
+                    public static readonly string jquery_ui_menu_min_css = Url("jquery.ui.menu.min.css");
+                    public static readonly string jquery_ui_progressbar_min_css = Url("jquery.ui.progressbar.min.css");
+                    public static readonly string jquery_ui_resizable_min_css = Url("jquery.ui.resizable.min.css");
+                    public static readonly string jquery_ui_selectable_min_css = Url("jquery.ui.selectable.min.css");
+                    public static readonly string jquery_ui_slider_min_css = Url("jquery.ui.slider.min.css");
+                    public static readonly string jquery_ui_spinner_min_css = Url("jquery.ui.spinner.min.css");
+                    public static readonly string jquery_ui_tabs_min_css = Url("jquery.ui.tabs.min.css");
+                    public static readonly string jquery_ui_theme_min_css = Url("jquery.ui.theme.min.css");
+                    public static readonly string jquery_ui_tooltip_min_css = Url("jquery.ui.tooltip.min.css");
+                }
+            
+            }
+        
+        }
+    
+    }
+
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static partial class Bundles
     {
@@ -1004,6 +1142,270 @@ namespace TeacherPouch.Web.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "fileName", fileName);
             PhotoImageDownloadOverride(callInfo, id, fileName);
+            return callInfo;
+        }
+
+        partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        public override System.Web.Mvc.ViewResult InvokeHttp404()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
+            InvokeHttp404Override(callInfo);
+            return callInfo;
+        }
+
+    }
+}
+
+namespace TeacherPouch.Web.Controllers
+{
+    public partial class QuestionsController
+    {
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected QuestionsController(Dummy d) { }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(ActionResult result)
+        {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoute(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
+        {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult QuestionDetails()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionDetails);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult QuestionCreate()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionCreate);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult QuestionEdit()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionEdit);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult QuestionDelete()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionDelete);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult QuestionsForPhoto()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionsForPhoto);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public QuestionsController Actions { get { return MVC.Questions; } }
+        [GeneratedCode("T4MVC", "2.0")]
+        public readonly string Area = "";
+        [GeneratedCode("T4MVC", "2.0")]
+        public readonly string Name = "Questions";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Questions";
+
+        static readonly ActionNamesClass s_actions = new ActionNamesClass();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionNamesClass ActionNames { get { return s_actions; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNamesClass
+        {
+            public readonly string QuestionIndex = "QuestionIndex";
+            public readonly string QuestionDetails = "QuestionDetails";
+            public readonly string QuestionCreate = "QuestionCreate";
+            public readonly string QuestionEdit = "QuestionEdit";
+            public readonly string QuestionDelete = "QuestionDelete";
+            public readonly string QuestionsForPhoto = "QuestionsForPhoto";
+            public readonly string InvokeHttp404 = "InvokeHttp404";
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants
+        {
+            public const string QuestionIndex = "QuestionIndex";
+            public const string QuestionDetails = "QuestionDetails";
+            public const string QuestionCreate = "QuestionCreate";
+            public const string QuestionEdit = "QuestionEdit";
+            public const string QuestionDelete = "QuestionDelete";
+            public const string QuestionsForPhoto = "QuestionsForPhoto";
+            public const string InvokeHttp404 = "InvokeHttp404";
+        }
+
+
+        static readonly ActionParamsClass_QuestionDetails s_params_QuestionDetails = new ActionParamsClass_QuestionDetails();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_QuestionDetails QuestionDetailsParams { get { return s_params_QuestionDetails; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_QuestionDetails
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_QuestionCreate s_params_QuestionCreate = new ActionParamsClass_QuestionCreate();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_QuestionCreate QuestionCreateParams { get { return s_params_QuestionCreate; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_QuestionCreate
+        {
+            public readonly string photoID = "photoID";
+            public readonly string postedViewModel = "postedViewModel";
+        }
+        static readonly ActionParamsClass_QuestionEdit s_params_QuestionEdit = new ActionParamsClass_QuestionEdit();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_QuestionEdit QuestionEditParams { get { return s_params_QuestionEdit; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_QuestionEdit
+        {
+            public readonly string id = "id";
+            public readonly string postedViewModel = "postedViewModel";
+        }
+        static readonly ActionParamsClass_QuestionDelete s_params_QuestionDelete = new ActionParamsClass_QuestionDelete();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_QuestionDelete QuestionDeleteParams { get { return s_params_QuestionDelete; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_QuestionDelete
+        {
+            public readonly string id = "id";
+            public readonly string postedViewModel = "postedViewModel";
+        }
+        static readonly ActionParamsClass_QuestionsForPhoto s_params_QuestionsForPhoto = new ActionParamsClass_QuestionsForPhoto();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_QuestionsForPhoto QuestionsForPhotoParams { get { return s_params_QuestionsForPhoto; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_QuestionsForPhoto
+        {
+            public readonly string photoID = "photoID";
+        }
+        static readonly ViewsClass s_views = new ViewsClass();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ViewsClass Views { get { return s_views; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ViewsClass
+        {
+            static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+            public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+            public class _ViewNamesClass
+            {
+                public readonly string QuestionCreate = "QuestionCreate";
+                public readonly string QuestionDelete = "QuestionDelete";
+                public readonly string QuestionDetails = "QuestionDetails";
+                public readonly string QuestionEdit = "QuestionEdit";
+                public readonly string QuestionIndex = "QuestionIndex";
+                public readonly string QuestionsForPhoto = "QuestionsForPhoto";
+            }
+            public readonly string QuestionCreate = "~/Views/Questions/QuestionCreate.cshtml";
+            public readonly string QuestionDelete = "~/Views/Questions/QuestionDelete.cshtml";
+            public readonly string QuestionDetails = "~/Views/Questions/QuestionDetails.cshtml";
+            public readonly string QuestionEdit = "~/Views/Questions/QuestionEdit.cshtml";
+            public readonly string QuestionIndex = "~/Views/Questions/QuestionIndex.cshtml";
+            public readonly string QuestionsForPhoto = "~/Views/Questions/QuestionsForPhoto.cshtml";
+        }
+    }
+
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public partial class T4MVC_QuestionsController : TeacherPouch.Web.Controllers.QuestionsController
+    {
+        public T4MVC_QuestionsController() : base(Dummy.Instance) { }
+
+        partial void QuestionIndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        public override System.Web.Mvc.ViewResult QuestionIndex()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionIndex);
+            QuestionIndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void QuestionDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
+
+        public override System.Web.Mvc.ViewResult QuestionDetails(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionDetails);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            QuestionDetailsOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void QuestionCreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int photoID);
+
+        public override System.Web.Mvc.ViewResult QuestionCreate(int photoID)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionCreate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "photoID", photoID);
+            QuestionCreateOverride(callInfo, photoID);
+            return callInfo;
+        }
+
+        partial void QuestionCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, TeacherPouch.Web.ViewModels.QuestionCreateViewModel postedViewModel);
+
+        public override System.Web.Mvc.ActionResult QuestionCreate(TeacherPouch.Web.ViewModels.QuestionCreateViewModel postedViewModel)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.QuestionCreate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "postedViewModel", postedViewModel);
+            QuestionCreateOverride(callInfo, postedViewModel);
+            return callInfo;
+        }
+
+        partial void QuestionEditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
+
+        public override System.Web.Mvc.ViewResult QuestionEdit(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionEdit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            QuestionEditOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void QuestionEditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, TeacherPouch.Web.ViewModels.QuestionEditViewModel postedViewModel);
+
+        public override System.Web.Mvc.ActionResult QuestionEdit(TeacherPouch.Web.ViewModels.QuestionEditViewModel postedViewModel)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.QuestionEdit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "postedViewModel", postedViewModel);
+            QuestionEditOverride(callInfo, postedViewModel);
+            return callInfo;
+        }
+
+        partial void QuestionDeleteOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
+
+        public override System.Web.Mvc.ViewResult QuestionDelete(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionDelete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            QuestionDeleteOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void QuestionDeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, TeacherPouch.Web.ViewModels.QuestionDetailsViewModel postedViewModel);
+
+        public override System.Web.Mvc.ActionResult QuestionDelete(TeacherPouch.Web.ViewModels.QuestionDetailsViewModel postedViewModel)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.QuestionDelete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "postedViewModel", postedViewModel);
+            QuestionDeleteOverride(callInfo, postedViewModel);
+            return callInfo;
+        }
+
+        partial void QuestionsForPhotoOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int photoID);
+
+        public override System.Web.Mvc.ViewResult QuestionsForPhoto(int photoID)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionsForPhoto);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "photoID", photoID);
+            QuestionsForPhotoOverride(callInfo, photoID);
             return callInfo;
         }
 
