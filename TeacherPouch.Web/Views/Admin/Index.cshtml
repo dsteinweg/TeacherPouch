@@ -32,6 +32,11 @@
         <a href="@Url.TagIndex()">View All Tags</a>
     </fieldset>
 
+    <fieldset>
+        <legend>Questions</legend>
+        @Html.ActionLink("View All Questions", MVC.Questions.QuestionIndex())
+    </fieldset>
+
     <p>
         <a href="@Url.AdminLogout()">Log out</a>
     </p>
