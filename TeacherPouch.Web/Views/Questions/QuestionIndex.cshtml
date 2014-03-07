@@ -23,8 +23,8 @@
             {
                 <tr>
                     <td>@question.ID</td>
-                    <td>@question.PhotoID</td>
-                    <td>@question.Text</td>
+                    <td>@Html.ActionLink(question.PhotoID.ToString(), MVC.Photos.PhotoDetails(question.PhotoID))</td>
+                    <td>@Html.ActionLink(question.Text, MVC.Questions.QuestionDetails(question.ID))</td>
                     <td>@question.SentenceStarters</td>
                     <td>
                         @if (Model.DisplayAdminLinks)
