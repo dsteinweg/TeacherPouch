@@ -33,11 +33,28 @@
         </tr>
     </table>
 
-    <div id="download">
-        Download this photo:
-        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Small)"><i class="icon-download-alt"></i>Small</a> <span class="file-size">(@Model.SmallFileSize)</span></span> |
-        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Large)"><i class="icon-download-alt"></i>Large</a> <span class="file-size">(@Model.LargeFileSize)</span></span>
-    </div>
+    @if (Model.Questions.SafeAny())
+    {
+        <div>
+            <h4>Questions</h4>
+            <ol>
+                @foreach (var question in Model.Questions)
+                {
+                    <li class="question">
+                        @if (Model.ShowAdminLinks)
+                        {
+                            <div class="preserve-newline">@Html.ActionLink(@question.Text, MVC.Questions.QuestionDetails(question.ID))</div>
+                        }
+                        else
+                        {
+                            <div class="preserve-newline">@question.Text</div>
+                        }
+                        <div class="question-starter preserve-newline">@question.SentenceStarters</div>
+                    </li>
+                }
+            </ol>
+        </div>
+    }
 
     @if (SecurityHelper.UserCanSeePrivateRecords(base.User))
     {
@@ -53,12 +70,22 @@
         </div>
     }
 
-    @if (SecurityHelper.UserIsAdmin(base.User))
+    <div id="download">
+        Download this photo:
+        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Small)"><i class="icon-download-alt"></i>Small</a> <span class="file-size">(@Model.SmallFileSize)</span></span> |
+        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Large)"><i class="icon-download-alt"></i>Large</a> <span class="file-size">(@Model.LargeFileSize)</span></span>
+    </div>
+
+    @if (Model.ShowAdminLinks)
     {
         <div>
-            <a href="@Url.PhotoEdit(Model.Photo)">Edit</a> |
-            <a href="@Url.PhotoDelete(Model.Photo)">Delete</a> | 
-            <a href="@Url.PhotoIndex()">Photo index</a>
+            @Html.ActionLink("Create Question", MVC.Questions.QuestionCreate(Model.Photo.ID))
+        </div>
+        
+        <div>
+            @Html.ActionLink("Edit", MVC.Photos.PhotoEdit(Model.Photo.ID)) |
+            @Html.ActionLink("Delete", MVC.Photos.PhotoDelete(Model.Photo.ID)) |
+            @Html.ActionLink("Photo Index", MVC.Photos.PhotoIndex())
         </div>
     }
 </div>
