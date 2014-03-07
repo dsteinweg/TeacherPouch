@@ -19,13 +19,21 @@ namespace TeacherPouch.Web.ViewModels
         public Tag SearchResultTag2 { get; set; }
         public Photo PreviousPhoto { get; set; }
         public Photo NextPhoto { get; set; }
+        public IEnumerable<Question> Questions { get; set; }
 
-        public PhotoDetailsViewModel(IRepository repository, Photo photo, bool allowPrivate, string tagName = null, string tag2Name = null)
+        public bool ShowAdminLinks { get; set; }
+
+
+        public PhotoDetailsViewModel(IRepository repository, Photo photo, bool allowPrivate, bool showAdminLinks, string tagName = null, string tag2Name = null)
         {
             this.Photo = photo;
 
             this.SmallFileSize = PhotoHelper.GetPhotoFileSize(photo, PhotoSizes.Small);
             this.LargeFileSize = PhotoHelper.GetPhotoFileSize(photo, PhotoSizes.Large);
+
+            this.Questions = repository.GetQuestionsForPhoto(photo);
+
+            this.ShowAdminLinks = showAdminLinks;
 
             if (!String.IsNullOrWhiteSpace(tagName))
             {

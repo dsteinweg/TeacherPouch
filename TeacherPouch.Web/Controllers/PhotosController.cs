@@ -40,13 +40,13 @@ namespace TeacherPouch.Web.Controllers
         public virtual ViewResult PhotoDetails(int id, string photoName = null, string tag = null, string tag2 = null)
         {
             bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
-
             var photo = base.Repository.FindPhoto(id, allowPrivate);
 
-            if (photo != null)
-                return View(Views.PhotoDetails, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, tag, tag2));
-            else
+            if (photo == null)
                 return InvokeHttp404();
+
+            var userIsAdmin = SecurityHelper.UserIsAdmin(base.User);
+            return View(Views.PhotoDetails, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, userIsAdmin, tag, tag2));
         }
 
         // GET: /Photos/Create
@@ -130,13 +130,13 @@ namespace TeacherPouch.Web.Controllers
         public virtual ViewResult PhotoEdit(int id)
         {
             bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
-
             var photo = base.Repository.FindPhoto(id, allowPrivate);
 
-            if (photo != null)
-                return View(Views.PhotoEdit, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate));
-            else
+            if (photo == null)
                 return InvokeHttp404();
+
+            var userIsAdmin = SecurityHelper.UserIsAdmin(base.User);
+            return View(Views.PhotoEdit, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, userIsAdmin));
         }
 
         // POST: /Photos/Edit/5
@@ -173,11 +173,11 @@ namespace TeacherPouch.Web.Controllers
             bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
 
             var photo = base.Repository.FindPhoto(id, allowPrivate);
-
-            if (photo != null)
-                return View(Views.PhotoDelete, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate));
-            else
+            if (photo == null)
                 return InvokeHttp404();
+
+            var userIsAdmin = SecurityHelper.UserIsAdmin(base.User);
+            return View(Views.PhotoDelete, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, userIsAdmin));
         }
 
         // POST: /Photos/Delete/5
