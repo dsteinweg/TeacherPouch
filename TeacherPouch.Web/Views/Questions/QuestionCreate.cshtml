@@ -1,0 +1,45 @@
+﻿@model QuestionCreateViewModel
+
+@{
+    ViewBag.Title = "Create Question";
+}
+
+<section id="question-edit" class="question-details">
+    <header><h2>Create Question</h2></header>
+
+    <div>
+        <div>@Html.PhotoThumb(Model.Photo)</div>
+
+        <div style="margin-top:10px;">
+            @{ Html.RenderPartial(MVC.Tags.Views._TagButtons, Model.PhotoTags); }
+        </div>
+    </div>
+
+    <div>@Html.ValidationSummary()</div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Photo.ID)
+
+        <div>
+            @Html.LabelFor(model => model.QuestionText)
+            @Html.TextAreaFor(model => model.QuestionText)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.QuestionSentenceStarters)
+            @Html.TextAreaFor(model => model.QuestionSentenceStarters)
+        </div>
+        
+        <div>
+            @Html.LabelFor(model => model.QuestionOrder)
+            @Html.TextBoxFor(model => model.QuestionOrder)
+        </div>
+
+        <div>
+            <button type="submit">Save</button> |
+            <a href="@Url.PhotoDetails(Model.Photo)">Cancel</a>
+        </div>
+    }
+</section>
