@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherPouch.Models", "TeacherPouch.Models\TeacherPouch.Models.csproj", "{FA21BA1D-F4D4-47F3-91DE-C0366A35AF4D}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherPouch.Utilities", "TeacherPouch.Utilities\TeacherPouch.Utilities.csproj", "{4C89DE3E-1B01-40DD-8D8E-40F29E75E216}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherPouch.Web", "TeacherPouch.Web\TeacherPouch.Web.csproj", "{D4A90CC5-8079-4C1C-AB1E-460225E2CD41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeacherPouch.Tests", "TeacherPouch.Tests\TeacherPouch.Tests.csproj", "{142BBBC2-A96D-4610-AB09-68FF9036C32F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D4A90CC5-8079-4C1C-AB1E-460225E2CD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A90CC5-8079-4C1C-AB1E-460225E2CD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A90CC5-8079-4C1C-AB1E-460225E2CD41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{142BBBC2-A96D-4610-AB09-68FF9036C32F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{142BBBC2-A96D-4610-AB09-68FF9036C32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{142BBBC2-A96D-4610-AB09-68FF9036C32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{142BBBC2-A96D-4610-AB09-68FF9036C32F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
