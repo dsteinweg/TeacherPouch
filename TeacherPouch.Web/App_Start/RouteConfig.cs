@@ -92,6 +92,44 @@ namespace TeacherPouch.Web
             );
 
 
+            // Question routes
+            routes.MapRoute(
+                name: "Questions for Photo",
+                url: "Photos/{photoID}/Questions",
+                defaults: MVC.Questions.QuestionsForPhoto(),
+                constraints: new { photoID = @"\d+" }
+            );
+            routes.MapRoute(
+                name: "Question Details",
+                url: "Questions/{id}",
+                defaults: MVC.Questions.QuestionDetails(),
+                constraints: new { id = @"\d+" }
+            );
+            routes.MapRoute(
+                name: "Create Question",
+                url: "Photos/{photoID}/Questions/Create",
+                defaults: MVC.Questions.QuestionCreate(),
+                constraints: new { photoID = @"\d+" }
+            );
+            routes.MapRoute(
+                name: "Question Index",
+                url: "QuestionIndex",
+                defaults: MVC.Questions.QuestionIndex()
+            );
+            routes.MapRoute(
+                name: "Question Edit",
+                url: "Questions/{id}/Edit",
+                defaults: MVC.Questions.QuestionEdit(),
+                constraints: new { id = @"\d+" }
+            );
+            routes.MapRoute(
+                name: "Question Delete",
+                url: "Questions/{id}/Delete",
+                defaults: MVC.Questions.QuestionDelete(),
+                constraints: new { id = @"\d+" }
+            );
+
+
             // Photo routes
             routes.MapRoute(
                 name: "Photo Image",
