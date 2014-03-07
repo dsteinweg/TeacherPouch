@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using System.Web.UI;
 
 using TeacherPouch.Models;
-using TeacherPouch.Models.Exceptions;
 using TeacherPouch.Providers;
 using TeacherPouch.Repositories;
 using TeacherPouch.Utilities;
@@ -85,45 +84,36 @@ namespace TeacherPouch.Web.Controllers
             if (!fileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
                 fileName = fileName + ".jpg";
 
-            try
+            var newPhoto = new Photo() { Name = name };
+            newPhoto.IsPrivate = isPrivate;
+
+            var tagNames = SplitTagNames(tagNamesStr);
+
+            PhotoHelper.MovePhoto(fileName, newPhoto);
+            PhotoHelper.GeneratePhotoSizes(newPhoto);
+
+            base.Repository.SavePhoto(newPhoto, tagNames);
+
+            var photoNameParts = name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            int photoNumber = 0;
+            if (Int32.TryParse(photoNameParts.Last(), out photoNumber))
             {
-                var newPhoto = new Photo() { Name = name };
-                newPhoto.IsPrivate = isPrivate;
-
-                var tagNames = SplitTagNames(tagNamesStr);
-
-                PhotoHelper.MovePhoto(fileName, newPhoto);
-                PhotoHelper.GeneratePhotoSizes(newPhoto);
-
-                base.Repository.SavePhoto(newPhoto, tagNames);
-
-                var photoNameParts = name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                int photoNumber = 0;
-                if (Int32.TryParse(photoNameParts.Last(), out photoNumber))
-                {
-                    photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
-                }
-
-                var newPhotoName = String.Join(" ", photoNameParts);
-
-                var urlHelper = new UrlHelper(Request.RequestContext);
-                var photoUrl = urlHelper.PhotoDetails(newPhoto);
-
-                var nextCreateViewModel = new PhotoCreateViewModel();
-                nextCreateViewModel.Message = String.Format("<a href=\"{0}\">Photo \"{1}\"</a> created.", photoUrl, newPhoto.Name);
-                nextCreateViewModel.LastTagsInput = tagNamesStr;
-                nextCreateViewModel.ProposedPhotoName = newPhotoName;
-
-                CacheHelper.Insert("NewPhotoViewModel", nextCreateViewModel);
-
-                return RedirectToAction(Actions.PhotoCreate());
+                photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
             }
-            catch (PhotoAlreadyExistsException ex)
-            {
-                viewModel.ErrorMessage = "Photo already exists at path: " + ex.Path;
 
-                return View(Views.PhotoCreate, viewModel);
-            }
+            var newPhotoName = String.Join(" ", photoNameParts);
+
+            var urlHelper = new UrlHelper(Request.RequestContext);
+            var photoUrl = urlHelper.PhotoDetails(newPhoto);
+
+            var nextCreateViewModel = new PhotoCreateViewModel();
+            nextCreateViewModel.Message = String.Format("<a href=\"{0}\">Photo \"{1}\"</a> created.", photoUrl, newPhoto.Name);
+            nextCreateViewModel.LastTagsInput = tagNamesStr;
+            nextCreateViewModel.ProposedPhotoName = newPhotoName;
+
+            CacheHelper.Insert("NewPhotoViewModel", nextCreateViewModel);
+
+            return RedirectToAction(Actions.PhotoCreate());
         }
 
         // GET: /Photos/Edit/5
