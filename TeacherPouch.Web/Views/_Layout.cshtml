@@ -87,7 +87,14 @@
             </div>
             <br>
             <div>
-                <a href="@Url.Admin()">Site Administration</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Site Administration", MVC.Admin.Index())
+                }
+                else
+                {
+                    @Html.ActionLink("Log In", MVC.Admin.Login().AddRouteValue("ReturnUrl", Request.RawUrl))
+                }
             </div>
         </footer>
     </div>
