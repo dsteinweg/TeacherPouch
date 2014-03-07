@@ -32,6 +32,27 @@ h2 {
     overflow-x: hidden;
 }
 
+.preserve-newline {
+    white-space:pre-line;
+}
+
+
+table.index {
+    border-collapse: collapse;
+}
+    table.index th {
+        text-align: left;
+    }
+
+    table.index th, table.index td {
+        padding: 10px 30px 10px 10px;
+    }
+
+    table.index tbody tr:nth-child(odd) {
+        background-color: #f5f5f5;
+    }
+
+
 
 /*
     Home Page
@@ -125,6 +146,9 @@ h2 {
 /*
     Photos
 */
+.photo-thumb {
+    margin-bottom:20px;
+}
 .photo-thumb img {
     border: 5px solid transparent;
 }
@@ -153,25 +177,7 @@ h2 {
     margin-bottom:20px;
 }
 
-#photoIndexTable {
-        border-collapse: collapse;
-    }
 
-    #photoIndexTable th {
-        text-align: left;
-    }
-
-    #photoIndexTable th, #photoIndexTable td {
-        padding: 10px 30px 10px 10px;
-    }
-
-    #photoIndexTable tbody tr td:nth-child(2) {
-        text-align:center;
-    }
-
-    #photoIndexTable tbody tr:nth-child(odd) {
-        background-color: #f5f5f5;
-    }
 
 
 #photoDetails header h1 {
@@ -179,11 +185,14 @@ h2 {
     padding-bottom:20px;
     border-bottom: 1px solid #e5e5e5;
 }
-#photoDetails div {
+#photoDetails > div {
     margin-bottom:20px;
 }
 #photoDetails .tag-buttons {
     max-width: 800px;
+}
+#photoDetails #download {
+    margin-top:40px;
 }
 #photoDetails #download .download-link {
     margin-left:10px;
@@ -225,6 +234,14 @@ h2 {
         width:810px;
         text-align:center;
     }
+
+#photoDetails .question {
+    margin-bottom:15px;
+}
+    #photoDetails .question .question-starter {
+        font-style:italic;
+    }
+
 
 
 /*
@@ -344,6 +361,22 @@ ul.photo-thumbs {
     }
 
 
+/*
+    Questions
+*/
+.question-details label {
+    font-size:20px;
+}
+.question-details input[type='text'] {
+    width:300px;
+}
+.question-details textarea {
+    width:300px;
+    height:200px;
+}
+.question-details > div {
+    margin-bottom:30px;
+}
 
 /*
     Search
