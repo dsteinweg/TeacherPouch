@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-using TeacherPouch.Web.Misc;
 using TeacherPouch.Repositories;
 using TeacherPouch.Repositories.SQLite;
-using System.Net.Http.Formatting;
+using TeacherPouch.Web.Misc;
 
 namespace TeacherPouch.Web
 {
@@ -20,6 +20,8 @@ namespace TeacherPouch.Web
 
         protected void Application_Start()
         {
+            MapperConfig.RegisterMappings();
+
             GlobalConfiguration.Configure(ConfigureWebApi);
             ConfigureMvc();
         }
