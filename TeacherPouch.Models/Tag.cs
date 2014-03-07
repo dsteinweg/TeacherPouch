@@ -9,17 +9,6 @@ namespace TeacherPouch.Models
         public bool IsPrivate { get; set; }
 
 
-        public Tag()
-        {
-
-        }
-
-        public Tag(string name)
-        {
-            this.Name = name;
-        }
-
-
         public override bool Equals(object obj)
         {
             return (this.GetHashCode() == obj.GetHashCode());
