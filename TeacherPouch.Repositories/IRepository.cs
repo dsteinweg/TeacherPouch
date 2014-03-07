@@ -23,6 +23,13 @@ namespace TeacherPouch.Repositories
 
         IEnumerable<Tag> GetTagsForPhoto(Photo photo, bool allowPrivate);
         IEnumerable<Photo> GetPhotosForTag(Tag tag, bool allowPrivate);
+        IEnumerable<Question> GetQuestionsForPhoto(Photo photo);
+
+        Question FindQuestion(int id);
+        IEnumerable<Question> GetAllQuestions();
+        void InsertQuestion(Question question);
+        void UpdateQuestion(Question question);
+        void DeleteQuestion(Question question);
 
         SearchResultsOr SearchOr(string query, bool allowPrivate);
         SearchResultsAnd SearchAnd(string query, bool allowPrivate);

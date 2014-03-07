@@ -300,6 +300,95 @@ namespace TeacherPouch.Repositories.SQLite
 
 
 
+        public Question FindQuestion(int id)
+        {
+            var query = SQL.SELECT("*")
+                           .FROM("Question")
+                           .WHERE("ID = {0}", id);
+
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
+            {
+                return connection.Map<Question>(query).FirstOrDefault();
+            }
+        }
+
+        public IEnumerable<Question> GetAllQuestions()
+        {
+            var query = SQL.SELECT("*")
+                           .FROM("Question")
+                           .ORDER_BY("ID");
+
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
+            {
+                return connection.Map<Question>(query).ToList();
+            }
+        }
+
+        public IEnumerable<Question> GetQuestionsForPhoto(Photo photo)
+        {
+            var query = SQL.SELECT("*")
+                           .FROM("Question")
+                           .WHERE("PhotoID = {0}", photo.ID)
+                           .ORDER_BY("\"Order\"");
+
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
+            {
+                return connection.Map<Question>(query).ToList();
+            }
+        }
+
+        public void InsertQuestion(Question question)
+        {
+            if (question.ID != 0)
+                throw new ApplicationException("Cannot insert a question that has an existing ID.");
+
+            var insertQuestionQuery = SQL.INSERT_INTO("Question(\"PhotoID\", \"Text\", \"SentenceStarters\", \"Order\")")
+                                        .VALUES(question.PhotoID, question.Text, question.SentenceStarters, question.Order);
+
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
+            {
+                connection.Open();
+
+                connection.Execute(insertQuestionQuery);
+
+                question.ID = (int)connection.LastInsertRowId;
+            }
+        }
+
+        public void UpdateQuestion(Question question)
+        {
+            if (question.ID == 0)
+                throw new ApplicationException("Cannot update question without an ID.");
+
+            var updateQuestionQuery = SQL.UPDATE("Question")
+                                             .SET("PhotoID = {0}", question.PhotoID)
+                                             .SET("Text = {0}", question.Text)
+                                             .SET("SentenceStarters = {0}", question.SentenceStarters)
+                                             .SET("\"Order\" = {0}", question.Order)
+                                             .WHERE("ID = {0}", question.ID);
+
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
+            {
+                connection.Execute(updateQuestionQuery);
+            }
+        }
+
+        public void DeleteQuestion(Question question)
+        {
+            if (question.ID == 0)
+                throw new ApplicationException("Cannot delete question without an ID.");
+
+            var deleteQuestionQuery = SQL.DELETE_FROM("Question")
+                                         .WHERE("ID = {0}", question.ID);
+
+            using (var connection = ConnectionHelper.GetSQLiteConnection())
+            {
+                connection.Execute(deleteQuestionQuery);
+            }
+        }
+
+
+
         public SearchResultsOr SearchOr(string query, bool allowPrivate)
         {
             query = query.ToLower();
