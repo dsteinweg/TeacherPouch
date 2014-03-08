@@ -500,6 +500,7 @@
     <Content Include="Views\Questions\QuestionEdit.cshtml" />
     <Content Include="Views\Questions\QuestionDetails.cshtml" />
     <Content Include="Views\Questions\QuestionDelete.cshtml" />
+    <Content Include="Views\Pages\Standards.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

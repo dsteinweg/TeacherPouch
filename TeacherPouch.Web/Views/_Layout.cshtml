@@ -18,9 +18,10 @@
         <div class="navbar-inner">
             <div class="container-fluid">
                 <ul class="nav">
-                    <li class="@ViewBag.HomeActiveClass"><a href="/">TeacherPouch Home</a></li>
-                    <li class="@ViewBag.AboutActiveClass"><a href="@Url.About()">About</a></li>
-                    <li class="@ViewBag.ContactActiveClass"><a href="@Url.Contact()">Contact</a></li>
+                    <li class="@ViewBag.HomeActiveClass">@Html.ActionLink("TeacherPouch Home", MVC.Pages.Home())</li>
+                    <li class="@ViewBag.StandardsActiveClass">@Html.ActionLink("Standards", MVC.Pages.Standards())</li>
+                    <li class="@ViewBag.AboutActiveClass">@Html.ActionLink("About", MVC.Pages.About())</li>
+                    <li class="@ViewBag.ContactActiveClass">@Html.ActionLink("Contact", MVC.Pages.Contact())</li>
                 </ul>
 
                 <form id="search-form" action="/Search" method="get" class="navbar-search pull-left">
@@ -39,7 +40,7 @@
                     <input type="submit" value="Search" />
                 </form>
 
-                <div id="suggest" style="">
+                <div id="suggest">
 
                 </div>
 

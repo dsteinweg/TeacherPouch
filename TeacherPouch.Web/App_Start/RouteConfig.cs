@@ -17,6 +17,11 @@ namespace TeacherPouch.Web
                 defaults: MVC.Pages.Home()
             );
             routes.MapRoute(
+                name: "Pages - Standards",
+                url: "Standards",
+                defaults: MVC.Pages.Standards()
+            );
+            routes.MapRoute(
                 name: "Pages - About",
                 url: "About",
                 defaults: MVC.Pages.About()

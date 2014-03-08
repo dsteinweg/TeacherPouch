@@ -27,6 +27,11 @@ namespace TeacherPouch.Web.Controllers
             return View(Views.About);
         }
 
+        public virtual ViewResult Standards()
+        {
+            return View(Views.Standards);
+        }
+
         // GET: /Contact
         public virtual ViewResult Contact()
         {
@@ -40,7 +45,7 @@ namespace TeacherPouch.Web.Controllers
         [ValidateAntiForgeryToken]
         public virtual ActionResult Contact(ContactSubmission submision)
         {
-            if (submision.IsValid)
+            if (ModelState.IsValid)
             {
                 if (!base.Request.IsLocal)
                 {

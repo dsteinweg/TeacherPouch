@@ -719,6 +719,7 @@ namespace TeacherPouch.Web.Controllers
         {
             public readonly string Home = "Home";
             public readonly string About = "About";
+            public readonly string Standards = "Standards";
             public readonly string Contact = "Contact";
             public readonly string ContactThanks = "ContactThanks";
             public readonly string License = "License";
@@ -732,6 +733,7 @@ namespace TeacherPouch.Web.Controllers
         {
             public const string Home = "Home";
             public const string About = "About";
+            public const string Standards = "Standards";
             public const string Contact = "Contact";
             public const string ContactThanks = "ContactThanks";
             public const string License = "License";
@@ -765,6 +767,7 @@ namespace TeacherPouch.Web.Controllers
                 public readonly string Home = "Home";
                 public readonly string License = "License";
                 public readonly string PrivacyPolicy = "PrivacyPolicy";
+                public readonly string Standards = "Standards";
             }
             public readonly string About = "~/Views/Pages/About.cshtml";
             public readonly string Contact = "~/Views/Pages/Contact.cshtml";
@@ -772,6 +775,7 @@ namespace TeacherPouch.Web.Controllers
             public readonly string Home = "~/Views/Pages/Home.cshtml";
             public readonly string License = "~/Views/Pages/License.cshtml";
             public readonly string PrivacyPolicy = "~/Views/Pages/PrivacyPolicy.cshtml";
+            public readonly string Standards = "~/Views/Pages/Standards.cshtml";
         }
     }
 
@@ -795,6 +799,15 @@ namespace TeacherPouch.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.About);
             AboutOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void StandardsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        public override System.Web.Mvc.ViewResult Standards()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Standards);
+            StandardsOverride(callInfo);
             return callInfo;
         }
 
