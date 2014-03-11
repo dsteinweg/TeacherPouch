@@ -3,54 +3,153 @@
     ViewBag.StandardsActiveClass = "active";
 }
 
-<div id="Standards">
+<style>
+    article.standards {
+        border:1px solid #ccc;
+        margin-bottom:20px;
+        padding:10px;
+    }
+    article.standards section header {
+        font-weight:bold;
+    }
+</style>
+
+
+<!-- Add more menu options here! -->
+<nav>
+    <div>Kindergarten</div>
+    <ul>
+        <li><a href="#k-social-studies">Social Studies</a></li>
+        <li><a href="#k-science">Science</a></li>
+    </ul>
+
+    <div>1st grade</div>
+    <ul>
+        <li><a href="#1-social-studies">Social Studies</a></li>
+        <li><a href="#1-science">Science</a></li>
+        <!-- Add <li>s here. -->
+    </ul>
+
+
+    <!-- Add more grades here. -->
+</nav>
+
+<!-- Each grade+subject (e.g. "Kindergarten Social Studies") gets its own <article>. Make sure you give it an id and make sure it has class="standards"! -->
+<header>
+    <h1>Kindergarten Standards</h1>
+    <h5 style="color:red;">**This standards page is NEW!  Our plan is to link our photos to the Kindergarten standards first, and then we'll work on grades 1-5.</h5>
+</header>
+
+<article id="k-social-studies" class="standards">
+    <section>
         <header>
-            <h5 style="color:red;">**This standards page is NEW!  Our plan is to link our photos to the Kindergarten standards first, and then we'll work on grades 1-5.</h5>
-            <br><h1>Kindergarten Standards</h1>
-    </header>
-    
-    <section class="big">
-        <header>
-            <h4><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank"> Social Studies Standards (2011)</a></h4>
+            <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank">Social Studies Standards (2011)</a></h3>
         </header>
     </section>
 
     <section>
-    <br>
-    <b> 1. Citizen and Government </b>
-        <br> 0.1.1.1.1	 Demonstrate civic skills in a classroom that reflect an understanding of civic values.
-
-        <br> <a href="@Url.Search("STD-Social Studies 0.1.2.2.1")"> 0.1.2.2.1</a> Describe symbols, songs and traditions that identify our nation and state.
-
-        <br> 0.1.4.8.1  Identify examples of rules in the school community and explain why they exist; describe incentives for following rules and consequences for breaking rules.
-
-    </p>
-
-    <br><p><b> 2. Economics </b>
-        <br> 0.2.1.1.1  Distinguish between individual needs (conditions necessary to survive) and individual wants (conditions desired to be happy).
-        
-        <br> <a href="@Url.Search("STD-Social Studies 0.2.1.1.2")">0.2.1.1.2</a> Identify goods and services that could satisfy a specific need or want.
-
-        <br> <a href="@Url.Search("STD-Social Studies 0.2.3.5.1")">0.2.3.5.1</a> Distinguish between goods (objects that can be seen or touched) and services (actions or activities). 
-    </p>
-
-    <br><p><b> 3. Geography  </b>
-        <br> <a href="@Url.Search("STD-Social Studies 0.3.1.1.1")">0.3.1.1.1</a> Describe special information depicted in simple drawings and pictures. < prepositions> 
-        
-        <br> <a href="@Url.Search("STD-Social Studies 0.3.1.1.2")">0.3.1.1.2</a> Describe a map and a globe as a representation of space. 
-
-        <br> <a href="@Url.Search("STD-Social Studies 0.3.2.3.1")">0.3.2.3.1</a> Identify the physical and human characteristics of places, including real and imagined places.  (Physical: landforms, bodies of water, soil, vegetation, weather, climate; Human: structures, bridges, cities, political boundaries, language, ethnicity, nationality, religion)
-    </p>
-        
-    <br>
-    <p>
-        <b> 4. History  </b>
-
-        <br> <a href="@Url.Search("STD-Social Studies 0.4.1.1.1")">0.4.1.1.1</a> Use a variety of words to reference time in the past, present and future; identify the beginning, middle, and end of historical stories. (Language: yesterday, today, tomorrow, morning, afternoon, days, weeks, months, years) 
-
-        <br> 0.4.1.2.1	 Describe ways people learn about the past.
-
-        <br> 0.4.2.4.1	 Compare and contrast traditions in a family with those of other families, including those from diverse backgrounds.
-    </p>
+        <header>1. Citizen and Government</header>
+        <div>0.1.1.1.1 Demonstrate civic skills in a classroom that reflect an understanding of civic values.</div>
+        <div>@Html.ActionLink("0.1.2.2.1", MVC.Search.Search("STD-Social Studies 0.1.2.2.1")) Describe symbols, songs and traditions that identify our nation and state.</div>
+        <div>0.1.4.8.1 Identify examples of rules in the school community and explain why they exist; describe incentives for following rules and consequences for breaking rules.</div>
     </section>
-</div>
+
+    <section>
+        <header>2. Economics</header>
+        <div>0.2.1.1.1 Distinguish between individual needs (conditions necessary to survive) and individual wants (conditions desired to be happy).</div>
+        <div>@Html.ActionLink("0.2.1.1.2", MVC.Search.Search("STD-Social Studies 0.2.1.1.2")) Identify goods and services that could satisfy a specific need or want.</div>
+        <div>@Html.ActionLink("0.2.3.5.1", MVC.Search.Search("STD-Social Studies 0.2.3.5.1")) Distinguish between goods (objects that can be seen or touched) and services (actions or activities).</div>
+    </section>
+
+    <section>
+        <header>3. Geography</header>
+        <div>@Html.ActionLink("0.3.1.1.1", MVC.Search.Search("STD-Social Studies 0.3.1.1.1")) Describe special information depicted in simple drawings and pictures. (Read: @Html.ActionLink("prepositions", MVC.Category.CategoryDetails("Prepositions")))</div>
+        <div>@Html.ActionLink("0.3.1.1.2", MVC.Search.Search("STD-Social Studies 0.3.1.1.2")) Describe a map and a globe as a representation of space.</div>
+        <div>@Html.ActionLink("0.3.2.3.1", MVC.Search.Search("STD-Social Studies 0.3.2.3.1")) Identify the physical and human characteristics of places, including real and imagined places.  (Physical: landforms, bodies of water, soil, vegetation, weather, climate; Human: structures, bridges, cities, political boundaries, language, ethnicity, nationality, religion)</div>
+    </section>
+
+    <section>
+        <header>4. History</header>
+        <div>@Html.ActionLink("0.4.1.1.1", MVC.Search.Search("STD-Social Studies 0.4.1.1.1")) Use a variety of words to reference time in the past, present and future; identify the beginning, middle, and end of historical stories. (Language: yesterday, today, tomorrow, morning, afternoon, days, weeks, months, years)</div>
+        <div>0.4.1.2.1 Describe ways people learn about the past.</div>
+        <div>0.4.2.4.1 Compare and contrast traditions in a family with those of other families, including those from diverse backgrounds.</div>
+    </section>
+</article>
+
+<article id="k-science" class="standards">
+    <header>
+        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm" target="_blank">Science Standards (2010)</a></h3>
+    </header>
+
+    <section>
+        <header>1. The Nature of Science and Engineering</header>
+        <div>0.1.1.2.1 Use observations to develop an accurate description of a natural phenomenon and compare one’s observations and descriptions with those of others.</div>
+        <div>@Html.ActionLink("0.1.2.1.1", MVC.Search.Search("STD-Science 0.1.2.1.1")) Sort objects in to two groups: those that are found in nature and those that are human made. For example: Cars, pencils, trees, rocks.</div>
+    </section>
+    
+    <section>
+        <header>2. Physical Science</header>
+        <div>@Html.ActionLink("0.2.1.1.1", MVC.Search.Search("STD-Science 0.2.1.1.1")) Sort objects in terms of @Html.ActionLink("color", MVC.Category.CategoryDetails("colors")), @Html.ActionLink("size", MVC.Category.CategoryDetails("Sizes")), @Html.ActionLink("shape", MVC.Search.Search("Shapes")), and texture, and communicate reasoning for the sorting system.</div>
+    </section>
+
+    <section>
+        <header>3. Earth Science</header>
+        <div>0.3.2.2.1 Monitor daily and seasonal changes in @Html.ActionLink("weather", MVC.Category.CategoryDetails("Weather")) and summarize the changes. For example: Recording cloudiness, rain, snow and temperature.</div>
+        <div>0.3.2.2.2  Identify the sun as a source of heat and light. For example: Record the time of day when the sun shines into different locations of the school and note patterns.</div>
+    </section>
+
+    <section>
+        <header>4. Life Science</header>
+        <div>@Html.ActionLink("0.4.1.1.1", MVC.Search.Search("STD-Science 0.4.1.1.1")) Observe and compare @Html.ActionLink("plants", MVC.Category.CategoryDetails("Garden")) and @Html.ActionLink("animals", MVC.Category.CategoryDetails("Animals")).</div>
+        <div>@Html.ActionLink("0.4.1.1.2", MVC.Search.Search("STD-Science 0.4.1.1.2")) Identify the external parts of a variety of @Html.ActionLink("plants", MVC.Category.CategoryDetails("Garden")) and @Html.ActionLink("animals", MVC.Category.CategoryDetails("Animals")) including humans.  For example:  Heads, legs, eyes and ears on humans and animals, flowers, stems and roots on many plants.</div>
+        <div>@Html.ActionLink("0.4.1.1.3", MVC.Search.Search("STD-Science 0.4.1.1.3")) Differentiate between living and nonliving things.  For example: Sort organisms and objects (or pictures of these) into groups of those that grow, and reproduce, and need air, food, and water; and those that don't.</div>
+        <div>0.4.2.1.1 Observe a natural system or its model, and identify living and nonliving components in that system.  For example: A wetland, prairie, garden or aquarium</div>
+    </section>
+</article>
+
+
+<!-- Now we're in the 1st grade standards area. Each grade needs a header like this. -->
+<header>
+    <h1>1st Grade Standards</h1>
+</header>
+
+<!-- After the grade header, add more <article>s here, where each article is a subject within a grade. -->
+<article id="1-social-studies" class="standards">
+    <header>
+        <h3><a href="">Social Studies</a></h3>
+    </header>
+
+    <section>
+        <header>1. BLAHABLAH1</header>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+
+    <section>
+        <header>2. BLAHABLAH2</header>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+</article>
+
+<article id="1-science" class="standards">
+    <header>
+        <h3><a href="">Science</a></h3>
+    </header>
+
+    <section>
+        <header>1. BLAHABLAH1</header>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+
+    <section>
+        <header>2. BLAHABLAH2</header>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+</article>
