@@ -1,6 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Web.Mvc;
-
 using TeacherPouch.Models;
 using TeacherPouch.Providers;
 using TeacherPouch.Repositories;
@@ -16,7 +16,7 @@ namespace TeacherPouch.Web.Controllers
 
 
         // GET: /Search?q=spring&op=and
-        public virtual ViewResult Search(string q, string op)
+        public virtual ViewResult Search(string q, SearchOperator op = SearchOperator.Or)
         {
             if (String.IsNullOrWhiteSpace(q) || q.Length < 2)
                 return base.View(Views.NoneFound);
@@ -25,15 +25,7 @@ namespace TeacherPouch.Web.Controllers
 
             bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
 
-            SearchOperator searchOperator = SearchOperator.Or;
-            if (!String.IsNullOrWhiteSpace(op))
-            {
-                SearchOperator parsed;
-                if (Enum.TryParse(op, true, out parsed))
-                    searchOperator = parsed;
-            }
-
-            if (searchOperator == SearchOperator.Or)
+            if (op == SearchOperator.Or)
             {
                 var results = base.Repository.SearchOr(q, allowPrivate);
 
@@ -42,7 +34,7 @@ namespace TeacherPouch.Web.Controllers
                 else
                     return base.View(Views.NoneFound);
             }
-            else if (searchOperator == SearchOperator.And)
+            else if (op == SearchOperator.And)
             {
                 ViewBag.AndChecked = true;
 
@@ -55,7 +47,7 @@ namespace TeacherPouch.Web.Controllers
             }
             else
             {
-                throw new ApplicationException("Search operator not found.");
+                throw new InvalidEnumArgumentException("Unknown search operator.");
             }
         }
     }
