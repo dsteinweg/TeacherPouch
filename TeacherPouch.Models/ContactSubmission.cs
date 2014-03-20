@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Net;
 using System.Net.Configuration;
@@ -6,7 +8,7 @@ using System.Net.Mail;
 
 namespace TeacherPouch.Models
 {
-    public class ContactSubmission
+    public class ContactSubmission : IValidatableObject
     {
         private const string BODY_HTML_FORMAT =
             "<div>" +
@@ -28,17 +30,16 @@ namespace TeacherPouch.Models
         public string ReasonForContacting { get; set; }
         public string Comment { get; set; }
 
-        public bool IsValid
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            get
+            if (String.IsNullOrWhiteSpace(this.Name) &&
+                String.IsNullOrWhiteSpace(this.Email) &&
+                String.IsNullOrWhiteSpace(this.Comment))
             {
-                return (
-                    !String.IsNullOrWhiteSpace(this.Name)
-                 || !String.IsNullOrWhiteSpace(this.Email)
-                 || !String.IsNullOrWhiteSpace(this.Comment));
+                yield return new ValidationResult("You must fill out the form before submitting.");
             }
         }
-
 
         public void SendEmail()
         {
@@ -53,19 +54,22 @@ namespace TeacherPouch.Models
                  && !String.IsNullOrWhiteSpace(smtpConfig.Network.UserName)
                  && !String.IsNullOrWhiteSpace(smtpConfig.Network.Password))
             {
-                var message = new MailMessage(smtpConfig.From, to);
+                using (var message = new MailMessage(smtpConfig.From, to))
+                {
+                    message.Subject = String.Format("TeacherPouch.com Contact Submission - {0}", this.Name);
+                    message.IsBodyHtml = true;
+                    message.Body = String.Format(BODY_HTML_FORMAT, this.Name, this.Email, this.ReasonForContacting, this.Comment);
 
-                message.Subject = String.Format("TeacherPouch.com Contact Submission - {0}", this.Name);
-                message.IsBodyHtml = true;
-                message.Body = String.Format(BODY_HTML_FORMAT, this.Name, this.Email, this.ReasonForContacting, this.Comment);
+                    if (!String.IsNullOrWhiteSpace(this.Email))
+                        message.ReplyToList.Add(this.Email);
 
-                if (!String.IsNullOrWhiteSpace(this.Email))
-                    message.ReplyToList.Add(this.Email);
-
-                var smtp = new SmtpClient(smtpConfig.Network.Host);
-                smtp.Credentials = new NetworkCredential(smtpConfig.Network.UserName, smtpConfig.Network.Password);
-                //smtp.Timeout = 5;
-                smtp.Send(message);
+                    using (var smtp = new SmtpClient(smtpConfig.Network.Host))
+                    {
+                        smtp.Credentials = new NetworkCredential(smtpConfig.Network.UserName, smtpConfig.Network.Password);
+                        //smtp.Timeout = 5;
+                        smtp.Send(message);
+                    }
+                }
             }
         }
     }
