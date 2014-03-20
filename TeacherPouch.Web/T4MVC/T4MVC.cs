@@ -13,6 +13,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -22,7 +23,7 @@ using System.Web.Routing;
 using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public static class MVC
+public static partial class MVC
 {
     public static TeacherPouch.Web.Controllers.AdminController Admin = new TeacherPouch.Web.Controllers.T4MVC_AdminController();
     public static TeacherPouch.Web.Controllers.CategoryController Category = new TeacherPouch.Web.Controllers.T4MVC_CategoryController();
@@ -285,10 +286,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
 
@@ -354,8 +367,10 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_AdminController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
@@ -363,8 +378,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void LoginOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Login()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Login);
@@ -372,8 +389,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection collection);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Login(System.Web.Mvc.FormCollection collection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
@@ -382,8 +401,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void LogoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Logout()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Logout);
@@ -391,8 +412,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
@@ -421,10 +444,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -534,8 +569,10 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_CategoryController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void CategoryDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, string name);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult CategoryDetails(string name)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.CategoryDetails);
@@ -544,8 +581,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
@@ -574,10 +613,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -648,8 +699,10 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_ErrorController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void Http404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Http404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Http404);
@@ -657,8 +710,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void ErrorOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int? httpStatusCode, System.Exception exception);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Error(int? httpStatusCode, System.Exception exception)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Error);
@@ -668,8 +723,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
@@ -695,10 +752,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
 
@@ -784,8 +853,10 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_PagesController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void HomeOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Home()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Home);
@@ -793,8 +864,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void AboutOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult About()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.About);
@@ -802,8 +875,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void StandardsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Standards()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Standards);
@@ -811,8 +886,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void ContactOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult Contact()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Contact);
@@ -820,8 +897,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void ContactOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, TeacherPouch.Models.ContactSubmission submision);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult Contact(TeacherPouch.Models.ContactSubmission submision)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Contact);
@@ -830,8 +909,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void ContactThanksOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult ContactThanks()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ContactThanks);
@@ -839,8 +920,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void LicenseOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult License()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.License);
@@ -848,8 +931,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PrivacyPolicyOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult PrivacyPolicy()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PrivacyPolicy);
@@ -857,8 +942,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void SitemapOverride(T4MVC_System_Web_Mvc_ContentResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ContentResult Sitemap()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ContentResult(Area, Name, ActionNames.Sitemap);
@@ -866,8 +953,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
@@ -893,10 +982,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -1053,8 +1154,10 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_PhotosController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void PhotoIndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult PhotoIndex()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoIndex);
@@ -1062,8 +1165,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id, string photoName, string tag, string tag2);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult PhotoDetails(int id, string photoName, string tag, string tag2)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoDetails);
@@ -1075,8 +1180,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoCreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult PhotoCreate()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoCreate);
@@ -1084,8 +1191,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection collection);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult PhotoCreate(System.Web.Mvc.FormCollection collection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoCreate);
@@ -1094,8 +1203,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoEditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult PhotoEdit(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoEdit);
@@ -1104,8 +1215,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoEditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.Mvc.FormCollection collection);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult PhotoEdit(int id, System.Web.Mvc.FormCollection collection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoEdit);
@@ -1115,8 +1228,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoDeleteOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult PhotoDelete(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PhotoDelete);
@@ -1125,8 +1240,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoDeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.Mvc.FormCollection collection);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult PhotoDelete(int id, System.Web.Mvc.FormCollection collection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoDelete);
@@ -1136,8 +1253,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoImageOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, string fileName);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult PhotoImage(int id, string fileName)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoImage);
@@ -1147,8 +1266,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void PhotoImageDownloadOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, string fileName);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult PhotoImageDownload(int id, string fileName)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PhotoImageDownload);
@@ -1158,8 +1279,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
@@ -1185,10 +1308,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -1333,8 +1468,10 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_QuestionsController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void QuestionIndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult QuestionIndex()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionIndex);
@@ -1342,8 +1479,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult QuestionDetails(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionDetails);
@@ -1352,8 +1491,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionCreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int photoID);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult QuestionCreate(int photoID)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionCreate);
@@ -1362,8 +1503,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, TeacherPouch.Web.ViewModels.QuestionCreateViewModel postedViewModel);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult QuestionCreate(TeacherPouch.Web.ViewModels.QuestionCreateViewModel postedViewModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.QuestionCreate);
@@ -1372,8 +1515,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionEditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult QuestionEdit(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionEdit);
@@ -1382,8 +1527,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionEditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, TeacherPouch.Web.ViewModels.QuestionEditViewModel postedViewModel);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult QuestionEdit(TeacherPouch.Web.ViewModels.QuestionEditViewModel postedViewModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.QuestionEdit);
@@ -1392,8 +1539,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionDeleteOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult QuestionDelete(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionDelete);
@@ -1402,8 +1551,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionDeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, TeacherPouch.Web.ViewModels.QuestionDetailsViewModel postedViewModel);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult QuestionDelete(TeacherPouch.Web.ViewModels.QuestionDetailsViewModel postedViewModel)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.QuestionDelete);
@@ -1412,8 +1563,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void QuestionsForPhotoOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int photoID);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult QuestionsForPhoto(int photoID)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.QuestionsForPhoto);
@@ -1422,8 +1575,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
@@ -1449,10 +1604,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -1523,9 +1690,11 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
-        partial void SearchOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, string q, string op);
+        [NonAction]
+        partial void SearchOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, string q, TeacherPouch.Models.SearchOperator op);
 
-        public override System.Web.Mvc.ViewResult Search(string q, string op)
+        [NonAction]
+        public override System.Web.Mvc.ViewResult Search(string q, TeacherPouch.Models.SearchOperator op)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Search);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "q", q);
@@ -1534,8 +1703,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
@@ -1561,10 +1732,22 @@ namespace TeacherPouch.Web.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -1690,8 +1873,10 @@ namespace TeacherPouch.Web.Controllers
     {
         public T4MVC_TagsController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void TagIndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult TagIndex()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.TagIndex);
@@ -1699,8 +1884,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void TagDetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, string tagName);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult TagDetails(string tagName)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.TagDetails);
@@ -1709,8 +1896,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void TagCreateOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult TagCreate()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.TagCreate);
@@ -1718,8 +1907,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void TagCreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection collection);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult TagCreate(System.Web.Mvc.FormCollection collection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.TagCreate);
@@ -1728,8 +1919,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void TagEditOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult TagEdit(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.TagEdit);
@@ -1738,8 +1931,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void TagEditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.Mvc.FormCollection collection);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult TagEdit(int id, System.Web.Mvc.FormCollection collection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.TagEdit);
@@ -1749,8 +1944,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void TagDeleteOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult TagDelete(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.TagDelete);
@@ -1759,8 +1956,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void TagDeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.Mvc.FormCollection collection);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult TagDelete(int id, System.Web.Mvc.FormCollection collection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.TagDelete);
@@ -1770,8 +1969,10 @@ namespace TeacherPouch.Web.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void InvokeHttp404Override(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
+        [NonAction]
         public override System.Web.Mvc.ViewResult InvokeHttp404()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.InvokeHttp404);
