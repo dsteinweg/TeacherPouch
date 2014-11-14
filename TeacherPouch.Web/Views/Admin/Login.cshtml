@@ -9,24 +9,24 @@
 
     <h3>Login</h3>
 
-    @using (Html.BeginForm())
-    {
-        <div>
-            <label for="userName">User Name:</label>
-            <input id="userName" name="userName" type="text" placeholder="user name" value="@Model.UserName" autofocus>
+    <form action="/Admin/Login" method="POST" role="form">
+        <div class="form-group">
+            <label for="userName">User Name</label>
+            <input id="userName" name="userName" type="text" placeholder="user name" value="@Model.UserName" class="form-control">
         </div>
-    
-        <div>
-            <label for="password">Password:</label>
-            <input id="password" name="password" type="password" placeholder="password">
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="password" class="form-control">
         </div>
-    
-        <div>
-            <input type="submit" value="Submit" />
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary form-control">submit</button>
         </div>
-    
-        if (Model.LoginErrorMessage != null) { 
+
+        @if (Model.LoginErrorMessage != null)
+        {
             <div style="color:red;margin-top:15px;">@Model.LoginErrorMessage</div>
         }
-    }
+    </form>
 </div>

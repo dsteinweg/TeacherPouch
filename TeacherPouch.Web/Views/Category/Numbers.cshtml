@@ -2,55 +2,49 @@
     ViewBag.Title = "Numbers - Category";
 }
 
-<div id="category">
-    <div class="hero-unit">
-        <header>
-            <img src="@Url.VersionedContent("~/img/NumbersS.jpg")">
-        </header>
-        <header>
-            <h3>one...two...three...four...five!  We can count!</h3>
-        </header>
-    </div>
+<div class="category">
+    <header>
+        <div class="jumbotron">
+            <img src="@Url.VersionedContent("~/img/NumbersS.jpg")" class="img-responsive center-block" alt="Numbers">
+            <h3>One...Two...Three...Four...Five!  We can count!</h3>
+        </div>
+    </header>
 
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Search("one")"><img src="@Url.VersionedContent("~/img/oneS.jpg")"></a>
+    <div class="row featured-tags-preview">
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("one")"><img src="@Url.VersionedContent("~/img/oneS.jpg")" class="img-responsive" alt="One / 1"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("two")"><img src="@Url.VersionedContent("~/img/twoS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("two")"><img src="@Url.VersionedContent("~/img/twoS.jpg")" class="img-responsive" alt="Two / 2"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("three")"><img src="@Url.VersionedContent("~/img/threeS.jpg")"></a>
-        </div>
-    </div>
-
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Search("four")"><img src="@Url.VersionedContent("~/img/fourS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("three")"><img src="@Url.VersionedContent("~/img/threeS.jpg")" class="img-responsive" alt="Three / 3"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("five")"><img src="@Url.VersionedContent("~/img/fiveS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("four")"><img src="@Url.VersionedContent("~/img/fourS.jpg")" class="img-responsive" alt="Four / 4"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("six")"><img src="@Url.VersionedContent("~/img/sixS.jpg")"></a>
-        </div>
-    </div>
-
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Search("many")"><img src="@Url.VersionedContent("~/img/lotsmanyS.jpg")"></a>
-        </div>
-        
-        <div class="span4">
-        <a href="@Url.Search("how many")"><img src="@Url.VersionedContent("~/img/howmanyS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("five")"><img src="@Url.VersionedContent("~/img/fiveS.jpg")" class="img-responsive" alt="Five / 5"></a>
         </div>
 
-        <div class="span4">
-            <img src="@Url.VersionedContent("~/img/searchnumbersS.jpg")">
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("six")"><img src="@Url.VersionedContent("~/img/sixS.jpg")" class="img-responsive" alt="Six / 6"></a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("many")"><img src="@Url.VersionedContent("~/img/lotsmanyS.jpg")" class="img-responsive" alt="Lots / Many"></a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("how many")"><img src="@Url.VersionedContent("~/img/howmanyS.jpg")" class="img-responsive" alt="How many?"></a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <img src="@Url.VersionedContent("~/img/searchnumbersS.jpg")" class="img-responsive" alt="Search for numbers one-ten, or count objects in any photo!">
         </div>
     </div>
 </div>

@@ -2,54 +2,49 @@
     ViewBag.Title = "Summer - Category";
 }
 
-<div id="category">
-    <div class="hero-unit">
-        <header>
-            <img src="@Url.VersionedContent("~/img/SummerS.jpg")">
-        </header>
-        <header>
+<div class="category">
+    <header>
+        <div class="jumbotron">
+            <img src="@Url.VersionedContent("~/img/SummerS.jpg")" class="img-responsive center-block" alt="Summer">
             <h3>We just can't wait!</h3>
-        </header>
-    </div>
-
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Search("grill")"><img src="@Url.VersionedContent("~/img/GrillingS.jpg")"></a>
         </div>
+    </header>
 
-        <div class="span4">
-            <a href="@Url.Search("pool")"><img src="@Url.VersionedContent("~/img/PoolS.jpg")"></a>
+    <div class="row featured-tags-preview">
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("grill")"><img src="@Url.VersionedContent("~/img/GrillingS.jpg")" class="img-responsive" alt="Grilling"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("park")"><img src="@Url.VersionedContent("~/img/playgroundS.jpg")"></a>
-        </div>
-    </div>
-
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Category("garden")"><img src="@Url.VersionedContent("~/img/gardenS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("pool")"><img src="@Url.VersionedContent("~/img/PoolS.jpg")" class="img-responsive" alt="Pool"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("flower")"><img src="@Url.VersionedContent("~/img/flowersS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("park")"><img src="@Url.VersionedContent("~/img/playgroundS.jpg")" class="img-responsive" alt="Playground"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("fishing")"><img src="@Url.VersionedContent("~/img/fishingS.jpg")"></a>
-        </div>
-    </div>
-        <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Search("campfire")"><img src="@Url.VersionedContent("~/img/campfiresS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Category("garden")"><img src="@Url.VersionedContent("~/img/gardenS.jpg")" class="img-responsive" alt="Garden"></a>
         </div>
 
-        <div class="span4">
-        <a href="@Url.Search("yard work")"><img src="@Url.VersionedContent("~/img/yardworkS.jpg")"></a>
-            
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("flower")"><img src="@Url.VersionedContent("~/img/flowersS.jpg")" class="img-responsive" alt="Flowers"></a>
         </div>
-        <div class="span4">
-        <a href="@Url.Search("summer")"><img src="@Url.VersionedContent("~/img/allsummerS.jpg")"></a>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("fishing")"><img src="@Url.VersionedContent("~/img/fishingS.jpg")" class="img-responsive" alt="Fishing"></a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("campfire")"><img src="@Url.VersionedContent("~/img/campfiresS.jpg")" class="img-responsive" alt="Campfires"></a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("yard work")"><img src="@Url.VersionedContent("~/img/yardworkS.jpg")" class="img-responsive" alt="Yard Work"></a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("summer")"><img src="@Url.VersionedContent("~/img/allsummerS.jpg")" class="img-responsive" alt="All Things Summer"></a>
         </div>
     </div>
 </div>

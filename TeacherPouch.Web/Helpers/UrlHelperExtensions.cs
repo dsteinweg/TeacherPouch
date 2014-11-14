@@ -217,6 +217,11 @@ namespace TeacherPouch.Web.Helpers
             return "/License";
         }
 
+        public static string Standards(this UrlHelper urlHelper)
+        {
+            return "/Standards";
+        }
+
         public static string PrivacyPolicy(this UrlHelper urlHelper)
         {
             return "/PrivacyPolicy";

@@ -9,29 +9,33 @@
         <h1>@Model.Photo.Name</h1>
     </header>
 
-    <table class="photo-details-tbl">
-        <tr>
-            <td class="prev-arrow-cell">
-                @if (Model.PreviousPhoto != null)
-                {
-                    <a href="@Url.PhotoDetails(Model.PreviousPhoto, Model.SearchResultTag, Model.SearchResultTag2)">&lt;</a>
-                }
-            </td>
-            <td class="photo-cell">
-                @Html.LargePhoto(Model.Photo, Model.PhotoTags)
+    <div class="row photo-details-slider">
+        @if (Model.PreviousPhoto != null)
+        {
+            <div class="prev-arrow col-xs-2 col-sm-1">
+                <a href="@Url.PhotoDetails(Model.PreviousPhoto, Model.SearchResultTag, Model.SearchResultTag2)">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+        }
 
-                <div>
-                    @{ Html.RenderPartial(MVC.Tags.Views._TagButtons, Model.PhotoTags); }
-                </div>
-            </td>
-            <td class="next-arrow-cell">
-                @if (Model.NextPhoto != null)
-                {
-                    <a href="@Url.PhotoDetails(Model.NextPhoto, Model.SearchResultTag, Model.SearchResultTag2)">&gt;</a>
-                }
-            </td>
-        </tr>
-    </table>
+        <div class="photo col-xs-8 col-sm-10">
+            @Html.LargePhoto(Model.Photo, Model.PhotoTags)
+        </div>
+
+        @if (Model.NextPhoto != null)
+        {
+            <div class="next-arrow col-xs-2 col-sm-1">
+                <a href="@Url.PhotoDetails(Model.NextPhoto, Model.SearchResultTag, Model.SearchResultTag2)">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        }
+    </div>
+
+    <div>
+        @{ Html.RenderPartial(MVC.Tags.Views._TagButtons, Model.PhotoTags); }
+    </div>
 
     @if (Model.Questions.SafeAny())
     {
@@ -72,8 +76,18 @@
 
     <div id="download">
         Download this photo:
-        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Small)"><i class="icon-download-alt"></i>Small</a> <span class="file-size">(@Model.SmallFileSize)</span></span> |
-        <span class="download-link"><a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Large)"><i class="icon-download-alt"></i>Large</a> <span class="file-size">(@Model.LargeFileSize)</span></span>
+        <span class="download-link">
+            <a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Small)" class="btn btn-default">
+                <span class="glyphicon glyphicon-save"></span>Small
+                <span class="file-size">(@Model.SmallFileSize)</span>
+            </a>
+        </span>
+        <span class="download-link">
+            <a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Large)" class="btn btn-default">
+                <span class="glyphicon glyphicon-save"></span>Large
+                <span class="file-size">(@Model.LargeFileSize)</span>
+            </a>
+        </span>
     </div>
 
     @if (Model.ShowAdminLinks)

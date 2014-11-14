@@ -1,12 +1,14 @@
-﻿<ul class="nav nav-list" style="font-size:20px;">
-    <li class="nav-header">
-        <div id="logo"><a class="brand" href="/"><img src="@Url.VersionedContent("~/img/logo/teacherpouchlogo30.png")"></a></div>
-        Categories
-    </li>
+﻿<div id="logo">
+    <a class="brand" href="/">
+        <img src="@Url.VersionedContent("~/img/logo/teacherpouchlogo30.png")" class="img-responsive center-block">
+    </a>
+</div>
+
+<ul class="nav">
     <li>
         <a href="@Url.Category("Animals")">Animals</a>
     </li>
-        <li>
+    <li>
         <a href="@Url.Category("CelebrationsAndHolidays")">Celebrations and Holidays</a>
     </li>
     <li>
@@ -61,13 +63,13 @@
         <a href="@Url.Category("Transportation")">Transportation</a>
     </li>
     <li>
+        <a href="@Url.Category("Vacation")">Vacation</a>
+    </li>
+    <li>
         <a href="@Url.Category("Weather")">Weather</a>
     </li>
     <li>
         <a href="@Url.Category("Winter")">Winter</a>
-    </li>
-    <li>
-        <a href="@Url.Category("Vacation")">Vacation</a>
     </li>
     <li>
         <a href="@Url.Category("Zoo")">Zoo</a>
@@ -77,7 +79,7 @@
     {
         <li class="nav-header">Administration</li>
         <li><a href="@Url.Admin()">Admin Home</a></li>
-        
+
         if (SecurityHelper.UserIsAdmin(base.User))
         {
             <li><a href="@Url.PhotoCreate()">Add new Photo</a></li>

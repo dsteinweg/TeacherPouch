@@ -2,27 +2,25 @@
     ViewBag.Title = "Math - Category";
 }
 
-<div id="category">
-    <div class="hero-unit">
-        <header>
-            <img src="@Url.VersionedContent("~/img/MathS.jpg")">
-        </header>
-        <header>
+<div class="category">
+    <header>
+        <div class="jumbotron">
+            <img src="@Url.VersionedContent("~/img/MathS.jpg")" class="img-responsive center-block" alt="Math">
             <h3>Time for Math!</h3>
-        </header>
-    </div>
+        </div>
+    </header>
 
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Search("shapes")"><img src="@Url.VersionedContent("~/img/shapesS.jpg")"></a>
+    <div class="row featured-tags-preview">
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("shapes")"><img src="@Url.VersionedContent("~/img/shapesS.jpg")" class="img-responsive" alt="Shapes"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("math supplies")"><img src="@Url.VersionedContent("~/img/mathsuppliesS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("math supplies")"><img src="@Url.VersionedContent("~/img/mathsuppliesS.jpg")" class="img-responsive" alt="Math Supplies"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Category("numbers")"><img src="@Url.VersionedContent("~/img/NumbersS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Category("numbers")"><img src="@Url.VersionedContent("~/img/NumbersS.jpg")" class="img-responsive" alt="Numbers"></a>
         </div>
     </div>
 </div>

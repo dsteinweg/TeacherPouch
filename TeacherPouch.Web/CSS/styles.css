@@ -1,12 +1,33 @@
 ﻿/*
     General
 */
+html, body {
+    height: 100%;
+}
 body {
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 16px;
     padding-top: 60px;
     padding-bottom: 40px;
 }
+@media (min-width: 768px) and (max-width: 992px) {
+    body {
+        padding-top: 110px;
+    }
+}
+@media (max-width: 768px) {
+    body {
+        padding-top: 120px;
+    }
+}
+
+@media (max-width: 770px) {
+    .main {
+        margin-bottom: 15px;
+    }
+}
+
+
 .nav li {
     line-height:inherit;
     font-size:16px;
@@ -26,10 +47,20 @@ h2 {
 #side-nav #logo {
     margin-bottom:10px;
 }
+
+@media (max-width: 992px) {
+    #side-nav {
+        text-align: center;
+    }
+}
+
 .ui-autocomplete {
     max-height: 500px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+.ui-menu-item {
+    cursor: pointer;
 }
 
 .preserve-newline {
@@ -57,35 +88,58 @@ table.index {
 /*
     Home Page
 */
-#home .hero-unit {
+#home .jumbotron {
     padding:20px 0 20px 0;
     text-align:center;
 }
-#home .hero-unit h1 {
+#home .jumbotron h1 {
     font-size: 40px;
 }
-#home .hero-unit h4 {
+#home .jumbotron h4 {
     font-size: 20px;
 }
-#home .hero-unit h5 {
+#home .jumbotron h5 {
     font-size: 15px;
 }
-#home .hero-unit header > * {
-    margin:0 0 15px 0;
-    line-height:normal;
-}
-#home #intro-video-placeholder {
-    height:315px;
-}
-#home #intro-video {
-    display:none;
-    height:315px;
+#home .jumbotron header > div {
+    margin: 0 0 15px 0;
+    line-height: normal;
 }
 
-.featured-tags-preview {
+#home #intro-video-placeholder img {
+    display: inline-block;
+}
+
+@media (max-width: 992px) {
+    #home #intro-video-placeholder {
+        height: auto;
+    }
+}
+
+#home #intro-video {
+    display: none;
+    height: 315px;
+}
+
+.featured-tags-preview img {
     margin-bottom: 20px;
 }
 
+@media (min-width: 992px) {
+    .featured-tags-preview {
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 992px) {
+    .featured-tags-preview div {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .featured-tags-preview img {
+        margin: auto;
+    }
+}
 
 /* 
     About
@@ -118,12 +172,12 @@ table.index {
 /*
     Category Pages
 */
-#category .hero-unit {
-    padding:20px 0 20px 0;
-    text-align:center;
+.category header {
+    padding: 20px 0 20px 0;
+    text-align: center;
 }
-    #category .hero-unit header h3 {
-        margin:20px 0 0 0;
+    .category header h3 {
+        margin: 20px 0 0 0;
     }
 
 
@@ -136,6 +190,18 @@ table.index {
 
 #login div {
     margin-bottom:15px;
+}
+
+#login form {
+    border: 1px solid #CCC;
+    padding: 20px;
+    max-width: 300px;
+}
+@media (max-width: 770px) {
+    #login form {
+        width: 100%;
+        max-width: none;
+    }
 }
 
 #admin fieldset{
@@ -178,8 +244,6 @@ table.index {
 }
 
 
-
-
 #photoDetails header h1 {
     font-size:50px;
     padding-bottom:20px;
@@ -198,14 +262,80 @@ table.index {
     margin-left:10px;
     margin-right:10px;
 }
+@media (max-width: 780px) {
+    #photoDetails #download .download-link {
+        display: block;
+        margin-top: 10px;
+    }
+}
 
-#photoDetails #download i {
-    margin-top:5px;
-    margin-right:3px;
+#photoDetails #download .glyphicon {
+    margin-top: 5px;
+    margin-right: 3px;
+    color: black;
 }
 #photoDetails #download .file-size {
-    font-size:16px;
+    font-size: 10px;
+    margin-left: 3px;
 }
+
+
+.photo-details-slider {
+    min-width: 360px;
+}
+@media (min-width: 1200px) {
+    .photo-details-slider {
+        height: 545px;
+    }
+}
+@media (min-width: 1000px) and (max-width: 1200px) {
+    .photo-details-slider {
+        height: 452px;
+    }
+}
+@media (min-width: 780px) and (max-width: 1000px) {
+    .photo-details-slider {
+        height: 316px;
+    }
+}
+@media (max-width: 780px) {
+    .photo-details-slider {
+        height: 100%;
+        min-width: initial;
+    }
+}
+
+    .photo-details-slider .prev-arrow a,
+    .photo-details-slider .next-arrow a {
+        display: block;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        
+    }
+
+    .photo-details-slider .prev-arrow,
+    .photo-details-slider .next-arrow {
+        font-size: 45px;
+        height: 100%;
+    }
+    @media (min-width: 780px) and (max-width: 1000px) {
+        .photo-details-slider .prev-arrow,
+        .photo-details-slider .next-arrow {
+            font-size: 30px;
+        }
+    }
+    @media (max-width: 780px) {
+        .photo-details-slider .prev-arrow,
+        .photo-details-slider .next-arrow {
+            font-size: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 22%;
+            text-align: center;
+        }
+    }
+
 
 .photo-details-tbl, .photo-details-tbl td {
     border-spacing:0 !important;
@@ -381,9 +511,34 @@ ul.photo-thumbs {
 /*
     Search
 */
+@media (max-width: 768px) {
+    #search-form {
+        width: 100%;
+        float: left !important;
+        margin: 0 15px 0 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    #search-form {
+        max-width: 400px;
+        float: right;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 991px) {
+    #search-form {
+        float: left !important;
+    }
+}
+
+#search-form {
+    display: inline-block;
+    padding-left: 0 !important;
+}
 #search-form label {
     display:inline;
-    color:white;
     margin-left:5px;
     margin-right:10px;
 }
@@ -397,11 +552,12 @@ ul.photo-thumbs {
     margin-top:30px;
 }
 .search-result {
-    margin-bottom:60px;
+    margin-bottom: 60px;
 }
     .search-result h2 {
         border-bottom: 1px solid #e5e5e5;
-        padding-bottom:10px;
+        padding-bottom: 10px;
+        line-height: 50px;
     }
 
 
@@ -409,17 +565,18 @@ ul.photo-thumbs {
     Contact
 */
 #contact #instructions {
-    font-size:20px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 #contact #form {
-    border:1px solid #ccc;
-    padding:10px;
-    display:inline-block;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: inline-block;
+    width: 500px;
 }
-
-#contact input, #contact textarea, #contact select {
-    width:500px;
+@media (max-width: 770px) {
+    #contact #form {
+        width: 100%;
+    }
 }
 
 #contact textarea {

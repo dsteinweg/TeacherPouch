@@ -186,6 +186,7 @@
     <Content Include="CSS\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.png" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="google7dfc43f9f0e1ec32.html" />
     <Content Include="IMG\aboveontopofS.jpg" />
@@ -375,12 +376,17 @@
     <Content Include="IMG\zooanimalsS.jpg" />
     <Content Include="IMG\zooridesS.jpg" />
     <Content Include="IMG\ZooS.jpg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />

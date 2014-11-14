@@ -69,11 +69,11 @@ namespace TeacherPouch.Web.Helpers
             }
 
             var thumbHtml = String.Format(
-                "<div href=\"{0}\" class=\"{1}\"><img alt=\"{2}\" src=\"{3}\"{4}></div>",
+                "<div href=\"{0}\" class=\"{1}\"><img src=\"{2}\" class=\"img-responsive center-block\" alt=\"{3}\"{4}></div>",
                 urlHelper.PhotoDetails(photo),
                 cssClasses,
-                tagNames,
                 urlHelper.VersionedPhoto(photo, PhotoSizes.Large),
+                tagNames,
                 title
             );
 
@@ -93,7 +93,7 @@ namespace TeacherPouch.Web.Helpers
             }
 
             var thumbHtml = String.Format(
-                "<a href=\"{0}\" class=\"{1}\"><img src=\"{2}\"{3}></a>",
+                "<a href=\"{0}\" class=\"{1}\"><img src=\"{2}\" class=\"img-responsive\"{3}></a>",
                 urlHelper.PhotoDetails(photo),
                 cssClasses,
                 urlHelper.VersionedPhoto(photo, PhotoSizes.Small),

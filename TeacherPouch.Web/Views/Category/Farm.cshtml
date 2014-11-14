@@ -2,27 +2,25 @@
     ViewBag.Title = "Farm - Category";
 }
 
-<div id="category">
-    <div class="hero-unit">
-        <header>
-            <img src="@Url.VersionedContent("~/img/FarmS.jpg")">
-        </header>
-        <header>
+<div class="category">
+    <header>
+        <div class="jumbotron">
+            <img src="@Url.VersionedContent("~/img/FarmS.jpg")" class="img-responsive center-block" alt="Farm">
             <h3>We're going to the farm!</h3>
-        </header>
-    </div>
+        </div>
+    </header>
 
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.CombinedSearch("farm animals")"><img src="@Url.VersionedContent("~/img/farmanimalsS.jpg")"></a>
+    <div class="row featured-tags-preview">
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.CombinedSearch("farm animals")"><img src="@Url.VersionedContent("~/img/farmanimalsS.jpg")" class="img-responsive" alt="Farm Animals"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("farmers market")"><img src="@Url.VersionedContent("~/img/farmersmarketS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("farmers market")"><img src="@Url.VersionedContent("~/img/farmersmarketS.jpg")" class="img-responsive" alt="Farmer's Market'"></a>
         </div>
 
-        <div class="span4">
-            <a href="@Url.Search("farm")"><img src="@Url.VersionedContent("~/img/allthingsfarmS.jpg")"></a>
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("farm")"><img src="@Url.VersionedContent("~/img/allthingsfarmS.jpg")" class="img-responsive" alt="All Things Farm"></a>
         </div>
     </div>
 </div>

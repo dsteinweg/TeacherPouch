@@ -2,7 +2,10 @@
 function PlayIntroVideo(placeholder) {
     var videoURL = $(placeholder).data("video");
 
-    var video = '<iframe width="420" height="315" src="' + videoURL + '" frameborder="0" allowfullscreen></iframe>';
+    var video =
+        "<div class='embed-responsive embed-responsive-4by3'>" +
+            "<iframe width='420' height='315' src='" + videoURL + "' allowfullscreen></iframe>" +
+        "</div>";
 
     $(placeholder).replaceWith(video);
 }

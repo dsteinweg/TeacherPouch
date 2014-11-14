@@ -2,26 +2,25 @@
     ViewBag.Title = "France - Category";
 }
 
-<div id="category">
-    <div class="hero-unit">
-        <header>
-            <img src="@Url.VersionedContent("~/img/FranceS.jpg")">
-        </header>
-        <header>
+<div class="category">
+    <header>
+        <div class="jumbotron">
+            <img src="@Url.VersionedContent("~/img/FranceS.jpg")" class="img-responsive center-block" alt="France">
             <h3>Bonjour!</h3>
-        </header>
-    </div>
+        </div>
+    </header>
 
-    <div class="row-fluid featured-tags-preview">
-        <div class="span4">
-            <a href="@Url.Search("Paris")"><img src="@Url.VersionedContent("~/img/ParisS.jpg")"></a>
+    <div class="row featured-tags-preview">
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("Paris")"><img src="@Url.VersionedContent("~/img/ParisS.jpg")" class="img-responsive" alt="Paris, France"></a>
         </div>
-        <div class="span4">
-            <a href="@Url.Search("Giverny")"><img src="@Url.VersionedContent("~/img/GivernyS.jpg")"></a>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("Giverny")"><img src="@Url.VersionedContent("~/img/GivernyS.jpg")" class="img-responsive" alt="Giverny, France"></a>
         </div>
-        <div class="span4">
-            <a href="@Url.Search("France")"><img src="@Url.VersionedContent("~/img/FranceS.jpg")"></a>
+
+        <div class="col-sm-6 col-md-4">
+            <a href="@Url.Search("France")"><img src="@Url.VersionedContent("~/img/FranceS.jpg")" class="img-responsive" alt="France"></a>
         </div>
     </div>
- 
 </div>
