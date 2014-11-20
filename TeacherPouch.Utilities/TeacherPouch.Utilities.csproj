@@ -62,6 +62,7 @@
     <Compile Include="Caching\CacheItem.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="PhotoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
