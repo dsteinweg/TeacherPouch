@@ -31,10 +31,9 @@ namespace TeacherPouch.Web.Helpers
                     if (fileInfo.Exists)
                         return path + String.Format("?v={0}", fileInfo.LastWriteTime.Ticks);
                     else
-                        return contentPath;
+                        throw new Exception("File at provided path not found.");
                 },
-                new CacheDependency(fullFilePath),
-                TimeSpan.Zero
+                fullFilePath
             );
         }
 
@@ -45,18 +44,17 @@ namespace TeacherPouch.Web.Helpers
         {
             var path = PhotoHelper.GetPhotoFilePath(photo, size);
 
-            return CacheHelper.RetrieveFromCache<string>(
+            return CacheHelper.RetrieveFromCache(
                 "Versioned Photo - " + path,
                 delegate()
                 {
                     var fileInfo = new FileInfo(path);
                     if (fileInfo.Exists)
-                        return urlHelper.PhotoUrl(photo, size) + String.Format("?v={0}", fileInfo.LastWriteTime.Ticks);
+                        return String.Format("{0}?v={1}", urlHelper.PhotoUrl(photo, size), fileInfo.LastWriteTime.Ticks);
                     else
-                        return path;
+                        throw new Exception("Cannot find photo.");
                 },
-                new CacheDependency(path),
-                TimeSpan.Zero
+                path
             );
         }
 
