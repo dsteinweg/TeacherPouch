@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PhotoSiteRoles.cs" />
+    <Compile Include="TeacherPouchRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityHelper.cs" />
     <Compile Include="SQLite\SQLiteMembershipProvider.cs" />
