@@ -60,13 +60,10 @@ namespace TeacherPouch.Models
                     message.IsBodyHtml = true;
                     message.Body = String.Format(BODY_HTML_FORMAT, this.Name, this.Email, this.ReasonForContacting, this.Comment);
 
-                    if (!String.IsNullOrWhiteSpace(this.Email))
-                        message.ReplyToList.Add(this.Email);
-
                     using (var smtp = new SmtpClient(smtpConfig.Network.Host))
                     {
                         smtp.Credentials = new NetworkCredential(smtpConfig.Network.UserName, smtpConfig.Network.Password);
-                        //smtp.Timeout = 5;
+
                         smtp.Send(message);
                     }
                 }
