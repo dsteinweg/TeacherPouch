@@ -1,41 +1,29 @@
 ﻿using System;
 using System.Net;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using TeacherPouch.ViewModels;
 
-using TeacherPouch.Web.Helpers;
-using TeacherPouch.Web.ViewModels;
-
-namespace TeacherPouch.Web.Controllers
+namespace TeacherPouch.Controllers
 {
-    public partial class ErrorController : ControllerBase
+    public class ErrorController : BaseController
     {
-        public virtual ViewResult Http404()
+        public ViewResult Http404()
         {
-            var relativeUrl = base.ControllerContext.RequestContext.HttpContext.Request.AppRelativeCurrentExecutionFilePath;
+            Response.StatusCode = (int)HttpStatusCode.NotFound;
 
-            ErrorHelper.HandleError(relativeUrl);
-
-            base.ControllerContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-
-            return View(Views.NotFound);
+            return View("NotFound");
         }
 
-        public virtual ViewResult Error(int? httpStatusCode, Exception exception = null)
+        [Route("Error")]
+        public ViewResult Error(int? httpStatusCode, Exception exception = null)
         {
-            var request = base.ControllerContext.RequestContext.HttpContext.Request;
-
-            var relativeUrl = request.AppRelativeCurrentExecutionFilePath;
-            ErrorHelper.HandleError(relativeUrl);
-
-            bool showErrorDetails = request.IsLocal;
-            if (base.User.Identity.IsAuthenticated && base.User.Identity.Name == "darren")
-                showErrorDetails = true;
+            var showErrorDetails = User.Identity.IsAuthenticated;
 
             var viewModel = new ErrorViewModel(httpStatusCode, exception, showErrorDetails);
 
-            base.ControllerContext.HttpContext.Response.StatusCode = viewModel.StatusCode;
+            Response.StatusCode = viewModel.StatusCode;
 
-            return View(Views.Error, viewModel);
+            return View("Error", viewModel);
         }
     }
 }

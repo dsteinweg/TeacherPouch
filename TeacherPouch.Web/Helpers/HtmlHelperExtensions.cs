@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-
+using Microsoft.AspNetCore.Html;
 using TeacherPouch.Models;
 using TeacherPouch.Utilities.Extensions;
 
-namespace TeacherPouch.Web.Helpers
+namespace TeacherPouch.Helpers
 {
     public static class HtmlHelperExtensions
     {
-        public static MvcHtmlString TagButton(this HtmlHelper htmlHelper, Tag tag)
+        public static HtmlString TagButton(this HtmlHelper htmlHelper, Tag tag)
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 
@@ -31,10 +31,10 @@ namespace TeacherPouch.Web.Helpers
                 tag.Name
             );
 
-            return new MvcHtmlString(buttonHtml);
+            return new HtmlString(buttonHtml);
         }
 
-        public static MvcHtmlString TagButton_NoLink(this HtmlHelper htmlHelper, Tag tag)
+        public static HtmlString TagButton_NoLink(this HtmlHelper htmlHelper, Tag tag)
         {
             var cssClasses = "tag";
             string title = null;
@@ -51,10 +51,10 @@ namespace TeacherPouch.Web.Helpers
                 tag.Name
             );
 
-            return new MvcHtmlString(buttonHtml);
+            return new HtmlString(buttonHtml);
         }
 
-        public static MvcHtmlString LargePhoto(this HtmlHelper htmlHelper, Photo photo, IEnumerable<Tag> photoTags)
+        public static HtmlString LargePhoto(this HtmlHelper htmlHelper, Photo photo, IEnumerable<Tag> photoTags)
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 
@@ -72,15 +72,15 @@ namespace TeacherPouch.Web.Helpers
                 "<div href=\"{0}\" class=\"{1}\"><img src=\"{2}\" class=\"img-responsive center-block\" alt=\"{3}\"{4}></div>",
                 urlHelper.PhotoDetails(photo),
                 cssClasses,
-                urlHelper.VersionedPhoto(photo, PhotoSizes.Large),
+                urlHelper.PhotoUrl(photo, PhotoSizes.Large),
                 tagNames,
                 title
             );
 
-            return new MvcHtmlString(thumbHtml);
+            return new HtmlString(thumbHtml);
         }
 
-        public static MvcHtmlString PhotoThumb(this HtmlHelper htmlHelper, Photo photo)
+        public static HtmlString PhotoThumb(this HtmlHelper htmlHelper, Photo photo)
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 
@@ -100,10 +100,10 @@ namespace TeacherPouch.Web.Helpers
                 title
             );
 
-            return new MvcHtmlString(thumbHtml);
+            return new HtmlString(thumbHtml);
         }
 
-        public static MvcHtmlString PhotoThumb_SearchResult(this HtmlHelper htmlHelper, Photo photo, Tag tag)
+        public static HtmlString PhotoThumb_SearchResult(this HtmlHelper htmlHelper, Photo photo, Tag tag)
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 
@@ -115,7 +115,7 @@ namespace TeacherPouch.Web.Helpers
                 title = " title=\"This photo is private.\"";
             }
 
-            return new MvcHtmlString(
+            return new HtmlString(
                 String.Format(
                     "<a href=\"{0}?tag={1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
                     urlHelper.PhotoDetails(photo),
@@ -127,7 +127,7 @@ namespace TeacherPouch.Web.Helpers
             );
         }
 
-        public static MvcHtmlString PhotoThumb_AndedSearchResults(this HtmlHelper htmlHelper, Photo photo, IEnumerable<Tag> tags)
+        public static HtmlString PhotoThumb_AndedSearchResults(this HtmlHelper htmlHelper, Photo photo, IEnumerable<Tag> tags)
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 
@@ -148,7 +148,7 @@ namespace TeacherPouch.Web.Helpers
                     tagsQs = tagsQs + "&tag" + (i + 1).ToString() + "=" + tags.ElementAt(i).Name;
             }
 
-            return new MvcHtmlString(
+            return new HtmlString(
                 String.Format(
                     "<a href=\"{0}?{1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
                     urlHelper.PhotoDetails(photo),
@@ -160,10 +160,10 @@ namespace TeacherPouch.Web.Helpers
             );
         }
 
-        public static MvcHtmlString CombinedTags_SearchResult(this HtmlHelper htmlHelper, IEnumerable<Tag> tags)
+        public static HtmlString CombinedTags_SearchResult(this HtmlHelper htmlHelper, IEnumerable<Tag> tags)
         {
             if (!tags.SafeAny())
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
 
             var builder = new StringBuilder();
 
@@ -176,10 +176,10 @@ namespace TeacherPouch.Web.Helpers
 
             builder.Append(TagButton(htmlHelper, tagList[tagList.Count - 1]));
 
-            return new MvcHtmlString(builder.ToString());
+            return new HtmlString(builder.ToString());
         }
 
-        public static MvcHtmlString ConditionalAnalyticsScript(this HtmlHelper htmlHelper)
+        public static HtmlString ConditionalAnalyticsScript(this HtmlHelper htmlHelper)
         {
             if (htmlHelper.ViewContext.RequestContext.HttpContext.Request.Url.Host.Contains("teacherpouch.com", StringComparison.OrdinalIgnoreCase))
             {
@@ -193,11 +193,11 @@ namespace TeacherPouch.Web.Helpers
                     "    ga('send', 'pageview');" +
                     "</script>";
 
-                return new MvcHtmlString(scriptBody);
+                return new HtmlString(scriptBody);
             }
             else
             {
-                return MvcHtmlString.Empty;
+                return HtmlString.Empty;
             }
         }
     }

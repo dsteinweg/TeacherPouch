@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TeacherPouch.Models
+﻿namespace TeacherPouch.Models
 {
     public class Question
     {
@@ -10,10 +8,9 @@ namespace TeacherPouch.Models
         public string SentenceStarters { get; set; }
         public int? Order { get; set; }
 
-
         public override string ToString()
         {
-            return String.Format("{0} - {1}", this.ID, this.Text);
+            return $"{ID} - {Text}";
         }
     }
 }

@@ -1,62 +1,14 @@
 ﻿using System;
-using System.IO;
-using System.Web.Caching;
-using System.Web.Mvc;
-
+using System.Net;
+using Microsoft.AspNetCore.Mvc.Routing;
 using TeacherPouch.Models;
-using TeacherPouch.Utilities;
-using TeacherPouch.Utilities.Caching;
 
-namespace TeacherPouch.Web.Helpers
+namespace TeacherPouch.Helpers
 {
     public static class UrlHelperExtensions
     {
         private const string BASE_PHOTO_URL_FORMAT = "/Photos/{0}/{1}_{2}.jpg";
         private const string BASE_PHOTO_DOWNLOAD_URL_FORMAT = "/Photos/{0}/Download/{1}_{2}.jpg";
-
-
-        /// <summary>
-        /// Produces a versioned file URL, based off the file's last modified timestamp.
-        /// </summary>
-        public static string VersionedContent(this UrlHelper urlHelper, string contentPath)
-        {
-            var path = urlHelper.Content(contentPath);
-            var fullFilePath = urlHelper.RequestContext.HttpContext.Server.MapPath(path);
-
-            return CacheHelper.RetrieveFromCache(
-                "Versioned Content File - " + contentPath,
-                delegate()
-                {
-                    var fileInfo = new FileInfo(fullFilePath);
-                    if (fileInfo.Exists)
-                        return path + String.Format("?v={0}", fileInfo.LastWriteTime.Ticks);
-                    else
-                        throw new Exception("File at provided path not found.");
-                },
-                fullFilePath
-            );
-        }
-
-        /// <summary>
-        /// Produces a versioned photo URL, based off the photo's last modified timestamp.
-        /// </summary>
-        public static string VersionedPhoto(this UrlHelper urlHelper, Photo photo, PhotoSizes size)
-        {
-            var path = PhotoHelper.GetPhotoFilePath(photo, size);
-
-            return CacheHelper.RetrieveFromCache(
-                "Versioned Photo - " + path,
-                delegate()
-                {
-                    var fileInfo = new FileInfo(path);
-                    if (fileInfo.Exists)
-                        return String.Format("{0}?v={1}", urlHelper.PhotoUrl(photo, size), fileInfo.LastWriteTime.Ticks);
-                    else
-                        throw new Exception("Cannot find photo.");
-                },
-                path
-            );
-        }
 
         public static string PhotoUrl(this UrlHelper urlHelper, Photo photo, PhotoSizes size)
         {
@@ -200,7 +152,7 @@ namespace TeacherPouch.Web.Helpers
             var logoutUrl = "/Admin/Logout";
 
             if (!String.IsNullOrWhiteSpace(returnUrl))
-                logoutUrl = logoutUrl + "?ReturnUrl=" + urlHelper.Encode(returnUrl);
+                logoutUrl = logoutUrl + "?ReturnUrl=" + WebUtility.UrlEncode(returnUrl);
 
             return logoutUrl;
         }

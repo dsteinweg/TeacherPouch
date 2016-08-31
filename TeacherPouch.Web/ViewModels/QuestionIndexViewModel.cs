@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-
 using TeacherPouch.Models;
 
-namespace TeacherPouch.Web.ViewModels
+namespace TeacherPouch.ViewModels
 {
     public class QuestionIndexViewModel
     {

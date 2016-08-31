@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TeacherPouch.Models
+﻿namespace TeacherPouch.Models
 {
     public class Tag
     {
@@ -8,20 +6,19 @@ namespace TeacherPouch.Models
         public string Name { get; set; }
         public bool IsPrivate { get; set; }
 
-
         public override bool Equals(object obj)
         {
-            return (this.GetHashCode() == obj.GetHashCode());
+            return (GetHashCode() == obj.GetHashCode());
         }
 
         public override int GetHashCode()
         {
-            return this.ID;
+            return ID;
         }
 
         public override string ToString()
         {
-            return String.Format("{0} - {1}", this.ID, this.Name);
+            return $"{ID} - {Name}";
         }
     }
 }

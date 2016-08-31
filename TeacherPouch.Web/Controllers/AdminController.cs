@@ -1,68 +1,88 @@
-﻿using TeacherPouch.Web.ViewModels;
-using System;
-using System.Web.Mvc;
-using System.Web.Security;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using TeacherPouch.Models;
+using TeacherPouch.ViewModels;
 
-namespace TeacherPouch.Web.Controllers
+namespace TeacherPouch.Controllers
 {
     [Authorize]
-    public partial class AdminController : ControllerBase
+    public class AdminController : BaseController
     {
-        // GET: /Admin/
-        public virtual ViewResult Index()
+        public AdminController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
-            var viewModel = new AdminViewModel(base.User);
-
-            return View(Views.Index, viewModel);
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        // GET: /Admin/Login
-        [HttpGet]
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+
+        [HttpGet("Admin")]
+        public async Task<ViewResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(user);
+            var viewModel = new AdminViewModel(user, roles);
+
+            return View(viewModel);
+        }
+
+        [HttpGet("Admin/Login")]
         [AllowAnonymous]
-        public virtual ViewResult Login()
+        public ViewResult Login()
         {
-            return View(Views.Login, new LoginViewModel(null, null));
+            return View(new LoginViewModel());
         }
 
-        // POST: /Admin/Login
-        [HttpPost]
+        [HttpPost("Admin/Login")]
         [AllowAnonymous]
-        public virtual ActionResult Login(FormCollection collection)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            string userName = collection["UserName"];
-            string password = collection["Password"];
-
-            if (String.IsNullOrWhiteSpace(userName) || String.IsNullOrWhiteSpace(password))
+            if (String.IsNullOrWhiteSpace(loginViewModel.UserName) || String.IsNullOrWhiteSpace(loginViewModel.Password))
             {
-                var viewModel = new LoginViewModel(userName, "Must provide both a user name and password.");
+                loginViewModel.LoginErrorMessage = "Must provide both a user name and password.";
 
-                return View(Views.Login, viewModel);
+                return View(loginViewModel);
             }
 
-            if (Membership.ValidateUser(userName, password))
+            var user = new ApplicationUser
             {
-                FormsAuthentication.SetAuthCookie(userName, false);
+                UserName = loginViewModel.UserName,
+                Password = loginViewModel.Password
+            };
+
+            var userValidator = new UserValidator<ApplicationUser>();
+            var result = await userValidator.ValidateAsync(_userManager, user);
+
+            var signInResult = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
+
+            if (!signInResult.Succeeded)
+            {
+                loginViewModel.LoginErrorMessage = "Invalid user name and/or password.";
+
+                return View(loginViewModel);
             }
+
+            StringValues values;
+            if (Request.Query.TryGetValue("ReturnUrl", out values))
+                return Redirect(values.First());
             else
-            {
-                var viewModel = new LoginViewModel(userName, "Invalid user name and/or password.");
-
-                return View(Views.Login, viewModel);
-            }
-
-            if (Request.Params["ReturnUrl"] != null)
-                return Redirect(Request.Params["ReturnUrl"]);
-            else
-                return RedirectToAction(Actions.Index());
+                return RedirectToAction(nameof(Index));
         }
 
-        // GET: /Admin/Logout/
-        public virtual ActionResult Logout()
+        [HttpGet("Admin/Logout")]
+        public async Task<IActionResult> Logout()
         {
-            FormsAuthentication.SignOut();
+            await _signInManager.SignOutAsync();
             
-            if (Request.Params["ReturnUrl"] != null)
-                return Redirect(Request.Params["ReturnUrl"]);
+            StringValues values;
+            if (Request.Query.TryGetValue("ReturnUrl", out values))
+                return Redirect(values.First());
             else
                 return Redirect("/");
         }

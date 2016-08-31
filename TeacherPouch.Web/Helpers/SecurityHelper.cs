@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.Security;
+using TeacherPouch.Models;
 
-namespace TeacherPouch.Providers
+namespace TeacherPouch.Helpers
 {
-    public static class SecurityHelper
+    public class SecurityHelper
     {
         public static IEnumerable<string> GetRolesForUser(IPrincipal user)
         {
-            return Roles.GetRolesForUser(user.Identity.Name);
+           return Roles.GetRolesForUser(user.Identity.Name);
         }
 
         public static bool UserIsAdmin(IPrincipal user)

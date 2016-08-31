@@ -1,19 +1,10 @@
 ﻿using TeacherPouch.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace TeacherPouch.Web.ViewModels
+namespace TeacherPouch.ViewModels
 {
     public class TagCreateViewModel
     {
-        public Tag Tag { get; set; }
+        public Tag Tag { get; set; } = new Tag();
         public string ErrorMessage { get; set; }
-
-        public TagCreateViewModel()
-        {
-            this.Tag = new Tag();
-        }
     }
 }

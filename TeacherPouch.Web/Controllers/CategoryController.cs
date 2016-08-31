@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
-namespace TeacherPouch.Web.Controllers
+namespace TeacherPouch.Controllers
 {
-    public partial class CategoryController : ControllerBase
+    public class CategoryController : BaseController
     {
         public enum Category
         {
@@ -32,15 +32,13 @@ namespace TeacherPouch.Web.Controllers
             Zoo
         }
 
-        // GET: /Category/Food
-        public virtual ViewResult CategoryDetails(string name)
+        [HttpGet("Category/{name}")]
+        public ViewResult CategoryDetails(string name)
         {
             Category category;
             if (Enum.TryParse<Category>(name, true, out category))
             {
-                string viewName = String.Format("~/Views/Category/{0}.cshtml", name);
-
-                return View(viewName);
+                return View($"~/Views/Category/{name}.cshtml");
             }
             else
             {

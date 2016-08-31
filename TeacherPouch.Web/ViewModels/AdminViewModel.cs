@@ -1,29 +1,23 @@
 ﻿using System;
-using System.Globalization;
-using System.Security.Principal;
+using System.Collections.Generic;
+using System.Linq;
+using TeacherPouch.Models;
 
-using TeacherPouch.Providers;
-using TeacherPouch.Utilities.Extensions;
-
-namespace TeacherPouch.Web.ViewModels
+namespace TeacherPouch.ViewModels
 {
     public class AdminViewModel
     {
-        public string UserName { get; set; }
-        public string Roles { get; set; }
-
-        public AdminViewModel(IPrincipal user)
+        public AdminViewModel(ApplicationUser user, IEnumerable<string> roles)
         {
-            if (user.Identity.IsAuthenticated)
-            {
-                this.UserName = user.Identity.Name.ToTitleCase();
+            UserName = user.UserName;
 
-                var userRoles = SecurityHelper.GetRolesForUser(user);
-                if (userRoles.SafeAny())
-                    this.Roles = String.Join(", ", userRoles);
-                else
-                    this.Roles = "No roles found.";
-            }
+            if (roles.Any())
+                Roles = String.Join(", ", roles);
+            else
+                Roles = "No roles found.";
         }
+
+        public string UserName { get; }
+        public string Roles { get; }
     }
 }

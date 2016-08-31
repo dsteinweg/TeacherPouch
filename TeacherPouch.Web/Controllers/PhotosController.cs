@@ -1,71 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using System.Web.UI;
-
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TeacherPouch.Models;
-using TeacherPouch.Providers;
-using TeacherPouch.Repositories;
-using TeacherPouch.Utilities;
-using TeacherPouch.Utilities.Caching;
-using TeacherPouch.Web.Helpers;
-using TeacherPouch.Web.ViewModels;
+using TeacherPouch.Data;
+using TeacherPouch.Helpers;
+using TeacherPouch.ViewModels;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Identity;
 
-namespace TeacherPouch.Web.Controllers
+namespace TeacherPouch.Controllers
 {
     [Authorize(Roles = TeacherPouchRoles.Admin)]
-    public partial class PhotosController : RepositoryControllerBase
+    public class PhotosController : BaseController
     {
-        public PhotosController(IRepository repository)
+        public PhotosController(
+            IRepository repository,
+            IMemoryCache cache,
+            UserManager<ApplicationUser> userManager)
         {
-            base.Repository = repository;
+            _repository = repository;
+            _cache = cache;
+            _userManager = userManager;
         }
 
+        private readonly IRepository _repository;
+        private readonly IMemoryCache _cache;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        // GET: /PhotoIndex/
+        [HttpGet("PhotoIndex")]
         [AllowAnonymous]
-        public virtual ViewResult PhotoIndex()
+        public ViewResult PhotoIndex()
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
+            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
 
-            var photos = base.Repository.GetAllPhotos(allowPrivate).OrderBy(photo => photo.ID);
+            var photos = _repository.GetAllPhotos(allowPrivate).OrderBy(photo => photo.ID);
 
-            return View(Views.PhotoIndex, photos);
+            return View(photos);
         }
 
-        // GET: /Photos/5/Flowers?tag=garden
+        [HttpGet("Photos/{id:int}/{photoName?}")]
         [AllowAnonymous]
-        public virtual ViewResult PhotoDetails(int id, string photoName = null, string tag = null, string tag2 = null)
+        public ViewResult PhotoDetails(int id, string photoName = null, string tag = null, string tag2 = null)
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
-            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
+            var photo = _repository.FindPhoto(id, allowPrivate);
 
             if (photo == null)
                 return InvokeHttp404();
 
-            var userIsAdmin = SecurityHelper.UserIsAdmin(base.User);
-            return View(Views.PhotoDetails, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, userIsAdmin, tag, tag2));
+            var userIsAdmin = SecurityHelper.UserIsAdmin(User);
+            return View(new PhotoDetailsViewModel(_repository, photo, allowPrivate, userIsAdmin, tag, tag2));
         }
 
-        // GET: /Photos/Create
-        [HttpGet]
-        public virtual ViewResult PhotoCreate()
+        [HttpGet("Photos/Create")]
+        public ViewResult PhotoCreate()
         {
-            var viewModel = CacheHelper.RetrieveFromCache<PhotoCreateViewModel>("NewPhotoViewModel");
-            if (viewModel == null)
-            {
+            PhotoCreateViewModel viewModel; 
+            if (!_cache.TryGetValue<PhotoCreateViewModel>("NewPhotoViewModel", out viewModel))
                 viewModel = new PhotoCreateViewModel();
-            }
 
-            return View(Views.PhotoCreate, viewModel);
+            return View(viewModel);
         }
 
-        // POST: /Photos/Create
-        [HttpPost]
+        [HttpPost("Photos/Create")]
         [ValidateAntiForgeryToken]
-        public virtual ActionResult PhotoCreate(FormCollection collection)
+        public ActionResult PhotoCreate(PhotoCreateViewModel postedViewModel)
         {
+            //todo finishdhd so tired
+
             var name = collection["Name"];
             var fileName = collection["FileName"];
             bool isPrivate = String.IsNullOrWhiteSpace(collection["IsPrivate"]) ? false : true;
@@ -78,7 +82,7 @@ namespace TeacherPouch.Web.Controllers
             {
                 viewModel.ErrorMessage = "All fields are required.";
 
-                return View(Views.PhotoCreate, viewModel);
+                return View(viewModel);
             }
 
             if (!fileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
@@ -92,7 +96,7 @@ namespace TeacherPouch.Web.Controllers
             PhotoHelper.MovePhoto(fileName, newPhoto);
             PhotoHelper.GeneratePhotoSizes(newPhoto);
 
-            base.Repository.SavePhoto(newPhoto, tagNames);
+            _repository.SavePhoto(newPhoto, tagNames);
 
             var photoNameParts = name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             int photoNumber = 0;
@@ -100,56 +104,49 @@ namespace TeacherPouch.Web.Controllers
             {
                 photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
             }
-
+ 
             var newPhotoName = String.Join(" ", photoNameParts);
-
-            var urlHelper = new UrlHelper(Request.RequestContext);
-            var photoUrl = urlHelper.PhotoDetails(newPhoto);
+            var photoUrl = Url.Action(nameof(PhotoDetails), new { id = newPhoto.ID });
 
             var nextCreateViewModel = new PhotoCreateViewModel();
-            nextCreateViewModel.Message = String.Format("<a href=\"{0}\">Photo \"{1}\"</a> created.", photoUrl, newPhoto.Name);
+            nextCreateViewModel.Message = $"<a href=\"{photoUrl}\">Photo \"{newPhoto.Name}\"</a> created.";
             nextCreateViewModel.LastTagsInput = tagNamesStr;
             nextCreateViewModel.ProposedPhotoName = newPhotoName;
 
-            CacheHelper.Insert("NewPhotoViewModel", nextCreateViewModel);
+            _cache.Set("NewPhotoViewModel", nextCreateViewModel);
 
-            return RedirectToAction(Actions.PhotoCreate());
+            return RedirectToAction(nameof(PhotoCreate));
         }
 
-        // GET: /Photos/Edit/5
-        public virtual ViewResult PhotoEdit(int id)
+        [HttpGet("Photos/Edit/{id:int}")]
+        public ViewResult PhotoEdit(int id)
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
-            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
+            var photo = _repository.FindPhoto(id, allowPrivate);
 
             if (photo == null)
                 return InvokeHttp404();
 
-            var userIsAdmin = SecurityHelper.UserIsAdmin(base.User);
-            return View(Views.PhotoEdit, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, userIsAdmin));
+            var userIsAdmin = SecurityHelper.UserIsAdmin(User);
+            return View(new PhotoDetailsViewModel(_repository, photo, allowPrivate, userIsAdmin));
         }
 
-        // POST: /Photos/Edit/5
-        [HttpPost]
-        public virtual ActionResult PhotoEdit(int id, FormCollection collection)
+        [HttpPost("Photos/Edit/{id:int}")]
+        public virtual ActionResult PhotoEdit(int id, PhotoEditViewModel postedViewModel)
         {
-            var name = collection["Name"];
-            bool isPrivate = String.IsNullOrWhiteSpace(collection["IsPrivate"]) ? false : true;
-            var tagNamesStr = collection["Tags"];
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
 
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
-
-            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            var photo = _repository.FindPhoto(id, allowPrivate);
             if (photo != null)
             {
-                photo.Name = name;
-                photo.IsPrivate = isPrivate;
+                photo.Name = postedViewModel.Name;
+                photo.IsPrivate = postedViewModel.IsPrivate;
 
-                var tagNames = SplitTagNames(tagNamesStr);
+                var tagNames = SplitTagNames(postedViewModel.Tags);
 
-                base.Repository.SavePhoto(photo, tagNames);
+                _repository.SavePhoto(photo, tagNames);
 
-                return RedirectToAction(Actions.PhotoDetails(photo.ID));
+                return RedirectToAction(nameof(PhotoDetails), new { id = photo.ID });
             }
             else
             {
@@ -157,32 +154,32 @@ namespace TeacherPouch.Web.Controllers
             }
         }
 
-        // GET: /Photos/Delete/5
-        public virtual ViewResult PhotoDelete(int id)
+        [HttpGet("Photos/Delete/{id:int}")]
+        public ViewResult PhotoDelete(int id)
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
 
-            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            var photo = _repository.FindPhoto(id, allowPrivate);
             if (photo == null)
                 return InvokeHttp404();
 
-            var userIsAdmin = SecurityHelper.UserIsAdmin(base.User);
-            return View(Views.PhotoDelete, new PhotoDetailsViewModel(base.Repository, photo, allowPrivate, userIsAdmin));
+            var userIsAdmin = SecurityHelper.UserIsAdmin(User);
+
+            return View(new PhotoDetailsViewModel(_repository, photo, allowPrivate, userIsAdmin));
         }
 
-        // POST: /Photos/Delete/5
-        [HttpPost]
-        public virtual ActionResult PhotoDelete(int id, FormCollection collection)
+        [HttpPost("Photos/Delete/{id:int}")]
+        public ActionResult PhotoDeleteConfirmed(int id)
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
 
-            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            var photo = _repository.FindPhoto(id, allowPrivate);
 
             if (photo != null)
             {
-                base.Repository.DeletePhoto(photo);
+                _repository.DeletePhoto(photo);
 
-                return RedirectToAction(Actions.PhotoIndex());
+                return RedirectToAction(nameof(PhotoIndex));
             }
             else
             {
@@ -190,19 +187,19 @@ namespace TeacherPouch.Web.Controllers
             }
         }
 
-        // GET: /Photos/1234/Flowers_Large.jpg?v=1234567890
-        [OutputCache(CacheProfile = "Forever", Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(CacheProfile = "Forever", Location = OutputCacheLocation.Downstream)]
+        [HttpGet("Photos/{id:int}/{fileName}")]
         [AllowAnonymous]
         public virtual ActionResult PhotoImage(int id, string fileName)
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
 
             var fileNameParts = fileName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
             PhotoSizes size;
             if (fileNameParts.Length == 0 || !Enum.TryParse<PhotoSizes>(fileNameParts[fileNameParts.Length - 1], true, out size))
                 return InvokeHttp404();
 
-            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            var photo =_repository.FindPhoto(id, allowPrivate);
             if (photo != null)
             {
                 var bytes = PhotoHelper.GetPhotoBytes(photo, size);
@@ -218,18 +215,18 @@ namespace TeacherPouch.Web.Controllers
             }
         }
 
-        // GET: /Photos/1234/Download/Flowers_Large.jpg
+        [HttpGet("Photos/{id:int}/Download/{fileName}")]
         [AllowAnonymous]
         public virtual ActionResult PhotoImageDownload(int id, string fileName)
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(base.User);
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
 
             var fileNameParts = fileName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
             PhotoSizes size;
             if (fileNameParts.Length == 0 || !Enum.TryParse<PhotoSizes>(fileNameParts[fileNameParts.Length - 1], true, out size))
                 return InvokeHttp404();
 
-            var photo = base.Repository.FindPhoto(id, allowPrivate);
+            var photo = _repository.FindPhoto(id, allowPrivate);
             if (photo != null)
             {
                 var bytes = PhotoHelper.GetPhotoBytes(photo, size);
@@ -245,16 +242,16 @@ namespace TeacherPouch.Web.Controllers
             }
         }
 
-
         private List<string> SplitTagNames(string tagNames)
         {
             if (String.IsNullOrWhiteSpace(tagNames))
                 return null;
 
-            return tagNames.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                           .Select(tagName => tagName.Trim())
-                           .Distinct()
-                           .ToList();
+            return tagNames
+                .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(tagName => tagName.Trim())
+                .Distinct()
+                .ToList();
         }
     }
 }

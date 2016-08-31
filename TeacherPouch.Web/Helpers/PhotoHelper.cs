@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using ImageResizer;
-
+using ImageProcessorCore;
 using TeacherPouch.Models;
 
-namespace TeacherPouch.Utilities
+namespace TeacherPouch.Helpers
 {
     public static class PhotoHelper
     {
@@ -16,6 +14,8 @@ namespace TeacherPouch.Utilities
 
         static PhotoHelper()
         {
+            // TODO: re-implement, options
+            /*
             PhotoPath = ConfigurationManager.AppSettings["PhotoPath"];
             if (String.IsNullOrWhiteSpace(PhotoPath))
                 throw new ConfigurationErrorsException("\"PhotoPath\" app setting missing.");
@@ -23,6 +23,7 @@ namespace TeacherPouch.Utilities
             PendingPhotoPath = ConfigurationManager.AppSettings["PendingPhotoPath"];
             if (String.IsNullOrWhiteSpace(PendingPhotoPath))
                 throw new ConfigurationErrorsException("\"PendingPhotoPath\" app setting missing.");
+            */
         }
 
 
@@ -103,7 +104,6 @@ namespace TeacherPouch.Utilities
             }
         }
 
-
         private static void AssertPhotoFoldersExist()
         {
             if (!Directory.Exists(PendingPhotoPath))
@@ -117,30 +117,38 @@ namespace TeacherPouch.Utilities
         {
             var destinationPath = Path.Combine(Path.GetDirectoryName(pathToOriginalPhoto), size.ToString().ToLower() + ".jpg");
 
-            var resizeSettings = new ResizeSettings();
-            switch (size)
+            using (var originalStream = File.OpenRead(pathToOriginalPhoto))
             {
-                case PhotoSizes.Small:
-                    resizeSettings.MaxWidth = 200;
-                    resizeSettings.MaxHeight = 200;
-                    break;
+                var originalImage = new Image(originalStream);
 
-                case PhotoSizes.Medium:
-                    resizeSettings.MaxWidth = 500;
-                    resizeSettings.MaxHeight = 500;
-                    break;
+                using (var resizedImageStream = File.OpenWrite(destinationPath))
+                {
+                    var resizeOptions = new ResizeOptions()
+                    {
+                        Mode = ResizeMode.Max,
+                        Sampler = new WelchResampler()
+                    };
 
-                case PhotoSizes.Large:
-                    resizeSettings.MaxWidth = 800;
-                    resizeSettings.MaxHeight = 800;
-                    break;
+                    switch (size)
+                    {
+                        case PhotoSizes.Small:
+                            resizeOptions.Size = new Size(200, 200);
+                            break;
+
+                        case PhotoSizes.Medium:
+                            resizeOptions.Size = new Size(500, 500);
+                            break;
+
+                        case PhotoSizes.Large:
+                            resizeOptions.Size = new Size(800, 800);
+                            break;
+                    }
+
+                    originalImage
+                        .Resize(resizeOptions)
+                        .Save(resizedImageStream);
+                }
             }
-
-            ImageBuilder.Current.Build(
-                source: pathToOriginalPhoto,
-                dest: destinationPath,
-                settings: resizeSettings
-            );
         }
     }
 }

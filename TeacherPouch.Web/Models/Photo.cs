@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TeacherPouch.Models
 {
@@ -7,19 +6,12 @@ namespace TeacherPouch.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public Guid UniqueID { get; set; }
+        public Guid UniqueID { get; set; } = Guid.NewGuid();
         public bool IsPrivate { get; set; }
-
-
-        public Photo()
-        {
-            this.UniqueID = Guid.NewGuid();
-        }
-
 
         public override string ToString()
         {
-            return String.Format("{0} - {1}", this.ID, this.Name);
+            return $"{ID} - {Name}";
         }
 
         public override bool Equals(object obj)
@@ -29,12 +21,12 @@ namespace TeacherPouch.Models
                 return false;
             }
 
-            return this.ID == (obj as Photo).ID;
+            return ID == (obj as Photo).ID;
         }
 
         public override int GetHashCode()
         {
-            return this.ID;
+            return ID;
         }
     }
 }

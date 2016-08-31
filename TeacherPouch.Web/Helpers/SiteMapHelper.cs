@@ -1,58 +1,60 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Web;
-using System.Web.Mvc;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Routing;
+using TeacherPouch.Data;
+using TeacherPouch.Controllers;
 
-using TeacherPouch.Repositories;
-using TeacherPouch.Utilities.Caching;
-using TeacherPouch.Web.Controllers;
-
-namespace TeacherPouch.Web.Helpers
+namespace TeacherPouch.Helpers
 {
-    public static class SiteMapHelper
+    public class SiteMapHelper
     {
+        public SiteMapHelper(UrlHelper urlHelper)
+        {
+            _urlHelper = urlHelper;
+        }
+
+        private readonly UrlHelper _urlHelper;
+
         private static readonly XNamespace RootNamespace = XNamespace.Get("http://www.sitemaps.org/schemas/sitemap/0.9");
         private static readonly XNamespace ImagesNamespace = XNamespace.Get("http://www.google.com/schemas/sitemap-image/1.1");
 
-        public static string GetSiteMap(IRepository repository, HttpContextBase httpContext)
+        public string GetSiteMap(IRepository repository, HttpContext httpContext)
         {
             var siteMapFormat = GetSiteMapFormatString(repository, httpContext);
-            var protocolAndHost = httpContext.Request.Url.GetLeftPart(UriPartial.Authority);
+            var protocolAndHost = httpContext.Request.Protocol + httpContext.Request.Host;
             var siteMap = String.Format(siteMapFormat, protocolAndHost);
 
             return siteMap;
         }
 
-        private static string GetSiteMapFormatString(IRepository repository, HttpContextBase httpContext)
+        private string GetSiteMapFormatString(IRepository repository, HttpContext httpContext)
         {
-            var urlHelper = new UrlHelper(httpContext.Request.RequestContext);
-
             var root =
                 new XElement(RootNamespace + "urlset",
-                    new XAttribute(XNamespace.Xmlns + "image", ImagesNamespace)
-            );
+                    new XAttribute(XNamespace.Xmlns + "image", ImagesNamespace));
 
             // General pages
             root.Add(CreateSiteMapNode("/"));
-            root.Add(CreateSiteMapNode(urlHelper.About()));
-            root.Add(CreateSiteMapNode(urlHelper.License()));
-            root.Add(CreateSiteMapNode(urlHelper.Contact()));
-            root.Add(CreateSiteMapNode(urlHelper.PrivacyPolicy()));
+            root.Add(CreateSiteMapNode(_urlHelper.About()));
+            root.Add(CreateSiteMapNode(_urlHelper.License()));
+            root.Add(CreateSiteMapNode(_urlHelper.Contact()));
+            root.Add(CreateSiteMapNode(_urlHelper.PrivacyPolicy()));
 
             // Categories
             var categories = Enum.GetNames(typeof(CategoryController.Category));
             foreach (var category in categories)
             {
-                root.Add(CreateSiteMapNode(urlHelper.Category(category)));
+                root.Add(CreateSiteMapNode(_urlHelper.Category(category)));
             }
-            
+
             // Photos
             var photos = repository.GetAllPhotos(false);
             foreach (var photo in photos)
             {
-                root.Add(CreatePhotoSiteMapNode(urlHelper.PhotoDetails(photo), urlHelper.LargePhotoUrl(photo), urlHelper.License()));
+                root.Add(CreatePhotoSiteMapNode(_urlHelper.PhotoDetails(photo), _urlHelper.LargePhotoUrl(photo), _urlHelper.License()));
             }
 
 
@@ -60,7 +62,7 @@ namespace TeacherPouch.Web.Helpers
             var tags = repository.GetAllTags(false);
             foreach (var tag in tags)
             {
-                root.Add(CreateSiteMapNode(urlHelper.TagDetails(tag)));
+                root.Add(CreateSiteMapNode(_urlHelper.TagDetails(tag)));
             }
 
 

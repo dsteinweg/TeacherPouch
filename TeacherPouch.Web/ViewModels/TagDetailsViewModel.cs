@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using TeacherPouch.Data;
 using TeacherPouch.Models;
-using TeacherPouch.Repositories;
 
-namespace TeacherPouch.Web.ViewModels
+namespace TeacherPouch.ViewModels
 {
     public class TagDetailsViewModel
     {
-        public Tag Tag { get; set; }
-        public List<Photo> TaggedPhotos { get; set; }
-
         public TagDetailsViewModel(IRepository repository, Tag tag, bool allowPrivate)
         {
-            this.Tag = tag;
-            this.TaggedPhotos = repository.GetPhotosForTag(tag, allowPrivate).ToList();
+            Tag = tag;
+            TaggedPhotos = repository.GetPhotosForTag(tag, allowPrivate).ToList();
         }
+
+        public Tag Tag { get; set; }
+        public List<Photo> TaggedPhotos { get; set; }
     }
 }

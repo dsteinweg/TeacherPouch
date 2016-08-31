@@ -1,4 +1,4 @@
-﻿namespace TeacherPouch.Providers
+﻿namespace TeacherPouch.Models
 {
     public static class TeacherPouchRoles
     {

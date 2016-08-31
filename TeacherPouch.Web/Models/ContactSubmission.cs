@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Configuration;
-using System.Net;
-using System.Net.Configuration;
-using System.Net.Mail;
 
 namespace TeacherPouch.Models
 {
@@ -33,16 +29,22 @@ namespace TeacherPouch.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (String.IsNullOrWhiteSpace(this.Name) &&
-                String.IsNullOrWhiteSpace(this.Email) &&
-                String.IsNullOrWhiteSpace(this.Comment))
+            var errors = new List<ValidationResult>();
+
+            if (String.IsNullOrWhiteSpace(Name) &&
+                String.IsNullOrWhiteSpace(Email) &&
+                String.IsNullOrWhiteSpace(Comment))
             {
-                yield return new ValidationResult("You must fill out the form before submitting.");
+                errors.Add(new ValidationResult("You must fill out the form before submitting."));
             }
+
+            return errors;
         }
 
         public void SendEmail()
         {
+            // TODO: re-implement, using options
+            /*
             var to = ConfigurationManager.AppSettings["ContactEmailAddress"];
             var smtpConfig = ConfigurationManager.GetSection("system.net/mailSettings/smtp") as SmtpSection;
 
@@ -56,9 +58,9 @@ namespace TeacherPouch.Models
             {
                 using (var message = new MailMessage(smtpConfig.From, to))
                 {
-                    message.Subject = String.Format("TeacherPouch.com Contact Submission - {0}", this.Name);
+                    message.Subject = String.Format("TeacherPouch.com Contact Submission - {0}", Name);
                     message.IsBodyHtml = true;
-                    message.Body = String.Format(BODY_HTML_FORMAT, this.Name, this.Email, this.ReasonForContacting, this.Comment);
+                    message.Body = String.Format(BODY_HTML_FORMAT, Name, Email, ReasonForContacting, Comment);
 
                     using (var smtp = new SmtpClient(smtpConfig.Network.Host))
                     {
@@ -68,6 +70,7 @@ namespace TeacherPouch.Models
                     }
                 }
             }
+            */
         }
     }
 }

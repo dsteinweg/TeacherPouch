@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-
 using TeacherPouch.Models;
 
-namespace TeacherPouch.Web.ViewModels
+namespace TeacherPouch.ViewModels
 {
     public class QuestionCreateViewModel : IValidatableObject
     {
