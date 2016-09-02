@@ -13,7 +13,9 @@ namespace TeacherPouch.Controllers
     [Authorize]
     public class AdminController : BaseController
     {
-        public AdminController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AdminController(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

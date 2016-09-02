@@ -98,8 +98,9 @@
                 <figure>
                     <img src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt="Creative Commons License" style="border-width: 0;">
                     <figcaption>
-                        Photography by TeacherPouch is licensed under a <em>Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported</em> License. <br>
-                        <a href="@Url.License()" rel="license">Read more about our license</a>
+                        Photography by TeacherPouch is licensed under a
+                        <em>Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported</em> License.<br>
+                        <a asp-controller="Home" asp-action="License">Read more about our license</a>
                     </figcaption>
                 </figure>
             </p>
@@ -107,11 +108,11 @@
             <p>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink("Site Administration", MVC.Admin.Index())
+                    <a asp-controller="Admin" asp-action="Index">Site Administration</a>
                 }
                 else
                 {
-                    @Html.ActionLink("Log In", MVC.Admin.Login().AddRouteValue("ReturnUrl", Request.RawUrl))
+                    <a asp-controller="Admin" asp-action="Login" asp-route-returnurl="@Request.RawUrl">Sign In</a>
                 }
             </p>
         </footer>

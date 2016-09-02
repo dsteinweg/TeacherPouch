@@ -9,7 +9,13 @@ namespace TeacherPouch.ViewModels
 {
     public class PhotoDetailsViewModel
     {
-        public PhotoDetailsViewModel(IRepository repository, Photo photo, bool allowPrivate, bool showAdminLinks, string tagName = null, string tag2Name = null)
+        public PhotoDetailsViewModel(
+            IRepository repository,
+            Photo photo,
+            bool allowPrivate,
+            bool showAdminLinks,
+            string tagName = null,
+            string tag2Name = null)
         {
             Photo = photo;
 

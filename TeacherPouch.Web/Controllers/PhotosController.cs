@@ -33,7 +33,7 @@ namespace TeacherPouch.Controllers
         [AllowAnonymous]
         public ViewResult PhotoIndex()
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
 
             var photos = _repository.GetAllPhotos(allowPrivate).OrderBy(photo => photo.ID);
 
@@ -44,14 +44,16 @@ namespace TeacherPouch.Controllers
         [AllowAnonymous]
         public ViewResult PhotoDetails(int id, string photoName = null, string tag = null, string tag2 = null)
         {
-            bool allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
+            var allowPrivate = SecurityHelper.UserCanSeePrivateRecords(User);
             var photo = _repository.FindPhoto(id, allowPrivate);
 
             if (photo == null)
                 return InvokeHttp404();
 
             var userIsAdmin = SecurityHelper.UserIsAdmin(User);
-            return View(new PhotoDetailsViewModel(_repository, photo, allowPrivate, userIsAdmin, tag, tag2));
+            var viewModel = new PhotoDetailsViewModel(_repository, photo, allowPrivate, userIsAdmin, tag, tag2);
+
+            return View(viewModel);
         }
 
         [HttpGet("Photos/Create")]
