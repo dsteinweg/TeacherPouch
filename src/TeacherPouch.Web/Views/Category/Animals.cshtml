@@ -1,0 +1,57 @@
+@{
+    ViewBag.Title = "Animals - Category";
+}
+
+<div class="category">
+    <header>
+        <div class="jumbotron">
+            <img src="~/img/AnimalsS.jpg" class="img-responsive center-block" alt="Animals" asp-append-version="true">
+            <h3>Let's look at some animals!</h3>
+        </div>
+    </header>
+
+    <div class="row featured-tags-preview">
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="bird">
+                <img src="~/img/birdsS.jpg" class="img-responsive" alt="Birds" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="chick">
+                <img src="~/img/chicksS.jpg" class="img-responsive" alt="Chicks" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="dog">
+                <img src="~/img/dogsS.jpg" class="img-responsive" alt="Dogs" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="zoo animal" asp-route-op="and">
+                <img src="~/img/zooanimalsS.jpg" class="img-responsive" alt="Zoo Animals" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="farm animal" asp-route-op="and">
+                <img src="~/img/farmanimalsS.jpg" class="img-responsive" alt="Farm Animals" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="animal">
+                <img src="~/img/allanimalsS.jpg" class="img-responsive" alt="All Animals" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-12">
+            <img src="~/img/animalssearch2S.jpg"
+                class="img-responsive center-block"
+                alt="Search for more Animal pictures"
+                asp-append-version="true">
+        </div>
+    </div>
+</div>

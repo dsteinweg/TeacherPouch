@@ -1,0 +1,90 @@
+﻿<div id="logo">
+    <a class="brand" href="/">
+        <img src="~/img/logo/teacherpouchlogo30.png" class="img-responsive center-block" asp-append-version="true">
+    </a>
+</div>
+
+<ul class="nav">
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Animals">Animals</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="CelebrationsAndHolidays">
+            Celebrations and Holidays
+        </a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Clothing">Clothing</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Colors">Colors</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Fall">Fall</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Farm">Farm</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Flowers">Flowers</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Food">Food</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Garden">Garden</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Materials">Materials</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Math">Math</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Numbers">Numbers</a>
+    </li>
+    <li>
+        <a asp-controller="Search" asp-action="Search" asp-route-q="Park">Park</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Prepositions">Prepositions</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="School">School</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Sizes">Sizes</a>
+    </li>
+    <li>
+        <a asp-controller="Search" asp-action="Search" asp-route-q="Spring">Spring</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Summer">Summer</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Transportation">Transportation</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Vacation">Vacation</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Weather">Weather</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Winter">Winter</a>
+    </li>
+    <li>
+        <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Zoo">Zoo</a>
+    </li>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-header">Administration</li>
+        <li><a asp-controller="Admin" asp-action="Index">Admin Home</a></li>
+
+        if (User.IsInRole(TeacherPouchRoles.Admin))
+        {
+            <li><a asp-controller="Photos" asp-action="CreateNew">Add new Photo</a></li>
+        }
+    }
+</ul>

@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Home";
+    ViewBag.HomeActiveClass = "active";
+}
+
+<div id="home">
+    <div class="jumbotron">
+        <header>
+            <div id="intro-video-placeholder">
+                <a href="javascript:;" onclick="PlayIntroVideo(this);" data-video="//www.youtube.com/embed/0bwl3JaPM8Q?autoplay=1&rel=0" title="Watch a quick intro video about TeacherPouch">
+                    <img src="~/img/TeacherPouch-Video-Placeholder.png" class="img-responsive">
+                </a>
+            </div>
+
+            <div id="intro-video"></div>
+
+            <div>
+                <h5>
+                    Free stock photos for teachers and non-teachers alike. <br>
+                    Come back periodically to see new photos that have been added!
+                </h5>
+            </div>
+        </header>
+    </div>
+
+    <div class="row featured-tags-preview">
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Weather">
+                <img src="~/img/WeatherS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Winter">
+                <img src="~/img/WinterS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="Winter Clothing">
+                <img src="~/img/winterclothingS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="School">
+                <img src="~/img/SchoolS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Math">
+                <img src="~/img/MathS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Prepositions">
+                <img src="~/img/PrepositionsS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Transportation">
+                <img src="~/img/TransportationS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Vacation">
+                <img src="~/img/VacationS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Sizes">
+                <img src="~/img/SizesS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Food">
+                <img src="~/img/FoodS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Animals">
+                <img src="~/img/AnimalsS.jpg" class="img-responsive">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Numbers">
+                <img src="~/img/NumbersS.jpg" class="img-responsive">
+            </a>
+        </div>
+    </div>
+</div>

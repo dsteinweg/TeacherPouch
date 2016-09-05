@@ -1,0 +1,28 @@
+﻿@model PhotoDeleteViewModel
+
+@{
+    ViewBag.Title = "Delete Photo";
+}
+
+<h2>Delete Photo</h2>
+
+<h3>Are you sure you want to delete this photo?</h3>
+
+<fieldset>
+    <legend>@Model.Photo.Name</legend>
+
+    <div>
+        <img src="@Url.LargePhotoUrl(Model.Photo)">
+    </div>
+
+    <div style="margin-top:20px; margin-bottom:20px;">
+        <tag-buttons tags="@">
+    </div>
+</fieldset>
+
+<form>
+    <div class="form-control">
+        <button class="btn btn-danger" type="submit" value="Delete"> |
+        <a asp-action="PhotoDetails" asp-route-id="@Model.Photo.Id">Cancel</a>
+    </div>
+</form>
