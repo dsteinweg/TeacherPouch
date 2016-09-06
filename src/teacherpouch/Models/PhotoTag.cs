@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TeacherPouch.Models
 {
     public class PhotoTag
@@ -5,7 +7,7 @@ namespace TeacherPouch.Models
         public int PhotoId { get; set; }
         public Photo Photo { get; set; }
 
-        public string TagId { get; set; }
+        public int TagId { get; set; }
         public Tag Tag { get; set; }
     }
 }

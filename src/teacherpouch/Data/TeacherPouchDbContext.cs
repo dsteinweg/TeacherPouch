@@ -21,6 +21,9 @@ namespace TeacherPouch.Data
             base.OnModelCreating(builder);
 
             builder.Entity<PhotoTag>()
+                .HasKey("PhotoId", "TagId");
+
+            builder.Entity<PhotoTag>()
                 .HasOne(pt => pt.Photo)
                 .WithMany(p => p.PhotoTags)
                 .HasForeignKey(pt => pt.PhotoId);

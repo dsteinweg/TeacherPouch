@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeacherPouch.Data;
 using TeacherPouch.Models;
+using TeacherPouch.Services;
 
 namespace TeacherPouch
 {
@@ -54,7 +55,9 @@ namespace TeacherPouch
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
-
+            services.AddScoped<PhotoService>();
+            services.AddScoped<TagService>();
+            services.AddScoped<SearchService>();
 
             // Add application services.
             // TODO: implement me
