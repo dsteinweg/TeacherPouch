@@ -141,7 +141,7 @@ table.index {
     }
 }
 
-/* 
+/*
     About
 */
 #About {
@@ -311,7 +311,7 @@ table.index {
         position: relative;
         top: 50%;
         transform: translateY(-50%);
-        
+
     }
 
     .photo-details-slider .prev-arrow,
@@ -391,7 +391,6 @@ table.index {
     border:3px solid red;
     margin:3px;
 }
-.tag.private:hover { }
 
 
 #createTag h2 {
@@ -416,9 +415,6 @@ table.index {
         float:left;
         margin:0 2px 20px 0;
     }
-    .tag-buttons li.private:hover {
-        
-    }
 
 
 #tags input {
@@ -434,7 +430,7 @@ table.index {
     #tagTable th {
         text-align: left;
     }
-    
+
     #tagTable th, #tagTable td {
         padding:5px;
     }
@@ -580,13 +576,14 @@ ul.photo-thumbs {
 }
 
 #contact textarea {
-    height:300px;
+    height: 300px;
+    width: 100%;
 }
 
 #contact label {
-    font-size:20px;
+    font-size: 20px;
 }
 
 #contact form > div{
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }

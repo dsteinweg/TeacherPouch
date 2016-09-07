@@ -19,41 +19,45 @@
             ...well not quite!  It takes a lot of time and effort to put together such a thing,
             but it's been a great opportunity to work together.
             Our day to day is taking new photos & updating the website.
-            Nicole uploads the new photos and “tags” them with vocabulary words,
-            Darren continues to add new features & make tasteful edits,
+            Nicole uploads the new photos and "tags" them with vocabulary words,
+            Darren continues to add new features &amp; make tasteful edits,
             and we've gotten a few of our family members to help us along the way.
         </p>
-            
+
         <p>
             We will continue to add new content and update the website when we have time, but we also have day jobs!
-            We hope that you will find ways to incorporate these photos into your lessons to teach your students new vocabulary words.  <br><br>
-            Please feel free to <a href="@Url.Contact()">email us</a> with questions or comments!
+            We hope that you will find ways to incorporate these photos
+            into your lessons to teach your students new vocabulary words.
+            <br><br>
+            Please feel free to <a asp-controller="Home" asp-action="Contact">email us</a> with questions or comments!
         </p>
     </section>
 
     <header>
         <h2>A little more information</h2>
     </header>
-
     <section class="big">
         <p>
             <b>You can search by theme or use the search box.</b><br>
-            You can search by clicking on the categories on the left hand column.  If you are looking for specific vocabulary
-            words for a story you can use the search box.  For example, if you want to show your students anything associated
-            with summer, just click on the category <a href="@Url.Category("Summer")">summer</a>. If you are looking for pictures to explain cold and hot,
-            then you might want to just search for those words.
+            You can search by clicking on the categories on the left hand column.
+            If you are looking for specific vocabulary words for a story you can use the search box.
+            For example, if you want to show your students anything associated with summer, just click on the category
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Summer">summer</a>.
+            If you are looking for pictures to explain cold and hot, then you might want to just search for those words.
         </p>
 
         <p>
             We are constantly adding photos and changing the website so you may find a category
             or theme that doesn't have many pictures in it.  You'll just have to come back again later!
-            If you search for a word and we don't have any pictures, please feel free to send us a  <a href="@Url.Contact()"> request</a>.
+            If you search for a word and we don't have any pictures, please feel free to send us a
+            <a asp-controller="Home" asp-action="Contact">request</a>.
         </p>
 
         <p>
             <b>The photos have been resized.</b><br>
             The photos we take are GIGANTIC in size.
-            When making lessons you may use 10-15 pictures and having the full resolution takes up a lot of space on a word document or Smart Notebook.
+            When making lessons you may use 10-15 pictures and having the full resolution
+            takes up a lot of space on a word document or Smart Notebook.
             The <b>small</b> size photo is perfect for a vocabulary card or worksheet,
             while the <b>large</b> size is perfect if you want students to see all of the detail.
             For Mac users, you just need to drag the photo you want into your word document.

@@ -6,20 +6,7 @@ namespace TeacherPouch.Models
 {
     public class ContactSubmission : IValidatableObject
     {
-        private const string BODY_HTML_FORMAT =
-            "<div>" +
-                "<div><b>Name:</b></div>" +
-                "<div>{0}</div>" +
-                "<br>" +
-                "<div><b>Email:</b></div>" +
-                "<div>{1}</div>" +
-                "<br>" +
-                "<div><b>Reason for contacting:</b></div>" +
-                "<div>{2}</div>" +
-                "<br>" +
-                "<div><b>Comment/Question:</b></div>" +
-                "<div>{3}</div>" +
-            "</div>";
+
 
         public string Name { get; set; }
         public string Email { get; set; }

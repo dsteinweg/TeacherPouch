@@ -41,11 +41,11 @@ namespace TeacherPouch
             // Add framework services.
             services
                 .AddDbContext<TeacherPouchDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("TeacherPouch")))
-                .AddDbContext<TeacherPouchIdentityDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("Identity")));
+                .AddDbContext<Data.IdentityDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("Identity")));
 
             services
                 .AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<TeacherPouchIdentityDbContext>()
+                .AddEntityFrameworkStores<Data.IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddRouting(opts => opts.LowercaseUrls = true);

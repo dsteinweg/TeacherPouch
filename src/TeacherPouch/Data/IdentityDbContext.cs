@@ -4,9 +4,9 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.Data
 {
-    public class TeacherPouchIdentityDbContext : IdentityDbContext<ApplicationUser>
+    public class IdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public TeacherPouchIdentityDbContext(DbContextOptions<TeacherPouchIdentityDbContext> options)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
             : base(options)
         {
 

@@ -58,73 +58,176 @@
 
 <header>
     <h1>Kindergarten Standards</h1>
-    <h5 style="color:red;">**This standards page is NEW! Our plan is to link our photos to the Kindergarten standards first, and then we'll work on grades 1-5.</h5>
+    <h5 style="color:red;">
+        **This standards page is NEW!
+        Our plan is to link our photos to the Kindergarten standards first, and then we'll work on grades 1-5.
+    </h5>
 </header>
 
 <article id="k-social-studies" class="standards">
     <section>
         <header>
-            <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank">Social Studies Standards (2011)</a></h3>
+            <h3>
+                <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html"
+                   target="_blank">Social Studies Standards (2011)</a>
+            </h3>
         </header>
     </section>
 
     <section>
         <header>1. Citizen and Government</header>
-        <div>0.1.1.1.1 Demonstrate civic skills in a classroom that reflect an understanding of civic values.</div>
-        <div>@Html.ActionLink("0.1.2.2.1", MVC.Search.Search("STD-Social Studies 0.1.2.2.1")) Describe symbols, songs and traditions that identify our nation and state.</div>
-        <div>0.1.4.8.1 Identify examples of rules in the school community and explain why they exist; describe incentives for following rules and consequences for breaking rules.</div>
+        <div>0.1.1.1.1
+            Demonstrate civic skills in a classroom that reflect an understanding of civic values.</div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Social Studies 0.1.2.2.1">0.1.2.2.1</a>
+            Describe symbols, songs and traditions that identify our nation and state.
+        </div>
+        <div>
+            0.1.4.8.1
+            Identify examples of rules in the school community and explain why they exist;
+            describe incentives for following rules and consequences for breaking rules.
+        </div>
     </section>
 
     <section>
         <header>2. Economics</header>
-        <div>0.2.1.1.1 Distinguish between individual needs (conditions necessary to survive) and individual wants (conditions desired to be happy).</div>
-        <div>@Html.ActionLink("0.2.1.1.2", MVC.Search.Search("STD-Social Studies 0.2.1.1.2")) Identify goods and services that could satisfy a specific need or want.</div>
-        <div>@Html.ActionLink("0.2.3.5.1", MVC.Search.Search("STD-Social Studies 0.2.3.5.1")) Distinguish between goods (objects that can be seen or touched) and services (actions or activities).</div>
+        <div>
+            0.2.1.1.1
+            Distinguish between individual needs (conditions necessary to survive)
+            and individual wants (conditions desired to be happy).
+        </div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Social Studies 0.2.1.1.2">0.2.1.1.2</a>
+            Identify goods and services that could satisfy a specific need or want.
+        </div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Social Studies 0.2.3.5.1">0.2.3.5.1</a>
+            Distinguish between goods (objects that can be seen or touched) and services (actions or activities).
+        </div>
     </section>
 
     <section>
         <header>3. Geography</header>
-        <div>@Html.ActionLink("0.3.1.1.1", MVC.Search.Search("STD-Social Studies 0.3.1.1.1")) Describe special information depicted in simple drawings and pictures. (Read: @Html.ActionLink("prepositions", MVC.Category.CategoryDetails("Prepositions")))</div>
-        <div>@Html.ActionLink("0.3.1.1.2", MVC.Search.Search("STD-Social Studies 0.3.1.1.2")) Describe a map and a globe as a representation of space.</div>
-        <div>@Html.ActionLink("0.3.2.3.1", MVC.Search.Search("STD-Social Studies 0.3.2.3.1")) Identify the physical and human characteristics of places, including real and imagined places. (Physical: landforms, bodies of water, soil, vegetation, weather, climate; Human: structures, bridges, cities, political boundaries, language, ethnicity, nationality, religion)</div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Social Studies 0.3.1.1.1">0.3.1.1.1</a>
+            Describe special information depicted in simple drawings and pictures.
+            (Read:
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Prepositions">prepositions</a>)
+        </div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Social Studies 0.3.1.1.2">0.3.1.1.2</a>
+            Describe a map and a globe as a representation of space.
+        </div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Social Studies 0.3.2.3.1">0.3.2.3.1</a>
+            Identify the physical and human characteristics of places, including real and imagined places.
+            (Physical: landforms, bodies of water, soil, vegetation, weather, climate;
+            Human: structures, bridges, cities, political boundaries, language, ethnicity, nationality, religion)
+        </div>
     </section>
 
     <section>
         <header>4. History</header>
-        <div>@Html.ActionLink("0.4.1.1.1", MVC.Search.Search("STD-Social Studies 0.4.1.1.1")) Use a variety of words to reference time in the past, present and future; identify the beginning, middle, and end of historical stories. (Language: yesterday, today, tomorrow, morning, afternoon, days, weeks, months, years)</div>
-        <div>0.4.1.2.1 Describe ways people learn about the past.</div>
-        <div>0.4.2.4.1 Compare and contrast traditions in a family with those of other families, including those from diverse backgrounds.</div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Social Studies 0.4.1.1.1">0.4.1.1.1</a>
+            Use a variety of words to reference time in the past, present and future;
+            identify the beginning, middle, and end of historical stories.
+            (Language: yesterday, today, tomorrow, morning, afternoon, days, weeks, months, years)
+        </div>
+        <div>
+            0.4.1.2.1
+            Describe ways people learn about the past.
+        </div>
+        <div>
+            0.4.2.4.1
+            Compare and contrast traditions in a family with those of other families,
+            including those from diverse backgrounds.
+        </div>
     </section>
 </article>
 
 <article id="k-science" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm" target="_blank">Kindergarten MN Science Standards (2010)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm"
+               target="_blank">Kindergarten MN Science Standards (2010)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. The Nature of Science and Engineering</header>
-        <div>0.1.1.2.1 Use observations to develop an accurate description of a natural phenomenon and compare one’s observations and descriptions with those of others.</div>
-        <div>@Html.ActionLink("0.1.2.1.1", MVC.Search.Search("STD-Science 0.1.2.1.1")) Sort objects in to two groups: those that are found in nature and those that are human made. For example: Cars, pencils, trees, rocks.</div>
+        <div>
+            0.1.1.2.1
+            Use observations to develop an accurate description of a natural phenomenon
+            and compare one’s observations and descriptions with those of others.
+        </div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Science 0.1.2.1.1">0.1.2.1.1</a>
+            Sort objects in to two groups: those that are found in nature and those that are human made.
+            For example: Cars, pencils, trees, rocks.
+        </div>
     </section>
 
     <section>
         <header>2. Physical Science</header>
-        <div>@Html.ActionLink("0.2.1.1.1", MVC.Search.Search("STD-Science 0.2.1.1.1")) Sort objects in terms of @Html.ActionLink("color", MVC.Category.CategoryDetails("colors")), @Html.ActionLink("size", MVC.Category.CategoryDetails("Sizes")), @Html.ActionLink("shape", MVC.Search.Search("Shapes")), and texture, and communicate reasoning for the sorting system.</div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Science 0.2.1.1.1">0.2.1.1.1</a>
+            Sort objects in terms of
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Colors">color</a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="Sizes">size</a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="Shapes">shape</a>
+            and texture, and communicate reasoning for the sorting system.
+        </div>
     </section>
 
     <section>
         <header>3. Earth Science</header>
-        <div>0.3.2.2.1 Monitor daily and seasonal changes in @Html.ActionLink("weather", MVC.Category.CategoryDetails("Weather")) and summarize the changes. For example: Recording cloudiness, rain, snow and temperature.</div>
-        <div>0.3.2.2.2 Identify the sun as a source of heat and light. For example: Record the time of day when the sun shines into different locations of the school and note patterns.</div>
+        <div>
+            0.3.2.2.1
+            Monitor daily and seasonal changes in
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Weather">weather</a>
+            and summarize the changes.
+            For example: Recording cloudiness, rain, snow and temperature.
+        </div>
+        <div>
+            0.3.2.2.2
+            Identify the sun as a source of heat and light.
+            For example: Record the time of day when the sun shines
+            into different locations of the school and note patterns.
+        </div>
     </section>
 
     <section>
         <header>4. Life Science</header>
-        <div>@Html.ActionLink("0.4.1.1.1", MVC.Search.Search("STD-Science 0.4.1.1.1")) Observe and compare @Html.ActionLink("plants", MVC.Category.CategoryDetails("Garden")) and @Html.ActionLink("animals", MVC.Category.CategoryDetails("Animals")).</div>
-        <div>@Html.ActionLink("0.4.1.1.2", MVC.Search.Search("STD-Science 0.4.1.1.2")) Identify the external parts of a variety of @Html.ActionLink("plants", MVC.Category.CategoryDetails("Garden")) and @Html.ActionLink("animals", MVC.Category.CategoryDetails("Animals")) including humans. For example: Heads, legs, eyes and ears on humans and animals, flowers, stems and roots on many plants.</div>
-        <div>@Html.ActionLink("0.4.1.1.3", MVC.Search.Search("STD-Science 0.4.1.1.3")) Differentiate between living and nonliving things. For example: Sort organisms and objects (or pictures of these) into groups of those that grow, and reproduce, and need air, food, and water; and those that don't.</div>
-        <div>0.4.2.1.1 Observe a natural system or its model, and identify living and nonliving components in that system. For example: A wetland, prairie, garden or aquarium</div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Science 0.4.1.1.1">0.4.1.1.1</a>
+            Observe and compare
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Garden">plants</a>
+            and
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Animals">animals</a>.
+        </div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Science 0.4.1.1.2">0.4.1.1.2</a>
+            Identify the external parts of a variety of
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Garden">plants</a>
+            and
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Animals">animals</a>
+            including humans.
+            For example: Heads, legs, eyes and ears on humans and animals,
+            flowers, stems and roots on many plants.
+        </div>
+        <div>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="STD-Science 0.4.1.1.3">0.4.1.1.3</a>
+            Differentiate between living and nonliving things.
+            For example: Sort organisms and objects (or pictures of these) into groups of those that grow,
+            and reproduce, and need air, food, and water; and those that don't.
+        </div>
+        <div>
+            0.4.2.1.1
+            Observe a natural system or its model, and identify
+            living and nonliving components in that system.
+            For example: A wetland, prairie, garden or aquarium.
+        </div>
     </section>
 </article>
 
@@ -135,51 +238,147 @@
 
 <article id="1-social-studies" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank">1st Grade MN Social Studies Standards (2011)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html"
+               target="_blank">1st Grade MN Social Studies Standards (2011)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. Citizenship and Government</header>
-        <div>1.1.1.1.1 Demonstrate ways good citizens participate in the civic life of their community; explain why participation is important. (For example: Ways to participate—pick up trash in park, vote, help make class decisions.)</div>
-        <div>1.1.2.2.1 Explain why and when the Pledge of Allegiance is recited; provide examples of basic @Html.ActionLink("flag", MVC.Search.Search("flag")) etiquette.</div>
-        <div>1.1.4.7.1 Identify the president of the United States; explain that the president is elected by the people.</div>
-        <div>1.1.4.8.1 Identify characteristics of effective rules; participate in a process to establish rules.(For example: Characteristics of effective rules—fair, understandable, enforceable, connected to goals.)</div>
+        <div>
+            1.1.1.1.1
+            Demonstrate ways good citizens participate in the civic life of their community;
+            explain why participation is important.
+            (For example: Ways to participate—pick up trash in park, vote, help make class decisions.)
+        </div>
+        <div>
+            1.1.2.2.1
+            Explain why and when the Pledge of Allegiance is recited; provide examples of basic
+            <a asp-controller="Search" asp-action="Search" asp-route-q="flag">flag</a>
+            etiquette.
+        </div>
+        <div>
+            1.1.4.7.1
+            Identify the president of the United States; explain that the president is elected by the people.
+        </div>
+        <div>
+            1.1.4.8.1
+            Identify characteristics of effective rules; participate in a process to establish rules.
+            (For example: Characteristics of effective rules—fair, understandable, enforceable, connected to goals.)
+        </div>
     </section>
 
     <section>
         <header>2. Economics</header>
-        <div>1.2.1.1.1 Describe some costs and benefits of alternative choices made by families.</div>
-        <div>1.2.3.3.1 Define scarcity as not having enough of something to satisfy everyone's wants; give examples. For example: Having only three desks for four students; not having enough time to do everything you want; not having enough money to buy all the goods you want.</div>
+        <div>
+            1.2.1.1.1
+            Describe some costs and benefits of alternative choices made by families.
+        </div>
+        <div>
+            1.2.3.3.1
+            Define scarcity as not having enough of something to satisfy everyone's wants; give examples.
+            For example: Having only three desks for four students; not having enough time to do everything you want;
+            not having enough money to buy all the goods you want.
+        </div>
     </section>
 
     <section>
         <header>3. Geography</header>
-        <div>1.3.1.1.1 Create sketch maps to illustrate spatial information about familiar places; describe spatial information found on maps. (For example: Spatial information—cities, roads, boundaries, bodies of water, regions. Familiar places—one’s home or classroom.)</div>
-        <div>1.3.1.1.2 Use relative location words and absolute location words to identify the location of a specific place; explain why or when it is important to use absolute versus relative location. (For example: Relative location words—near, far, left, right. (Read: @Html.ActionLink("Prepositions", MVC.Category.CategoryDetails("prepositions"))) Absolute location words—street address (important for emergencies, mail).</div>
-        <div>1.3.2.3.1 Compare physical and human characteristics of a local place and a place far away on a globe or map (such as a place in an equatorial or polar region). (Physical: landforms, bodies of water, soil, vegetation, weather, climate; Human: structures, bridges, cities, political boundaries, language, ethnicity, nationality, religion)</div>
+        <div>
+            1.3.1.1.1
+            Create sketch maps to illustrate spatial information about familiar places;
+            describe spatial information found on maps.
+            (For example: Spatial information—cities, roads, boundaries, bodies of water, regions.
+            Familiar places—one’s home or classroom.)
+        </div>
+        <div>
+            1.3.1.1.2
+            Use relative location words and absolute location words
+            to identify the location of a specific place;
+            explain why or when it is important to use absolute versus relative location.
+            (For example: Relative location words—near, far, left, right.)
+            (Read:
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Prepositions">Prepositions</a>.
+            Absolute location words—street address (important for emergencies, mail).
+        </div>
+        <div>
+            1.3.2.3.1
+            Compare physical and human characteristics of a local place
+            and a place far away on a globe or map (such as a place in an equatorial or polar region).
+            (Physical: landforms, bodies of water, soil, vegetation, weather, climate;
+            Human: structures, bridges, cities, political boundaries, language, ethnicity, nationality, religion)
+        </div>
     </section>
 
     <section>
         <header>4. History</header>
-        <div>1.4.1.1.1 Create a timeline that identifies at least three events from one's own life. For example: Events—birth, walking, loss of first tooth, first day of school.</div>
-        <div>1.4.1.2.1 Ask basic historical questions about a past event in one's family, school or local community. For example: Basic historical questions—What happened? When did it happen? Who was involved? How and why did it happen? How do we know what happened? What effect did it have?</div>
-        <div>1.4.1.2.2 Describe how people lived at a particular time in the past, based on information found in historical records and artifacts. For example: Historical records—photos, oral histories, diaries/journals, textbooks, library books. Artifacts—art, pottery, baskets, jewelry, tools.</div>
-        <div>1.4.2.4.1 Compare and contrast family life from earlier times and today. For example: Various aspects of family life—housing, clothing, food, language, work, recreation, education.</div>
-        <div> 1.4.2.4.2 Compare and contrast buildings and other technologies from earlier times and today. (For example: Places in earlier times like @Html.ActionLink("Pompeii", MVC.Search.Search("Pompeii")), @Html.ActionLink("Rome", MVC.Search.Search("Rome")), or Athens. Building technologies—arches, domes, glass. Communication technologies—scrolls, books, emails; Transportation technologies—chariot, train, car.)</div>
+        <div>
+            1.4.1.1.1
+            Create a timeline that identifies at least three events from one's own life.
+            For example: Events—birth, walking, loss of first tooth, first day of school.
+        </div>
+        <div>
+            1.4.1.2.1
+            Ask basic historical questions about a past event in one's family, school or local community.
+            For example: Basic historical questions—What happened? When did it happen? Who was involved?
+            How and why did it happen? How do we know what happened? What effect did it have?
+        </div>
+        <div>
+            1.4.1.2.2
+            Describe how people lived at a particular time in the past,
+            based on information found in historical records and artifacts.
+            For example: Historical records—photos, oral histories, diaries/journals, textbooks, library books.
+            Artifacts—art, pottery, baskets, jewelry, tools.
+        </div>
+        <div>
+            1.4.2.4.1
+            Compare and contrast family life from earlier times and today.
+            For example: Various aspects of family life—housing, clothing, food, language, work, recreation, education.
+        </div>
+        <div>
+            1.4.2.4.2
+            Compare and contrast buildings and other technologies from earlier times and today.
+            (For example: Places in earlier times like
+            <a asp-controller="Search" asp-action="Search" asp-route-q="Pompeii">Pompeii</a>,
+            <a asp-controller="Search" asp-action="Search" asp-route-q="Rome">Rome</a>,
+            or Athens.
+            Building technologies—arches, domes, glass. Communication technologies—scrolls, books, emails;
+            Transportation technologies—chariot, train, car.)
+        </div>
     </section>
 </article>
 
 <article id="1-science" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm" target="_blank">1st Grade MN Science Standards (2010)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm"
+               target="_blank">1st Grade MN Science Standards (2010)</a>
+            </h3>
     </header>
 
     <section>
         <header>1. The Nature of Science and Engineering</header>
-        <div>1.1.1.1.1 When asked "How do You Know?", students support their answer with observations. For example: Use observations to tell why a squirrel is a living thing.</div>
-        <div>1.1.1.1.2 Recognize that describing things as accurately as possible is important in science because it enables people to compare their observations with those of others. </div>
-        <div>1.1.3.1.1 Observe that many living and nonliving things are made of parts and that if a part is missing or broken, they may not function properly.</div>
-        <div>1.1.3.2.1 Recognize that tools are used by people, including scientists and engineers, to gather information and solve problems. For example: Magnifier, snowplow, calculator.</div>
+        <div>
+            1.1.1.1.1
+            When asked "How do You Know?", students support their answer with observations.
+            For example: Use observations to tell why a squirrel is a living thing.
+        </div>
+        <div>
+            1.1.1.1.2
+            Recognize that describing things as accurately as possible is important in science
+             because it enables people to compare their observations with those of others.
+        </div>
+        <div>
+            1.1.3.1.1
+            Observe that many living and nonliving things are made of parts
+            and that if a part is missing or broken, they may not function properly.
+        </div>
+        <div>
+            1.1.3.2.1
+            Recognize that tools are used by people, including scientists and engineers,
+            to gather information and solve problems. For example: Magnifier, snowplow, calculator.
+        </div>
     </section>
 
     <section>
@@ -188,18 +387,48 @@
 
     <section>
         <header>3. Earth Science </header>
-        <div>1.3.1.3.1 Group or classify rocks in terms of color, shape and size.</div>
-        <div>1.3.1.3.2 Describe similarities and differences between soil and rocks. For example: Use screens to separate components of soil and observe the samples using a magnifier.</div>
-        <div>1.3.1.3.3 Identify and describe large and small objects made of Earth materials.</div>
+        <div>
+            1.3.1.3.1
+            Group or classify rocks in terms of color, shape and size.
+        </div>
+        <div>
+            1.3.1.3.2
+            Describe similarities and differences between soil and rocks.
+            For example: Use screens to separate components of soil and observe the samples using a magnifier.
+        </div>
+        <div>
+            1.3.1.3.3
+            Identify and describe large and small objects made of Earth materials.
+        </div>
     </section>
 
     <section>
         <header>4. Life Science </header>
-        <div>1.4.1.1.1 Describe and sort animals into groups in many ways, according to their physical characteristics and behaviors.</div>
-        <div>1.4.2.1.1 Recognize that animals need space, water, food, shelter and air.</div>
-        <div>1.4.2.1.2 Describe ways in which an animal's habitat provides for its basic needs. For example: Compare students' houses with animal habitats.</div>
-        <div>1.4.3.1.1 Demonstrate an understanding that animals pass through life cycles that include a beginning, development into adults, reproduction and eventually death. For example: Use live organisms or pictures to observe the changes that occur during the life cycle of butterflies, meal worms or frogs.</div>
-        <div>1.4.3.1.2 Recognize that animals pass through the same life cycle stages as their parents.</div>
+        <div>
+            1.4.1.1.1
+            Describe and sort animals into groups in many ways,
+            according to their physical characteristics and behaviors.
+        </div>
+        <div>
+            1.4.2.1.1
+            Recognize that animals need space, water, food, shelter and air.
+        </div>
+        <div>
+            1.4.2.1.2
+            Describe ways in which an animal's habitat provides for its basic needs.
+            For example: Compare students' houses with animal habitats.
+        </div>
+        <div>
+            1.4.3.1.1
+            Demonstrate an understanding that animals pass through life cycles that include a beginning,
+            development into adults, reproduction and eventually death.
+            For example: Use live organisms or pictures to observe the changes that occur
+            during the life cycle of butterflies, meal worms or frogs.
+        </div>
+        <div>
+            1.4.3.1.2
+            Recognize that animals pass through the same life cycle stages as their parents.
+        </div>
     </section>
 </article>
 
@@ -210,75 +439,207 @@
 
 <article id="2-social-studies" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank">2nd Grade MN Social Studies Standards (2011)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html"
+               target="_blank">2nd Grade MN Social Studies Standards (2011)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. Citizenship and Government</header>
-        <div>2.1.1.1.1 Demonstrate voting skills, identify rules that keep a voting process fair, and explain why voting is important.</div>
-        <div>2.1.2.2.1 Explain the importance of constitutions. For example: Examples of constitutions— a classroom constitution, club charter, the United States Constitution.</div>
-        <div>2.1.4.8.1 Compare and contrast student rules, rights and responsibilities at school with their rules, rights and responsibilities at home; explain the importance of obeying rules.</div>
+        <div>
+            2.1.1.1.1
+            Demonstrate voting skills, identify rules that keep a voting process fair,
+            and explain why voting is important.
+        </div>
+        <div>
+            2.1.2.2.1
+            Explain the importance of constitutions. For example: Examples of constitutions—
+            a classroom constitution, club charter, the United States Constitution.
+        </div>
+        <div>
+            2.1.4.8.1
+            Compare and contrast student rules, rights and responsibilities at school with their rules,
+            rights and responsibilities at home; explain the importance of obeying rules.
+        </div>
     </section>
 
     <section>
         <header>2. Economics</header>
-        <div>2.2.1.1.1 Given a goal and several alternative choices to reach that goal, select the best choice and explain why.</div>
-        <div>2.2.3.3.1 Describe the trade-offs of a decision; describe the opportunity cost of a choice as the next best alternative which was not chosen. </div>
-        <div>2.2.3.5.1 Classify @Html.ActionLink("materials", MVC.Category.CategoryDetails("materials")) that come from nature as natural resources (or raw materials); tools, equipment and factories as capital resources; and workers as human resources.</div>
-        <div>2.2.3.5.2 Identify money as any generally accepted item used in making exchanges.</div>
+        <div>
+            2.2.1.1.1
+            Given a goal and several alternative choices to reach that goal,
+            select the best choice and explain why.
+        </div>
+        <div>
+            2.2.3.3.1
+            Describe the trade-offs of a decision;
+            describe the opportunity cost of a choice as the next best alternative which was not chosen.
+        </div>
+        <div>
+            2.2.3.5.1
+            Classify
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Materials">materials</a>.
+            that come from nature as natural resources (or raw materials);
+             tools, equipment and factories as capital resources; and workers as human resources.
+            </div>
+        <div>
+            2.2.3.5.2
+            Identify money as any generally accepted item used in making exchanges.
+        </div>
     </section>
 
     <section>
         <header>3. Geography</header>
-        <div>2.3.1.1.1 Create sketch maps to illustrate detailed spatial information about settings from stories; describe the spatial information found on the maps. </div>
-        <div>2.3.1.1.2 Locate key features on a map or @Html.ActionLink("globe", MVC.Search.Search("globe")); use cardinal directions to describe the relationship between two or more features. (For example: Key features—city, state, country, continents, the equator, poles, prime meridian, hemisphere, @Html.ActionLink("oceans", MVC.Search.Search("ocean")), major @Html.ActionLink("rivers", MVC.Search.Search("river")), major @Html.ActionLink("mountain", MVC.Search.Search("mountain")) ranges, other types of landforms in the world.)</div>
-        <div>2.3.1.1.3 Use maps, photos or other geographic tools to identify and locate major landmarks or major physical features of the United States. </div>
-        <div>2.3.1.1.4 Use maps, photos, or other geographic tools to answer basic questions about where people are located. </div>
-        <div>2.3.4.9.1 Identify causes and consequences of human impact on the environment and ways that the environment influences people.</div>
+        <div>
+            2.3.1.1.1
+            Create sketch maps to illustrate detailed spatial information about settings from stories;
+            describe the spatial information found on the maps.
+        </div>
+        <div>
+            2.3.1.1.2
+            Locate key features on a map or
+            <a asp-controller="Search" asp-action="Search" asp-route-q="globe">globe</a>;
+            use cardinal directions to describe the relationship between two or more features.
+            (For example: Key features—city, state, country, continents, the equator, poles, prime meridian, hemisphere,
+            <a asp-controller="Search" asp-action="Search" asp-route-q="ocean">oceans</a>, major
+            <a asp-controller="Search" asp-action="Search" asp-route-q="river">rivers</a>, major
+            <a asp-controller="Search" asp-action="Search" asp-route-q="mountain">mountain</a> ranges,
+            other types of landforms in the world.)
+        </div>
+        <div>
+            2.3.1.1.3
+            Use maps, photos or other geographic tools to identify and locate
+            major landmarks or major physical features of the United States.
+        </div>
+        <div>
+            2.3.1.1.4
+            Use maps, photos, or other geographic tools to answer
+            basic questions about where people are located.
+        </div>
+        <div>
+            2.3.4.9.1
+            Identify causes and consequences of human impact on the environment
+            and ways that the environment influences people.
+        </div>
     </section>
 
     <section>
         <header>4. History</header>
-        <div>2.4.1.1.1 Use and create calendars to identify days, weeks, months, years and seasons; use and create timelines to chronicle personal, school, community or world events.</div>
-        <div>2.4.1.2.1 Use historical records and artifacts to describe how people's lives have changed over time. </div>
-        <div>2.4.2.4.1 Compare and contrast daily life for Minnesota Dakota or Anishinaabe peoples in different times, including before European contact and today.</div>
-        <div>2.4.2.4.2 Describe how the culture of a community reflects the history, daily life or beliefs of its people. </div>
+        <div>
+            2.4.1.1.1
+            Use and create calendars to identify days, weeks, months, years and seasons;
+            use and create timelines to chronicle personal, school, community or world events.
+        </div>
+        <div>
+            2.4.1.2.1
+            Use historical records and artifacts to describe how people's lives have changed over time.
+        </div>
+        <div>
+            2.4.2.4.1
+            Compare and contrast daily life for Minnesota Dakota or Anishinaabe peoples in different times,
+            including before European contact and today.
+        </div>
+        <div>
+            2.4.2.4.2
+            Describe how the culture of a community reflects the history, daily life or beliefs of its people.
+        </div>
     </section>
 </article>
 
 <article id="2-science" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm" target="_blank">2nd Grade MN Science Standards (2010)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm"
+               target="_blank">2nd Grade MN Science Standards (2010)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. The Nature of Science and Engineering</header>
-        <div>2.1.1.2.1 Raise questions about the natural world and seek answers by making careful observations, noting what happens when you interact with an object, and sharing the answers with others.</div>
-        <div>2.1.2.2.1 Identify a need or problem and construct an object that helps to meet the need or solve the problem. For example: Design a kite and identify the materials to use.</div>
-        <div>2.1.2.2.2 Describe why some materials are better than others for making a particular object and how materials that are better in some ways may be worse in other ways. For example: Objects made of plastic or glass. </div>
-        <div>2.1.2.2.3 Explain how engineered or designed items from everyday life benefit people.</div>
+        <div>
+            2.1.1.2.1
+            Raise questions about the natural world and seek answers by making careful observations,
+            noting what happens when you interact with an object, and sharing the answers with others.
+        </div>
+        <div>
+            2.1.2.2.1
+            Identify a need or problem and construct an object
+            that helps to meet the need or solve the problem.
+            For example: Design a kite and identify the materials to use.
+        </div>
+        <div>
+            2.1.2.2.2
+            Describe why some materials are better than others
+            for making a particular object and how materials that are better in some ways may be worse in other ways.
+            For example: Objects made of plastic or glass.
+        </div>
+        <div>
+            2.1.2.2.3
+            Explain how engineered or designed items from everyday life benefit people.
+        </div>
     </section>
 
     <section>
         <header>2. Physical Science</header>
-        <div>2.2.1.1.1 Describe objects in terms of color, size, shape, weight, texture, flexibility, strength and the types of materials in the object. </div>
-        <div>2.2.1.2.1 Observe, record, and recognize that water can be a solid or a liquid and can change from one state to another. </div>
-        <div>2.2.2.1.1 Describe an object's change in position relative to other objects or a background. For example: Forward, backward, going up, going down.</div>
-        <div>2.2.2.1.2 Demonstrate that objects move in a variety of ways, including a straight line, a curve, a circle, back and forth, and at different speeds.</div>
-        <div>2.2.2.2.1 Describe how push and pull forces can make objects move. For example: Push and pull objects on smooth and rough surfaces.</div>
-        <div>2.2.2.2.2 Describe how things near Earth fall to the ground unless something holds them up.</div>
+        <div>
+            2.2.1.1.1
+            Describe objects in terms of color, size, shape, weight, texture, flexibility, strength and
+            the types of materials in the object.
+        </div>
+        <div>
+            2.2.1.2.1
+            Observe, record, and recognize that water can be a solid or a liquid
+            and can change from one state to another.
+        </div>
+        <div>
+            2.2.2.1.1
+            Describe an object's change in position relative to other objects or a background.
+            For example: Forward, backward, going up, going down.
+        </div>
+        <div>
+            2.2.2.1.2
+            Demonstrate that objects move in a variety of ways, including
+            a straight line, a curve, a circle, back and forth, and at different speeds.
+        </div>
+        <div>
+            2.2.2.2.1
+            Describe how push and pull forces can make objects move.
+            For example: Push and pull objects on smooth and rough surfaces.
+        </div>
+        <div>
+            2.2.2.2.2
+            Describe how things near Earth fall to the ground unless something holds them up.
+        </div>
     </section>
 
     <section>
         <header>3. Earth Science </header>
-        <div>2.3.2.2.1 Measure, record and describe weather conditions using common tools. For example: Temperature, precipitation, sunrise/sunset, and wind speed/direction.</div>
+        <div>
+            2.3.2.2.1
+            Measure, record and describe weather conditions using common tools.
+            For example: Temperature, precipitation, sunrise/sunset, and wind speed/direction.
+        </div>
     </section>
 
     <section>
         <header>4. Life Science </header>
-        <div>2.4.1.1.1 Describe and sort plants into groups in many ways, according to their physical characteristics and behaviors.</div>
-        <div>2.4.2.1.1 Recognize that plants need space, water, nutrients and air, and that they fulfill these needs in different ways.</div>
-        <div>2.4.3.1.1 Describe the characteristics of plants at different stages of their life cycles. For example: Use live organisms or pictures to observe the changes that occur during the life cycle of bean plants or marigolds.</div>
+        <div>
+            2.4.1.1.1
+            Describe and sort plants into groups in many ways,
+            according to their physical characteristics and behaviors.
+        </div>
+        <div>
+            2.4.2.1.1
+            Recognize that plants need space, water, nutrients and air,
+            and that they fulfill these needs in different ways.
+        </div>
+        <div>
+            2.4.3.1.1
+            Describe the characteristics of plants at different stages of their life cycles.
+            For example: Use live organisms or pictures to observe the changes
+            that occur during the life cycle of bean plants or marigolds.
+        </div>
     </section>
 </article>
 
@@ -289,86 +650,279 @@
 
 <article id="3-social-studies" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank">3rd Grade MN Social Studies Standards (2011)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html"
+               target="_blank">3rd Grade MN Social Studies Standards (2011)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. Citizenship and Government</header>
-        <div>3.1.1.1.1 Identify ways people make a difference in the civic life of their communities, state, nation or world by working as individuals or groups to address a specific problem or need.</div>
-        <div>3.1.2.3.1 Explain the importance of civic discourse (including speaking, listening, voting and respecting diverse viewpoints) and the principles of majority rule and minority rights. </div>
-        <div>3.1.4.7.1 Describe the importance of the services provided by government; explain that they are funded through taxes and fees. (For example: Services— schools, parks, garbage and recycling, street lighting, police protection, roads, interstate waterway navigation, postal service.)</div>
-        <div>3.1.4.7.2 Identify the three branches of government (executive, legislative, and judicial) and their primary functions. </div>
+        <div>
+            3.1.1.1.1
+            Identify ways people make a difference in the civic life of
+            their communities, state, nation or world by working as
+            individuals or groups to address a specific problem or need.
+        </div>
+        <div>
+            3.1.2.3.1
+            Explain the importance of civic discourse
+            (including speaking, listening, voting and respecting diverse viewpoints)
+            and the principles of majority rule and minority rights.
+        </div>
+        <div>
+            3.1.4.7.1
+            Describe the importance of the services provided by government;
+            explain that they are funded through taxes and fees.
+            (For example: Services— schools, parks, garbage and recycling, street lighting, police protection,
+            roads, interstate waterway navigation, postal service.)
+        </div>
+        <div>
+            3.1.4.7.2
+            Identify the three branches of government (executive, legislative, and judicial)
+            and their primary functions.
+        </div>
     </section>
 
     <section>
         <header>2. Economics</header>
-        <div>3.2.1.1.1 Identify possible short- and long-term consequences (costs and benefits) of different choices. </div>
-        <div>3.2.2.2.1 Describe income as the money earned from selling resources and expenditures as the money used to buy goods and services. </div>
-        <div>3.2.3.5.1 Explain that producing any good or service requires resources; describe the resources needed to produce a specific good or service; explain why it is not possible to produce an unlimited amount of a good or service. (For example: natural resources, capital resources, and human resources)</div>
-        <div>3.2.3.5.2 Explain that consumers have two roles—as sellers of resources and buyers of goods and services; explain that producers have two roles—as sellers of goods and services and buyers of resources.</div>
+        <div>
+            3.2.1.1.1
+            Identify possible short- and long-term consequences (costs and benefits) of different choices.
+        </div>
+        <div>
+            3.2.2.2.1
+            Describe income as the money earned from selling resources
+            and expenditures as the money used to buy goods and services.
+        </div>
+        <div>
+            3.2.3.5.1
+            Explain that producing any good or service requires resources;
+            describe the resources needed to produce a specific good or service;
+            explain why it is not possible to produce an unlimited amount of a good or service.
+            (For example: natural resources, capital resources, and human resources)
+        </div>
+        <div>
+            3.2.3.5.2
+            Explain that consumers have two roles—as sellers of resourcesand buyers of goods and services;
+            explain that producers have two roles—as sellers of goods and services and buyers of resources.
+        </div>
     </section>
 
         <section>
         <header>3. Geography</header>
-        <div>3.3.1.1.1 Use maps and concepts of location (relative location words and cardinal and intermediate directions) to describe places in one’s community, the state of Minnesota, the United States or the world.</div>
-        <div>3.3.1.1.2 Create and interpret simple maps of places around the world, local to global; incorporate the "TODALS" map basics, as well as points, lines and colored areas to display spatial information. (For example: Global places—country, continent, ocean. "TODALS" map basics—title, orientation, date, author, legend (key), and scale. Local places—city, village. Spatial information—cities, roads, boundaries, bodies of water, regions.)</div>
-        <div>3.3.3.6.1 Identify landforms and patterns in population; explain why human populations are unevenly distributed around the world. (For example: Mountainous and arid places tend to have less population than coastal places.)</div>
-        <div>3.3.3.8.1 Identify physical and human features that act as boundaries or dividers; give examples of situations or reasons why people have made or used boundaries. (For example: Physical features—@Html.ActionLink("mountains",MVC.Search.Search("mountains")), @Html.ActionLink("rivers",MVC.Search.Search("rivers")), bodies of water. Human-made features—@Html.ActionLink("fences",MVC.Search.Search("fence")), @Html.ActionLink("hedges",MVC.Search.Search("hedges")), political boundaries.)</div>
+        <div>
+            3.3.1.1.1
+            Use maps and concepts of location
+            (relative location words and cardinal and intermediate directions)
+            to describe places in one’s community, the state of Minnesota, the United States or the world.
+        </div>
+        <div>
+            3.3.1.1.2
+            Create and interpret simple maps of places around the world, local to global;
+            incorporate the "TODALS" map basics, as well as points,
+            lines and colored areas to display spatial information.
+            (For example: Global places—country, continent, ocean. "TODALS" map basics—title, orientation,
+            date, author, legend (key), and scale. Local places—city, village. Spatial information—cities,
+            roads, boundaries, bodies of water, regions.)
+        </div>
+        <div>
+            3.3.3.6.1
+            Identify landforms and patterns in population;
+            explain why human populations are unevenly distributed around the world.
+            (For example: Mountainous and arid places tend to have less population than coastal places.)
+        </div>
+        <div>
+            3.3.3.8.1 Identify physical and human features that act as boundaries or dividers;
+            give examples of situations or reasons why people have made or used boundaries.
+            (For example: Physical features—
+            <a asp-controller="Search" asp-action="Search" asp-route-q="mountains">mountains</a>,
+            <a asp-controller="Search" asp-action="Search" asp-route-q="rivers">rivers</a>,
+            bodies of water. Human-made features—
+            <a asp-controller="Search" asp-action="Search" asp-route-q="fence">fences</a>,
+            <a asp-controller="Search" asp-action="Search" asp-route-q="hedges">hedges</a>,
+            political boundaries.)
+        </div>
     </section>
 
     <section>
         <header>4. History</header>
-        <div>3.4.1.1.1 Reference different time periods using correct terminology, including the terms decade, century and millennium. </div>
-        <div>3.4.1.1.2 Create timelines of important events in three different time scales—decades, centuries and millennia.</div>
-        <div>3.4.1.2.1 Examine historical records, maps and artifacts to answer basic questions about times and events in history, both ancient and more recent. </div>
-        <div>3.4.1.2.2 Compare and contrast two different accounts of an event. (For example: Event—a playground conflict, current event, historic event. )</div>
-        <div>3.4.1.2.3 Compare and contrast various ways that different cultures have expressed concepts of time and space.</div>
-        <div>3.4.1.3.1 Explain how an invention of the past changed life at that time, including positive, negative and unintended outcomes.</div>
-        <div>3.4.2.5.1 Identify examples of individuals or groups who have had an impact on world history; explain how their actions helped shape the world around them.</div>
-        <div>3.4.3.7.1 Explain how the environment influenced the settlement of ancient peoples in three different regions of the world. (Early Civilizations and the Emergence of Pastoral Peoples: 8000 BCE-2000 BCE)</div>
-        <div>3.4.3.8.1 Identify methods of communication used by peoples living in ancient times in three different regions of the world. (Classical Traditions, Belief Systems and Giant Empires: 2000 BCE- 600 CE) </div>
-        <div>3.4.3.9.1 Compare and contrast daily life for people living in ancient times in at least three different regions of the world. (Post-Classical and Medieval Civilizations and Expanding Zones of Exchange: 600 CE – 1450 CE)</div>
+        <div>
+            3.4.1.1.1 Reference different time periods using correct terminology,
+            including the terms decade, century and millennium.
+        </div>
+        <div>
+            3.4.1.1.2
+            Create timelines of important events
+            in three different time scales—decades, centuries and millennia.
+        </div>
+        <div>
+            3.4.1.2.1
+            Examine historical records, maps and artifacts to answer
+            basic questions about times and events in history, both ancient and more recent.
+        </div>
+        <div>
+            3.4.1.2.2
+            Compare and contrast two different accounts of an event.
+            (For example: Event—a playground conflict, current event, historic event.)
+        </div>
+        <div>
+            3.4.1.2.3
+            Compare and contrast various ways that different cultures
+            have expressed concepts of time and space.
+        </div>
+        <div>
+            3.4.1.3.1
+            Explain how an invention of the past changed life at that time,
+            including positive, negative and unintended outcomes.
+        </div>
+        <div>
+            3.4.2.5.1
+            Identify examples of individuals or groups who have had an impact on world history;
+            explain how their actions helped shape the world around them.
+        </div>
+        <div>
+            3.4.3.7.1
+            Explain how the environment influenced the settlement
+            of ancient peoples in three different regions of the world.
+            (Early Civilizations and the Emergence of Pastoral Peoples: 8000 BCE-2000 BCE)
+        </div>
+        <div>
+            3.4.3.8.1
+            Identify methods of communication used by peoples living
+            in ancient times in three different regions of the world.
+            (Classical Traditions, Belief Systems and Giant Empires: 2000 BCE- 600 CE)
+        </div>
+        <div>
+            3.4.3.9.1
+            Compare and contrast daily life for people living
+            in ancient times in at least three different regions of the world.
+            (Post-Classical and Medieval Civilizations and Expanding Zones of Exchange: 600 CE – 1450 CE)
+        </div>
     </section>
 </article>
 
 <article id="3-science" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm" target="_blank">3rd Grade MN Science Standards (2010)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm"
+               target="_blank">3rd Grade MN Science Standards (2010)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. The Nature of Science and Engineering</header>
-        <div>3.1.1.1.1 Provide evidence to support claims, other than saying "Everyone knows that," or "I just know," and question such reasons when given by others.</div>
-        <div>3.1.1.2.1 Generate questions that can be answered when scientific knowledge is combined with knowledge gained from one's own observations or investigations. For example: Investigate the sounds produced by striking various objects.</div>
-        <div>3.1.1.2.2 Recognize that when a science investigation is done the way it was done before, even in a different place, a similar result is expected. </div>
-        <div>3.1.1.2.3 Maintain a record of observations, procedures and explanations, being careful to distinguish between actual observations and ideas about what was observed. For example: Make a chart comparing observations about the structures of plants and animals.</div>
-        <div>3.1.1.2.4 Construct reasonable explanations based on evidence collected from observations or experiments.</div>
-        <div>3.1.3.2.1 Understand that everybody can use evidence to learn about the natural world, identify patterns in nature, and develop tools. </div>
-        <div>3.1.3.2.2 Recognize that the practice of science and/or engineering involves many different kinds of work and engages men and women of all ages and backgrounds.</div>
-        <div>3.1.3.4.1 Use tools, including rulers, thermometers, magnifiers and simple balance, to improve observations and keep a record of the observations made.</div>
+        <div>
+            3.1.1.1.1
+            Provide evidence to support claims, other than saying "Everyone knows that,"
+            or "I just know," and question such reasons when given by others.
+        </div>
+        <div>
+            3.1.1.2.1
+            Generate questions that can be answered when scientific knowledge
+            is combined with knowledge gained from one's own observations or investigations.
+            For example: Investigate the sounds produced by striking various objects.
+        </div>
+        <div>
+            3.1.1.2.2
+            Recognize that when a science investigation is done the way it was done before,
+            even in a different place, a similar result is expected.
+        </div>
+        <div>
+            3.1.1.2.3
+            Maintain a record of observations, procedures and explanations,
+            being careful to distinguish between actual observations and ideas about what was observed.
+            For example: Make a chart comparing observations about the structures of plants and animals.
+        </div>
+        <div>
+            3.1.1.2.4
+            Construct reasonable explanations based on evidence collected from observations or experiments.
+        </div>
+        <div>
+            3.1.3.2.1
+            Understand that everybody can use evidence to learn about the natural world,
+            identify patterns in nature, and develop tools.
+        </div>
+        <div>
+            3.1.3.2.2
+            Recognize that the practice of science and/or engineering
+            involves many different kinds of work and engages men and women of all ages and backgrounds.
+        </div>
+        <div>
+            3.1.3.4.1
+            Use tools, including rulers, thermometers, magnifiers and simple balance,
+            to improve observations and keep a record of the observations made.
+        </div>
     </section>
 
     <section>
         <header>2. Physical Science</header>
-        <div>3.2.3.1.1 Explain the relationship between the pitch of a sound, the rate of vibration of the source, and factors that affect pitch. For example: Changing the length of a string that is plucked changes the pitch.</div>
-        <div>3.2.3.1.2 Explain how shadows form and can change in various ways.</div>
-        <div>3.2.3.1.3 Describe how light travels in a straight line until it is absorbed, redirected, reflected or allowed to pass through an object. For example: Use a flashlight, mirrors and water to demonstrate reflection and bending of light.</div>
+        <div>
+            3.2.3.1.1
+            Explain the relationship between the pitch of a sound,
+            the rate of vibration of the source, and factors that affect pitch.
+            For example: Changing the length of a string that is plucked changes the pitch.
+        </div>
+        <div>
+            3.2.3.1.2
+            Explain how shadows form and can change in various ways.
+        </div>
+        <div>
+            3.2.3.1.3
+            Describe how light travels in a straight line until it is absorbed,
+            redirected, reflected or allowed to pass through an object.
+            For example: Use a flashlight, mirrors and water to demonstrate reflection and bending of light.
+        </div>
     </section>
-    
+
     <section>
         <header>3. Earth Science </header>
-        <div>3.3.3.1.1 Observe and describe the daily and seasonal changes in the position of the sun and compare observations.</div>
-        <div>3.3.3.1.2 Recognize the pattern of apparent changes in the moon's shape and position.</div>
-        <div>3.3.3.2.1 Demonstrate how a large light source at a great distance looks like a small light that is much closer. For example: Car headlights at a distance look small compared to when they are close.</div>
-        <div>3.3.3.2.2 Recognize that the Earth is one of several planets that orbit the sun, and that the moon orbits the Earth.</div>
+        <div>
+            3.3.3.1.1
+            Observe and describe the daily and seasonal changes
+            in the position of the sun and compare observations.
+        </div>
+        <div>
+            3.3.3.1.2
+            Recognize the pattern of apparent changes in the moon's shape and position.
+        </div>
+        <div>
+            3.3.3.2.1
+            Demonstrate how a large light source at a great distance
+            looks like a small light that is much closer.
+            For example: Car headlights at a distance look small compared to when they are close.
+        </div>
+        <div>
+            3.3.3.2.2
+            Recognize that the Earth is one of several planets
+            that orbit the sun, and that the moon orbits the Earth.
+        </div>
     </section>
 
     <section>
         <header>4. Life Science </header>
-        <div>3.4.1.1.1 Compare how the different structures of plants and animals serve various functions of growth, survival and reproduction. For example: Skeletons in animals and stems in plants provide strength and stability. </div>
-        <div>3.4.1.1.2 Identify common groups of plants and animals using observable physical characteristics, structures and behaviors. For example: Sort animals into groups such as mammals and amphibians based on physical characteristics.</div>
-        <div>3.4.3.2.1 Give examples of likenesses between adults and offspring in plants and animals that can be inherited or acquired.</div>
-        <div>3.4.3.2.2 Give examples of differences among individuals that can sometimes give an individual an advantage in survival and reproduction.</div>
+        <div>
+            3.4.1.1.1
+            Compare how the different structures of plants
+            and animals serve various functions of growth, survival and reproduction.
+            For example: Skeletons in animals and stems in plants provide strength and stability.
+        </div>
+        <div>
+            3.4.1.1.2
+            Identify common groups of plants and animals
+            using observable physical characteristics, structures and behaviors.
+            For example: Sort animals into groups such as mammals and amphibians based on physical characteristics.
+        </div>
+        <div>
+            3.4.3.2.1
+            Give examples of likenesses between adults and
+            offspring in plants and animals that can be inherited or acquired.
+        </div>
+        <div>
+            3.4.3.2.2
+            Give examples of differences among individuals
+            that can sometimes give an individual an advantage in survival and reproduction.
+        </div>
     </section>
 </article>
 
@@ -379,85 +933,246 @@
 
 <article id="4-social-studies" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank">4th Grade MN Social Studies Standards (2011)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html"
+               target="_blank">4th Grade MN Social Studies Standards (2011)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. Citizenship and Government</header>
-        <div>4.1.1.1.1 Describe how people take action to influence a decision on a specific issue; explain how local, state, national or tribal governments have addressed that issue. </div>
-        <div>4.1.4.7.1 Describe tribal government and some of the services it provides; distinguish between United States and tribal forms of government. </div>
-        <div>4.1.4.7.2 Identify the major roles and responsibilities of elected and appointed leaders in the community, state and nation; name some current leaders who function in these roles and how they are selected.</div>
+        <div>
+            4.1.1.1.1
+            Describe how people take action to influence a decision on a specific issue;
+            explain how local, state, national or tribal governments have addressed that issue.
+        </div>
+        <div>
+            4.1.4.7.1
+            Describe tribal government and some of the services it provides;
+            distinguish between United States and tribal forms of government.
+        </div>
+        <div>
+            4.1.4.7.2
+            Identify the major roles and responsibilities of
+            elected and appointed leaders in the community, state and nation;
+            name some current leaders who function in these roles and how they are selected.
+        </div>
     </section>
 
     <section>
         <header>2. Economics</header>
-        <div>4.2.1.1.1 Apply a reasoned decision-making process to make a choice.</div>
-        <div>4.2.3.3.1 Define the productivity of a resource and describe ways to increase it.</div>
-        <div>4.2.3.5.1 Describe a market as any place or manner in which buyers and sellers interact to make exchanges; describe prices as payments of money for items exchanged in markets.</div>
+        <div>
+            4.2.1.1.1
+            Apply a reasoned decision-making process to make a choice.
+        </div>
+        <div>
+            4.2.3.3.1
+            Define the productivity of a resource and describe ways to increase it.
+        </div>
+        <div>
+            4.2.3.5.1
+            Describe a market as any place or manner in which buyers and sellers interact to make exchanges;
+            describe prices as payments of money for items exchanged in markets.
+        </div>
     </section>
 
     <section>
         <header>3. Geography</header>
-        <div>4.3.1.1.1 Create and use various kinds of maps, including overlaying thematic maps, of places in the United States, and also Canada or Mexico; incorporate the "TODALS" map basics, as well as points, lines and colored areas to display spatial information.</div>
-        <div>4.3.1.1.2 Use latitude and longitude on maps and globes to locate places in the United States, and also Canada or Mexico. </div>
-        <div>4.3.1.2.1 Choose the most appropriate data from maps, charts, and graphs in an atlas to answer specific questions about geographic issues in the United States, and also Canada or Mexico.</div>
-        <div>4.3.1.2.2 Use photographs or satellite-produced images to interpret spatial information about the United States, and also Canada or Mexico. </div>
-        <div>4.3.2.3.1 Locate and identify the physical and human characteristics of places in the United States, and also Canada or Mexico.</div>
-        <div>4.3.2.4.1 Name and locate states and territories, major cities and state capitals in the United States.</div>
-        <div>4.3.2.4.2 Name and locate countries neighboring the United States and their major cities</div>
-        <div>4.3.3.5.1 Use data to analyze and explain the changing distribution of population in the United States and Canada over the last century.</div>
-        <div>4.3.3.6.1 Explain how geographic factors affect population distribution and the growth of cities in the United States and Canada.</div>
-        <div>4.3.4.9.1 Explain how humans adapt to and/or modify the physical environment and how they are in turn affected by these adaptations and modifications.</div>
-        <div>4.3.4.10.1 Describe how the location of resources and the distribution of people and their various economic activities has created different regions in the United States and Canada.</div>
-        <div>4.3.4.10.2 Analyze the impact of geographic factors on the development of modern agricultural regions in Minnesota and the United States</div>
+        <div>
+            4.3.1.1.1
+            Create and use various kinds of maps, including overlaying thematic maps,
+            of places in the United States, and also Canada or Mexico;
+            incorporate the "TODALS" map basics, as well as points,
+            lines and colored areas to display spatial information.
+        </div>
+        <div>
+            4.3.1.1.2
+            Use latitude and longitude on maps and globes to locate places in the United States,
+            and also Canada or Mexico.
+        </div>
+        <div>
+            4.3.1.2.1
+            Choose the most appropriate data from maps, charts, and graphs
+            in an atlas to answer specific questions about geographic issues in the United States,
+            and also Canada or Mexico.
+        </div>
+        <div>
+            4.3.1.2.2
+            Use photographs or satellite-produced images to interpret
+            spatial information about the United States, and also Canada or Mexico.
+        </div>
+        <div>
+            4.3.2.3.1
+            Locate and identify the physical and human characteristics
+            of places in the United States, and also Canada or Mexico.
+        </div>
+        <div>
+            4.3.2.4.1
+            Name and locate states and territories,
+            major cities and state capitals in the United States.
+        </div>
+        <div>
+            4.3.2.4.2
+            Name and locate countries neighboring the United States and their major cities.
+        </div>
+        <div>
+            4.3.3.5.1
+            Use data to analyze and explain the changing distribution
+            of population in the United States and Canada over the last century.
+        </div>
+        <div>
+            4.3.3.6.1
+            Explain how geographic factors affect population distribution
+            and the growth of cities in the United States and Canada.
+        </div>
+        <div>
+            4.3.4.9.1
+            Explain how humans adapt to and/or modify the physical environment
+            and how they are in turn affected by these adaptations and modifications.
+        </div>
+        <div>
+            4.3.4.10.1
+            Describe how the location of resources and the distribution
+            of people and their various economic activities
+            has created different regions in the United States and Canada.
+        </div>
+        <div>
+            4.3.4.10.2
+            Analyze the impact of geographic factors on the development
+            of modern agricultural regions in Minnesota and the United States.
+        </div>
     </section>
 
     <section>
         <header>4. History</header>
-        <div>4.4.1.2.1 Use maps to compare and contrast a particular region in the United States, and also Canada or Mexico, at different points in time.</div>
-        <div>4.4.2.4.1 Identify and locate on a map or globe the origins of peoples in the local community and state; create a timeline of when different groups arrived; describe why and how they came.</div>
+        <div>
+            4.4.1.2.1
+            Use maps to compare and contrast a particular region in the United States,
+            and also Canada or Mexico, at different points in time.
+        </div>
+        <div>
+            4.4.2.4.1
+            Identify and locate on a map or globe the origins of peoples
+            in the local community and state; create a timeline of when different groups arrived;
+            describe why and how they came.
+        </div>
     </section>
 </article>
 
 <article id="4-science" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm" target="_blank">4th Grade MN Science Standards (2010)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm"
+               target="_blank">4th Grade MN Science Standards (2010)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. The Nature of Science and Engineering</header>
-        <div>4.1.2.1.1 Describe the positive and negative impacts that the designed world has on the natural world as more and more engineered products and services are created and used. </div>
-        <div>4.1.2.2.1 Identify and investigate a design solution and describe how it was used to solve an everyday problem. For example: Investigate different varieties of construction tools.</div>
-        <div>4.1.2.2.2 Generate ideas and possible constraints for solving a problem through engineering design. For example: Design and build an electromagnet to sort steel and aluminum materials for recycling.</div>
-        <div>4.1.2.2.3 Test and evaluate solutions, considering advantages and disadvantages for the engineering solution, and communicate the results effectively.</div>
-        <div>4.1.3.3.1 Describe a situation in which one invention led to other inventions.</div>
+        <div>
+            4.1.2.1.1
+            Describe the positive and negative impacts that the designed world has
+            on the natural world as more and more engineered products and services are created and used.
+        </div>
+        <div>
+            4.1.2.2.1
+            Identify and investigate a design solution and describe
+            how it was used to solve an everyday problem.
+            For example: Investigate different varieties of construction tools.
+        </div>
+        <div>
+            4.1.2.2.2
+            Generate ideas and possible constraints for solving a problem through engineering design.
+            For example: Design and build an electromagnet to sort steel and aluminum materials for recycling.
+        </div>
+        <div>
+            4.1.2.2.3
+            Test and evaluate solutions, considering advantages and disadvantages
+            for the engineering solution, and communicate the results effectively.
+        </div>
+        <div>
+            4.1.3.3.1
+            Describe a situation in which one invention led to other inventions.
+        </div>
     </section>
 
     <section>
         <header>2. Physical Science</header>
-         <div> 4.2.1.1.1 Measure temperature, volume, weight and length using appropriate tools and units.</div>
-         <div> 4.2.1.2.1 Distinguish between solids, liquids and gases in terms of shape and volume. For example: Liquid water changes shape depending on the shape of its container.</div>
-         <div> 4.2.1.2.2 Describe how the states of matter change as a result of heating and cooling. </div>
-         <div> 4.2.3.1.1 Describe the transfer of heat energy when a warm and a cool object are touching or placed near each other.</div>
-         <div> 4.2.3.1.2 Describe how magnets can repel or attract each other and how they attract certain metal objects.</div>
-         <div> 4.2.3.1.3 Compare materials that are conductors and insulators of heat and/or electricity. For example: Glass conducts heat well, but is a poor conductor of electricity.</div>
-         <div> 4.2.3.2.1 Identify several ways to generate heat energy. For example: Burning a substance, rubbing hands together, or electricity flowing through wires. </div>
-         <div> 4.2.3.2.2 Construct a simple electrical circuit using wires, batteries, and light bulbs.</div>
-         <div> 4.2.3.2.3 Demonstrate how an electric current can produce a magnetic force. For example: Construct an electromagnet to pick up paperclips.</div>
+        <div>
+            4.2.1.1.1
+            Measure temperature, volume, weight and length using appropriate tools and units.
+        </div>
+        <div>
+            4.2.1.2.1
+            Distinguish between solids, liquids and gases in terms of shape and volume.
+            For example: Liquid water changes shape depending on the shape of its container.</div>
+         <div>
+            4.2.1.2.2
+            Describe how the states of matter change as a result of heating and cooling.
+        </div>
+        <div>
+            4.2.3.1.1
+            Describe the transfer of heat energy when a warm and a cool object are touching or placed near each other.
+        </div>
+        <div>
+            4.2.3.1.2
+            Describe how magnets can repel or attract each other and how they attract certain metal objects.
+        </div>
+        <div>
+            4.2.3.1.3
+            Compare materials that are conductors and insulators of heat and/or electricity.
+            For example: Glass conducts heat well, but is a poor conductor of electricity.
+        </div>
+        <div>
+            4.2.3.2.1
+            Identify several ways to generate heat energy.
+            For example: Burning a substance, rubbing hands together, or electricity flowing through wires.
+        </div>
+        <div>
+            4.2.3.2.2
+            Construct a simple electrical circuit using wires, batteries, and light bulbs.
+        </div>
+        <div>
+            4.2.3.2.3
+            Demonstrate how an electric current can produce a magnetic force.
+            For example: Construct an electromagnet to pick up paperclips.
+        </div>
     </section>
 
     <section>
         <header>3. Earth Science </header>
-        <div>4.3.1.3.1 Recognize that rocks may be uniform or made of mixtures of different minerals.</div>
-        <div>4.3.1.3.2 Describe and classify minerals based on their physical properties. For example: Streak, luster, hardness, reaction to vinegar.</div>
-        <div>4.3.2.3.1 Identify where water collects on Earth, including atmosphere, ground, and surface water, and describe how water moves through the Earth system using the processes of evaporation, condensation and precipitation.</div>
-        <div>4.3.4.1.1 Describe how the methods people utilize to obtain and use water in their homes and communities can affect water supply and quality.</div>
+        <div>
+            4.3.1.3.1
+            Recognize that rocks may be uniform or made of mixtures of different minerals.
+        </div>
+        <div>
+            4.3.1.3.2
+            Describe and classify minerals based on their physical properties.
+            For example: Streak, luster, hardness, reaction to vinegar.
+        </div>
+        <div>
+            4.3.2.3.1
+            Identify where water collects on Earth, including atmosphere, ground, and surface water,
+            and describe how water moves through the Earth system using the processes
+            of evaporation, condensation and precipitation.
+        </div>
+        <div>
+            4.3.4.1.1
+            Describe how the methods people utilize to obtain and use water
+            in their homes and communities can affect water supply and quality.
+        </div>
     </section>
 
     <section>
         <header>4. Life Science </header>
-        <div>4.4.4.2.1 Recognize that the body has defense systems against germs, including tears, saliva, skin, and blood.</div>
-        <div>4.4.4.2.2 Give examples of diseases that can be prevented by vaccination.</div>
+        <div>
+            4.4.4.2.1
+            Recognize that the body has defense systems against germs, including tears, saliva, skin, and blood.
+        </div>
+        <div>
+            4.4.4.2.2
+            Give examples of diseases that can be prevented by vaccination.
+        </div>
     </section>
 </article>
 
@@ -468,97 +1183,327 @@
 
 <article id="5-social-studies" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html" target="_blank">5th Grade MN Social Studies Standards (2011)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/SocialStudies/index.html"
+               target="_blank">5th Grade MN Social Studies Standards (2011)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. Citizenship and Government</header>
-        <div>5.1.1.1.1 Simulate a historic event to show how civic engagement (voting, civil discourse about controversial issues and civic action) improves and sustains a democratic society, supports the general welfare, and protects the rights of individuals.</div>
-        <div>5.1.1.1.2 Identify a public problem in the school or community, analyze the issue from multiple perspectives, and create an action plan to address it.</div>
-        <div>5.1.2.2.1 Identify historically significant people during the period of the American Revolution; explain how their actions contributed to the development of American political culture</div>
-        <div>5.1.3.5.1 Explain specific protections that the Bill of Rights provides to individuals and the importance of these ten amendments to the ratification of the United States Constitution.</div>
-        <div>5.1.4.7.1 Explain the primary functions of the three branches of government and how the leaders of each branch are selected, as established in the United States Constitution.</div>
-        <div>5.1.4.7.2 Describe how governmental power is limited through the principles of federalism, the separation of powers, and checks and balances.</div>
-        <div>5.1.4.7.3 Identify taxes and fees collected, and services provided, by governments during colonial times; compare these to the taxes and fees collected, and services provided, by the government today.</div>
-        <div>5.1.4.8.1 Explain how law limits the powers of government and the governed, protects individual rights and promotes the general welfare.</div>
+        <div>
+            5.1.1.1.1
+            Simulate a historic event to show how civic engagement
+            (voting, civil discourse about controversial issues and civic action)
+            improves and sustains a democratic society, supports the general welfare,
+            and protects the rights of individuals.
+        </div>
+        <div>
+            5.1.1.1.2
+            Identify a public problem in the school or community, analyze the issue from multiple perspectives,
+            and create an action plan to address it.
+        </div>
+        <div>
+            5.1.2.2.1
+            Identify historically significant people during the period of the American Revolution;
+            explain how their actions contributed to the development of American political culture.
+        </div>
+        <div>
+            5.1.3.5.1
+            Explain specific protections that the Bill of Rights provides to individuals
+            and the importance of these ten amendments to the ratification of the United States Constitution.
+        </div>
+        <div>
+            5.1.4.7.1
+            Explain the primary functions of the three branches of government
+            and how the leaders of each branch are selected, as established in the United States Constitution.
+        </div>
+        <div>
+            5.1.4.7.2
+            Describe how governmental power is limited through the principles of federalism,
+            the separation of powers, and checks and balances.
+        </div>
+        <div>
+            5.1.4.7.3
+            Identify taxes and fees collected, and services provided, by governments during colonial times;
+            compare these to the taxes and fees collected, and services provided, by the government today.
+        </div>
+        <div>
+            5.1.4.8.1
+            Explain how law limits the powers of government and the governed,
+            protects individual rights and promotes the general welfare.
+        </div>
     </section>
 
     <section>
         <header>2. Economics</header>
-        <div>5.2.1.1.1 Apply a decision-making process to identify an alternative choice that could have been made for a historical event; explain the probable impact of that choice.</div>
-        <div>5.2.2.2.1 Describe various uses of income and discuss advantages and disadvantages of each</div>
-        <div>5.2.4.6.1 Describe the concept of profit as the motivation for entrepreneurs; calculate profit as the difference between revenue (from selling goods and services) and cost (payments for resources used).</div>
+        <div>
+            5.2.1.1.1
+            Apply a decision-making process to identify an alternative choice
+            that could have been made for a historical event; explain the probable impact of that choice.
+        </div>
+        <div>
+            5.2.2.2.1
+            Describe various uses of income and discuss advantages and disadvantages of each.
+        </div>
+        <div>
+            5.2.4.6.1
+            Describe the concept of profit as the motivation for entrepreneurs;
+            calculate profit as the difference between revenue (from selling goods and services)
+            and cost (payments for resources used).
+        </div>
     </section>
 
     <section>
         <header>3. Geography</header>
-        <div>5.3.1.1.1 Create and use various kinds of maps, including overlaying thematic maps, of places in the North American colonies; incorporate the "TODALS" map basics, as well as points, lines and colored areas to display spatial information.</div>
-        <div>5.3.1.3.1 Locate and identify the physical and human characteristics of places in the North American colonies.</div>
-        <div>5.3.4.10.1 Explain how geographic factors affected land use in the North American colonies.</div>
+        <div>
+            5.3.1.1.1
+            Create and use various kinds of maps, including overlaying thematic maps,
+            of places in the North American colonies; incorporate the "TODALS" map basics,
+            as well as points, lines and colored areas to display spatial information.
+        </div>
+        <div>
+            5.3.1.3.1
+            Locate and identify the physical and human characteristics of places in the North American colonies.
+        </div>
+        <div>
+            5.3.4.10.1
+            Explain how geographic factors affected land use in the North American colonies.
+        </div>
     </section>
 
     <section>
         <header>4. History</header>
-        <div>5.4.1.1.1 Explain the construct of an era; interpret the connections between three or more events in an era depicted on a timeline or flowchart.</div>
-        <div>5.4.1.2.1 Pose questions about a topic in history, examine a variety of sources related to the questions, interpret findings and use evidence to draw conclusions that address the questions.</div>
-        <div>5.4.1.2.2 Explain a historical event from multiple perspectives</div>
-        <div>5.4.1.3.1 Analyze multiple causes and outcomes of a historical event</div>
-        <div>5.4.4.15.1 Describe complex urban societies that existed in Mesoamerica and North America before 1500. (Before European Contact)</div>
-        <div>5.4.4.16.1 Identify various motivations of Europeans for exploration and settlement in Asia, Africa and the Americas from the fifteenth to early seventeenth centuries. (Colonization and Settlement: 1585-1763)</div>
-        <div>5.4.4.16.2 Describe early interactions between indigenous peoples, Europeans and Africans, including the Columbian Exchange; identify the consequences of those interactions on the three groups. (Colonization and Settlement: 1585-1763)</div>
-        <div>5.4.4.16.3 Identify the role of Europeans and West Africans in the development of the Atlantic slave trade. (Colonization and Settlement: 1585-1763)</div>
-        <div>5.4.4.16.4 Compare and contrast life within the English, French and Spanish colonies in North America. (Colonization and Settlement: 1585-1763)</div>
-        <div>5.4.4.16.5 Describe ways that enslaved people and people in free black communities resisted slavery and transferred, developed and maintained their cultural identities. (Colonization and Settlement: 1585-1763)</div>
-        <div>5.4.4.17.1 Identify major conflicts between the colonies and England following the Seven Years War; explain how these conflicts led to the American Revolution. (Revolution and a New Nation: 1754-1800)</div>
-        <div>5.4.4.17.2 Describe the development of self-governance in the British colonies and explain the influence of this tradition on the American Revolution. (Revolution and a New Nation: 1754-1800)</div>
-        <div>5.4.4.17.3 Identify the major events of the American Revolution culminating in the creation of a new and independent nation. (Revolution and a New Nation: 1754-1800)</div>
-        <div>5.4.4.17.4 Compare and contrast the impact of the American Revolution on different groups within the 13 colonies that made up the new United States. (Revolution and a New Nation: 1754-1800)</div>
-        <div>5.4.4.17.5 Describe the purposes of the founding documents and explain the basic principles of democracy that were set forth in the Declaration of Independence, the Constitution and the Bill of Rights. (Revolution and a New Nation: 1754-1800)</div>
-        <div>5.4.4.17.6 Describe the successes and failures of the national government under the Articles of Confederation and why it was ultimately discarded and replaced with the Constitution. (Revolution and a New Nation: 1754-1800)</div>
-        <div>5.4.4.17.7 Describe the major issues that were debated at the Constitutional Convention. (Revolution and a New Nation: 1754-1800)</div>
+        <div>
+            5.4.1.1.1
+            Explain the construct of an era; interpret the connections between three or more events
+            in an era depicted on a timeline or flowchart.
+        </div>
+        <div>
+            5.4.1.2.1
+            Pose questions about a topic in history, examine a variety of sources related to the questions,
+            interpret findings and use evidence to draw conclusions that address the questions.
+        </div>
+        <div>
+            5.4.1.2.2
+            Explain a historical event from multiple perspectives.
+        </div>
+        <div>
+            5.4.1.3.1
+            Analyze multiple causes and outcomes of a historical event.
+        </div>
+        <div>
+            5.4.4.15.1
+            Describe complex urban societies that existed in Mesoamerica and North America before 1500.
+            (Before European Contact)
+        </div>
+        <div>
+            5.4.4.16.1
+            Identify various motivations of Europeans for exploration and settlement
+            in Asia, Africa and the Americas from the fifteenth to early seventeenth centuries.
+            (Colonization and Settlement: 1585-1763)
+        </div>
+        <div>
+            5.4.4.16.2
+            Describe early interactions between indigenous peoples,
+            Europeans and Africans, including the Columbian Exchange;
+            identify the consequences of those interactions on the three groups.
+            (Colonization and Settlement: 1585-1763)
+        </div>
+        <div>
+            5.4.4.16.3
+            Identify the role of Europeans and West Africans in the development of the Atlantic slave trade.
+            (Colonization and Settlement: 1585-1763)
+        </div>
+        <div>
+            5.4.4.16.4
+            Compare and contrast life within the English, French and Spanish colonies in North America.
+            (Colonization and Settlement: 1585-1763)
+        </div>
+        <div>
+            5.4.4.16.5
+            Describe ways that enslaved people and people in free black communities resisted slavery and transferred,
+            developed and maintained their cultural identities.
+            (Colonization and Settlement: 1585-1763)
+        </div>
+        <div>
+            5.4.4.17.1
+            Identify major conflicts between the colonies and England following the Seven Years War;
+            explain how these conflicts led to the American Revolution.
+            (Revolution and a New Nation: 1754-1800)
+        </div>
+        <div>
+            5.4.4.17.2
+            Describe the development of self-governance in the British colonies
+            and explain the influence of this tradition on the American Revolution.
+            (Revolution and a New Nation: 1754-1800)
+        </div>
+        <div>
+            5.4.4.17.3
+            Identify the major events of the American Revolution culminating
+            in the creation of a new and independent nation.
+            (Revolution and a New Nation: 1754-1800)
+        </div>
+        <div>
+            5.4.4.17.4
+            Compare and contrast the impact of the American Revolution on different groups
+            within the 13 colonies that made up the new United States.
+            (Revolution and a New Nation: 1754-1800)
+        </div>
+        <div>
+            5.4.4.17.5
+            Describe the purposes of the founding documents and explain the basic principles of democracy
+            that were set forth in the Declaration of Independence, the Constitution and the Bill of Rights.
+            (Revolution and a New Nation: 1754-1800)
+        </div>
+        <div>
+            5.4.4.17.6
+            Describe the successes and failures of the national government under
+            the Articles of Confederation and why it was ultimately discarded and replaced with the Constitution.
+            (Revolution and a New Nation: 1754-1800)
+        </div>
+        <div>
+            5.4.4.17.7
+            Describe the major issues that were debated at the Constitutional Convention.
+            (Revolution and a New Nation: 1754-1800)
+        </div>
     </section>
 </article>
 
 <article id="5-science" class="standards">
     <header>
-        <h3><a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm" target="_blank">5th Grade MN Science Standards (2010)</a></h3>
+        <h3>
+            <a href="http://www.education.state.mn.us/MDE/EdExc/StanCurri/K-12AcademicStandards/Science/index.htm"
+               target="_blank">5th Grade MN Science Standards (2010)</a>
+        </h3>
     </header>
 
     <section>
         <header>1. The Nature of Science and Engineering</header>
-        <div>5.1.1.1.1 Explain why evidence, clear communication, accurate record keeping, replication by others, and openness to scrutiny are essential parts of doing science.</div>
-        <div>5.1.1.1.2 Recognize that when scientific investigations are replicated they generally produce the same results, and when results differ significantly, it is important to investigate what may have caused such differences.</div>
-        <div>5.1.1.1.3 Understand that different explanations for the same observations usually lead to making more observations and trying to resolve the differences.</div>
-        <div>5.1.1.1.4 Understand that different models can be used to represent natural phenomena and these models have limitations about what they can explain.</div>
-        <div>5.1.1.2.1 Generate a scientific question and plan an appropriate scientific investigation, such as systematic observations, field studies, open-ended exploration or controlled experiments to answer the question.</div>
-        <div>5.1.1.2.2 Identify and collect relevant evidence, make systematic observations and accurate measurements, and identify variables in a scientific investigation.</div>
-        <div>5.1.1.2.3 Conduct or critique an experiment, noting when the experiment might not be fair because some of the things that might change the outcome are not kept the same, or that the experiment isn't repeated enough times to provide valid results.</div>
-        <div>5.1.3.2.1 Describe how science and engineering influence and are influenced by local traditions and beliefs. For example: Substainable agriculture practices used by many cultures.</div>
-        <div>5.1.3.4.1 Use appropriate tools and techniques in gathering, analyzing and interpreting data. For example: Spring scale, metric measurements, tables, mean/median/range, spreadsheets, and appropriate graphs.</div>
-        <div>5.1.3.4.2 Create and analyze different kinds of maps of the student's community and of Minnesota. For example: Weather maps, city maps, aerial photos, regional maps, or online map resources.</div>
+        <div>
+            5.1.1.1.1
+            Explain why evidence, clear communication, accurate record keeping, replication by others,
+            and openness to scrutiny are essential parts of doing science.
+        </div>
+        <div>
+            5.1.1.1.2
+            Recognize that when scientific investigations are replicated they generally produce the same results,
+            and when results differ significantly,
+            it is important to investigate what may have caused such differences.
+        </div>
+        <div>
+            5.1.1.1.3
+            Understand that different explanations for the same observations
+            usually lead to making more observations and trying to resolve the differences.
+        </div>
+        <div>
+            5.1.1.1.4
+            Understand that different models can be used to represent natural phenomena
+            and these models have limitations about what they can explain.
+        </div>
+        <div>
+            5.1.1.2.1
+            Generate a scientific question and plan an appropriate scientific investigation,
+            such as systematic observations, field studies, open-ended exploration
+            or controlled experiments to answer the question.
+        </div>
+        <div>
+            5.1.1.2.2
+            Identify and collect relevant evidence, make systematic observations and accurate measurements,
+            and identify variables in a scientific investigation.
+        </div>
+        <div>
+            5.1.1.2.3
+            Conduct or critique an experiment, noting when the experiment might not be fair
+            because some of the things that might change the outcome are not kept the same,
+            or that the experiment isn't repeated enough times to provide valid results.
+        </div>
+        <div>
+            5.1.3.2.1
+            Describe how science and engineering influence and are influenced by local traditions and beliefs.
+            For example: Substainable agriculture practices used by many cultures.
+        </div>
+        <div>
+            5.1.3.4.1
+            Use appropriate tools and techniques in gathering, analyzing and interpreting data.
+            For example: Spring scale, metric measurements, tables,
+            mean/median/range, spreadsheets, and appropriate graphs.
+        </div>
+        <div>
+            5.1.3.4.2
+            Create and analyze different kinds of maps of the student's community and of Minnesota.
+            For example: Weather maps, city maps, aerial photos, regional maps, or online map resources.
+        </div>
     </section>
 
     <section>
         <header>2. Physical Science</header>
-        <div>5.2.2.1.1 Give examples of simple machines and demonstrate how they change the input and output of forces and motion.</div>
-        <div>5.2.2.1.2 Identify the force that starts something moving or changes its speed or direction of motion. For example: Friction slows down a moving skateboard.</div>
-        <div>5.2.2.1.3 Demonstrate that a greater force on an object can produce a greater change in motion.</div>
+        <div>
+            5.2.2.1.1
+            Give examples of simple machines and demonstrate how they change the input and output of forces and motion.
+        </div>
+        <div>
+            5.2.2.1.2
+            Identify the force that starts something moving or changes its speed or direction of motion.
+            For example: Friction slows down a moving skateboard.
+        </div>
+        <div>
+            5.2.2.1.3
+            Demonstrate that a greater force on an object can produce a greater change in motion.
+        </div>
     </section>
 
     <section>
         <header>3. Earth Science</header>
-        <div>5.3.1.2.1 Explain how, over time, rocks weather and combine with organic matter to form soil.</div>
-        <div>5.3.1.2.2 Explain how slow processes, such as water erosion, and rapid processes, such as landslides and volcanic eruptions, form features of the Earth's surface.</div>
-        <div>5.3.4.1.1 Identify renewable and non-renewable energy and material resources that are found in Minnesota and describe how they are used. For example: Water, iron ore, granite, sand and gravel, wind, and forests.</div>
-        <div>5.3.4.1.2 Give examples of how mineral and energy resources are obtained and processed and how that processing modifies their properties to make them more useful. For example: Iron ore, biofuels, or coal.</div>
-        <div>5.3.4.1.3 Compare the impact of individual decisions on natural systems. For example: Choosing paper or plastic bags impacts landfills as well as ocean life cycles.</div>
+        <div>
+            5.3.1.2.1
+            Explain how, over time, rocks weather and combine with organic matter to form soil.
+        </div>
+        <div>
+            5.3.1.2.2
+            Explain how slow processes, such as water erosion, and rapid processes,
+            such as landslides and volcanic eruptions, form features of the Earth's surface.
+        </div>
+        <div>
+            5.3.4.1.1
+            Identify renewable and non-renewable energy and material resources that are found
+            in Minnesota and describe how they are used.
+            For example: Water, iron ore, granite, sand and gravel, wind, and forests.
+        </div>
+        <div>
+            5.3.4.1.2
+            Give examples of how mineral and energy resources are obtained and processed
+            and how that processing modifies their properties to make them more useful.
+            For example: Iron ore, biofuels, or coal.
+        </div>
+        <div>
+            5.3.4.1.3
+            Compare the impact of individual decisions on natural systems.
+            For example: Choosing paper or plastic bags impacts landfills as well as ocean life cycles.
+        </div>
     </section>
 
     <section>
         <header>4. Life Science </header>
-        <div>5.4.1.1.1 Describe how plant and animal structures and their functions provide an advantage for survival in a given natural system.</div>
-        <div>5.4.2.1.1 Describe a natural system in Minnesota, such as a wetland, prairie, or garden, in terms of the relationships among its living and nonliving parts, as well as inputs and outputs.</div>
-        <div>5.4.2.1.2 Explain what would happen to a system such as a wetland, prairie or garden if one of its parts were changed.</div>
-        <div>5.4.4.1.1 Give examples of beneficial and harmful human interaction with natural systems. For example: Recreation, pollution, wildlife management.</div>
+        <div>
+            5.4.1.1.1
+            Describe how plant and animal structures and their functions
+            provide an advantage for survival in a given natural system.
+        </div>
+        <div>
+            5.4.2.1.1
+            Describe a natural system in Minnesota, such as a wetland, prairie, or garden,
+            in terms of the relationships among its living and nonliving parts, as well as inputs and outputs.
+        </div>
+        <div>
+            5.4.2.1.2
+            Explain what would happen to a system such as a wetland,
+            prairie or garden if one of its parts were changed.
+        </div>
+        <div>
+            5.4.4.1.1
+            Give examples of beneficial and harmful human interaction with natural systems.
+            For example: Recreation, pollution, wildlife management.
+        </div>
     </section>
 </article>

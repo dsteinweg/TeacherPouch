@@ -28,73 +28,70 @@ namespace TeacherPouch.Controllers
         private readonly IHostingEnvironment _env;
 
         [HttpGet("")]
-        public ViewResult Home()
+        public IActionResult Home()
         {
             return View();
         }
 
         [HttpGet("about")]
-        public ViewResult About()
+        public IActionResult About()
         {
             return View();
         }
 
         [HttpGet("standards")]
-        public ViewResult Standards()
+        public IActionResult Standards()
         {
             return View();
         }
 
         [HttpGet("contact")]
-        public ViewResult Contact()
+        public IActionResult Contact()
         {
             return View(new ContactViewModel());
         }
 
         [HttpPost("contact")]
         [ValidateAntiForgeryToken]
-        public ActionResult Contact(ContactSubmission submission)
+        public IActionResult Contact(ContactViewModel postedViewModel)
         {
             if (ModelState.IsValid)
             {
                 if (_env.IsProduction())
                 {
-                    submission.SendEmail();
+                    //submission.SendEmail();
                 }
             }
             else
             {
-                var viewModel = new ContactViewModel
-                {
-                    ErrorMessage = "You must fill out the form before submitting."
-                };
+                postedViewModel.ErrorMessage = "You must fill out the form before submitting.";
 
-                return View(viewModel);
+                return View(postedViewModel);
             }
 
             return RedirectToAction(nameof(ContactThanks));
         }
 
         [HttpGet("contact/thanks")]
-        public virtual ViewResult ContactThanks()
+        public IActionResult ContactThanks()
         {
             return View();
         }
 
         [HttpGet("license")]
-        public virtual ViewResult License()
+        public IActionResult License()
         {
             return View();
         }
 
         [HttpGet("privacy-policy")]
-        public virtual ViewResult PrivacyPolicy()
+        public IActionResult PrivacyPolicy()
         {
             return View();
         }
 
         [HttpGet("sitemap.xml")]
-        public virtual ContentResult Sitemap()
+        public IActionResult Sitemap()
         {
             var siteMapService = new SiteMapService(_db, _urlHelper);
 
