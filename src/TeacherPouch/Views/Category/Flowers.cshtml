@@ -5,46 +5,65 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/FlowersS.jpg")" class="img-responsive center-block" alt="Flowers">
+            <img src="~/img/flowers.jpg"
+                class="img-responsive center-block"
+                alt="Flowers"
+                asp-append-version="true">
             <h3>Flowers to brighten your day!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("red flowers")"><img src="@Url.VersionedContent("~/img/redflowersS.jpg")" class="img-responsive" alt="Red Flowers"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="red flower" asp-route-op="and">
+                <img src="~/img/red-flowers.jpg" class="img-responsive" alt="Red Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("purple flowers")"><img src="@Url.VersionedContent("~/img/purpleflowersS.jpg")" class="img-responsive" alt="Purple Flowers"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="purple flower" asp-route-op="and">
+                <img src="~/img/purple-flowers.jpg" class="img-responsive" alt="Purple Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("yellow flowers")"><img src="@Url.VersionedContent("~/img/yellowflowersS.jpg")" class="img-responsive" alt="Yellow Flowers"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="yellow flower" asp-route-op="and">
+                <img src="~/img/yellow-flowers.jpg" class="img-responsive" alt="Yellow Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("orange flower")"><img src="@Url.VersionedContent("~/img/orangeflowersS.jpg")" class="img-responsive" alt="Orange Flowers"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="orange flower" asp-route-op="and">
+                <img src="~/img/orange-flowers.jpg" class="img-responsive" alt="Orange Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("white flowers")"><img src="@Url.VersionedContent("~/img/whiteflowersS.jpg")" class="img-responsive" alt="White Flowers"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="white flower" asp-route-op="and">
+                <img src="~/img/white-flowers.jpg" class="img-responsive" alt="White Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("pink flowers")"><img src="@Url.VersionedContent("~/img/pinkflowersS.jpg")" class="img-responsive" alt="Pink Flowers"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="pink flower" asp-route-op="and">
+                <img src="~/img/pink-flowers.jpg" class="img-responsive" alt="Pink Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("bouquet")"><img src="@Url.VersionedContent("~/img/bouquetsS.jpg")" class="img-responsive" alt="Bouquets"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="bouquet">
+                <img src="~/img/bouquets.jpg" class="img-responsive" alt="Bouquets" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("flower")"><img src="@Url.VersionedContent("~/img/allflowersS.jpg")" class="img-responsive" alt="All Flowers"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="flower">
+                <img src="~/img/all-flowers.jpg" class="img-responsive" alt="All Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <img src="@Url.VersionedContent("~/img/morecomingsoonS.jpg")" class="img-responsive" alt="More coming soon...">
+            <img src="~/img/more-coming-soon.jpg" class="img-responsive" alt="More coming soon..." asp-append-version="true">
         </div>
     </div>
 </div>

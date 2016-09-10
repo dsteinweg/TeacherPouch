@@ -5,46 +5,67 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/weatherS.jpg")" class="img-responsive center-block" alt="Weather">
+            <img src="~/img/weather.jpg"
+                class="img-responsive center-block"
+                alt="Weather"
+                asp-append-version="true">
             <h3>What's the weather like today?</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("sunny")"><img src="@Url.VersionedContent("~/img/sunnyS.jpg")" class="img-responsive" alt="Sunny"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="sunny">
+                <img src="~/img/sunny.jpg" class="img-responsive" alt="Sunny" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("cloudy")"><img src="@Url.VersionedContent("~/img/cloudyS.jpg")" class="img-responsive" alt="Cloudy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="cloudy">
+                <img src="~/img/cloudy.jpg" class="img-responsive" alt="Cloudy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("rainy")"><img src="@Url.VersionedContent("~/img/rainyS.jpg")" class="img-responsive" alt="Rainy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="rainy">
+                <img src="~/img/rainy.jpg" class="img-responsive" alt="Rainy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("windy")"><img src="@Url.VersionedContent("~/img/windyS.jpg")" class="img-responsive" alt="Windy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="windy">
+                <img src="~/img/windy.jpg" class="img-responsive" alt="Windy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("foggy")"><img src="@Url.VersionedContent("~/img/foggyS.jpg")" class="img-responsive" alt="Foggy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="foggy">
+                <img src="~/img/foggy.jpg" class="img-responsive" alt="Foggy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("snowy")"><img src="@Url.VersionedContent("~/img/snowyS.jpg")" class="img-responsive" alt="Snowy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="snowy">
+                <img src="~/img/snowy.jpg" class="img-responsive" alt="Snowy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("sunset")"><img src="@Url.VersionedContent("~/img/sunsetS.jpg")" class="img-responsive" alt="Sunset"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="sunset">
+                <img src="~/img/sunset.jpg" class="img-responsive" alt="Sunset" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("sunshine")"><img src="@Url.VersionedContent("~/img/sunshineS.jpg")" class="img-responsive" alt="Sunshine"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="sunshine">
+                <img src="~/img/sunshine.jpg" class="img-responsive" alt="Sunshine" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("weather")"><img src="@Url.VersionedContent("~/img/alltypesofweatherS.jpg")" class="img-responsive" alt="All Types of Weather"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="weather">
+                <img src="~/img/all-types-of-weather.jpg" class="img-responsive" alt="All Types of Weather" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

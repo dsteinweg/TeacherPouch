@@ -5,22 +5,31 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/MathS.jpg")" class="img-responsive center-block" alt="Math">
+            <img src="~/img/math.jpg"
+                class="img-responsive center-block"
+                alt="Math"
+                asp-append-version="true">
             <h3>Time for Math!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("shapes")"><img src="@Url.VersionedContent("~/img/shapesS.jpg")" class="img-responsive" alt="Shapes"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="shapes">
+                <img src="~/img/shapes.jpg" class="img-responsive" alt="Shapes" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("math supplies")"><img src="@Url.VersionedContent("~/img/mathsuppliesS.jpg")" class="img-responsive" alt="Math Supplies"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="math supplies">
+                <img src="~/img/math-supplies.jpg" class="img-responsive" alt="Math Supplies" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Category("numbers")"><img src="@Url.VersionedContent("~/img/NumbersS.jpg")" class="img-responsive" alt="Numbers"></a>
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="numbers">
+                <img src="~/img/numbers.jpg" class="img-responsive" alt="Numbers" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

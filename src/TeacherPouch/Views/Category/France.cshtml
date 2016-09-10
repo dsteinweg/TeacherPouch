@@ -5,22 +5,31 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/FranceS.jpg")" class="img-responsive center-block" alt="France">
+            <img src="~/img/france.jpg"
+                class="img-responsive center-block"
+                alt="France"
+                asp-append-version="true">
             <h3>Bonjour!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("Paris")"><img src="@Url.VersionedContent("~/img/ParisS.jpg")" class="img-responsive" alt="Paris, France"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="paris">
+                <img src="~/img/paris.jpg" class="img-responsive" alt="Paris, France" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("Giverny")"><img src="@Url.VersionedContent("~/img/GivernyS.jpg")" class="img-responsive" alt="Giverny, France"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="giverny">
+                <img src="~/img/giverny.jpg" class="img-responsive" alt="Giverny, France" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("France")"><img src="@Url.VersionedContent("~/img/FranceS.jpg")" class="img-responsive" alt="France"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="france">
+                <img src="~/img/france.jpg" class="img-responsive" alt="France" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

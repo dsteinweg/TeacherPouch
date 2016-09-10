@@ -5,62 +5,91 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/colorsS.jpg")" class="img-responsive center-block" alt="Colors">
+            <img src="~/img/colors.jpg"
+                class="img-responsive center-block"
+                alt="Colors"
+                asp-append-version="true">
             <h3>Teach me the colors!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("red")"><img src="@Url.VersionedContent("~/img/redS.jpg")" class="img-responsive" alt="Red"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="red">
+                <img src="~/img/red.jpg" class="img-responsive" alt="Red" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("yellow")"><img src="@Url.VersionedContent("~/img/yellowS.jpg")" class="img-responsive" alt="Yellow"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="yellow">
+                <img src="~/img/yellow.jpg" class="img-responsive" alt="Yellow" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("orange")"><img src="@Url.VersionedContent("~/img/orangeS.jpg")" class="img-responsive" alt="Orange"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="orange">
+                <img src="~/img/orange.jpg" class="img-responsive" alt="Orange" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("blue")"><img src="@Url.VersionedContent("~/img/blueS.jpg")" class="img-responsive" alt="Blue"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="blue">
+                <img src="~/img/blue.jpg" class="img-responsive" alt="Blue" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("green")"><img src="@Url.VersionedContent("~/img/greenS.jpg")" class="img-responsive" alt="Green"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="green">
+                <img src="~/img/green.jpg" class="img-responsive" alt="Green" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("purple")"><img src="@Url.VersionedContent("~/img/purpleS.jpg")" class="img-responsive" alt="Purple"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="purple">
+                <img src="~/img/purple.jpg" class="img-responsive" alt="Purple" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("black")"><img src="@Url.VersionedContent("~/img/blackS.jpg")" class="img-responsive" alt="Black"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="black">
+                <img src="~/img/black.jpg" class="img-responsive" alt="Black" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("pink")"><img src="@Url.VersionedContent("~/img/pinkS.jpg")" class="img-responsive" alt="Pink"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="pink">
+                <img src="~/img/pink.jpg" class="img-responsive" alt="Pink" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.TagDetails("white")"><img src="@Url.VersionedContent("~/img/whiteS.jpg")" class="img-responsive" alt="White"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="white">
+                <img src="~/img/white.jpg" class="img-responsive" alt="White" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("gray")"><img src="@Url.VersionedContent("~/img/grayS.jpg")" class="img-responsive" alt="Gray"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="gray">
+                <img src="~/img/gray.jpg" class="img-responsive" alt="Gray" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("brown")"><img src="@Url.VersionedContent("~/img/brownS.jpg")" class="img-responsive" alt="Brown"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="brown">
+                <img src="~/img/brown.jpg" class="img-responsive" alt="Brown" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("colorful")"><img src="@Url.VersionedContent("~/img/colorfulS.jpg")" class="img-responsive" alt="Colorful"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="colorful">
+                <img src="~/img/colorful.jpg" class="img-responsive" alt="Colorful" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <a href="@Url.Search("what color")"><img src="@Url.VersionedContent("~/img/whatcolorS.jpg")" class="img-responsive" alt="What Color?"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="what color">
+                <img src="~/img/what-color.jpg" class="img-responsive" alt="What Color?" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

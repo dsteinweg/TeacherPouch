@@ -30,11 +30,11 @@ namespace TeacherPouch.Controllers
             return View(allTags);
         }
 
-        [HttpGet("{tagName}")]
+        [HttpGet("{name}")]
         [AllowAnonymous]
-        public ViewResult TagDetails(string tagName)
+        public ViewResult TagDetails(string name)
         {
-            var tag = _tagService.FindTag(tagName);
+            var tag = _tagService.FindTag(name);
             if (tag != null)
                 return InvokeHttp404();
 

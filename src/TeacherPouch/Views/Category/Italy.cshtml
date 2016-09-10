@@ -5,32 +5,49 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/ItalyS.jpg")" class="img-responsive center-block" alt="Italy">
+            <img src="~/img/italy.jpg"
+                class="img-responsive center-block"
+                alt="Italy"
+                asp-append-version="true">
             <h3>Rome, here we come!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("Florence")"><img src="@Url.VersionedContent("~/img/FlorenceS.jpg")" class="img-responsive" alt="Florence, Italy"></a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("Rome")"><img src="@Url.VersionedContent("~/img/RomeS.jpg")" class="img-responsive" alt="Rome, Italy"></a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("Venice")"><img src="@Url.VersionedContent("~/img/VeniceS.jpg")" class="img-responsive" alt="Venice, Italy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="florence">
+                <img src="~/img/florence.jpg" class="img-responsive" alt="Florence, Italy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("Pompeii")"><img src="@Url.VersionedContent("~/img/PompeiiS.jpg")" class="img-responsive" alt="Pompeii, Italy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="rome">
+                <img src="~/img/rome.jpg" class="img-responsive" alt="Rome, Italy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("Italy")"><img src="@Url.VersionedContent("~/img/ItalyS.jpg")" class="img-responsive" alt="Italy"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="venice">
+                <img src="~/img/venice.jpg" class="img-responsive" alt="Venice, Italy" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Category("Vacation")"><img src="@Url.VersionedContent("~/img/flysomewhereelseS.jpg")" class="img-responsive" alt="Fly Somewhere Else"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="pompeii">
+                <img src="~/img/pompeii.jpg" class="img-responsive" alt="Pompeii, Italy" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Search" asp-action="Search" asp-route-q="italy">
+                <img src="~/img/italy.jpg" class="img-responsive" alt="Italy" asp-append-version="true">
+            </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="vacation">
+                <img src="~/img/fly-somewhere-else.jpg" class="img-responsive" alt="Fly Somewhere Else" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

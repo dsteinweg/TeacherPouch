@@ -5,38 +5,55 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/ClothingS.jpg")" class="img-responsive center-block" alt="Clothing">
+            <img src="~/img/clothing.jpg"
+                class="img-responsive center-block"
+                alt="Clothing"
+                asp-append-version="true">
             <h3>What are you going to put on today?</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("pants")"><img src="@Url.VersionedContent("~/img/pantsS.jpg")" class="img-responsive" alt="Pants"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="pants">
+                <img src="~/img/pants.jpg" class="img-responsive" alt="Pants" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("shirts")"><img src="@Url.VersionedContent("~/img/shirtsS.jpg")" class="img-responsive" alt="Shirts"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="shirts">
+                <img src="~/img/shirts.jpg" class="img-responsive" alt="Shirts" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("shoes")"><img src="@Url.VersionedContent("~/img/shoesS.jpg")" class="img-responsive" alt="Shoes"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="shoes">
+                <img src="~/img/shoes.jpg" class="img-responsive" alt="Shoes" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("shorts")"><img src="@Url.VersionedContent("~/img/shortsS.jpg")" class="img-responsive" alt="Shorts"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="shorts">
+                <img src="~/img/shorts.jpg" class="img-responsive" alt="Shorts" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("accessories")"><img src="@Url.VersionedContent("~/img/accessoriesS.jpg")" class="img-responsive" alt="Accessories"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="accessories">
+                <img src="~/img/accessories.jpg" class="img-responsive" alt="Accessories" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("winter clothing")"><img src="@Url.VersionedContent("~/img/winterclothingS.jpg")" class="img-responsive" alt="Winter Clothing"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="winter clothing">
+                <img src="~/img/winter-clothing.jpg" class="img-responsive" alt="Winter Clothing" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <a href="@Url.Search("clothing")"><img src="@Url.VersionedContent("~/img/allclothingS.jpg")" class="img-responsive" alt="All Clothing"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="clothing">
+                <img src="~/img/all-clothing.jpg" class="img-responsive" alt="All Clothing" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

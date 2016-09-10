@@ -5,38 +5,55 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/PrepositionsS.jpg")" class="img-responsive center-block" alt="Prepositions">
+            <img src="~/img/prepositions.jpg"
+                class="img-responsive center-block"
+                alt="Prepositions"
+                asp-append-version="true">
             <h3>We were on, in, and all around!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.TagDetails("in")"><img src="@Url.VersionedContent("~/img/InS.jpg")" class="img-responsive" alt="In"></a>
+            <a asp-controller="Tags" asp-action="TagDetails" asp-route-name="in">
+                <img src="~/img/in.jpg" class="img-responsive" alt="In" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("above")"><img src="@Url.VersionedContent("~/img/aboveontopofS.jpg")" class="img-responsive" alt="Above / On top of"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="above">
+                <img src="~/img/above-on-top-of.jpg" class="img-responsive" alt="Above / On top of" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("through")"><img src="@Url.VersionedContent("~/img/ThroughS.jpg")" class="img-responsive" alt="Through"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="through">
+                <img src="~/img/through.jpg" class="img-responsive" alt="Through" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.TagDetails("on")"><img src="@Url.VersionedContent("~/img/onS.jpg")" class="img-responsive" alt="On"></a>
+            <a asp-controller="Tags" asp-action="TagDetails" asp-route-name="on">
+                <img src="~/img/on.jpg" class="img-responsive" alt="On" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("below under")"><img src="@Url.VersionedContent("~/img/belowunderS.jpg")" class="img-responsive" alt="Below / Under"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="below under" asp-route-op="and">
+                <img src="~/img/below-under.jpg" class="img-responsive" alt="Below / Under" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("next to")"><img src="@Url.VersionedContent("~/img/nexttoS.jpg")" class="img-responsive" alt="Next to"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="next to">
+                <img src="~/img/next-to.jpg" class="img-responsive" alt="Next to" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <a href="@Url.Search("where")"><img src="@Url.VersionedContent("~/img/whereS.jpg")" class="img-responsive" alt="Where?"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="where">
+                <img src="~/img/where.jpg" class="img-responsive" alt="Where?" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

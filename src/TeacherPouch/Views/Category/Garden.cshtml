@@ -5,38 +5,55 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/GardenS.jpg")" class="img-responsive center-block" alt="Garden">
+            <img src="~/img/garden.jpg"
+                class="img-responsive center-block"
+                alt="Garden"
+                asp-append-version="true">
             <h3>Grow garden! Grow!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("garden vegetable")"><img src="@Url.VersionedContent("~/img/gardenvegetablesS.jpg")" class="img-responsive" alt="Garden Vegetables"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="garden vegetable" asp-route-op="and">
+                <img src="~/img/garden-vegetables.jpg" class="img-responsive" alt="Garden Vegetables" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Category("flowers")"><img src="@Url.VersionedContent("~/img/FlowersS.jpg")" class="img-responsive" alt="Flowers"></a>
+            <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="flowers">
+                <img src="~/img/flowers.jpg" class="img-responsive" alt="Flowers" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("garden fruit")"><img src="@Url.VersionedContent("~/img/gardenfruitS.jpg")" class="img-responsive" alt="Garden Fruit"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="garden fruit" asp-route-op="and">
+                <img src="~/img/garden-fruit.jpg" class="img-responsive" alt="Garden Fruit" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("plant")"><img src="@Url.VersionedContent("~/img/plantsS.jpg")" class="img-responsive" alt="Plants"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="plant">
+                <img src="~/img/plants.jpg" class="img-responsive" alt="Plants" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("apple orchard")"><img src="@Url.VersionedContent("~/img/appleorchardS.jpg")" class="img-responsive" alt="Apple Orchard"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="apple orchard">
+                <img src="~/img/apple-orchard.jpg" class="img-responsive" alt="Apple Orchard" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("tree")"><img src="@Url.VersionedContent("~/img/treesS.jpg")" class="img-responsive" alt="Trees"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="tree">
+                <img src="~/img/trees.jpg" class="img-responsive" alt="Trees" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <a href="@Url.Search("garden")"><img src="@Url.VersionedContent("~/img/allgardenS.jpg")" class="img-responsive" alt="All Things Garden"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="garden">
+                <img src="~/img/all-garden.jpg" class="img-responsive" alt="All Things Garden" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

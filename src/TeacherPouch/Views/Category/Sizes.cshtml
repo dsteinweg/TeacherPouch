@@ -5,46 +5,65 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/SizesS.jpg")" class="img-responsive center-block" alt="Sizes">
+            <img src="~/img/sizes.jpg")"
+                class="img-responsive center-block"
+                alt="Sizes"
+                asp-append-version="true">
             <h3>What size is it?</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("tiny")"><img src="@Url.VersionedContent("~/img/tinyS.jpg")" class="img-responsive" alt="Tiny"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="tiny">
+                <img src="~/img/tiny.jpg")" class="img-responsive" alt="Tiny" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("small little")"><img src="@Url.VersionedContent("~/img/smallorlittleS.jpg")" class="img-responsive" alt="Small / Little"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="small little">
+                <img src="~/img/small-or-little.jpg")" class="img-responsive" alt="Small / Little" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("medium")"><img src="@Url.VersionedContent("~/img/mediumS.jpg")" class="img-responsive" alt="Medium"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="medium">
+                <img src="~/img/medium.jpg")" class="img-responsive" alt="Medium" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("big large")"><img src="@Url.VersionedContent("~/img/bigS.jpg")" class="img-responsive" alt="Large / Big"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="big large">
+                <img src="~/img/big.jpg")" class="img-responsive" alt="Large / Big" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("huge gigantic")"><img src="@Url.VersionedContent("~/img/hugeS.jpg")" class="img-responsive" alt="Huge"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="huge gigantic">
+                <img src="~/img/huge.jpg")" class="img-responsive" alt="Huge" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("tall")"><img src="@Url.VersionedContent("~/img/tallS.jpg")" class="img-responsive" alt="Tall"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="tall">
+                <img src="~/img/tall.jpg")" class="img-responsive" alt="Tall" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("sizes")"><img src="@Url.VersionedContent("~/img/sizesS.jpg")" class="img-responsive" alt="Sizes"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="sizes">
+                <img src="~/img/sizes.jpg")" class="img-responsive" alt="Sizes" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("how big")"><img src="@Url.VersionedContent("~/img/howbigS.jpg")" class="img-responsive" alt="How big?"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="how big">
+                <img src="~/img/how-big.jpg")" class="img-responsive" alt="How big?" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <img src="@Url.VersionedContent("~/img/morecomingsoonS.jpg")" class="img-responsive" alt="More coming soon...">
+            <img src="~/img/more-coming-soon.jpg")" class="img-responsive" alt="More coming soon..." asp-append-version="true">
         </div>
     </div>
 </div>

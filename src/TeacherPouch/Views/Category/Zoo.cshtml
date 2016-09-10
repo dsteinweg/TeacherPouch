@@ -5,22 +5,31 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/ZooS.jpg")" class="img-responsive center-block" alt="Zoo">
+            <img src="~/img/zoo.jpg"
+                class="img-responsive center-block"
+                alt="Zoo"
+                asp-append-version="true">
             <h3>Let's go to the zoo!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("zoo animal")"><img src="@Url.VersionedContent("~/img/zooanimalsS.jpg")" class="img-responsive" alt="Zoo Animals"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="zoo animal" asp-route-op="and">
+                <img src="~/img/zoo-animals.jpg" class="img-responsive" alt="Zoo Animals" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.CombinedSearch("zoo ride")"><img src="@Url.VersionedContent("~/img/zooridesS.jpg")" class="img-responsive" alt="Rides"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="zoo ride" asp-route-op="and">
+                <img src="~/img/zoo-rides.jpg" class="img-responsive" alt="Rides" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("zoo")"><img src="@Url.VersionedContent("~/img/allzooS.jpg")" class="img-responsive" alt="All Things Zoo"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="zoo">
+                <img src="~/img/all-zoo.jpg" class="img-responsive" alt="All Things Zoo" asp-append-version="true">
+            </a>
         </div>
     </div>
 </div>

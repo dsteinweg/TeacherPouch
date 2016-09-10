@@ -5,46 +5,68 @@
 <div class="category">
     <header>
         <div class="jumbotron">
-            <img src="@Url.VersionedContent("~/img/NumbersS.jpg")" class="img-responsive center-block" alt="Numbers">
+            <img src="~/img/numbers.jpg"
+                class="img-responsive center-block"
+                alt="Numbers"
+                asp-append-version="true">
             <h3>One...Two...Three...Four...Five!  We can count!</h3>
         </div>
     </header>
 
     <div class="row featured-tags-preview">
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("one")"><img src="@Url.VersionedContent("~/img/oneS.jpg")" class="img-responsive" alt="One / 1"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="one">
+                <img src="~/img/one.jpg" class="img-responsive" alt="One / 1" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("two")"><img src="@Url.VersionedContent("~/img/twoS.jpg")" class="img-responsive" alt="Two / 2"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="two">
+                <img src="~/img/two.jpg" class="img-responsive" alt="Two / 2" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("three")"><img src="@Url.VersionedContent("~/img/threeS.jpg")" class="img-responsive" alt="Three / 3"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="three">
+                <img src="~/img/three.jpg" class="img-responsive" alt="Three / 3" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("four")"><img src="@Url.VersionedContent("~/img/fourS.jpg")" class="img-responsive" alt="Four / 4"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="four">
+                <img src="~/img/four.jpg" class="img-responsive" alt="Four / 4" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("five")"><img src="@Url.VersionedContent("~/img/fiveS.jpg")" class="img-responsive" alt="Five / 5"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="five">
+                <img src="~/img/five.jpg" class="img-responsive" alt="Five / 5" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("six")"><img src="@Url.VersionedContent("~/img/sixS.jpg")" class="img-responsive" alt="Six / 6"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="six">
+                <img src="~/img/six.jpg" class="img-responsive" alt="Six / 6" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("many")"><img src="@Url.VersionedContent("~/img/lotsmanyS.jpg")" class="img-responsive" alt="Lots / Many"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="many">
+                <img src="~/img/lots-many.jpg" class="img-responsive" alt="Lots / Many" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <a href="@Url.Search("how many")"><img src="@Url.VersionedContent("~/img/howmanyS.jpg")" class="img-responsive" alt="How many?"></a>
+            <a asp-controller="Search" asp-action="Search" asp-route-q="how many">
+                <img src="~/img/how-many.jpg" class="img-responsive" alt="How many?" asp-append-version="true">
+            </a>
         </div>
 
         <div class="col-sm-6 col-md-4">
-            <img src="@Url.VersionedContent("~/img/searchnumbersS.jpg")" class="img-responsive" alt="Search for numbers one-ten, or count objects in any photo!">
+            <img src="~/img/search-numbers.jpg"
+                class="img-responsive"
+                alt="Search for numbers one-ten, or count objects in any photo!"
+                asp-append-version="true">
         </div>
     </div>
 </div>
