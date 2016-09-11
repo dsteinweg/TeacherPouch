@@ -164,8 +164,8 @@ table.index {
 /*
     License
 */
-#License section {
-    margin-bottom:20px;
+.page-license section {
+    margin-bottom: 20px;
 }
 
 
@@ -203,8 +203,8 @@ table.index {
     }
 }
 
-#admin fieldset{
-    margin-bottom:20px;
+.page-admin fieldset{
+    margin-bottom: 20px;
 }
 
 

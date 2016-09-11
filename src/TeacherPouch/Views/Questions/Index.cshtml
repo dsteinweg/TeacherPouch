@@ -1,0 +1,54 @@
+﻿@model QuestionIndexViewModel
+
+@{
+    ViewBag.Title = "Question Index";
+}
+
+<h2>Question Index</h2>
+
+@if (Model.Questions.Any())
+{
+    <table class="index">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Photo ID</th>
+                <th>Question</th>
+                <th>Sentence Starters</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model.Questions)
+            {
+                <tr>
+                    <td>
+                        @question.ID
+                    </td>
+                    <td>
+                        <a asp-controller="Photos" asp-action="Details" asp-route-id="@question.PhotoId">@question.PhotoId</a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@question.Id">@question.Text</a>
+                    <td>
+                        @question.SentenceStarters
+                    </td>
+                    <td>
+                        @if (Model.DisplayAdminLinks)
+                        {
+                            <span>
+                                <a asp-action="Details" asp-route-id="@question.Id">Details</a> |
+                                <a asp-action="Edit" asp-route-id="@question.Id">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@question.Id">Delete</a>
+                            </span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    @:No questions found.
+}

@@ -1,15 +1,15 @@
-﻿@model LoginViewModel
+@model LoginViewModel
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Register";
 }
 
-<div id="login">
+<div>
     <h1>Site Administration</h1>
 
-    <h3>Login</h3>
+    <h3>Register</h3>
 
-    <form asp-controller="Admin" asp-action="Login" method="POST" role="form">
+    <form asp-controller="Admin" asp-action="Register" method="POST" role="form">
         <div class="form-group">
             <label asp-for="@Model.UserName"></label>
             <input asp-for="@Model.UserName" class="form-control">

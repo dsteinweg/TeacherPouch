@@ -20,9 +20,9 @@
     </div>
 </fieldset>
 
-<form>
+<form asp-action="Delete" method="POST">
     <div class="form-control">
-        <button class="btn btn-danger" type="submit" value="Delete"> |
-        <a asp-action="PhotoDetails" asp-route-id="@Model.Photo.Id">Cancel</a>
+        <button class="btn btn-danger" type="submit">Delete</button> |
+        <a asp-action="Details" asp-route-id="@Model.Photo.Id">Cancel</a>
     </div>
 </form>

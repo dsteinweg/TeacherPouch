@@ -11,7 +11,7 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers
 {
     [Authorize]
-    [Route("Admin")]
+    [Route("admin")]
     public class AdminController : BaseController
     {
         public AdminController(
@@ -25,40 +25,45 @@ namespace TeacherPouch.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        [HttpGet("Login")]
+        [HttpGet("")]
+        public async Task<IActionResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var roles = await _userManager.GetRolesAsync(user);
+            var viewModel = new AdminViewModel(user, roles);
+
+            return View(viewModel);
+        }
+
+        [HttpGet("login")]
         [AllowAnonymous]
-        public ViewResult Login()
+        public IActionResult Login()
         {
             return View(new LoginViewModel());
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login(LoginViewModel postedViewModel)
         {
-            if (String.IsNullOrWhiteSpace(loginViewModel.UserName) || String.IsNullOrWhiteSpace(loginViewModel.Password))
-            {
-                loginViewModel.LoginErrorMessage = "Must provide both a user name and password.";
-
-                return View(loginViewModel);
-            }
+            if (!ModelState.IsValid)
+                return View(postedViewModel);
 
             var user = new ApplicationUser
             {
-                UserName = loginViewModel.UserName,
-                Password = loginViewModel.Password
+                UserName = postedViewModel.UserName,
+                Password = postedViewModel.Password
             };
 
             var userValidator = new UserValidator<ApplicationUser>();
             var result = await userValidator.ValidateAsync(_userManager, user);
 
-            var signInResult = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
+            var signInResult = await _signInManager.PasswordSignInAsync(user, postedViewModel.Password, false, false);
 
             if (!signInResult.Succeeded)
             {
-                loginViewModel.LoginErrorMessage = "Invalid user name and/or password.";
-
-                return View(loginViewModel);
+                ModelState.AddModelError("Login failed", "Invalid user name and/or password.");
+                return View(postedViewModel);
             }
 
             StringValues values;
@@ -68,17 +73,46 @@ namespace TeacherPouch.Controllers
                 return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("")]
-        public async Task<ViewResult> Index()
+        [HttpGet("register")]
+        [AllowAnonymous]
+        public IActionResult Register()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var roles = await _userManager.GetRolesAsync(user);
-            var viewModel = new AdminViewModel(user, roles);
-
-            return View(viewModel);
+            return View(new LoginViewModel());
         }
 
-        [HttpGet("Logout")]
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(LoginViewModel postedViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(postedViewModel);
+
+            var user = new ApplicationUser
+            {
+                UserName = postedViewModel.UserName,
+                Password = postedViewModel.Password
+            };
+
+            var createUserResult = await _userManager.CreateAsync(user);
+
+            if (!createUserResult.Succeeded)
+            {
+                ModelState.AddModelError("Create user failed", "Unable to create user.");
+                return View(postedViewModel);
+            }
+
+            var signInResult = _signInManager.SignInAsync(user, true);
+
+            if (!createUserResult.Succeeded)
+            {
+                ModelState.AddModelError("Sign in failed", "User created, but unable to sign in.");
+                return View(postedViewModel);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("logout")]
         public async Task<IActionResult> Logout(string returnUrl)
         {
             await _signInManager.SignOutAsync();

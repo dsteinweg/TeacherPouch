@@ -4,11 +4,11 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.Controllers
 {
-    [Route("Category")]
+    [Route("category")]
     public class CategoryController : BaseController
     {
         [HttpGet("{name}")]
-        public ViewResult CategoryDetails(string name)
+        public IActionResult CategoryDetails(string name)
         {
             Category category;
             if (Enum.TryParse<Category>(name, true, out category))

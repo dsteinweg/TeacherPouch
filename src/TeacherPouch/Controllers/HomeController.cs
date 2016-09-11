@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using TeacherPouch.Models;
 using TeacherPouch.Data;
 using TeacherPouch.Helpers;
 using TeacherPouch.ViewModels;

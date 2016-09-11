@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TeacherPouch.Controllers
 {
+    [Route("photos")]
     [Authorize(Roles = TeacherPouchRoles.Admin)]
     public class PhotosController : BaseController
     {
@@ -31,18 +32,18 @@ namespace TeacherPouch.Controllers
         private readonly IMemoryCache _cache;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        [HttpGet("PhotoIndex")]
+        [HttpGet("index")]
         [AllowAnonymous]
-        public ViewResult PhotoIndex()
+        public IActionResult Index()
         {
             var photos = _photoService.GetAllPhotos();
 
             return View(photos);
         }
 
-        [HttpGet("Photos/{id:int}/{photoName?}")]
+        [HttpGet("{id:int}/{photoName?}")]
         [AllowAnonymous]
-        public ViewResult PhotoDetails(int id, string tag = null, string tag2 = null)
+        public IActionResult Details(int id, string tag = null, string tag2 = null)
         {
             // TODO: extract this into service
             var photo = _photoService.FindPhoto(id);
@@ -102,8 +103,8 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("Photos/Create")]
-        public ViewResult PhotoCreate()
+        [HttpGet("create")]
+        public IActionResult Create()
         {
             PhotoCreateViewModel viewModel;
             if (!_cache.TryGetValue<PhotoCreateViewModel>("NewPhotoViewModel", out viewModel))
@@ -112,9 +113,9 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("Photos/Create")]
+        [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public ActionResult PhotoCreate(PhotoCreateViewModel postedViewModel)
+        public IActionResult Create(PhotoCreateViewModel postedViewModel)
         {
             postedViewModel.PendingPhotoPath = _photoService.PendingPhotoPath;
 
@@ -146,7 +147,7 @@ namespace TeacherPouch.Controllers
                 photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
 
             var newPhotoName = String.Join(" ", photoNameParts);
-            var photoUrl = Url.Action(nameof(PhotoDetails), new { id = newPhoto.Id });
+            var photoUrl = Url.Action(nameof(Details), new { id = newPhoto.Id });
 
             var nextCreateViewModel = new PhotoCreateViewModel(_photoService.PendingPhotoPath);
             nextCreateViewModel.Message = $"<a href=\"{photoUrl}\">Photo \"{newPhoto.Name}\"</a> created.";
@@ -155,11 +156,11 @@ namespace TeacherPouch.Controllers
 
             _cache.Set("NewPhotoViewModel", nextCreateViewModel);
 
-            return RedirectToAction(nameof(PhotoCreate));
+            return RedirectToAction(nameof(Create));
         }
 
-        [HttpGet("Photos/Edit/{id:int}")]
-        public ViewResult PhotoEdit(int id)
+        [HttpGet("{id:int}/edit")]
+        public IActionResult PhotoEdit(int id)
         {
             var photo = _photoService.FindPhoto(id);
             if (photo == null)
@@ -177,8 +178,8 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("Photos/Edit/{id:int}")]
-        public virtual ActionResult PhotoEdit(int id, PhotoEditViewModel postedViewModel)
+        [HttpPost("{id:int}/edit")]
+        public IActionResult PhotoEdit(int id, PhotoEditViewModel postedViewModel)
         {
             var photo = _photoService.FindPhoto(id);
             if (photo == null)
@@ -191,10 +192,10 @@ namespace TeacherPouch.Controllers
 
             _photoService.SavePhoto(photo);
 
-            return RedirectToAction(nameof(PhotoDetails), new { id = photo.Id });
+            return RedirectToAction(nameof(Details), new { id = photo.Id });
         }
 
-        [HttpGet("Photos/Delete/{id:int}")]
+        [HttpGet("{id:int}/delete")]
         public IActionResult PhotoDelete(int id)
         {
             var photo = _photoService.FindPhoto(id);
@@ -208,8 +209,8 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("Photos/Delete/{id:int}")]
-        public ActionResult PhotoDeleteConfirmed(int id)
+        [HttpPost("{id:int}/delete")]
+        public IActionResult PhotoDeleteConfirmed(int id)
         {
             var photo =  _photoService.FindPhoto(id);
             if (photo == null)
@@ -217,10 +218,10 @@ namespace TeacherPouch.Controllers
 
             _photoService.DeletePhoto(photo);
 
-            return RedirectToAction(nameof(PhotoIndex));
+            return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Photos/{id:int}/{fileName}")]
+        [HttpGet("{id:int}/{fileName}")]
         [AllowAnonymous]
         public IActionResult PhotoImage(int id, string fileName)
         {
@@ -240,7 +241,7 @@ namespace TeacherPouch.Controllers
             return File(bytes, "image/jpeg");
         }
 
-        [HttpGet("Photos/{id:int}/Download/{fileName}")]
+        [HttpGet("{id:int}/download/{fileName}")]
         [AllowAnonymous]
         public IActionResult PhotoImageDownload(int id, string fileName)
         {

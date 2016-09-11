@@ -7,15 +7,15 @@ namespace TeacherPouch.Controllers
 {
     public class ErrorController : BaseController
     {
-        public ViewResult Http404()
+        public IActionResult Http404()
         {
             Response.StatusCode = (int)HttpStatusCode.NotFound;
 
             return View();
         }
 
-        [Route("Error")]
-        public ViewResult Error(int? httpStatusCode, Exception exception = null)
+        [Route("error")]
+        public IActionResult Error(int? httpStatusCode, Exception exception = null)
         {
             var showErrorDetails = User.Identity.IsAuthenticated;
 

@@ -6,7 +6,7 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.ViewModels
 {
-    public class QuestionCreateViewModel : IValidatableObject
+    public class QuestionCreateViewModel
     {
         public QuestionCreateViewModel()
         {
@@ -23,14 +23,20 @@ namespace TeacherPouch.ViewModels
         public IEnumerable<Tag> Tags { get; set; } = Enumerable.Empty<Tag>();
 
         [Display(Name = "Question")]
+        [Required]
+        [DataType(DataType.MultilineText)]
         public string QuestionText { get; set; }
 
         [Display(Name = "Sentence Starters")]
+        [DataType(DataType.MultilineText)]
         public string QuestionSentenceStarters { get; set; }
 
         [Display(Name = "Question Order (optional)")]
-        public string QuestionOrder { get; set; }
+        [Range(1, Int32.MaxValue, ErrorMessage = "Order must be a whole number greater than 0.")]
+        public int? QuestionOrder { get; set; }
 
+        public string Message { get; set; }
+/*
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = new List<ValidationResult>();
@@ -41,11 +47,7 @@ namespace TeacherPouch.ViewModels
             if (String.IsNullOrWhiteSpace(QuestionText))
                 results.Add(new ValidationResult("Question text cannot be empty."));
 
-            int questionOrder;
-            if (!String.IsNullOrWhiteSpace(QuestionOrder) && !Int32.TryParse(QuestionOrder, out questionOrder))
-                results.Add(new ValidationResult("Question order must be a whole number."));
-
             return results;
-        }
+        }*/
     }
 }

@@ -10,7 +10,7 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers
 {
     [Authorize(Roles = TeacherPouchRoles.Admin)]
-    public partial class QuestionsController : BaseController
+    public class QuestionsController : BaseController
     {
         public QuestionsController(
             TeacherPouchDbContext dbContext,
@@ -26,9 +26,9 @@ namespace TeacherPouch.Controllers
         private readonly PhotoService _photoService;
         private readonly TagService _tagService;
 
-        [HttpGet("Questions")]
+        [HttpGet("questions")]
         [AllowAnonymous]
-        public ViewResult QuestionIndex()
+        public IActionResult Index()
         {
             var viewModel = new QuestionIndexViewModel();
             viewModel.Questions = _db.Questions.ToList();
@@ -37,9 +37,9 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("Questions/{id:int}")]
+        [HttpGet("questions/{id:int}")]
         [AllowAnonymous]
-        public ViewResult QuestionDetails(int id)
+        public IActionResult Details(int id)
         {
             var question = _db.Questions.FirstOrDefault(q => q.Id == id);
             if (question == null)
@@ -57,15 +57,15 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("Photos/{photoId:int}/Questions")]
+        [HttpGet("photos/{photoId:int}/questions")]
         [AllowAnonymous]
-        public ViewResult QuestionsForPhoto(int photoId)
+        public IActionResult QuestionsForPhoto(int photoId)
         {
             return View();
         }
 
-        [HttpGet("Photos/{photoId:int}/Questions/Create")]
-        public ViewResult QuestionCreate(int photoId)
+        [HttpGet("photos/{photoId:int}/questions/create")]
+        public IActionResult Create(int photoId)
         {
             var photo = _photoService.FindPhoto(photoId);
             if (photo == null)
@@ -76,43 +76,33 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("Photos/{photoId:int}/Questions/Create")]
+        [HttpPost("photos/{photoId:int}/questions/create")]
         [ValidateAntiForgeryToken]
-        public ActionResult QuestionCreate(int photoId, QuestionCreateViewModel postedViewModel)
+        public IActionResult Create(int photoId, QuestionCreateViewModel postedViewModel)
         {
-            if (ModelState.IsValid)
+            var photo = _photoService.FindPhoto(photoId);
+            if (photo == null)
+                return InvokeHttp404();
+
+            if (!ModelState.IsValid)
+                return View(postedViewModel);
+
+            var question = new Question
             {
-                var question = new Question
-                {
-                    PhotoId = photoId,
-                    Text = postedViewModel.QuestionText,
-                    SentenceStarters = postedViewModel.QuestionSentenceStarters
-                };
+                PhotoId = photoId,
+                Text = postedViewModel.QuestionText,
+                SentenceStarters = postedViewModel.QuestionSentenceStarters,
+                Order = postedViewModel.QuestionOrder
+            };
 
-                int questionOrder;
-                if (Int32.TryParse(postedViewModel.QuestionOrder, out questionOrder))
-                    question.Order = questionOrder;
+            _db.Questions.Add(question);
+            _db.SaveChanges();
 
-                _db.Questions.Add(question);
-
-                _db.SaveChanges();
-
-                return RedirectToAction(nameof(QuestionDetails), new { id = question.Id });
-            }
-            else
-            {
-                var photo = _photoService.FindPhoto(photoId);
-                if (photo == null)
-                    return InvokeHttp404();
-
-                var viewModel = new QuestionCreateViewModel(photo);
-
-                return View(viewModel);
-            }
+            return RedirectToAction(nameof(Details), new { id = question.Id });
         }
 
-        [HttpGet("Questions/{id:int}/Edit")]
-        public ViewResult QuestionEdit(int id)
+        [HttpGet("questions/{id:int}/edit")]
+        public IActionResult Edit(int id)
         {
             var question = _db.Questions.FirstOrDefault(q => q.Id == id);
             if (question == null)
@@ -125,36 +115,15 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("Questions/{id:int}/Edit")]
+        [HttpPost("questions/{id:int}/edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult QuestionEdit(int id, QuestionEditViewModel postedViewModel)
+        public IActionResult Edit(int id, QuestionEditViewModel postedViewModel)
         {
             var question = _db.Questions.FirstOrDefault(q => q.Id == id);
             if (question == null)
                 return InvokeHttp404();
 
-            if (ModelState.IsValid)
-            {
-                question.Text = postedViewModel.QuestionText;
-                question.SentenceStarters = postedViewModel.QuestionSentenceStarters;
-
-                if (!String.IsNullOrWhiteSpace(postedViewModel.QuestionOrder))
-                {
-                    int questionOrder;
-                    if (Int32.TryParse(postedViewModel.QuestionOrder, out questionOrder))
-                        question.Order = questionOrder;
-                }
-                else
-                {
-                    question.Order = null;
-                }
-
-                _db.Questions.Update(question);
-                _db.SaveChanges();
-
-                return RedirectToAction(nameof(QuestionDetails), new { id });
-            }
-            else
+            if (!ModelState.IsValid)
             {
                 var photo = _photoService.FindPhoto(question.PhotoId);
 
@@ -162,10 +131,29 @@ namespace TeacherPouch.Controllers
 
                 return View(viewModel);
             }
+
+            question.Text = postedViewModel.QuestionText;
+            question.SentenceStarters = postedViewModel.QuestionSentenceStarters;
+
+            if (!String.IsNullOrWhiteSpace(postedViewModel.QuestionOrder))
+            {
+                int questionOrder;
+                if (Int32.TryParse(postedViewModel.QuestionOrder, out questionOrder))
+                    question.Order = questionOrder;
+            }
+            else
+            {
+                question.Order = null;
+            }
+
+            _db.Questions.Update(question);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Details), new { id });
         }
 
-        [HttpGet("Questions/{id:int}/Delete")]
-        public ViewResult QuestionDelete(int id)
+        [HttpGet("questions/{id:int}/delete")]
+        public IActionResult Delete(int id)
         {
             var question = _db.Questions.FirstOrDefault(q => q.Id == id);
             if (question == null)
@@ -178,9 +166,9 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("Questoins/{id:int}/Delete")]
+        [HttpPost("questions/{id:int}/delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult QuestionDelete(int id, QuestionDetailsViewModel postedViewModel)
+        public IActionResult Delete(int id, QuestionDetailsViewModel postedViewModel)
         {
             var question = _db.Questions.FirstOrDefault(q => q.Id == id);
             if (question == null)
@@ -188,7 +176,7 @@ namespace TeacherPouch.Controllers
 
             _db.Remove(question);
 
-            return RedirectToAction(nameof(QuestionIndex));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

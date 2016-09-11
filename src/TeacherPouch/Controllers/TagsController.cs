@@ -8,7 +8,7 @@ using TeacherPouch.Services;
 
 namespace TeacherPouch.Controllers
 {
-    [Route("Tags")]
+    [Route("tags")]
     [Authorize(Roles = TeacherPouchRoles.Admin)]
     public class TagsController : BaseController
     {
@@ -23,7 +23,7 @@ namespace TeacherPouch.Controllers
 
         [HttpGet("")]
         [AllowAnonymous]
-        public ViewResult TagIndex()
+        public IActionResult Index()
         {
             var allTags = _tagService.GetAllTags().OrderBy(tag => tag.Name);
 
@@ -32,7 +32,7 @@ namespace TeacherPouch.Controllers
 
         [HttpGet("{name}")]
         [AllowAnonymous]
-        public ViewResult TagDetails(string name)
+        public IActionResult TagDetails(string name)
         {
             var tag = _tagService.FindTag(name);
             if (tag != null)
@@ -43,16 +43,16 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("CreateNew")]
-        public ViewResult TagCreate()
+        [HttpGet("create")]
+        public IActionResult Create()
         {
             var viewModel = new TagCreateViewModel();
 
             return View(viewModel);
         }
 
-        [HttpPost("CreateNew")]
-        public IActionResult TagCreate(TagCreateViewModel postedViewModel)
+        [HttpPost("create")]
+        public IActionResult Create(TagCreateViewModel postedViewModel)
         {
             if (String.IsNullOrWhiteSpace(postedViewModel.TagName))
             {
@@ -72,8 +72,8 @@ namespace TeacherPouch.Controllers
             return RedirectToAction(nameof(TagDetails), new { tagName = tag.Name} );
         }
 
-        [HttpGet("Edit/{id:int}")]
-        public ViewResult TagEdit(int id)
+        [HttpGet("{id:int}/Edit")]
+        public IActionResult TagEdit(int id)
         {
             var tag = _tagService.FindTag(id);
 
@@ -85,7 +85,7 @@ namespace TeacherPouch.Controllers
             return View(tag);
         }
 
-        [HttpPost("Edit/{id:int}")]
+        [HttpPost("{id:int}/Edit")]
         public IActionResult TagEdit(int id, TagEditViewModel postedViewModel)
         {
             var tag = _tagService.FindTag(id);
@@ -115,8 +115,8 @@ namespace TeacherPouch.Controllers
             return RedirectToAction(nameof(TagDetails), new { id = tag.Id });
         }
 
-        [HttpGet("Delete/{id:int}")]
-        public ViewResult TagDelete(int id)
+        [HttpGet("{id:int}/delete")]
+        public IActionResult TagDelete(int id)
         {
             var tag = _tagService.FindTag(id);
             if (tag == null)
@@ -125,7 +125,7 @@ namespace TeacherPouch.Controllers
             return View(tag);
         }
 
-        [HttpPost("Delete/{id:int}")]
+        [HttpPost("{id:int}/delete")]
         public IActionResult TagDeleteConfirmed(int id)
         {
             var tag = _tagService.FindTag(id);
@@ -135,7 +135,7 @@ namespace TeacherPouch.Controllers
 
             _tagService.DeleteTag(tag);
 
-            return RedirectToAction(nameof(TagIndex));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

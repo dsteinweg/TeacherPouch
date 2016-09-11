@@ -14,8 +14,8 @@ namespace TeacherPouch.Controllers
 
         private readonly SearchService _searchService;
 
-        [HttpGet("Search")]
-        public virtual ViewResult Search(string q, SearchOperator op = SearchOperator.Or)
+        [HttpGet("search")]
+        public IActionResult Search(string q, SearchOperator op = SearchOperator.Or)
         {
             if (String.IsNullOrWhiteSpace(q) || q.Length < 2)
                 return View("NoneFound");

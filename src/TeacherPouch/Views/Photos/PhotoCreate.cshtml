@@ -37,14 +37,14 @@
                     </div>
                 </td>
                 <td>
-                    <div><input type="text" name="FileName" id="FileName" /> .jpg</div> 
+                    <div><input type="text" name="FileName" id="FileName" /> .jpg</div>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
                     <div>
-                        <label for="Tags">Tags <span style="font-size:14px;margin-left:40px;">Separate multiple tags with a comma (,).</span></label> 
+                        <label for="Tags">Tags <span style="font-size:14px;margin-left:40px;">Separate multiple tags with a comma (,).</span></label>
 
                         <textarea name="Tags" id="Tags">@Model.LastTagsInput</textarea>
                     </div>
@@ -55,7 +55,7 @@
                 <td>
                     <div>
                         <label for="IsPrivate">Private</label>
-                        <input type="checkbox" name="IsPrivate" id="IsPrivate"> 
+                        <input type="checkbox" name="IsPrivate" id="IsPrivate">
                     </div>
                 </td>
             </tr>
@@ -64,7 +64,7 @@
                 <td>
                     <p>
                         <input type="submit" value="Create" /> |
-                        <a href="@Url.PhotoIndex()">Cancel</a>
+                        <a asp-action="Index">Cancel</a>
                     </p>
 
                     @if (!String.IsNullOrWhiteSpace(Model.ErrorMessage))

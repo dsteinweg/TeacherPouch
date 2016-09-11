@@ -4,7 +4,7 @@
     ViewBag.Title = "Admin";
 }
 
-<div id="admin">
+<div class="page-admin">
     <h2>Admin Home</h2>
 
     <h4>Welcome, @Model.UserName!</h4>
@@ -12,32 +12,32 @@
     <fieldset>
         <legend>Your Account</legend>
         <p>Assigned Roles: @Model.Roles</p>
-    </fieldset>    
+    </fieldset>
 
     <fieldset>
         <legend>Photos</legend>
-        @if (SecurityHelper.UserIsAdmin(base.User))
+        @if (User.IsInRole(TeacherPouchRoles.Admin))
         {
-            <a href="@Url.PhotoCreate()">Create New Photo</a> <br>
+            <a asp-controller="Photos" asp-action="Create">Create New Photo</a> <br>
         }
-        <a href="@Url.PhotoIndex()">View All Photos</a>
+        <a asp-controller="Photos" asp-action="Index">View All Photos</a>
     </fieldset>
 
     <fieldset>
         <legend>Tags</legend>
-        @if (SecurityHelper.UserIsAdmin(base.User))
+        @if (User.IsInRole(TeacherPouchRoles.Admin))
         {
-            <a href="@Url.TagCreate()">Create New Tag</a> <br>
+            <a asp-controller="Tags" asp-action="Create">Create New Tag</a> <br>
         }
-        <a href="@Url.TagIndex()">View All Tags</a>
+        <a asp-controller="Tags" asp-action="Index">View All Tags</a>
     </fieldset>
 
     <fieldset>
         <legend>Questions</legend>
-        @Html.ActionLink("View All Questions", MVC.Questions.QuestionIndex())
+        <a asp-controller="Questions" asp-action="Index">View All Questions</a>
     </fieldset>
 
     <p>
-        <a href="@Url.AdminLogout()">Log out</a>
+        <a asp-action="Logout">Log out</a>
     </p>
 </div>
