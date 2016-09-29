@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TeacherPouch.Models;
 
 namespace TeacherPouch.Data
 {
-    public class IdentityDbContext : IdentityDbContext<ApplicationUser>
+    public class IdentityDbContext : IdentityDbContext<IdentityUser>
     {
         public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
             : base(options)

@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TeacherPouch.Models;
-using TeacherPouch.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using TeacherPouch.Services;
-using System.Collections.Generic;
+using TeacherPouch.ViewModels;
 
 namespace TeacherPouch.Controllers
 {
@@ -87,41 +87,36 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("{id:int}/Edit")]
-        public IActionResult TagEdit(int id)
+        public IActionResult Edit(int id)
         {
             var tag = _tagService.FindTag(id);
-
             if (tag == null)
                 return InvokeHttp404();
 
             var viewModel = new TagEditViewModel(tag);
 
-            return View(tag);
+            return View(viewModel);
         }
 
         [HttpPost("{id:int}/Edit")]
-        public IActionResult TagEdit(int id, TagEditViewModel postedViewModel)
+        public IActionResult Edit(int id, TagEditViewModel postedViewModel)
         {
             var tag = _tagService.FindTag(id);
             if (tag == null)
                 return InvokeHttp404();
 
-            if (String.IsNullOrWhiteSpace(postedViewModel.TagName))
-            {
-                postedViewModel.ErrorMessage = "Tag must have a name.";
-
-                return View(postedViewModel);
-            }
-
-            var existingTag = _tagService.FindTag(postedViewModel.TagName);
+            var existingTag = _tagService.FindTag(postedViewModel.Name);
             if (existingTag != null)
-            {
-                postedViewModel.ErrorMessage = "Tag exists with that name.";
+                ModelState.AddModelError("Duplicate tag", "Tag exists with that name.");
 
-                return View(postedViewModel);
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new TagEditViewModel(tag);
+
+                return View(viewModel);
             }
 
-            tag.Name = postedViewModel.TagName;
+            tag.Name = postedViewModel.Name;
             tag.IsPrivate = postedViewModel.IsPrivate;
 
             _tagService.SaveTag(tag);
@@ -130,7 +125,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("{id:int}/delete")]
-        public IActionResult TagDelete(int id)
+        public IActionResult Delete(int id)
         {
             var tag = _tagService.FindTag(id);
             if (tag == null)
@@ -140,10 +135,9 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpPost("{id:int}/delete")]
-        public IActionResult TagDeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             var tag = _tagService.FindTag(id);
-
             if (tag == null)
                 return InvokeHttp404();
 

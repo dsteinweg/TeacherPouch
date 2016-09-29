@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TeacherPouch.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TeacherPouch.ViewModels
 {
     public class AdminViewModel
     {
-        public AdminViewModel(ApplicationUser user, IEnumerable<string> roles)
+        public AdminViewModel(IdentityUser user, IEnumerable<string> roles)
         {
             UserName = user.UserName;
 

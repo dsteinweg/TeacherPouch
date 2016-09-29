@@ -1,0 +1,33 @@
+﻿@model TagEditViewModel
+
+@{
+    ViewBag.Title = Model.Name + " - Edit";
+}
+
+<div id="tagEdit">
+    <header>
+        <h1>@Model.Name</h1>
+        <h2>Edit</h2>
+    </header>
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Name"></label>
+            <input asp-for="@Model.Name" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox">
+                <input asp-for="@Model.IsPrivate">
+                <label asp-for="@Model.IsPrivate"></label>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Save</button> |
+            <a asp-action="Details" asp-route-name="@Model.Name">Cancel</a>
+        </div>
+    </form>
+</div>

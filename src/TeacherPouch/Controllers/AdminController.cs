@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using TeacherPouch.Models;
@@ -15,19 +16,37 @@ namespace TeacherPouch.Controllers
     public class AdminController : BaseController
     {
         public AdminController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         [HttpGet("")]
         public async Task<IActionResult> Index()
         {
+            var adminRole = new IdentityRole(TeacherPouchRoles.Admin);
+            if (!await _roleManager.RoleExistsAsync(adminRole.Name))
+                await _roleManager.CreateAsync(adminRole);
+
+            var friendRole = new IdentityRole(TeacherPouchRoles.Friend);
+            if (!await _roleManager.RoleExistsAsync(friendRole.Name))
+                await _roleManager.CreateAsync(friendRole);
+
+            if (User.Identity.IsAuthenticated && User.Identity.Name == "darren")
+            {
+                var darren = await _userManager.GetUserAsync(User);
+
+                await _userManager.AddToRoleAsync(darren, TeacherPouchRoles.Admin);
+            }
+
             var user = await _userManager.GetUserAsync(User);
             var roles = await _userManager.GetRolesAsync(user);
             var viewModel = new AdminViewModel(user, roles);
@@ -84,7 +103,7 @@ namespace TeacherPouch.Controllers
             if (!ModelState.IsValid)
                 return View(postedViewModel);
 
-            var user = new ApplicationUser
+            var user = new IdentityUser
             {
                 UserName = postedViewModel.UserName
             };

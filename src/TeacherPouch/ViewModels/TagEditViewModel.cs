@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using TeacherPouch.Models;
 
 namespace TeacherPouch.ViewModels
@@ -11,12 +12,12 @@ namespace TeacherPouch.ViewModels
 
         public TagEditViewModel(Tag tag)
         {
-            TagName = tag.Name;
+            Name = tag.Name;
             IsPrivate = tag.IsPrivate;
         }
 
-        public string TagName { get; set; }
+        [Required]
+        public string Name { get; set; }
         public bool IsPrivate { get; set; }
-        public string ErrorMessage { get; set; }
     }
 }

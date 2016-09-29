@@ -71,20 +71,6 @@
             </form>
 
             <div id="suggest"></div>
-
-            @if (User.Identity.IsAuthenticated)
-            {
-                <ul class="nav" style="float:right;">
-                    <li style="padding-top:10px;">
-                        <span style="color:white;">Hello, @User.Identity.Name!</span>
-
-                        <a asp-controller="Admin"
-                           asp-action="Logout"
-                           asp-route-return-url="@Context.Request.Path"
-                           style="display:inline;">Log out</a>
-                    </li>
-                </ul>
-            }
         </div>
     </nav>
 
@@ -96,7 +82,7 @@
 
             <div class="col-sm-3 col-sm-pull-9 col-md-2 col-md-pull-10">
                 <nav id="side-nav" class="well">
-                    @await Html.PartialAsync("~/Views/Category/_FeaturedCategoriesMenu.cshtml")
+                    @Html.Partial("~/Views/Category/_FeaturedCategoriesMenu.cshtml")
                 </nav>
             </div>
         </div>
@@ -124,6 +110,16 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <a asp-controller="Admin" asp-action="Index">Site Administration</a>
+
+                    <div>
+                        <span>Hello, @User.Identity.Name!</span>
+
+                        <a asp-controller="Admin"
+                           asp-action="Logout"
+                           asp-route-return-url="@Context.Request.Path">
+                           Sign out
+                        </a>
+                    </div>
                 }
                 else
                 {

@@ -50,7 +50,7 @@ namespace TeacherPouch
                 .AddDbContext<Data.IdentityDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("Identity")));
 
             services
-                .AddIdentity<ApplicationUser, IdentityRole>(opts =>
+                .AddIdentity<IdentityUser, IdentityRole>(opts =>
                 {
                     opts.Password.RequireNonAlphanumeric = false;
                 })
@@ -99,6 +99,9 @@ namespace TeacherPouch
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc();
+
+
+
         }
     }
 }

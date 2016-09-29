@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using TeacherPouch.Models;
 using TeacherPouch.Services;
 using TeacherPouch.ViewModels;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.AspNetCore.Identity;
 
 namespace TeacherPouch.Controllers
 {
@@ -19,7 +20,7 @@ namespace TeacherPouch.Controllers
             PhotoService photoService,
             TagService tagService,
             IMemoryCache cache,
-            UserManager<ApplicationUser> userManager)
+            UserManager<IdentityUser> userManager)
         {
             _photoService = photoService;
             _tagService = tagService;
@@ -30,7 +31,7 @@ namespace TeacherPouch.Controllers
         private readonly PhotoService _photoService;
         private readonly TagService _tagService;
         private readonly IMemoryCache _cache;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         [HttpGet("index")]
         [AllowAnonymous]

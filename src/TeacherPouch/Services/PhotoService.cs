@@ -5,6 +5,7 @@ using System.Linq;
 using ImageProcessorCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using TeacherPouch.Data;
 using TeacherPouch.Models;
@@ -18,7 +19,7 @@ namespace TeacherPouch.Services
             IOptions<PhotoPaths> photoPaths,
             TeacherPouchDbContext dbContext,
             IHttpContextAccessor httpContextAccessor,
-            UserManager<ApplicationUser> userManager)
+            UserManager<IdentityUser> userManager)
         {
             PhotoPath = photoPaths.Value.PhotoPath;
             PendingPhotoPath = photoPaths.Value.PendingPhotoPath;
@@ -31,7 +32,7 @@ namespace TeacherPouch.Services
         public readonly string PendingPhotoPath = null;
         private readonly TeacherPouchDbContext _db;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public IEnumerable<Photo> GetAllPhotos()
         {
