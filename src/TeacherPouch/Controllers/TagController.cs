@@ -5,21 +5,33 @@ using TeacherPouch.Models;
 using TeacherPouch.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using TeacherPouch.Services;
+using System.Collections.Generic;
 
 namespace TeacherPouch.Controllers
 {
     [Route("tags")]
     [Authorize(Roles = TeacherPouchRoles.Admin)]
-    public class TagsController : BaseController
+    public class TagController : BaseController
     {
-        public TagsController(TagService tagService, PhotoService photoService)
+        public TagController(
+            TagService tagService,
+            PhotoService photoService,
+            SearchService searchService)
         {
             _tagService = tagService;
             _photoService = photoService;
+            _searchService = searchService;
         }
 
         private readonly TagService _tagService;
         private readonly PhotoService _photoService;
+        private readonly SearchService _searchService;
+
+        [HttpGet("~/api/tags")]
+        public IEnumerable<string> Get(string q)
+        {
+            return _searchService.TagAutocompleteSearch(q);
+        }
 
         [HttpGet("")]
         [AllowAnonymous]
@@ -32,13 +44,15 @@ namespace TeacherPouch.Controllers
 
         [HttpGet("{name}")]
         [AllowAnonymous]
-        public IActionResult TagDetails(string name)
+        public IActionResult Details(string name)
         {
             var tag = _tagService.FindTag(name);
-            if (tag != null)
+            if (tag == null)
                 return InvokeHttp404();
 
-            var viewModel = new TagDetailsViewModel(tag);
+            var viewModel = new TagDetailsViewModel(
+                tag,
+                tag.PhotoTags.Select(pt => pt.Photo));
 
             return View(viewModel);
         }
@@ -69,7 +83,7 @@ namespace TeacherPouch.Controllers
 
             _tagService.SaveTag(tag);
 
-            return RedirectToAction(nameof(TagDetails), new { tagName = tag.Name} );
+            return RedirectToAction(nameof(Details), new { tagName = tag.Name} );
         }
 
         [HttpGet("{id:int}/Edit")]
@@ -112,7 +126,7 @@ namespace TeacherPouch.Controllers
 
             _tagService.SaveTag(tag);
 
-            return RedirectToAction(nameof(TagDetails), new { id = tag.Id });
+            return RedirectToAction(nameof(Details), new { id = tag.Id });
         }
 
         [HttpGet("{id:int}/delete")]

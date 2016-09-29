@@ -18,23 +18,20 @@ namespace TeacherPouch.ViewModels
             QuestionId = question.Id;
             QuestionText = question.Text;
             QuestionSentenceStarters = question.SentenceStarters;
-
-            if (question.Order.HasValue)
-                QuestionOrder = question.Order.Value.ToString();
-
+            QuestionOrder = question.Order;
             Photo = photo;
             PhotoTags = photo.PhotoTags.Select(photoTag => photoTag.Tag);
         }
 
-        public Photo Photo { get; set; } = new Photo();
-        public IEnumerable<Tag> PhotoTags { get; set; } = Enumerable.Empty<Tag>();
         public int QuestionId { get; set; }
         [Display(Name = "Question")]
         public string QuestionText { get; set; }
-        [Display(Name = "SentenceStarters")]
+        [Display(Name = "Sentence Starters")]
         public string QuestionSentenceStarters { get; set; }
         [Display(Name = "Question Order (optional)")]
-        public string QuestionOrder { get; set; }
+        public int? QuestionOrder { get; set; }
+        public Photo Photo { get; set; } = new Photo();
+        public IEnumerable<Tag> PhotoTags { get; set; } = Enumerable.Empty<Tag>();
         public bool DisplayAdminLinks { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -49,10 +46,6 @@ namespace TeacherPouch.ViewModels
 
             if (String.IsNullOrWhiteSpace(QuestionText))
                 results.Add(new ValidationResult("Question text cannot be empty."));
-
-            int questionOrder;
-            if (!String.IsNullOrWhiteSpace(QuestionOrder) && !Int32.TryParse(QuestionOrder, out questionOrder))
-                results.Add(new ValidationResult("Question order must be a whole number."));
 
             return results;
         }

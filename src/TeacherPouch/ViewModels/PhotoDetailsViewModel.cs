@@ -27,15 +27,15 @@ namespace TeacherPouch.ViewModels
             ShowAdminLinks = userIsAdmin;
         }
 
-        public Photo Photo { get; set; }
-        public string PhotoUrl { get; set; }
-        public string SmallFileSize { get; set; }
-        public string LargeFileSize { get; set; }
-        public Tag SearchResultTag { get; set; }
-        public Tag SearchResultTag2 { get; set; }
-        public Photo PreviousPhoto { get; set; }
-        public Photo NextPhoto { get; set; }
-        public IEnumerable<Question> Questions { get; set; }
-        public bool ShowAdminLinks { get; set; }
+        public Photo Photo { get; }
+        public string PhotoUrl { get; }
+        public string SmallFileSize { get; }
+        public string LargeFileSize { get; }
+        public Tag SearchResultTag { get; }
+        public Tag SearchResultTag2 { get; }
+        public Photo PreviousPhoto { get; }
+        public Photo NextPhoto { get; }
+        public IEnumerable<Question> Questions { get; }
+        public bool ShowAdminLinks { get; }
     }
 }

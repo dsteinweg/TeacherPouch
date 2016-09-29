@@ -1,0 +1,63 @@
+﻿@model TagDetailsViewModel
+
+@{
+    ViewBag.Title = "Tag: " + Model.Tag.Name;
+}
+
+<div id="tagDetails">
+    <header>
+        <h1>@Html.Partial("_TagButton", Model.Tag)</h1>
+    </header>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            @if (Model.Tag.IsPrivate)
+            {
+                <span>Is Private: <strong>Yes</strong></span>
+            }
+            else
+            {
+                <span>Is Private: No</span>
+            }
+        </div>
+    }
+
+    @if (Model.Photos.Any())
+    {
+        <div>
+            <ul class="photo-thumbs">
+                @foreach (var photo in Model.Photos)
+                {
+                    <li>
+                        <a asp-controller="Photo"
+                           asp-action="Details"
+                           asp-route-id="@photo.Id">
+                           <img src="@Url.RouteUrl(
+                               "Image",
+                               new
+                               {
+                                   id = photo.Id,
+                                   photoSize = PhotoSizes.Small,
+                                   fileName = photo.Name + ".jpg"
+                               })">
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div>No photos found for this tag.</div>
+    }
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <a asp-action="Edit">Edit</a> |
+            <a asp-action="Delete">Delete</a> |
+            <a asp-action="Index">Tag Index</a>
+        </div>
+    }
+</div>

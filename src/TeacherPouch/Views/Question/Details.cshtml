@@ -1,0 +1,42 @@
+﻿@model QuestionDetailsViewModel
+
+@{
+    ViewBag.Title = "Question Details";
+}
+
+<section class="question-details">
+    <header>
+        <h2>Question Details</h2>
+    </header>
+
+    <div>
+        <div>@Html.PhotoThumb(Model.Photo)</div>
+
+        <div style="margin-top: 10px;">
+            @Html.Partial("_TagButtons", Model.PhotoTags)
+        </div>
+    </div>
+
+    <div>
+        <label asp-for="@Model.QuestionText"></label>
+        <span class="preserve-newline">@Model.QuestionText</span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.QuestionSentenceStarters"></label>
+        <span class="preserve-newline">@Model.QuestionSentenceStarters</span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.QuestionOrder"></label>
+        @Model.QuestionOrder
+    </div>
+
+    @if (Model.DisplayAdminLinks)
+    {
+        <div>
+            <a asp-action="Edit">Edit</a> |
+            <a asp-action="Delete">Delete</a>
+        </div>
+    }
+</section>

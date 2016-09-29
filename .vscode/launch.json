@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/TeacherPouch.Web/bin/Debug/netcoreapp1.0/TeacherPouch.Web.dll",
+            "program": "${workspaceRoot}/src/TeacherPouch/bin/Debug/netcoreapp1.0/TeacherPouch.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

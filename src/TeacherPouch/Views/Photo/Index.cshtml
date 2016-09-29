@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Photo>
+
+@{
+    ViewBag.Title = "Photo Index";
+}
+
+<div>
+    <header>
+        <h1>Photo Index</h1>
+    </header>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <a asp-action="Create">Add new photo</a>
+        </div>
+    }
+
+    <h3>Total Photo Count: @Model.Count()</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Thumbnail</th>
+                <th>Name</th>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <th>Private</th>
+                }
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var photo in Model)
+        {
+            <tr>
+                <td>
+                    @photo.ID
+                </td>
+                <td>
+                    @Html.PhotoThumb(photo)
+                </td>
+                <td>
+                    <a asp-action="Details">@photo.Name</a>
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        @if (photo.IsPrivate)
+                        {
+                            <strong>Yes</strong>
+                        }
+                        else
+                        {
+                            @:No
+                        }
+                    </td>
+                }
+                <td>
+                    <a asp-action="Details">Details</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @: | <a asp-action="Edit">Edit</a>
+                        @: | <a asp-action="Delete">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

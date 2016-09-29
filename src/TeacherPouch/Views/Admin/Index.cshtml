@@ -18,23 +18,23 @@
         <legend>Photos</legend>
         @if (User.IsInRole(TeacherPouchRoles.Admin))
         {
-            <a asp-controller="Photos" asp-action="Create">Create New Photo</a> <br>
+            <a asp-controller="Photo" asp-action="Create">Create New Photo</a> <br>
         }
-        <a asp-controller="Photos" asp-action="Index">View All Photos</a>
+        <a asp-controller="Photo" asp-action="Index">View All Photos</a>
     </fieldset>
 
     <fieldset>
         <legend>Tags</legend>
         @if (User.IsInRole(TeacherPouchRoles.Admin))
         {
-            <a asp-controller="Tags" asp-action="Create">Create New Tag</a> <br>
+            <a asp-controller="Tag" asp-action="Create">Create New Tag</a> <br>
         }
-        <a asp-controller="Tags" asp-action="Index">View All Tags</a>
+        <a asp-controller="Tag" asp-action="Index">View All Tags</a>
     </fieldset>
 
     <fieldset>
         <legend>Questions</legend>
-        <a asp-controller="Questions" asp-action="Index">View All Questions</a>
+        <a asp-controller="Question" asp-action="Index">View All Questions</a>
     </fieldset>
 
     <p>

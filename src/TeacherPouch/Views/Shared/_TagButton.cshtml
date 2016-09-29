@@ -1,0 +1,8 @@
+@model Tag
+
+<a class="tag"
+   asp-controller="Tag"
+   asp-action="Details"
+   asp-route-name="@Model.Name">
+    @Model.Name
+</a>

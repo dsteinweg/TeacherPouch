@@ -1,0 +1,6 @@
+@model IEnumerable<Tag>
+
+@foreach (var tag in Model)
+{
+    Html.RenderPartial("_TagButton", tag);
+}

@@ -10,18 +10,37 @@
         <span class="duration">Searched in @Model.SearchDuration.TotalSeconds.ToString() seconds</span>
     </header>
 
-    @if (Model.TagResults.SafeAny())
+    @if (Model.TagResults.Any())
     {
         foreach (var tagResult in Model.TagResults)
         {
             <div class="search-result">
-                <h2>@Html.TagButton(tagResult.Tag)</h2>
-                @if (tagResult.Photos.SafeAny())
+                <h2>@Html.Partial("_TagButton", tagResult.Tag)</h2>
+                @if (tagResult.Photos != null && tagResult.Photos.Any())
                 {
                     <ul class="photo-thumbs">
                         @foreach (var photo in tagResult.Photos)
                         {
-                            <li>@Html.PhotoThumb_SearchResult(photo, tagResult.Tag)</li>
+                            @*return new HtmlString(
+                                String.Format(
+                                    "<a href=\"{0}?tag={1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
+                                    urlHelper.PhotoDetails(photo),
+                                    tag.Name,
+                                    cssClasses,
+                                    urlHelper.VersionedPhoto(photo, PhotoSizes.Small),
+                                    title
+                                )
+                            );*@
+
+                            <li>
+                                <a asp-controller="Photo"
+                                   asp-action="Details"
+                                   asp-route-id="@photo.Id"
+                                   asp-route-tag="@tagResult.Tag.Name"
+                                   class="photo-thumb">
+                                    <img src="@Url.Action("Image", "Photo", new { id = @photo.Id, fileName = "Blah_Small.jpg" })">
+                                </a>
+                            </li>
                         }
                     </ul>
                 }

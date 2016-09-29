@@ -11,6 +11,8 @@ namespace TeacherPouch.ViewModels
             Tags = tags;
         }
 
+        public string Name { get; set; }
+        public string PhotoUrl { get; set; }
         public Photo Photo { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
     }

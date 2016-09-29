@@ -13,11 +13,10 @@
         @if (Model.PreviousPhoto != null)
         {
             <div class="prev-arrow col-xs-2 col-sm-1">
-                <a
-                    asp-action="Details"
-                    asp-route-id="@Model.NextPhoto.Id"
-                    asp-route-tag="@Model.SearchResultTag.Name"
-                    asp-route-tag2="@Model.SearchResultTag2.Name">
+                <a asp-action="Details"
+                   asp-route-id="@Model.NextPhoto.Id"
+                   asp-route-tag="@Model.SearchResultTag.Name"
+                   asp-route-tag2="@Model.SearchResultTag2.Name">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
@@ -32,11 +31,10 @@
         @if (Model.NextPhoto != null)
         {
             <div class="next-arrow col-xs-2 col-sm-1">
-                <a
-                    asp-action="Details"
-                    asp-route-id="@Model.NextPhoto.Id"
-                    asp-route-tag="@Model.SearchResultTag.Name"
-                    asp-route-tag2="@Model.SearchResultTag2.Name">
+                <a asp-action="Details"
+                   asp-route-id="@Model.NextPhoto.Id"
+                   asp-route-tag="@Model.SearchResultTag.Name"
+                   asp-route-tag2="@Model.SearchResultTag2.Name">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
             </div>
@@ -44,20 +42,27 @@
     </div>
 
     <div>
-        <tag-buttons tags="@Model.PhotoTags"></tag-buttons>
+        @Html.Partial("_TagButtons", Model.PhotoTags)
     </div>
 
-    @if (Model.Questions.SafeAny())
+    @if (Model.Questions.Any())
     {
-        <div>
-            <h4>Questions</h4>
+        <section>
+            <header>
+                <h1>Questions</h1>
+            </header>
+
             <ul>
                 @foreach (var question in Model.Questions)
                 {
                     <li class="question">
                         @if (Model.ShowAdminLinks)
                         {
-                            <div class="preserve-newline">@Html.ActionLink(@question.Text, MVC.Questions.QuestionDetails(question.ID))</div>
+                            <div class="preserve-newline">
+                                <a asp-controller="Question"
+                                   asp-action="Details"
+                                   asp-route-id="@question.Id">@question.Text</a>
+                            </div>
                         }
                         else
                         {
@@ -67,7 +72,7 @@
                     </li>
                 }
             </ul>
-        </div>
+        </section>
     }
 
     @if (User.Identity.IsAuthenticated)
@@ -87,13 +92,13 @@
     <div id="download">
         Download this photo:
         <span class="download-link">
-            <a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Small)" class="btn btn-default">
+            <a asp-action="Download" class="btn btn-default">
                 <span class="glyphicon glyphicon-save"></span>Small
                 <span class="file-size">(@Model.SmallFileSize)</span>
             </a>
         </span>
         <span class="download-link">
-            <a href="@Url.PhotoDownloadUrl(Model.Photo, PhotoSizes.Large)" class="btn btn-default">
+            <a asp-action="Download" class="btn btn-default">
                 <span class="glyphicon glyphicon-save"></span>Large
                 <span class="file-size">(@Model.LargeFileSize)</span>
             </a>
@@ -103,12 +108,12 @@
     @if (Model.ShowAdminLinks)
     {
         <div>
-            <a asp-controller="Questions" asp-action="Create" asp-route-photo-id="@Model.Photo.Id">Create Question</a>
+            <a asp-controller="Question" asp-action="Create" asp-route-photo-id="@Model.Photo.Id">Create Question</a>
         </div>
 
         <div>
-            <a asp-action="Edit" asp-route-id="@Model.Photo.Id">Edit</a> |
-            <a asp-action="Delete" asp-route-id="@Model.Photo.Id">Delete</a> |
+            <a asp-action="Edit">Edit</a> |
+            <a asp-action="Delete">Delete</a> |
             <a asp-action="Index">Photo Index</a>
         </div>
     }

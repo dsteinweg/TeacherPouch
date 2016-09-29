@@ -7,8 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using TeacherPouch.Data;
 using TeacherPouch.Models;
+using TeacherPouch.Options;
 using TeacherPouch.Services;
 
 namespace TeacherPouch
@@ -25,7 +27,7 @@ namespace TeacherPouch
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
+                //builder.AddUserSecrets();
             }
 
             builder.AddEnvironmentVariables();
@@ -39,18 +41,27 @@ namespace TeacherPouch
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
+            services.AddOptions();
+            services.Configure<PhotoPaths>(Configuration.GetSection("Paths"));
+
             services
                 .AddDbContext<TeacherPouchDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("TeacherPouch")))
                 .AddDbContext<Data.IdentityDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("Identity")));
 
             services
-                .AddIdentity<ApplicationUser, IdentityRole>()
+                .AddIdentity<ApplicationUser, IdentityRole>(opts =>
+                {
+                    opts.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<Data.IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddRouting(opts => opts.LowercaseUrls = true);
 
             services.AddMvc();
+
+            services.AddMemoryCache();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();

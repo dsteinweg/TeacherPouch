@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace TeacherPouch.Models
 {
     public class PhotoTag

@@ -7,7 +7,7 @@ namespace TeacherPouch.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsPrivate { get; set; }
-        public List<PhotoTag> PhotoTags { get; set; }
+        public List<PhotoTag> PhotoTags { get; set; } = new List<PhotoTag>();
 
         public override string ToString()
         {

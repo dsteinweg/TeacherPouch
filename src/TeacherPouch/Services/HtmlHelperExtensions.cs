@@ -94,7 +94,7 @@ namespace TeacherPouch.Helpers
 
         public static HtmlString CombinedTags_SearchResult(this HtmlHelper htmlHelper, IEnumerable<Tag> tags)
         {
-            if (!tags.SafeAny())
+            if (!tags.Any())
                 return HtmlString.Empty;
 
             var builder = new StringBuilder();

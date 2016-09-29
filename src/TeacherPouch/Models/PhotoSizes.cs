@@ -3,7 +3,6 @@
     public enum PhotoSizes
     {
         Large,
-        Medium,
         Small
     }
 }

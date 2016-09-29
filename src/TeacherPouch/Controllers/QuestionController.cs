@@ -10,9 +10,9 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers
 {
     [Authorize(Roles = TeacherPouchRoles.Admin)]
-    public class QuestionsController : BaseController
+    public class QuestionController : BaseController
     {
-        public QuestionsController(
+        public QuestionController(
             TeacherPouchDbContext dbContext,
             PhotoService photoService,
             TagService tagService)
@@ -134,17 +134,7 @@ namespace TeacherPouch.Controllers
 
             question.Text = postedViewModel.QuestionText;
             question.SentenceStarters = postedViewModel.QuestionSentenceStarters;
-
-            if (!String.IsNullOrWhiteSpace(postedViewModel.QuestionOrder))
-            {
-                int questionOrder;
-                if (Int32.TryParse(postedViewModel.QuestionOrder, out questionOrder))
-                    question.Order = questionOrder;
-            }
-            else
-            {
-                question.Order = null;
-            }
+            question.Order = postedViewModel.QuestionOrder;
 
             _db.Questions.Update(question);
             _db.SaveChanges();

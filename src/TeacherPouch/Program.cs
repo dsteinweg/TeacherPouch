@@ -8,7 +8,7 @@ namespace TeacherPouch
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel(opts => opts.AddServerHeader = false)
+                .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();

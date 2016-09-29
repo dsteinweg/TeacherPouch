@@ -3,6 +3,7 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.TagHelpers
 {
+    [HtmlTargetElement("tag-button")]
     public class TagButtonTagHelper : TagHelper
     {
         public Tag Tag { get; set; }

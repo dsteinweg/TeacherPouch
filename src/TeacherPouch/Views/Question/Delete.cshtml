@@ -1,0 +1,42 @@
+﻿@model QuestionDetailsViewModel
+
+@{
+    ViewBag.Title = "Delete Question";
+}
+
+<section class="question-details">
+    <header>
+        <h1>Delete Question</h1>
+        <h2>Are you sure you want to delete this question?</h2>
+    </header>
+
+    <div>
+        <div>@Html.PhotoThumb(Model.Photo)</div>
+
+        <div style="margin-top: 10px;">
+            @Html.Partial("_TagButtons", Model.PhotoTags)
+        </div>
+    </div>
+
+    <div>
+        <label asp-for="@Model.QuestionText"></label>
+        <span class="preserve-newline">@Model.QuestionText</span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.QuestionSentenceStarters"></label>
+        <span class="preserve-newline">@Model.QuestionSentenceStarters</span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.QuestionOrder"></label>
+        @Model.QuestionOrder
+    </div>
+
+    <form asp-action="Delete">
+        <div class="form-group">
+            <button class="btn btn-danger" type="submit">Delete</button> |
+            <a asp-action="Details">Cancel</a>
+        </div>
+    </form>
+</section>

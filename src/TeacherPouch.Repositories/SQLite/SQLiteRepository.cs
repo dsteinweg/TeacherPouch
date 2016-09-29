@@ -133,7 +133,7 @@ namespace TeacherPouch.Repositories.SQLite
             // Delete all existing tag associations for the photo; we'll add them back below.
             PhotoTagAssociation.DeleteTagAssociationsForPhoto(photo);
 
-            if (tagNames.SafeAny())
+            if (tagNames.Any())
             {
                 var photoTags = new List<Tag>();
 

@@ -130,7 +130,7 @@ namespace TeacherPouch.Services
             // Delete all existing tag associations for the photo; we'll add them back below.
             PhotoTagAssociation.DeleteTagAssociationsForPhoto(photo);
 
-            if (tagNames.SafeAny())
+            if (tagNames.Any())
             {
                 var photoTags = new List<Tag>();
 
@@ -250,13 +250,12 @@ namespace TeacherPouch.Services
                             resizeOptions.Size = new Size(200, 200);
                             break;
 
-                        case PhotoSizes.Medium:
-                            resizeOptions.Size = new Size(500, 500);
-                            break;
-
                         case PhotoSizes.Large:
                             resizeOptions.Size = new Size(800, 800);
                             break;
+
+                        default:
+                            throw new Exception("Unrecognized photo size.");
                     }
 
                     originalImage

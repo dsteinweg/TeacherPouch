@@ -10,11 +10,11 @@
         <span class="duration">Searched in @Model.SearchDuration.TotalSeconds.ToString() seconds</span>
     </header>
 
-    @if (Model.Tags.SafeAny())
+    @if (Model.Tags.Any())
     {
         <div class="search-result">
             <h2>@Html.CombinedTags_SearchResult(Model.Tags)</h2>
-            @if (Model.Photos.SafeAny())
+            @if (Model.Photos.Any())
             {
                 <ul class="photo-thumbs">
                     @foreach (var photo in Model.Photos)

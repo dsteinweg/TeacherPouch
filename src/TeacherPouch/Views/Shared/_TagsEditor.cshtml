@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Tag>
 
 <textarea id="Tags" name="Tags" style="height:200px; width:300px;">
-    @if (Model.SafeAny())
+    @if (Model.Any())
     {
         @String.Join(", ", Model.Select(tag => tag.Name))
     }

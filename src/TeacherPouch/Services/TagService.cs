@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using TeacherPouch.Data;
 using TeacherPouch.Models;
 
@@ -42,7 +43,14 @@ namespace TeacherPouch.Services
 
         public Tag FindTag(string name)
         {
-            var tag = _db.Tags.FirstOrDefault(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            var tags = _db.Tags
+                .Where(t => t.Name == name)
+                .Include(t => t.PhotoTags)
+                .ThenInclude(pt => pt.Photo)
+                .ToList();
+
+            var tag = tags.FirstOrDefault();
+
             if (tag == null)
                 return null;
 

@@ -44,25 +44,21 @@ namespace TeacherPouch.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel postedViewModel)
         {
             if (!ModelState.IsValid)
                 return View(postedViewModel);
 
-            var user = new ApplicationUser
-            {
-                UserName = postedViewModel.UserName,
-                Password = postedViewModel.Password
-            };
-
-            var userValidator = new UserValidator<ApplicationUser>();
-            var result = await userValidator.ValidateAsync(_userManager, user);
-
-            var signInResult = await _signInManager.PasswordSignInAsync(user, postedViewModel.Password, false, false);
+            var signInResult = await _signInManager.PasswordSignInAsync(
+                postedViewModel.UserName,
+                postedViewModel.Password,
+                false,
+                false);
 
             if (!signInResult.Succeeded)
             {
-                ModelState.AddModelError("Login failed", "Invalid user name and/or password.");
+                ModelState.AddModelError("Login failed", "Invalid user name and/or password, " + signInResult.ToString());
                 return View(postedViewModel);
             }
 
@@ -82,6 +78,7 @@ namespace TeacherPouch.Controllers
 
         [HttpPost("register")]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(LoginViewModel postedViewModel)
         {
             if (!ModelState.IsValid)
@@ -89,11 +86,10 @@ namespace TeacherPouch.Controllers
 
             var user = new ApplicationUser
             {
-                UserName = postedViewModel.UserName,
-                Password = postedViewModel.Password
+                UserName = postedViewModel.UserName
             };
 
-            var createUserResult = await _userManager.CreateAsync(user);
+            var createUserResult = await _userManager.CreateAsync(user, postedViewModel.Password);
 
             if (!createUserResult.Succeeded)
             {

@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TeacherPouch.Models;
 
 namespace TeacherPouch.ViewModels
 {
     public class TagDetailsViewModel
     {
-        public TagDetailsViewModel(Tag tag)
+        public TagDetailsViewModel(Tag tag, IEnumerable<Photo> photos)
         {
             Tag = tag;
-            TaggedPhotos = tag.PhotoTags.Select(photoTag => photoTag.Photo).ToList();
+            Photos = photos;
         }
 
-        public Tag Tag { get; set; }
-        public List<Photo> TaggedPhotos { get; set; }
+        public Tag Tag { get; }
+        public IEnumerable<Photo> Photos { get; }
     }
 }

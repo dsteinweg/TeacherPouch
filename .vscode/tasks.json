@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/TeacherPouch.Web/project.json"
+                "${workspaceRoot}/src/TeacherPouch/project.json"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"

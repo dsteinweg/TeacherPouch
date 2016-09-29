@@ -13,9 +13,9 @@ namespace TeacherPouch.Controllers
 {
     [Route("photos")]
     [Authorize(Roles = TeacherPouchRoles.Admin)]
-    public class PhotosController : BaseController
+    public class PhotoController : BaseController
     {
-        public PhotosController(
+        public PhotoController(
             PhotoService photoService,
             TagService tagService,
             IMemoryCache cache,
@@ -50,7 +50,7 @@ namespace TeacherPouch.Controllers
             if (photo == null)
                 return InvokeHttp404();
 
-            var photoUrl = Url.Action(nameof(PhotoImage), new { id, fileName = photo.Name + ".jpg" });
+            var photoUrl = Url.Action(nameof(Image), new { id, fileName = photo.Name + ".jpg" });
 
             var smallFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Small);
             var largeFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Large);
@@ -107,7 +107,7 @@ namespace TeacherPouch.Controllers
         public IActionResult Create()
         {
             PhotoCreateViewModel viewModel;
-            if (!_cache.TryGetValue<PhotoCreateViewModel>("NewPhotoViewModel", out viewModel))
+            if (!_cache.TryGetValue<PhotoCreateViewModel>("New Photo View Model", out viewModel))
                 viewModel = new PhotoCreateViewModel(_photoService.PendingPhotoPath);
 
             return View(viewModel);
@@ -154,13 +154,13 @@ namespace TeacherPouch.Controllers
             nextCreateViewModel.Tags = postedViewModel.Tags;
             nextCreateViewModel.ProposedPhotoName = newPhotoName;
 
-            _cache.Set("NewPhotoViewModel", nextCreateViewModel);
+            _cache.Set("New Photo View Model", nextCreateViewModel);
 
             return RedirectToAction(nameof(Create));
         }
 
         [HttpGet("{id:int}/edit")]
-        public IActionResult PhotoEdit(int id)
+        public IActionResult Edit(int id)
         {
             var photo = _photoService.FindPhoto(id);
             if (photo == null)
@@ -169,6 +169,7 @@ namespace TeacherPouch.Controllers
             var viewModel = new PhotoEditViewModel
             {
                 Name = photo.Name,
+                PhotoUrl = Url.Action(nameof(Image), new { id = photo.Id, fileName = photo.Name }),
                 IsPrivate = photo.IsPrivate,
                 Tags = String.Join(
                     ", ",
@@ -179,7 +180,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpPost("{id:int}/edit")]
-        public IActionResult PhotoEdit(int id, PhotoEditViewModel postedViewModel)
+        public IActionResult Edit(int id, PhotoEditViewModel postedViewModel)
         {
             var photo = _photoService.FindPhoto(id);
             if (photo == null)
@@ -196,7 +197,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("{id:int}/delete")]
-        public IActionResult PhotoDelete(int id)
+        public IActionResult Delete(int id)
         {
             var photo = _photoService.FindPhoto(id);
             if (photo == null)
@@ -210,7 +211,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpPost("{id:int}/delete")]
-        public IActionResult PhotoDeleteConfirmed(int id)
+        public IActionResult Delete(int id, bool confirmed = true)
         {
             var photo =  _photoService.FindPhoto(id);
             if (photo == null)
@@ -221,17 +222,12 @@ namespace TeacherPouch.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("{id:int}/{fileName}")]
+        [HttpGet("{id:int}/{size}/{fileName}", Name = "Image")]
         [AllowAnonymous]
-        public IActionResult PhotoImage(int id, string fileName)
+        public IActionResult Image(int id, PhotoSizes size, string fileName)
         {
-            var fileNameParts = fileName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            PhotoSizes size;
-            if (fileNameParts.Length == 0 || !Enum.TryParse<PhotoSizes>(fileNameParts[fileNameParts.Length - 1], true, out size))
-                return InvokeHttp404();
-
             var photo = _photoService.FindPhoto(id);
-            if (photo != null)
+            if (photo == null)
                 return InvokeHttp404();
 
             var bytes = _photoService.GetPhotoBytes(photo, size);
@@ -241,15 +237,10 @@ namespace TeacherPouch.Controllers
             return File(bytes, "image/jpeg");
         }
 
-        [HttpGet("{id:int}/download/{fileName}")]
+        [HttpGet("{id:int}/{size}/download/{fileName}.jpg")]
         [AllowAnonymous]
-        public IActionResult PhotoImageDownload(int id, string fileName)
+        public IActionResult Download(int id, PhotoSizes size, string fileName)
         {
-            var fileNameParts = fileName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            PhotoSizes size;
-            if (fileNameParts.Length == 0 || !Enum.TryParse<PhotoSizes>(fileNameParts[fileNameParts.Length - 1], true, out size))
-                return InvokeHttp404();
-
             var photo = _photoService.FindPhoto(id);
             if (photo == null)
                 return InvokeHttp404();
