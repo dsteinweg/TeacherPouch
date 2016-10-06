@@ -11,7 +11,7 @@ namespace TeacherPouch.Controllers
         {
             Response.StatusCode = (int)HttpStatusCode.NotFound;
 
-            return View();
+            return View("Http404");
         }
 
         [Route("error")]
@@ -23,7 +23,7 @@ namespace TeacherPouch.Controllers
 
             Response.StatusCode = viewModel.StatusCode;
 
-            return View(viewModel);
+            return View("Error", viewModel);
         }
     }
 }
