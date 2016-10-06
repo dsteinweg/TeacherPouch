@@ -57,14 +57,7 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("photos/{photoId:int}/questions")]
-        [AllowAnonymous]
-        public IActionResult QuestionsForPhoto(int photoId)
-        {
-            return View();
-        }
-
-        [HttpGet("photos/{photoId:int}/questions/create")]
+        [HttpGet("questions/create")]
         public IActionResult Create(int photoId)
         {
             var photo = _photoService.FindPhoto(photoId);
