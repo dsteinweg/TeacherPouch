@@ -31,7 +31,6 @@ namespace TeacherPouch.Services
             if (exactTagMatch != null)
             {
                 var exactTagResult = new TagSearchResult(exactTagMatch);
-                //exactTagResult.Photos = GetPhotosForTag(exactTagMatch, allowPrivate).ToList();
 
                 results.TagResults.Add(exactTagResult);
             }
@@ -43,7 +42,7 @@ namespace TeacherPouch.Services
                 pluralSuffixTagMatch = _tagService.FindTag(query + "s");
                 if (pluralSuffixTagMatch != null)
                 {
-                    results.TagResults.Add(PopulateTagSearchResult(pluralSuffixTagMatch));
+                    results.TagResults.Add(new TagSearchResult(pluralSuffixTagMatch));
                 }
             }
             else // ends with 's'
@@ -51,7 +50,7 @@ namespace TeacherPouch.Services
                 singularSuffixTagMatch = _tagService.FindTag(query.TrimEnd('s'));
                 if (singularSuffixTagMatch != null)
                 {
-                    results.TagResults.Add(PopulateTagSearchResult(singularSuffixTagMatch));
+                    results.TagResults.Add(new TagSearchResult(singularSuffixTagMatch));
                 }
             }
 
@@ -67,7 +66,7 @@ namespace TeacherPouch.Services
 
             foreach (var tag in startsWithTagMatches)
             {
-                results.TagResults.Add(PopulateTagSearchResult(tag));
+                results.TagResults.Add(new TagSearchResult(tag));
             }
 
             var endsWithTagMatches = from tag in allTags
@@ -80,10 +79,11 @@ namespace TeacherPouch.Services
 
             foreach (var tag in endsWithTagMatches)
             {
-                results.TagResults.Add(PopulateTagSearchResult(tag));
+                results.TagResults.Add(new TagSearchResult(tag));
             }
 
-            // If no results were found using exact tag and plural/singular searching, try splitting the search query into tokens and search for multiple tags.
+            // If no results were found using exact tag and plural/singular searching,
+            // try splitting the search query into tokens and search for multiple tags.
             if (!results.HasAnyResults)
             {
                 var searchWords = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -94,7 +94,7 @@ namespace TeacherPouch.Services
                     var tag = _tagService.FindTag(searchWord);
                     if (tag != null)
                     {
-                        results.TagResults.Add(PopulateTagSearchResult(tag));
+                        results.TagResults.Add(new TagSearchResult(tag));
                     }
                 }
             }
@@ -122,42 +122,8 @@ namespace TeacherPouch.Services
                     matchingTags.Add(tag);
             }
 
-            /*
-            IEnumerable<Photo> uniquePhotos = new List<Photo>();
-            using (var connection = ConnectionHelper.GetSQLiteConnection())
-            {
-                foreach (var matchingTag in matchingTags)
-                {
-                    var sqlQuery = SQL.SELECT("DISTINCT Photo.*")
-                                      .FROM("Photo_Tag")
-                                      .INNER_JOIN("Tag on Tag.ID = Photo_Tag.TagID")
-                                      .INNER_JOIN("Photo on Photo.ID = Photo_Tag.PhotoID")
-                                      .WHERE("Tag.ID = {0}", matchingTag.ID);
-
-                    if (!allowPrivate)
-                    {
-                        sqlQuery = sqlQuery.WHERE("Photo.IsPrivate = {0}", false);
-                    }
-
-                    var matches = connection.Map<Photo>(sqlQuery);
-
-                    if (!uniquePhotos.Any())
-                    {
-                        uniquePhotos = matches.ToList();
-                    }
-                    else
-                    {
-                        uniquePhotos = uniquePhotos.Intersect(matches.ToList());
-                    }
-                }
-
-                uniquePhotos = uniquePhotos.Distinct();
-            }
-            */
-
             var results = new SearchResultsAnd(query);
             results.Tags = matchingTags;
-            //results.Photos = uniquePhotos.ToList();
 
             stopwatch.Stop();
 
@@ -172,14 +138,6 @@ namespace TeacherPouch.Services
                 .FindTagsLike(query)
                 .Select(tag => tag.Name)
                 .OrderBy(tagName => tagName);
-        }
-
-        private TagSearchResult PopulateTagSearchResult(Tag tag)
-        {
-            var tagResult = new TagSearchResult(tag);
-            //tagResult.Photos = GetPhotosForTag(tag, allowPrivate).ToList();
-
-            return tagResult;
         }
     }
 }
