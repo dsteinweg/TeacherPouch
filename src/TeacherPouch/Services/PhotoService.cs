@@ -6,6 +6,7 @@ using ImageProcessorCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using TeacherPouch.Data;
 using TeacherPouch.Models;
@@ -44,7 +45,14 @@ namespace TeacherPouch.Services
 
         public Photo FindPhoto(int id)
         {
-            var photo = _db.Photos.FirstOrDefault(p => p.Id == id);
+            var photo = _db
+                .Photos
+                .Where(p => p.Id == id)
+                .Include(p => p.PhotoTags)
+                .ThenInclude(pt => pt.Tag)
+                .Include(p => p.Questions)
+                .FirstOrDefault();
+
             if (photo == null)
                 return null;
 
@@ -56,7 +64,10 @@ namespace TeacherPouch.Services
 
         public string GetPhotoFilePath(Photo photo, PhotoSizes size)
         {
-            return Path.Combine(PhotoPath, photo.UniqueId.ToString(), size.ToString() + ".jpg");
+            return Path.Combine(
+                PhotoPath,
+                photo.UniqueId.ToString(),
+                size.ToString().ToLower() + ".jpg");
         }
 
         public string GetPhotoFileSize(Photo photo, PhotoSizes size)
