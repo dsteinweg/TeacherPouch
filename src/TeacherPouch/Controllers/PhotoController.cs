@@ -51,7 +51,14 @@ namespace TeacherPouch.Controllers
             if (photo == null)
                 return InvokeHttp404();
 
-            var photoUrl = Url.Action(nameof(Image), new { id, fileName = photo.Name + ".jpg" });
+            var photoUrl = Url.Action(
+                nameof(Image),
+                new
+                {
+                    id,
+                    size = PhotoSizes.Large,
+                    fileName = photo.Name + ".jpg"
+                });
 
             var smallFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Small);
             var largeFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Large);
