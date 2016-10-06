@@ -1,7 +1,7 @@
 @model Tag
 
-<a asp-controller="Tag" asp-action="Details" asp-route-name="@Model.Name">
-    <span class="label label-info">
-        @Model.Name
-    </span>
-</a>
+<a asp-controller="Tag"
+   asp-action="Details"
+   asp-route-id="@Model.Id"
+   asp-route-name="@Model.Name"
+   class="tag"><span class="label label-primary">@Model.Name</span></a>
