@@ -31,7 +31,13 @@ namespace TeacherPouch.Services
 
         public Tag FindTag(int id)
         {
-            var tag = _db.Tags.FirstOrDefault(t => t.Id == id);
+            var tag = _db
+                .Tags
+                .Where(t => t.Id == id)
+                .Include(t => t.PhotoTags)
+                .ThenInclude(pt => pt.Photo)
+                .FirstOrDefault();
+
             if (tag == null)
                 return null;
 
@@ -43,7 +49,8 @@ namespace TeacherPouch.Services
 
         public Tag FindTag(string name)
         {
-            var tags = _db.Tags
+            var tags = _db
+                .Tags
                 .Where(t => t.Name == name)
                 .Include(t => t.PhotoTags)
                 .ThenInclude(pt => pt.Photo)
@@ -80,8 +87,15 @@ namespace TeacherPouch.Services
             _db.SaveChanges();
         }
 
-        public void DeleteTag(Tag tag)
+        public void DeleteTag(int id)
         {
+            var tag = _db.Tags.FirstOrDefault(t => t.Id == id);
+            if (tag == null)
+                throw new Exception($"Tag with ID {id} not found.");
+
+            var photoTags = _db.PhotoTags.Where(pt => pt.TagId == id);
+
+            _db.RemoveRange(photoTags);
             _db.Remove(tag);
             _db.SaveChanges();
         }
