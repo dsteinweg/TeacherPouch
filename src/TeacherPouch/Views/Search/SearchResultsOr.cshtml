@@ -21,24 +21,14 @@
                     <ul class="photo-thumbs">
                         @foreach (var photo in tagResult.Photos)
                         {
-                            @*return new HtmlString(
-                                String.Format(
-                                    "<a href=\"{0}?tag={1}\" class=\"{2}\"><img src=\"{3}\"{4}></a>",
-                                    urlHelper.PhotoDetails(photo),
-                                    tag.Name,
-                                    cssClasses,
-                                    urlHelper.VersionedPhoto(photo, PhotoSizes.Small),
-                                    title
-                                )
-                            );*@
-
                             <li>
                                 <a asp-controller="Photo"
                                    asp-action="Details"
                                    asp-route-id="@photo.Id"
+                                   asp-route-photo-name="@photo.Name"
                                    asp-route-tag="@tagResult.Tag.Name"
                                    class="photo-thumb">
-                                    <img src="@Url.Action("Image", "Photo", new { id = @photo.Id, fileName = "Blah_Small.jpg" })">
+                                    <img src="@Url.Action("Image", "Photo", new { id = @photo.Id, size = PhotoSizes.Small, fileName = "Blah_Small.jpg" })">
                                 </a>
                             </li>
                         }

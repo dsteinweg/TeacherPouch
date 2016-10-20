@@ -13,13 +13,23 @@
     @if (Model.Tags.Any())
     {
         <div class="search-result">
-            <h2>@Html.CombinedTags_SearchResult(Model.Tags)</h2>
+            <h2>
+                @Html.Partial("_TagButtons", Model.Tags)
+            </h2>
             @if (Model.Photos.Any())
             {
                 <ul class="photo-thumbs">
                     @foreach (var photo in Model.Photos)
                     {
-                        <li>@Html.PhotoThumb_AndedSearchResults(photo, Model.Tags)</li>
+                        <li>
+                            <a asp-controller="Photo"
+                                asp-action="Details"
+                                asp-route-id="@photo.Id"
+                                asp-route-photo-name="@photo.Name"
+                                class="photo-thumb">
+                                <img src="@Url.Action("Image", "Photo", new { id = @photo.Id, size = PhotoSizes.Small, fileName = "Blah_Small.jpg" })">
+                            </a>
+                        </li>
                     }
                 </ul>
             }

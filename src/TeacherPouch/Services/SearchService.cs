@@ -110,8 +110,6 @@ namespace TeacherPouch.Services
         {
             var stopwatch = Stopwatch.StartNew();
 
-            var allTags = _tagService.GetAllTags();
-
             var searchWords = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             var matchingTags = new List<Tag>();
@@ -122,8 +120,24 @@ namespace TeacherPouch.Services
                     matchingTags.Add(tag);
             }
 
+            var uniquePhotos = Enumerable.Empty<Photo>();
+            foreach (var tag in matchingTags)
+            {
+                var photos = tag.PhotoTags.Select(pt => pt.Photo);
+
+                if (!uniquePhotos.Any())
+                {
+                    uniquePhotos = photos;
+                }
+                else
+                {
+                    uniquePhotos = uniquePhotos.Intersect(photos.ToList());
+                }
+            }
+
             var results = new SearchResultsAnd(query);
             results.Tags = matchingTags;
+            results.Photos = uniquePhotos.ToList();
 
             stopwatch.Stop();
 
