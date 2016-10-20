@@ -230,7 +230,7 @@ namespace TeacherPouch.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("{id:int}/{size}/{fileName}", Name = "Image")]
+        [HttpGet("{id:int}/{size}/{fileName}")]
         [AllowAnonymous]
         public IActionResult Image(int id, PhotoSizes size, string fileName)
         {
