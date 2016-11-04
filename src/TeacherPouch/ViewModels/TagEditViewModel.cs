@@ -13,11 +13,11 @@ namespace TeacherPouch.ViewModels
         public TagEditViewModel(Tag tag)
         {
             Name = tag.Name;
-            IsPrivate = tag.IsPrivate;
+            Private = tag.IsPrivate;
         }
 
         [Required]
         public string Name { get; set; }
-        public bool IsPrivate { get; set; }
+        public bool Private { get; set; }
     }
 }

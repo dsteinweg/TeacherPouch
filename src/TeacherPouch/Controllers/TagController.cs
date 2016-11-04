@@ -42,11 +42,11 @@ namespace TeacherPouch.Controllers
             return View(allTags);
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("{id:int}/{name?}")]
         [AllowAnonymous]
-        public IActionResult Details(string name)
+        public IActionResult Details(int id, string name)
         {
-            var tag = _tagService.FindTag(name);
+            var tag = _tagService.FindTag(id);
             if (tag == null)
                 return InvokeHttp404();
 
@@ -78,12 +78,12 @@ namespace TeacherPouch.Controllers
             var tag = new Tag()
             {
                 Name = postedViewModel.TagName,
-                IsPrivate = postedViewModel.IsPrivate
+                IsPrivate = postedViewModel.Private
             };
 
             _tagService.SaveTag(tag);
 
-            return RedirectToAction(nameof(Details), new { tagName = tag.Name} );
+            return RedirectToAction(nameof(Details), new { id = tag.Id, name = tag.Name });
         }
 
         [HttpGet("{id:int}/Edit")]
@@ -117,7 +117,7 @@ namespace TeacherPouch.Controllers
             }
 
             tag.Name = postedViewModel.Name;
-            tag.IsPrivate = postedViewModel.IsPrivate;
+            tag.IsPrivate = postedViewModel.Private;
 
             _tagService.SaveTag(tag);
 
@@ -141,7 +141,7 @@ namespace TeacherPouch.Controllers
             if (tag == null)
                 return InvokeHttp404();
 
-            _tagService.DeleteTag(tag);
+            _tagService.DeleteTag(id);
 
             return RedirectToAction(nameof(Index));
         }

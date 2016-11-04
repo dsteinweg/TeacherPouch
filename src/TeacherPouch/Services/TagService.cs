@@ -52,6 +52,7 @@ namespace TeacherPouch.Services
             var tags = _db
                 .Tags
                 .Where(t => t.Name == name)
+                .OrderBy(t => t.Id)
                 .Include(t => t.PhotoTags)
                 .ThenInclude(pt => pt.Photo)
                 .ToList();
@@ -61,8 +62,13 @@ namespace TeacherPouch.Services
             if (tag == null)
                 return null;
 
-            if (!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated && tag.IsPrivate)
-                return null;
+            if (!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                if (tag.IsPrivate)
+                    return null;
+
+                tag.PhotoTags = tag.PhotoTags.Where(pt => !pt.Photo.IsPrivate).ToList();
+            }
 
             return tag;
         }

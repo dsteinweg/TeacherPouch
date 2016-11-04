@@ -11,8 +11,6 @@
     </header>
 
     <form asp-action="Edit">
-        <div asp-validation-summary="All" class="alert alert-danger"></div>
-
         <div class="form-group">
             <label asp-for="@Model.Name"></label>
             <input asp-for="@Model.Name" class="form-control">
@@ -20,8 +18,8 @@
 
         <div class="form-group">
             <div class="checkbox">
-                <input asp-for="@Model.IsPrivate">
-                <label asp-for="@Model.IsPrivate"></label>
+                <label asp-for="@Model.Private"></label>
+                <input asp-for="@Model.Private">
             </div>
         </div>
 

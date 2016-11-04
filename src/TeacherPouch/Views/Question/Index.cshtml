@@ -23,10 +23,10 @@
             {
                 <tr>
                     <td>
-                        @question.ID
+                        @question.Id
                     </td>
                     <td>
-                        <a asp-controller="Photo" asp-action="Details" asp-route-id="@question.PhotoId">@question.PhotoId</a>
+                        <a asp-route="photo-details" asp-route-id="@question.PhotoId">@question.PhotoId</a>
                     </td>
                     <td>
                         <a asp-action="Details" asp-route-id="@question.Id">@question.Text</a>

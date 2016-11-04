@@ -1,9 +1,12 @@
-﻿namespace TeacherPouch.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TeacherPouch.ViewModels
 {
     public class TagCreateViewModel
     {
+        [Display(Name = "Tag Name")]
         public string TagName { get; set; }
-        public bool IsPrivate { get; set; }
+        public bool Private { get; set; }
         public string ErrorMessage { get; set; }
     }
 }

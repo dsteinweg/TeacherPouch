@@ -40,13 +40,6 @@ namespace TeacherPouch.Controllers
             if (!await _roleManager.RoleExistsAsync(friendRole.Name))
                 await _roleManager.CreateAsync(friendRole);
 
-            if (User.Identity.IsAuthenticated && User.Identity.Name == "darren")
-            {
-                var darren = await _userManager.GetUserAsync(User);
-
-                await _userManager.AddToRoleAsync(darren, TeacherPouchRoles.Admin);
-            }
-
             var user = await _userManager.GetUserAsync(User);
             var roles = await _userManager.GetRolesAsync(user);
             var viewModel = new AdminViewModel(user, roles);

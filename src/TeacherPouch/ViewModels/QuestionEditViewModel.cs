@@ -20,7 +20,7 @@ namespace TeacherPouch.ViewModels
             QuestionSentenceStarters = question.SentenceStarters;
             QuestionOrder = question.Order;
             Photo = photo;
-            PhotoTags = photo.PhotoTags.Select(photoTag => photoTag.Tag);
+            Tags = photo.PhotoTags.Select(pt => pt.Tag);
         }
 
         public int QuestionId { get; set; }
@@ -31,7 +31,7 @@ namespace TeacherPouch.ViewModels
         [Display(Name = "Question Order (optional)")]
         public int? QuestionOrder { get; set; }
         public Photo Photo { get; set; } = new Photo();
-        public IEnumerable<Tag> PhotoTags { get; set; } = Enumerable.Empty<Tag>();
+        public IEnumerable<Tag> Tags { get; set; } = Enumerable.Empty<Tag>();
         public bool DisplayAdminLinks { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

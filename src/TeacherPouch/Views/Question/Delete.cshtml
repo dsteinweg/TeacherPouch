@@ -11,26 +11,28 @@
     </header>
 
     <div>
-        <div>@Html.PhotoThumb(Model.Photo)</div>
+        <div>
+            @Html.Partial("_PhotoThumbSmall", Model.Photo)
+        </div>
 
         <div style="margin-top: 10px;">
-            @Html.Partial("_TagButtons", Model.PhotoTags)
+            @Html.Partial("_TagButtons", Model.Tags)
         </div>
     </div>
 
     <div>
         <label asp-for="@Model.QuestionText"></label>
-        <span class="preserve-newline">@Model.QuestionText</span>
+        <div class="preserve-newline">@Model.QuestionText</div>
     </div>
 
     <div>
         <label asp-for="@Model.QuestionSentenceStarters"></label>
-        <span class="preserve-newline">@Model.QuestionSentenceStarters</span>
+        <div class="preserve-newline">@Model.QuestionSentenceStarters</div>
     </div>
 
     <div>
         <label asp-for="@Model.QuestionOrder"></label>
-        @Model.QuestionOrder
+        <div>@Model.QuestionOrder</div>
     </div>
 
     <form asp-action="Delete">

@@ -42,9 +42,9 @@ namespace TeacherPouch.Controllers
             return View(photos);
         }
 
-        [HttpGet("{id:int}/{photoName?}")]
+        [HttpGet("{id:int}/{name?}", Name = "photo-details")]
         [AllowAnonymous]
-        public IActionResult Details(int id, string tag = null, string tag2 = null)
+        public IActionResult Details(int id, string name = null, string tag = null, string tag2 = null)
         {
             // TODO: extract this into service
             var photo = _photoService.FindPhoto(id);
@@ -61,7 +61,9 @@ namespace TeacherPouch.Controllers
                 });
 
             var smallFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Small);
+            var smallDownloadUrl = Url.Action(nameof(Download), new { id, size = PhotoSizes.Small, fileName = photo.Name });
             var largeFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Large);
+            var largeDownloadUrl = Url.Action(nameof(Download), new { id, size = PhotoSizes.Large, fileName = photo.Name });
 
             Tag firstTag = null;
             var firstTagPhotos = Enumerable.Empty<Photo>();
@@ -69,7 +71,7 @@ namespace TeacherPouch.Controllers
             {
                 firstTag = _tagService.FindTag(tag);
                 if (firstTag != null)
-                    firstTagPhotos = firstTag.PhotoTags.Select(photoTag => _photoService.FindPhoto(photoTag.PhotoId));
+                    firstTagPhotos = firstTag.PhotoTags.Select(pt => pt.Photo);
             }
 
             Tag secondTag = null;
@@ -78,22 +80,22 @@ namespace TeacherPouch.Controllers
             {
                 secondTag = _tagService.FindTag(tag2);
                 if (secondTag != null)
-                    secondTagPhotos = secondTag.PhotoTags.Select(photoTag => _photoService.FindPhoto(photoTag.PhotoId));
+                    secondTagPhotos = secondTag.PhotoTags.Select(pt => pt.Photo);
             }
 
-            var allTagPhotos = secondTagPhotos.Any() ?
-                firstTagPhotos.Intersect(secondTagPhotos).Distinct().ToList() :
-                firstTagPhotos.ToList();
+            var allTagPhotos = secondTagPhotos.Any()
+                ? firstTagPhotos.Intersect(secondTagPhotos).Distinct().OrderBy(p => p.Id).ToList()
+                : firstTagPhotos.OrderBy(p => p.Id).ToList();
 
             var photoIndexInPhotosList = allTagPhotos.IndexOf(photo);
 
             var previousPhoto = allTagPhotos.ElementAtOrDefault(photoIndexInPhotosList - 1);
             if (previousPhoto == null && allTagPhotos.Count() > 1)
-                previousPhoto = allTagPhotos.ElementAtOrDefault(allTagPhotos.Count() - 1);
+                previousPhoto = allTagPhotos.LastOrDefault();
 
             var nextPhoto = allTagPhotos.ElementAtOrDefault(photoIndexInPhotosList + 1);
             if (nextPhoto == null && allTagPhotos.Count() > 1)
-                nextPhoto = allTagPhotos.ElementAtOrDefault(0);
+                nextPhoto = allTagPhotos.FirstOrDefault();
 
             var userIsAdmin = User.IsInRole(TeacherPouchRoles.Admin);
 
@@ -101,7 +103,9 @@ namespace TeacherPouch.Controllers
                 photo,
                 photoUrl,
                 smallFileSize,
+                smallDownloadUrl,
                 largeFileSize,
+                largeDownloadUrl,
                 firstTag,
                 secondTag,
                 previousPhoto,
@@ -254,7 +258,7 @@ namespace TeacherPouch.Controllers
                 return InvokeHttp404();
 
             var bytes = _photoService.GetPhotoBytes(photo, size);
-            if (bytes != null || bytes.Length == 0)
+            if (bytes == null || bytes.Length == 0)
                 return InvokeHttp404();
 
             return File(bytes, "image/jpeg", fileName + ".jpg");

@@ -1,7 +1,7 @@
 ﻿@model PhotoDetailsViewModel
 
 @{
-    ViewBag.Title = "Photo Details";
+    ViewBag.Title = Model.Photo.Name;
 }
 
 <div id="photoDetails">
@@ -9,36 +9,41 @@
         <h1>@Model.Photo.Name</h1>
     </header>
 
-    <div class="row photo-details-slider">
-        @if (Model.PreviousPhoto != null)
-        {
-            <div class="prev-arrow col-xs-2 col-sm-1">
-                <a asp-action="Details"
-                   asp-route-id="@Model.PreviousPhoto.Id"
-                   asp-route-tag="@Model.SearchResultTag?.Name"
-                   asp-route-tag2="@Model.SearchResultTag2?.Name">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-            </div>
-        }
+    @if (Model.PreviousPhoto != null || Model.NextPhoto != null)
+    {
+        <ul class="pager">
+            @if (Model.PreviousPhoto != null)
+            {
+                <li class="previous">
+                    <a asp-route="photo-details"
+                       asp-route-id="@Model.PreviousPhoto.Id"
+                       asp-route-name="@Model.PreviousPhoto.Name"
+                       asp-route-tag="@Model.SearchResultTag?.Name"
+                       asp-route-tag2="@Model.SearchResultTag2?.Name">
+                        <span aria-hidden="true">&larr;</span> Previous
+                    </a>
+                </li>
+            }
 
-        <div class="photo col-xs-8 col-sm-10">
-            <div class="photo-thumb">
-                <img src="@Model.PhotoUrl" class="img-responsive center-block">
-            </div>
+            @if (Model.NextPhoto != null)
+            {
+                <li class="next">
+                    <a asp-route="photo-details"
+                       asp-route-id="@Model.NextPhoto.Id"
+                       asp-route-name="@Model.NextPhoto.Name"
+                       asp-route-tag="@Model.SearchResultTag?.Name"
+                       asp-route-tag2="@Model.SearchResultTag2?.Name">
+                            Next <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+
+    <div class="photo">
+        <div class="photo-thumb">
+            <img src="@Model.PhotoUrl" class="img-responsive center-block">
         </div>
-
-        @if (Model.NextPhoto != null)
-        {
-            <div class="next-arrow col-xs-2 col-sm-1">
-                <a asp-action="Details"
-                   asp-route-id="@Model.NextPhoto.Id"
-                   asp-route-tag="@Model.SearchResultTag?.Name"
-                   asp-route-tag2="@Model.SearchResultTag2?.Name">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-            </div>
-        }
     </div>
 
     <div>
@@ -92,13 +97,13 @@
     <div id="download">
         Download this photo:
         <span class="download-link">
-            <a asp-action="Download" class="btn btn-default">
+            <a href="@Model.SmallDownloadUrl" class="btn btn-default">
                 <span class="glyphicon glyphicon-save"></span>Small
                 <span class="file-size">(@Model.SmallFileSize)</span>
             </a>
         </span>
         <span class="download-link">
-            <a asp-action="Download" class="btn btn-default">
+            <a href="@Model.LargeDownloadUrl" class="btn btn-default">
                 <span class="glyphicon glyphicon-save"></span>Large
                 <span class="file-size">(@Model.LargeFileSize)</span>
             </a>

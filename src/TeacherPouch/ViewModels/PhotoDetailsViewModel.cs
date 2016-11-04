@@ -10,7 +10,9 @@ namespace TeacherPouch.ViewModels
             Photo photo,
             string photoUrl,
             string smallFileSize,
+            string smallDownloadUrl,
             string largeFileSize,
+            string largeDownloadUrl,
             Tag searchResultTag,
             Tag searchResultTag2,
             Photo previousPhoto,
@@ -22,7 +24,9 @@ namespace TeacherPouch.ViewModels
             Tags = photo.PhotoTags.Select(pt => pt.Tag);
             Questions = photo.Questions;
             SmallFileSize = smallFileSize;
+            SmallDownloadUrl = smallDownloadUrl;
             LargeFileSize = largeFileSize;
+            LargeDownloadUrl = largeDownloadUrl;
             SearchResultTag = searchResultTag;
             SearchResultTag2 = searchResultTag2;
             PreviousPhoto = previousPhoto;
@@ -35,7 +39,9 @@ namespace TeacherPouch.ViewModels
         public IEnumerable<Tag> Tags { get; }
         public IEnumerable<Question> Questions { get; }
         public string SmallFileSize { get; }
+        public string SmallDownloadUrl { get; }
         public string LargeFileSize { get; }
+        public string LargeDownloadUrl { get; }
         public Tag SearchResultTag { get; }
         public Tag SearchResultTag2 { get; }
         public Photo PreviousPhoto { get; }

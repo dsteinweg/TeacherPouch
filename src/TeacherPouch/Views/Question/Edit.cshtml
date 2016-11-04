@@ -11,14 +11,11 @@
 
     <div>
         <div>
-            @Html.PhotoThumb(Model.Photo)
+            @Html.Partial("_PhotoThumbSmall", Model.Photo)
         </div>
 
         <div style="margin-top:10px;">
-            @foreach (var tag in Model.PhotoTags)
-            {
-                Html.Partial("_TagButton", tag)
-            }
+            @Html.Partial("_TagButtons", Model.Tags)
         </div>
     </div>
 
@@ -28,17 +25,17 @@
             <textarea asp-for="@Model.QuestionText" class="form-control"></textarea>
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.QuestionSentenceStarters"></label>
             <textarea asp-for="@Model.QuestionSentenceStarters" class="form-control"></textarea>
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.QuestionOrder"></label>
             <input asp-for="@Model.QuestionOrder" class="form-control"></textarea>
         </div>
 
-        <div>
+        <div class="form-group">
             <button class="btn btn-primary" type="submit">Save</button> |
             <a asp-action="Details" asp-route-id="@Model.QuestionId">Cancel</a>
         </div>

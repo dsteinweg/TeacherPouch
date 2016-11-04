@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using TeacherPouch.Models;
 
 namespace TeacherPouch.ViewModels
@@ -19,9 +20,11 @@ namespace TeacherPouch.ViewModels
             QuestionSentenceStarters = !String.IsNullOrWhiteSpace(question.SentenceStarters) ? question.SentenceStarters : "(None)";
             QuestionOrder = (question.Order.HasValue) ? question.Order.Value.ToString() : "(None)";
             Photo = photo;
+            Tags = photo.PhotoTags.Select(pt => pt.Tag);
         }
 
         public Photo Photo { get; set; } = new Photo();
+        public IEnumerable<Tag> Tags { get; }
         public int QuestionId { get; set; }
         [Display(Name = "Question")]
         public string QuestionText { get; set; }
