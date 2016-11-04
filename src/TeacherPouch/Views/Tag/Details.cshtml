@@ -32,7 +32,8 @@
                     <li>
                         <a asp-controller="Photo"
                            asp-action="Details"
-                           asp-route-id="@photo.Id">
+                           asp-route-id="@photo.Id"
+                           asp-route-tag="@Model.Tag.Name">
                            <img src="@Url.Action("Image", "Photo", new { id = photo.Id, size = PhotoSizes.Small, fileName = photo.Name + "_Small.jpg" })">
                         </a>
                     </li>
