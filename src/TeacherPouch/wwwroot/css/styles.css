@@ -468,23 +468,6 @@ ul.photo-thumbs {
 
 
 /*
-    Questions
-*/
-.question-details label {
-    font-size: 20px;
-}
-.question-details input[type='text'] {
-    width: 300px;
-}
-.question-details textarea {
-    width: 300px;
-    height: 200px;
-}
-.question-details > div {
-    margin-bottom: 30px;
-}
-
-/*
     Search
 */
 @media (max-width: 768px) {

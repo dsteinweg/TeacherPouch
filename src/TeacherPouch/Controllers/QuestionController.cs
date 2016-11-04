@@ -68,7 +68,7 @@ namespace TeacherPouch.Controllers
             return View(viewModel);
         }
 
-        [HttpPost("photos/{photoId:int}/questions/create")]
+        [HttpPost("questions/create")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(int photoId, QuestionCreateViewModel postedViewModel)
         {
