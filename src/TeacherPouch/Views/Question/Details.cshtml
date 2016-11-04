@@ -15,7 +15,7 @@
                asp-route-id="@Model.Photo.Id"
                asp-route-name="@Model.Photo.Name"
                class="photo-thumb">
-                <img src="@Url.Action("Image", "Photo", new { id = Model.Photo.Id, size = PhotoSizes.Small, fileName = Model.Photo.Name + "_Small.jpg" })">
+                <img src="@Url.Action("Image", "Photo", new { id = Model.Photo.Id, size = PhotoSizes.Large, fileName = Model.Photo.Name + "_Small.jpg" })">
             </a>
         </div>
 

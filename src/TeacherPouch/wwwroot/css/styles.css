@@ -397,12 +397,6 @@ table.index {
     }
 
 
-#tags input {
-    height: 200px;
-    width: 300px;
-}
-
-
 #tagTable {
     border-collapse: collapse;
 }

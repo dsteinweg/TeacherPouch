@@ -63,17 +63,15 @@
                     <li class="question">
                         @if (Model.ShowAdminLinks)
                         {
-                            <div class="preserve-newline">
-                                <a asp-controller="Question"
-                                   asp-action="Details"
-                                   asp-route-id="@question.Id">@question.Text</a>
-                            </div>
+                            <a asp-controller="Question"
+                                asp-action="Details"
+                                asp-route-id="@question.Id">@question.Text</a>
                         }
                         else
                         {
-                            <div class="preserve-newline">@question.Text</div>
+                            @question.Text
                         }
-                        <div class="question-starter preserve-newline">@question.SentenceStarters</div>
+                        <div class="question-starter">@question.SentenceStarters</div>
                     </li>
                 }
             </ul>

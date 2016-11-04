@@ -1,7 +1,7 @@
 ﻿@model PhotoDeleteViewModel
 
 @{
-    ViewBag.Title = "Delete Photo";
+    ViewBag.Title = @Model.Name + " - Delete";
 }
 
 <div>
@@ -10,20 +10,22 @@
         <h2>Delete</h2>
     </header>
 
-    <div>
-        <img src="@Model.PhotoUrl">
-    </div>
-
-    <div style="margin-top:20px; margin-bottom:20px;">
-        @Html.Partial("_TagButtons", Model.Tags)
-    </div>
-
-    <p>Are you sure you want to delete this photo?</p>
-
     <form asp-action="Delete">
-        <div class="form-control">
+        <div class="form-group">
+            <img src="@Model.PhotoUrl">
+
+            <div>
+                @Html.Partial("_TagButtons", Model.Tags)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="form-control-static">Are you sure you want to delete this photo?</p>
+        </div?
+
+        <div class="form-group">
             <button class="btn btn-danger" type="submit">Delete</button> |
-            <a asp-action="Details">Cancel</a>
+            <a asp-route="photo-details" asp-route-id="@Model.Id" asp-route-name="@Model.Name">Cancel</a>
         </div>
     </form>
 </div>

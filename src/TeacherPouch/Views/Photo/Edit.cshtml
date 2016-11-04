@@ -1,7 +1,7 @@
 ﻿@model PhotoEditViewModel
 
 @{
-    ViewBag.Title = "Edit Photo";
+    ViewBag.Title = @Model.Name + " - Edit";
 }
 
 <div id="editPhoto">
@@ -12,29 +12,29 @@
 
     <form asp-action="Edit">
         <div>
-            <img src="@Model.PhotoUrl" asp-append-version="true">
+            <img src="@Model.PhotoUrl">
         </div>
 
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.Name"></label>
-            <input asp-for="@Model.Name"></input>
+            <input asp-for="@Model.Name" class="form-control">
         </div>
 
-        <div>
-            <label asp-for="@Model.IsPrivate"></label>
-            <input asp-for="@Model.IsPrivate"></input>
+        <div class="form-group">
+            <label asp-for="@Model.Private"></label>
+            <input asp-for="@Model.Private">
         </div>
 
-        <div id="tags">
+        <div class="form-group">
             <label asp-for="@Model.Tags"></label>
-            <textarea asp-for="@Model.Tags"></textarea>
+            <textarea asp-for="@Model.Tags" class="form-control"></textarea>
         </div>
 
-        <div>
-            <input type="submit" value="Save" /> |
-            <a asp-action="Details">Cancel</a>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button> |
+            <a asp-route="photo-details" asp-route-id="@Model.Id" asp-route-name="@Model.Name">Cancel</a>
         </div>
 
-        <div asp-validation-summary="true"></div>
+        <div asp-validation-summary="All"></div>
     </form>
 </div>

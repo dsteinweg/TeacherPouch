@@ -178,15 +178,10 @@ namespace TeacherPouch.Controllers
             if (photo == null)
                 return InvokeHttp404();
 
-            var viewModel = new PhotoEditViewModel
-            {
-                Name = photo.Name,
-                PhotoUrl = Url.Action(nameof(Image), new { id = photo.Id, fileName = photo.Name }),
-                IsPrivate = photo.IsPrivate,
-                Tags = String.Join(
-                    ", ",
-                    photo.PhotoTags.Select(photoTag => _tagService.FindTag(photoTag.TagId)).Select(tag => tag.Name))
-            };
+            var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
+            var tags = photo.PhotoTags.Select(pt => pt.Tag);
+
+            var viewModel = new PhotoEditViewModel(photo, photoUrl, tags);
 
             return View(viewModel);
         }
@@ -199,7 +194,7 @@ namespace TeacherPouch.Controllers
                 return InvokeHttp404();
 
             photo.Name = postedViewModel.Name;
-            photo.IsPrivate = postedViewModel.IsPrivate;
+            photo.IsPrivate = postedViewModel.Private;
 
             //var tagNames = SplitTagNames(postedViewModel.Tags);
 
@@ -215,9 +210,9 @@ namespace TeacherPouch.Controllers
             if (photo == null)
                 return InvokeHttp404();
 
+            var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
             var tags = photo.PhotoTags.Select(photoTag => _tagService.FindTag(photoTag.TagId));
-
-            var viewModel = new PhotoDeleteViewModel(photo, tags);
+            var viewModel = new PhotoDeleteViewModel(photo, photoUrl, tags);
 
             return View(viewModel);
         }

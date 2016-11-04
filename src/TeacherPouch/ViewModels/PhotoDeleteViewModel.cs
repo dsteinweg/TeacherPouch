@@ -5,15 +5,17 @@ namespace TeacherPouch.ViewModels
 {
     public class PhotoDeleteViewModel
     {
-        public PhotoDeleteViewModel(Photo photo, IEnumerable<Tag> tags)
+        public PhotoDeleteViewModel(Photo photo, string photoUrl, IEnumerable<Tag> tags)
         {
-            Photo = photo;
+            Id = photo.Id;
+            Name = photo.Name;
+            PhotoUrl = photoUrl;
             Tags = tags;
         }
 
+        public int Id { get; set; }
         public string Name { get; set; }
         public string PhotoUrl { get; set; }
-        public Photo Photo { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
     }
 }
