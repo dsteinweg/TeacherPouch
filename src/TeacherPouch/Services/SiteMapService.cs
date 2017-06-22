@@ -69,9 +69,9 @@ namespace TeacherPouch.Helpers
                 root.Add(CreateSiteMapNode(_urlHelper.TagDetails(tag)));
             }
 
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
-                using (StreamWriter writer = new StreamWriter(ms, Encoding.UTF8))
+                using (var writer = new StreamWriter(ms, Encoding.UTF8))
                 {
                     root.Save(writer);
                 }
@@ -82,7 +82,8 @@ namespace TeacherPouch.Helpers
 
         private static XElement CreateSiteMapNode(string siteRelativeUrl)
         {
-            return new XElement(RootNamespace + "url",
+            return
+                new XElement(RootNamespace + "url",
                     new XElement(RootNamespace + "loc", "{0}" + siteRelativeUrl));
         }
 
@@ -93,9 +94,7 @@ namespace TeacherPouch.Helpers
                     new XElement(RootNamespace + "loc", "{0}" + siteRelativeUrl),
                     new XElement(ImagesNamespace + "image",
                         new XElement(ImagesNamespace + "loc", "{0}" + photoImageUrl),
-                        new XElement(ImagesNamespace + "license", "{0}" + licenseUrl)
-                    )
-                );
+                        new XElement(ImagesNamespace + "license", "{0}" + licenseUrl)));
         }
     }
 }
