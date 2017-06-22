@@ -66,7 +66,8 @@ namespace TeacherPouch.Services
 
             foreach (var tag in startsWithTagMatches)
             {
-                results.TagResults.Add(new TagSearchResult(tag));
+                var aggregateTag = _tagService.FindTag(tag.Id);
+                results.TagResults.Add(new TagSearchResult(aggregateTag));
             }
 
             var endsWithTagMatches = from tag in allTags
@@ -79,14 +80,15 @@ namespace TeacherPouch.Services
 
             foreach (var tag in endsWithTagMatches)
             {
-                results.TagResults.Add(new TagSearchResult(tag));
+                var aggregateTag = _tagService.FindTag(tag.Id);
+                results.TagResults.Add(new TagSearchResult(aggregateTag));
             }
 
             // If no results were found using exact tag and plural/singular searching,
             // try splitting the search query into tokens and search for multiple tags.
             if (!results.HasAnyResults)
             {
-                var searchWords = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var searchWords = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 var tagSearchResults = new List<TagSearchResult>(searchWords.Length);
                 foreach (var searchWord in searchWords)
@@ -110,7 +112,7 @@ namespace TeacherPouch.Services
         {
             var stopwatch = Stopwatch.StartNew();
 
-            var searchWords = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var searchWords = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             var matchingTags = new List<Tag>();
             foreach (var searchWord in searchWords)
