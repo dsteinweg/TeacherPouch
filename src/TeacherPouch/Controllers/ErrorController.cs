@@ -14,7 +14,7 @@ namespace TeacherPouch.Controllers
             return View("Http404");
         }
 
-        [Route("error")]
+        [Route("Error")]
         public IActionResult Error(int? httpStatusCode, Exception exception = null)
         {
             var showErrorDetails = User.Identity.IsAuthenticated;
@@ -23,7 +23,7 @@ namespace TeacherPouch.Controllers
 
             Response.StatusCode = viewModel.StatusCode;
 
-            return View("Error", viewModel);
+            return View(viewModel);
         }
     }
 }
