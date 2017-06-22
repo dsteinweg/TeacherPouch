@@ -265,7 +265,7 @@ namespace TeacherPouch.Controllers
                 return null;
 
             return tagNames
-                .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(tagName => tagName.Trim())
                 .Distinct()
                 .ToList();
