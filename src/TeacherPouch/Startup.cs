@@ -7,9 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using TeacherPouch.Data;
-using TeacherPouch.Models;
 using TeacherPouch.Options;
 using TeacherPouch.Services;
 
@@ -24,12 +22,6 @@ namespace TeacherPouch
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            if (env.IsDevelopment())
-            {
-                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
-                //builder.AddUserSecrets();
-            }
-
             builder.AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -37,17 +29,20 @@ namespace TeacherPouch
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-
             services.AddOptions();
-            services.Configure<PhotoPaths>(Configuration.GetSection("Paths"));
+            services.Configure<PhotoPaths>(Configuration.GetSection("PhotoPaths"));
 
-            services
-                .AddDbContext<TeacherPouchDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("TeacherPouch")))
-                .AddDbContext<Data.IdentityDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("Identity")));
+            services.AddDbContext<TeacherPouchDbContext>(o =>
+            {
+                o.EnableSensitiveDataLogging();
+                o.UseSqlite(Configuration.GetConnectionString("TeacherPouch"));
+            });
+            services.AddDbContext<Data.IdentityDbContext>(o =>
+            {
+                o.UseSqlite(Configuration.GetConnectionString("Identity"));
+            });
 
             services
                 .AddIdentity<IdentityUser, IdentityRole>(opts =>
@@ -76,7 +71,6 @@ namespace TeacherPouch
             //services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -89,19 +83,14 @@ namespace TeacherPouch
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();
 
             app.UseIdentity();
 
-            // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
             app.UseMvc();
-
-
-
         }
     }
 }
