@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using SixLabors.Primitives;
 using TeacherPouch.Data;
 using TeacherPouch.Models;
 using TeacherPouch.Options;
@@ -245,13 +246,11 @@ namespace TeacherPouch.Services
         {
             var destinationPath = Path.Combine(Path.GetDirectoryName(pathToOriginalPhoto), size.ToString().ToLower() + ".jpg");
 
-            using (var originalStream = File.OpenRead(pathToOriginalPhoto))
+            using (var originalImage = Image.Load(pathToOriginalPhoto))
             {
-                var originalImage = new Image(originalStream);
-
                 using (var resizedImageStream = File.OpenWrite(destinationPath))
                 {
-                    var resizeOptions = new ResizeOptions()
+                    var resizeOptions = new ResizeOptions
                     {
                         Mode = ResizeMode.Max,
                         Sampler = new WelchResampler()
