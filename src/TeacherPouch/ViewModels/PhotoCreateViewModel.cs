@@ -14,5 +14,6 @@
         public bool IsPrivate { get; set; }
         public string Message { get; set; }
         public string ProposedPhotoName { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }
