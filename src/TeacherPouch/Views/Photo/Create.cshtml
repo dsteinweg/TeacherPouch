@@ -12,9 +12,7 @@
         <h4>@Html.Raw(Model.Message)</h4>
     }
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
+    <form asp-action="Create">
         <table>
             <tr>
                 <td></td>
@@ -46,7 +44,7 @@
                     <div>
                         <label for="Tags">Tags <span style="font-size:14px;margin-left:40px;">Separate multiple tags with a comma (,).</span></label>
 
-                        <textarea name="Tags" id="Tags">@Model.LastTagsInput</textarea>
+                        <textarea name="Tags" id="Tags">@Model.Tags</textarea>
                     </div>
                 </td>
             </tr>
@@ -74,7 +72,7 @@
                 </td>
             </tr>
         </table>
-    }
+    </form>
 </div>
 
 @section Script {

@@ -36,10 +36,10 @@
         {
             <tr>
                 <td>
-                    @photo.ID
+                    @photo.Id
                 </td>
                 <td>
-                    @Html.PhotoThumb(photo)
+                    @Html.Partial("_PhotoThumbSmall", photo)
                 </td>
                 <td>
                     <a asp-action="Details">@photo.Name</a>
