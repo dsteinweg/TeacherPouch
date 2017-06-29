@@ -1,4 +1,4 @@
 TeacherPouch
 =========
 
-<http://www.teacherpouch.com>
+<https://teacherpouch.com>
