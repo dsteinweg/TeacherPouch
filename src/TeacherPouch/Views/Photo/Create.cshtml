@@ -13,82 +13,61 @@
     }
 
     <form asp-action="Create">
-        <table>
-            <tr>
-                <td></td>
-                <td>
-                    <div>
-                        <label for="Name">Photo Name</label>
+        <div class="form-group">
+            <label asp-for="ProposedPhotoName" class="control-label">Photo Name</label>
+            <input asp-for="ProposedPhotoName" class="form-control">
+        </div>
 
-                        <input type="text" name="Name" id="Name" value="@Model.ProposedPhotoName">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><label for="FileName">File Name</label></td>
-            </tr>
-            <tr>
-                <td style="padding-right:10px;">
-                    <div>
-                        @Model.PendingPhotoPath
-                    </div>
-                </td>
-                <td>
-                    <div><input type="text" name="FileName" id="FileName" /> .jpg</div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <div>
-                        <label for="Tags">Tags <span style="font-size:14px;margin-left:40px;">Separate multiple tags with a comma (,).</span></label>
+        <div class="form-group">
+            <label asp-for="FileName" class="control-label"></label>
+            <div class="input-group">
+                <input asp-for="FileName" class="form-control">
+                <span class="input-group-addon">.jpg</span>
+            </div>
+        </div>
 
-                        <textarea name="Tags" id="Tags">@Model.Tags</textarea>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <div>
-                        <label for="IsPrivate">Private</label>
-                        <input type="checkbox" name="IsPrivate" id="IsPrivate">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <p>
-                        <input type="submit" value="Create" /> |
-                        <a asp-action="Index">Cancel</a>
-                    </p>
+        <div class="form-group">
+            <label asp-for="Tags" class="control-label"></label>
+            <textarea asp-for="Tags" class="form-control">@Model.Tags</textarea>
+            <div class="help-block">Separate multiple tags with a comma (,).</div>
+        </div>
 
-                    @if (!String.IsNullOrWhiteSpace(Model.ErrorMessage))
-                    {
-                        <div style="color:red;">@Model.ErrorMessage</div>
-                    }
-                </td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input asp-for="IsPrivate"> Private
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Create" class="btn btn-primary">
+            <a asp-action="Index" class="btn btn-link">Cancel</a>
+        </div>
+
+        @if (!String.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div style="color: red;">@Model.ErrorMessage</div>
+        }
     </form>
 </div>
 
 @section Script {
-    <script type="text/javascript">
+    <script>
         $(function () {
-            $('textarea').focus(function () {
-                var $this = $(this);
-                $this.select().mouseup(function () {
-                    $this.off('mouseup');
-                    return false;
+            $("textarea")
+                .focus(function () {
+                    var $this = $(this);
+                    $this.select().mouseup(function () {
+                        $this.off("mouseup");
+                        return false;
+                    });
+                })
+                .keyup(function (e) {
+                    if (e.which === 9) {
+                        this.select();
+                    }
                 });
-            }).keyup(function (e) {
-                if (e.which === 9) {
-                    this.select();
-                }
-            });
 
             var photoNameHasFocus = false;
             $("#Name").click(function () {

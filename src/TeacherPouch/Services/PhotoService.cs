@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ImageSharp;
 using ImageSharp.Processing;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +44,18 @@ namespace TeacherPouch.Services
                 return _db.Photos.ToList();
 
             return _db.Photos.Where(photo => !photo.IsPrivate).ToList();
+        }
+
+        public async Task<PaginatedList<Photo>> GetPhotoIndexPage(int pageNumber, int pageSize = 10)
+        {
+            var includePrivatePhotos = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+
+            var query = _db
+                .Photos
+                .AsNoTracking()
+                .Where(photo => includePrivatePhotos || !photo.IsPrivate);
+
+            return await PaginatedList<Photo>.CreateAsync(query, pageNumber, pageSize);
         }
 
         public Photo FindPhoto(int id)

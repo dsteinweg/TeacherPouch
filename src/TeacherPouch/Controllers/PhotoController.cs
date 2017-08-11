@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,6 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers
 {
     [Route("photos")]
-    [Authorize(Roles = TeacherPouchRoles.Admin)]
     public class PhotoController : BaseController
     {
         public PhotoController(
@@ -34,16 +34,14 @@ namespace TeacherPouch.Controllers
         private readonly UserManager<IdentityUser> _userManager;
 
         [HttpGet("index")]
-        [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            var photos = _photoService.GetAllPhotos();
+            var photos = await _photoService.GetPhotoIndexPage(page.GetValueOrDefault(1));
 
             return View(photos);
         }
 
         [HttpGet("{id:int}/{name?}", Name = "photo-details")]
-        [AllowAnonymous]
         public IActionResult Details(int id, string name = null, string tag = null, string tag2 = null)
         {
             // TODO: extract this into service
@@ -116,6 +114,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("create")]
+        [Authorize(Roles = TeacherPouchRoles.Admin)]
         public IActionResult Create()
         {
             PhotoCreateViewModel viewModel;
@@ -126,6 +125,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize(Roles = TeacherPouchRoles.Admin)]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PhotoCreateViewModel postedViewModel)
         {
@@ -172,6 +172,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("{id:int}/edit")]
+        [Authorize(Roles = TeacherPouchRoles.Admin)]
         public IActionResult Edit(int id)
         {
             var photo = _photoService.FindPhoto(id);
@@ -187,6 +188,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpPost("{id:int}/edit")]
+        [Authorize(Roles = TeacherPouchRoles.Admin)]
         public IActionResult Edit(int id, PhotoEditViewModel postedViewModel)
         {
             var photo = _photoService.FindPhoto(id);
@@ -204,6 +206,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("{id:int}/delete")]
+        [Authorize(Roles = TeacherPouchRoles.Admin)]
         public IActionResult Delete(int id)
         {
             var photo = _photoService.FindPhoto(id);
@@ -218,6 +221,7 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpPost("{id:int}/delete")]
+        [Authorize(Roles = TeacherPouchRoles.Admin)]
         public IActionResult Delete(int id, bool confirmed = true)
         {
             var photo =  _photoService.FindPhoto(id);
@@ -230,7 +234,6 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("{id:int}/{size}/{fileName}")]
-        [AllowAnonymous]
         public IActionResult Image(int id, PhotoSizes size, string fileName)
         {
             var photo = _photoService.FindPhoto(id);
@@ -245,7 +248,6 @@ namespace TeacherPouch.Controllers
         }
 
         [HttpGet("{id:int}/{size}/download/{fileName}.jpg")]
-        [AllowAnonymous]
         public IActionResult Download(int id, PhotoSizes size, string fileName)
         {
             var photo = _photoService.FindPhoto(id);

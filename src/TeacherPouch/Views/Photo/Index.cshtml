@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Photo>
+﻿@model PaginatedList<Photo>
 
 @{
     ViewBag.Title = "Photo Index";
@@ -12,13 +12,15 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div>
-            <a asp-action="Create">Add new photo</a>
+            <a asp-action="Create" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span> Add new photo
+            </a>
         </div>
     }
 
-    <h3>Total Photo Count: @Model.Count()</h3>
+    <h3>Total Photo Count: @Model.TotalItems</h3>
 
-    <table>
+    <table class="table table-striped photo-index">
         <thead>
             <tr>
                 <th>ID</th>
@@ -38,7 +40,7 @@
                 <td>
                     @photo.Id
                 </td>
-                <td>
+                <td class="photo-cell">
                     @Html.Partial("_PhotoThumbSmall", photo)
                 </td>
                 <td>
@@ -58,15 +60,39 @@
                     </td>
                 }
                 <td>
-                    <a asp-action="Details">Details</a>
+                    <a asp-action="Details" asp-route-id="@photo.Id" class="btn btn-default">Details</a>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @: | <a asp-action="Edit">Edit</a>
-                        @: | <a asp-action="Delete">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@photo.Id" class="btn btn-default">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@photo.Id" class="btn btn-danger">Delete</a>
                     }
                 </td>
             </tr>
         }
         </tbody>
     </table>
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <nav aria-label="pager">
+        <ul class="pager">
+            <li>
+                <a asp-action="Index"
+                    asp-route-page="@(Model.PageIndex - 1)"
+                    class="btn btn-default @prevDisabled">
+                    Previous
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index"
+                    asp-route-page="@(Model.PageIndex + 1)"
+                    class="btn btn-default @nextDisabled">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>

@@ -208,9 +208,6 @@ table.index {
 /*
     Photos
 */
-.photo-thumb {
-    margin-bottom: 20px;
-}
 .photo-thumb img {
     border: 5px solid transparent;
 }
@@ -218,15 +215,18 @@ table.index {
     border: 5px solid red;
 }
 
-#createPhoto textarea {
-    height: 200px;
-    width: 300px;
+.photo-index th,
+.photo-index td {
+    padding: 5px;
 }
-#createPhoto table div {
-    padding-bottom: 20px;
+.photo-cell a {
+    display: inline-block;
+    width: 100%;
 }
-#createPhoto label {
-    font-size: 20px;
+.photo-cell img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #editPhoto label {
@@ -250,9 +250,6 @@ table.index {
 }
 #photoDetails .tag-buttons {
     max-width: 800px;
-}
-#photoDetails #download {
-    margin-top: 40px;
 }
 #photoDetails #download .download-link {
     margin-left: 10px;
