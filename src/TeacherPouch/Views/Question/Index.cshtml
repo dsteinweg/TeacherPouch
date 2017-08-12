@@ -4,51 +4,61 @@
     ViewBag.Title = "Question Index";
 }
 
-<h2>Question Index</h2>
+<div class="page-question-index">
+    <header class="page-header" style="margin-top: 0;">
+        <h1>Question Index</h1>
+    </header>
 
-@if (Model.Questions.Any())
-{
-    <table class="index">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Photo ID</th>
-                <th>Question</th>
-                <th>Sentence Starters</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var question in Model.Questions)
-            {
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="form-group">
+            <a asp-controller="Admin" asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-home"></span> Admin Home
+            </a>
+        </div>
+    }
+
+    @if (Model.Questions.Any())
+    {
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>
-                        @question.Id
-                    </td>
-                    <td>
-                        <a asp-route="photo-details" asp-route-id="@question.PhotoId">@question.PhotoId</a>
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@question.Id">@question.Text</a>
-                    <td>
-                        @question.SentenceStarters
-                    </td>
-                    <td>
-                        @if (Model.DisplayAdminLinks)
-                        {
-                            <span>
-                                <a asp-action="Details" asp-route-id="@question.Id">Details</a> |
-                                <a asp-action="Edit" asp-route-id="@question.Id">Edit</a> |
-                                <a asp-action="Delete" asp-route-id="@question.Id">Delete</a>
-                            </span>
-                        }
-                    </td>
+                    <th>ID</th>
+                    <th>Photo ID</th>
+                    <th>Question</th>
+                    <th>Sentence Starters</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    @:No questions found.
-}
+            </thead>
+            <tbody>
+                @foreach (var question in Model.Questions)
+                {
+                    <tr>
+                        <td>
+                            @question.Id
+                        </td>
+                        <td>
+                            <a asp-route="photo-details" asp-route-id="@question.PhotoId">@question.PhotoId</a>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@question.Id">@question.Text</a>
+                            @if (Model.DisplayAdminLinks)
+                            {
+                                <div style="margin-top: 10px;">
+                                    <a asp-action="Details" asp-route-id="@question.Id" class="btn btn-default btn-sm">Details</a>
+                                    <a asp-action="Edit" asp-route-id="@question.Id" class="btn btn-default btn-sm">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@question.Id" class="btn btn-danger btn-sm">Delete</a>
+                                </div>
+                            }
+                        <td>
+                            @question.SentenceStarters
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        @:No questions found.
+    }
+</div>

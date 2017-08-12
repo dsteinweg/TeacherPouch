@@ -4,12 +4,18 @@
     ViewBag.Title = "Question Details";
 }
 
-<section class="question-details">
-    <header>
+<style>
+    .page-question-details section:not(:last-child) {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="page-question-details">
+    <header class="page-header" style="margin-top: 0;">
         <h1>Question Details</h1>
     </header>
 
-    <div>
+    <section>
         <div>
             <a asp-route="photo-details"
                asp-route-id="@Model.Photo.Id"
@@ -22,28 +28,32 @@
         <div style="margin-top: 10px;">
             @Html.Partial("_TagButtons", Model.Tags)
         </div>
-    </div>
+    </section>
 
-    <div style="margin-bottom: 20px;">
+    <section>
         <label asp-for="@Model.QuestionText"></label>
         <div class="preserve-newline">@Model.QuestionText</div>
-    </div>
+    </section>
 
-    <div style="margin-bottom: 20px;">
+    <section>
         <label asp-for="@Model.QuestionSentenceStarters"></label>
         <div class="preserve-newline">@Model.QuestionSentenceStarters</div>
-    </div>
+    </section>
 
-    <div>
+    <section>
         <label asp-for="@Model.QuestionOrder"></label>
         <div>@Model.QuestionOrder</div>
-    </div>
+    </section>
 
     @if (Model.DisplayAdminLinks)
     {
-        <div>
-            <a asp-action="Edit">Edit</a> |
-            <a asp-action="Delete">Delete</a>
-        </div>
+        <section>
+            <a asp-action="Edit" class="btn btn-default">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+            </a>
+            <a asp-action="Delete" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            </a>
+        </section>
     }
-</section>
+</div>

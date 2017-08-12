@@ -1,38 +1,44 @@
 ﻿@model PhotoEditViewModel
 
 @{
-    ViewBag.Title = @Model.Name + " - Edit";
+    ViewBag.Title = "Edit Photo: " + @Model.Name;
 }
 
-<div id="editPhoto">
-    <header>
-        <h1>@Model.Name</h1>
-        <h2>Edit</h2>
+<div class="page-photo-edit">
+    <header class="page-header" style="margin-top: 0;">
+        <h1>Edit Photo: @Model.Name</h1>
     </header>
 
     <form asp-action="Edit">
-        <div>
+        <div class="form-group">
             <img src="@Model.PhotoUrl">
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Name"></label>
-            <input asp-for="@Model.Name" class="form-control">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control">
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Private"></label>
-            <input asp-for="@Model.Private">
+            <div class="checkbox">
+                <label asp-for="Private" class="control-label">
+                    <input asp-for="Private"> Private
+                </label>
+            </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Tags"></label>
-            <textarea asp-for="@Model.Tags" class="form-control"></textarea>
+            <label asp-for="Tags" class="control-label"></label>
+            <textarea asp-for="Tags" class="form-control"></textarea>
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button> |
-            <a asp-route="photo-details" asp-route-id="@Model.Id" asp-route-name="@Model.Name">Cancel</a>
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+            </button>
+            <a asp-route="photo-details" asp-route-id="@Model.Id" asp-route-name="@Model.Name" class="btn btn-link">
+                Cancel
+            </a>
         </div>
 
         <div asp-validation-summary="All"></div>

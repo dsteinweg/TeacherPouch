@@ -117,7 +117,7 @@ namespace TeacherPouch.Controllers
             }
 
             tag.Name = postedViewModel.Name;
-            tag.IsPrivate = postedViewModel.Private;
+            tag.IsPrivate = postedViewModel.IsPrivate;
 
             _tagService.SaveTag(tag);
 

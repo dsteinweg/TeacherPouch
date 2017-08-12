@@ -4,17 +4,29 @@
     ViewBag.Title = "Tag Index";
 }
 
-<h2>Tag Index</h2>
+<div class="page-tag-index">
+    <header class="page-header" style="margin-top: 0;">
+        <h1>Tag Index</h1>
+    </header>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <p>
-        <a asp-action="Create">Create new Tag</a>
-    </p>
-}
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="form-group">
+            <a asp-action="Create" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span> Create New Tag
+            </a>
+            <a asp-controller="Admin" asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-home"></span> Admin Home
+            </a>
+        </div>
+    }
 
-<h3>@Model.Count() tags</h3>
+    <div class="form-group">
+        <label class="control-label">Total Tag Count</label>
+        <p class="form-control-static">@Model.Count()</p>
+    </div>
 
-<div>
-    @Html.Partial("_TagButtons", Model)
+    <div>
+        @Html.Partial("_TagButtons", Model)
+    </div>
 </div>

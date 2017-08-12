@@ -1,31 +1,51 @@
 ﻿@model TagDetailsViewModel
 
 @{
-    ViewBag.Title = "Tag: " + Model.Tag.Name;
+    ViewBag.Title = "Tag: " + Model.TagName;
 }
 
-<div id="tagDetails">
-    <header>
-        <h1>@Html.Partial("_TagButton", Model.Tag)</h1>
+<style>
+    .page-tag-details section:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    .page-tag-details header h1 .tag {
+        font-size: 40px;
+    }
+</style>
+
+<div class="page-tag-details">
+    <header class="page-header" style="margin-top: 0;">
+        <h1>
+            Tag: @Html.Partial("_TagButton", Model.Tag)
+        </h1>
     </header>
 
     @if (User.Identity.IsAuthenticated)
     {
-        <div>
-            @if (Model.Tag.IsPrivate)
-            {
-                <span>Is Private: <strong>Yes</strong></span>
-            }
-            else
-            {
-                <span>Is Private: No</span>
-            }
-        </div>
+        <section>
+            <div class="form-group">
+                <label class="control-label">Is Private</label>
+                <p class="form-control-static">@Html.Raw(@Model.IsPrivateHtml)</p>
+            </div>
+
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.TagId" class="btn btn-default">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.TagId" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                </a>
+                <a asp-action="Index" class="btn btn-default">
+                    <span class="glyphicon glyphicon-th-list"></span> Tag Index
+                </a>
+            </div>
+        </section>
     }
 
     @if (Model.Photos.Any())
     {
-        <div>
+        <section>
             <ul class="photo-thumbs">
                 @foreach (var photo in Model.Photos)
                 {
@@ -33,25 +53,18 @@
                         <a asp-controller="Photo"
                            asp-action="Details"
                            asp-route-id="@photo.Id"
-                           asp-route-tag="@Model.Tag.Name">
+                           asp-route-tag="@Model.TagName">
                            <img src="@Url.Action("Image", "Photo", new { id = photo.Id, size = PhotoSizes.Small, fileName = photo.Name + "_Small.jpg" })">
                         </a>
                     </li>
                 }
             </ul>
-        </div>
+        </section>
     }
     else
     {
-        <div>No photos found for this tag.</div>
-    }
-
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.Tag.Id">Edit</a> |
-            <a asp-action="Delete" asp-route-id="@Model.Tag.Id">Delete</a> |
-            <a asp-action="Index">Tag Index</a>
-        </div>
+        <section>
+            <p>No photos found for this tag.</p>
+        </section>
     }
 </div>

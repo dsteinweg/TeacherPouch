@@ -4,12 +4,12 @@
     ViewBag.Title = "Edit Question";
 }
 
-<section class="question-details">
-    <header>
-        <h2>Edit Question</h2>
+<div class="page-question-edit">
+    <header class="page-header" style="margin-top: 0;">
+        <h1>Edit Question</h1>
     </header>
 
-    <div>
+    <section>
         <div>
             @Html.Partial("_PhotoThumbSmall", Model.Photo)
         </div>
@@ -17,29 +17,31 @@
         <div style="margin-top:10px;">
             @Html.Partial("_TagButtons", Model.Tags)
         </div>
-    </div>
+    </section>
 
-    <form asp-action="Edit" method="POST">
-        <div class="form-group">
-            <label asp-for="@Model.QuestionText"></label>
-            <textarea asp-for="@Model.QuestionText" class="form-control"></textarea>
-        </div>
+    <section>
+        <form asp-action="Edit" method="POST">
+            <div class="form-group">
+                <label asp-for="@Model.QuestionText" class="control-label"></label>
+                <textarea asp-for="@Model.QuestionText" rows="6" class="form-control"></textarea>
+            </div>
 
-        <div class="form-group">
-            <label asp-for="@Model.QuestionSentenceStarters"></label>
-            <textarea asp-for="@Model.QuestionSentenceStarters" class="form-control"></textarea>
-        </div>
+            <div class="form-group">
+                <label asp-for="@Model.QuestionSentenceStarters" class="control-label"></label>
+                <textarea asp-for="@Model.QuestionSentenceStarters" rows="6" class="form-control"></textarea>
+            </div>
 
-        <div class="form-group">
-            <label asp-for="@Model.QuestionOrder"></label>
-            <input asp-for="@Model.QuestionOrder" class="form-control"></textarea>
-        </div>
+            <div class="form-group">
+                <label asp-for="@Model.QuestionOrder" class="control-label"></label>
+                <input asp-for="@Model.QuestionOrder" class="form-control"></textarea>
+            </div>
 
-        <div class="form-group">
-            <button class="btn btn-primary" type="submit">Save</button> |
-            <a asp-action="Details" asp-route-id="@Model.QuestionId">Cancel</a>
-        </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Details" asp-route-id="@Model.QuestionId" class="btn btn-link">Cancel</a>
+            </div>
 
-        <div asp-asp-validation-summary="true"></div>
-    </form>
-</section>
+            <div asp-asp-validation-summary="true"></div>
+        </form>
+    </section>
+</div>

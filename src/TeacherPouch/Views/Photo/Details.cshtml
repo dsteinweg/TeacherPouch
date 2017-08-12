@@ -4,8 +4,8 @@
     ViewBag.Title = Model.Photo.Name;
 }
 
-<div id="photoDetails">
-    <header>
+<div class="page-photo-details">
+    <header class="page-header" style="margin-top: 0;">
         <h1>@Model.Photo.Name</h1>
     </header>
 
@@ -54,7 +54,7 @@
     {
         <section>
             <header>
-                <h1>Questions</h1>
+                <h3>Questions</h3>
             </header>
 
             <ul>
@@ -93,16 +93,16 @@
     }
 
     <div id="download">
-        Download this photo:
+        <p>Download this photo:</p>
         <span class="download-link">
             <a href="@Model.SmallDownloadUrl" class="btn btn-default">
-                <span class="glyphicon glyphicon-save"></span>Small
+                <span class="glyphicon glyphicon-save"></span> Small
                 <span class="file-size">(@Model.SmallFileSize)</span>
             </a>
         </span>
         <span class="download-link">
             <a href="@Model.LargeDownloadUrl" class="btn btn-default">
-                <span class="glyphicon glyphicon-save"></span>Large
+                <span class="glyphicon glyphicon-save"></span> Large
                 <span class="file-size">(@Model.LargeFileSize)</span>
             </a>
         </span>
@@ -111,13 +111,48 @@
     @if (Model.ShowAdminLinks)
     {
         <div>
-            <a asp-controller="Question" asp-action="Create" asp-route-photoid="@Model.Photo.Id">Create Question</a>
+            <a asp-controller="Question" asp-action="Create" asp-route-photoid="@Model.Photo.Id" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span> Create Question
+            </a>
         </div>
 
         <div>
-            <a asp-action="Edit">Edit</a> |
-            <a asp-action="Delete">Delete</a> |
-            <a asp-action="Index">Photo Index</a>
+            <a asp-action="Edit" class="btn btn-default">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+            </a>
+            <a asp-action="Delete" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span> Delete
+            </a>
+            <a asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-th-list"></span> Photo Index
+            </a>
         </div>
     }
 </div>
+
+@section Script {
+    <script>
+        var previousPhotoExists = @(@Model.PreviousPhoto != null ? "true" : "false");
+        var nextPhotoExists = @(@Model.NextPhoto != null ? "true" : "false");
+
+        function previousPhoto() {
+            window.location.href = $(".previous a").attr("href");
+        }
+
+        function nextPhoto() {
+            window.location.href = $(".next a").attr("href");
+        }
+
+        $(document).ready(function () {
+            $(document).keyup(function (event) {
+                var key = event.which;
+                if (previousPhotoExists && key == 37) { // Left arrow key
+                    previousPhoto();
+                }
+                else if (nextPhotoExists && key == 39) { //Right arrow key
+                    nextPhoto();
+                }
+            });
+        });
+    </script>
+}

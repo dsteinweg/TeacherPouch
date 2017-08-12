@@ -83,6 +83,25 @@
             <div class="col-sm-3 col-sm-pull-9 col-md-2 col-md-pull-10">
                 <nav id="side-nav" class="well">
                     @Html.Partial("~/Views/Category/_FeaturedCategoriesMenu.cshtml")
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="nav" style="margin-top: 20px;">
+                            <li>
+                                Administration
+                            </li>
+                            <li>
+                                <a asp-controller="Admin" asp-action="Index">Admin Home</a>
+                            </li>
+
+                            @if (User.IsInRole(TeacherPouchRoles.Admin))
+                            {
+                                <li>
+                                    <a asp-controller="Photo" asp-action="Create">Add new Photo</a>
+                                </li>
+                            }
+                        </ul>
+                    }
                 </nav>
             </div>
         </div>

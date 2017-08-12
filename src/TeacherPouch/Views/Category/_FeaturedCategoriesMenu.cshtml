@@ -79,15 +79,4 @@
     <li>
         <a asp-controller="Category" asp-action="CategoryDetails" asp-route-name="Zoo">Zoo</a>
     </li>
-
-    @if (User.Identity.IsAuthenticated)
-    {
-        <li class="nav-header">Administration</li>
-        <li><a asp-controller="Admin" asp-action="Index">Admin Home</a></li>
-
-        if (User.IsInRole(TeacherPouchRoles.Admin))
-        {
-            <li><a asp-controller="Photo" asp-action="CreateNew">Add new Photo</a></li>
-        }
-    }
 </ul>

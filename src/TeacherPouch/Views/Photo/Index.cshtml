@@ -2,23 +2,51 @@
 
 @{
     ViewBag.Title = "Photo Index";
+
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<div>
-    <header>
+<div class="page-photo-index">
+    <header class="page-header" style="margin-top: 0;">
         <h1>Photo Index</h1>
     </header>
 
     @if (User.Identity.IsAuthenticated)
     {
-        <div>
+        <div class="form-group">
             <a asp-action="Create" class="btn btn-default">
-                <span class="glyphicon glyphicon-plus"></span> Add new photo
+                <span class="glyphicon glyphicon-plus"></span> Add New Photo
+            </a>
+            <a asp-controller="Admin" asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-home"></span> Admin Home
             </a>
         </div>
     }
 
-    <h3>Total Photo Count: @Model.TotalItems</h3>
+    <div class="form-group">
+        <label class="control-label">Total Photo Count</label>
+        <p class="form-control-static">@Model.TotalItems</p>
+    </div>
+
+    <nav aria-label="pager">
+        <ul class="pager" style="margin-top: 0;">
+            <li>
+                <a asp-action="Index"
+                    asp-route-page="@(Model.PageIndex - 1)"
+                    class="btn btn-default @prevDisabled">
+                    Previous
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index"
+                    asp-route-page="@(Model.PageIndex + 1)"
+                    class="btn btn-default @nextDisabled">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
 
     <table class="table table-striped photo-index">
         <thead>
@@ -71,11 +99,6 @@
         }
         </tbody>
     </table>
-
-    @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-    }
 
     <nav aria-label="pager">
         <ul class="pager">

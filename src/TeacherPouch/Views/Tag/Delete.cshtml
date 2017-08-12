@@ -1,30 +1,38 @@
 ﻿@model Tag
 
 @{
-    ViewBag.Title = "Delete Tag";
+    ViewBag.Title = "Delete Tag: " + @Model.Name;
 }
 
-<div id="tagDelete">
-    <header>
-        <h1>@Model.Name</h1>
-        <h2>Delete</h2>
-    <header>
+<div class="page-tag-delete">
+    <header class="page-header" style="margin-top: 0;">
+        <h1>Delete Tag: @Model.Name</h1>
+    </header>
 
-    <div>
+    <div class="alert alert-warning">
+        Are you sure you want to delete this tag?
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <p class="form-control-static">@Model.Name</p>
+    </div>
+
+    <div class="form-group">
         @if (Model.IsPrivate)
         {
-            <span>Is Private: <strong>Yes</strong></span>
+            <span>Private: <strong>Yes</strong></span>
         }
         else
         {
-            <span>Is Private: No</span>
+            <span>Private: No</span>
         }
     </div>
 
     <form asp-action="Delete">
-        <div>
-            <button type="submit" class="btn btn-danger">Delete</button> |
-            <a asp-action="Details" asp-route-name="@Model.Name">Cancel</a>
-        </div>
+        <button type="submit" class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+        </button>
+        <a asp-action="Details" asp-route-name="@Model.Name" class="btn btn-link">Cancel</a>
     </form>
 </div>
