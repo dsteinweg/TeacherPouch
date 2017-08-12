@@ -5,39 +5,66 @@
 }
 
 <div class="page-admin">
-    <h2>Admin Home</h2>
+    <header class="page-header" style="margin-top: 0;">
+        <h1>TeacherPouch Administration</h1>
+    </header>
 
-    <h4>Welcome, @Model.UserName!</h4>
+    <section>
+        <header class="page-header">
+            <h2>Welcome, @Model.UserName!</h2>
+        </header>
+        <div>
+            <p>Assigned Roles: @Model.Roles</p>
+            <div>
+                <a asp-action="Logout" class="btn btn-default">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <fieldset>
-        <legend>Your Account</legend>
-        <p>Assigned Roles: @Model.Roles</p>
-    </fieldset>
+    <section>
+        <header class="page-header">
+            <h2>Photos</h2>
+        </header>
+        <div>
+            @if (User.IsInRole(TeacherPouchRoles.Admin))
+            {
+                <a asp-controller="Photo" asp-action="Create" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span> Create New Photo
+                </a>
+            }
+            <a asp-controller="Photo" asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-th-list"></span> View All Photos
+            </a>
+        </div>
+    </section>
 
-    <fieldset>
-        <legend>Photos</legend>
-        @if (User.IsInRole(TeacherPouchRoles.Admin))
-        {
-            <a asp-controller="Photo" asp-action="Create">Create New Photo</a> <br>
-        }
-        <a asp-controller="Photo" asp-action="Index">View All Photos</a>
-    </fieldset>
+    <section>
+        <header class="page-header">
+            <h2>Tags</h2>
+        </header>
+        <div>
+            @if (User.IsInRole(TeacherPouchRoles.Admin))
+            {
+                <a asp-controller="Tag" asp-action="Create" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span> Create New Tag
+                </a>
+            }
+            <a asp-controller="Tag" asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-th-list"></span> View All Tags
+            </a>
+        </div>
+    </section>
 
-    <fieldset>
-        <legend>Tags</legend>
-        @if (User.IsInRole(TeacherPouchRoles.Admin))
-        {
-            <a asp-controller="Tag" asp-action="Create">Create New Tag</a> <br>
-        }
-        <a asp-controller="Tag" asp-action="Index">View All Tags</a>
-    </fieldset>
-
-    <fieldset>
-        <legend>Questions</legend>
-        <a asp-controller="Question" asp-action="Index">View All Questions</a>
-    </fieldset>
-
-    <p>
-        <a asp-action="Logout">Log out</a>
-    </p>
+    <section>
+        <header class="page-header">
+            <h2>Questions</h2>
+        </header>
+        <div>
+            <a asp-controller="Question" asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-th-list"></span> View All Questions
+            </a>
+        </div>
+    </section>
 </div>
