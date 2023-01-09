@@ -7,7 +7,7 @@
 <div id="createPhoto">
     <h2>Create New Photo</h2>
 
-    @if (!String.IsNullOrWhiteSpace(Model.Message))
+    @if (!string.IsNullOrWhiteSpace(Model.Message))
     {
         <h4>@Html.Raw(Model.Message)</h4>
     }
@@ -45,7 +45,7 @@
             <a asp-action="Index" class="btn btn-link">Cancel</a>
         </div>
 
-        @if (!String.IsNullOrWhiteSpace(Model.ErrorMessage))
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
         {
             <div style="color: red;">@Model.ErrorMessage</div>
         }

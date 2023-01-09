@@ -14,7 +14,7 @@
     {
         <div class="search-result">
             <h2>
-                @Html.Partial("_TagButtons", Model.Tags)
+                <partial name="_TagButtons" model="Model.Tags" />
             </h2>
             @if (Model.Photos.Any())
             {

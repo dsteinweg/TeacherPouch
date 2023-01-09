@@ -11,11 +11,11 @@
 
     <div>
         <div>
-            @Html.Partial("_PhotoThumbSmall", Model.Photo)
+            <partial name="_PhotoThumbSmall" model="Model.Photo" />
         </div>
 
         <div style="margin-top:10px;">
-            @Html.Partial("_TagButtons", Model.Tags)
+            <partial name="_TagButtons" model="Model.Tags" />
         </div>
     </div>
 

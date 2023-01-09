@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using TeacherPouch.Models;
+﻿using TeacherPouch.Models;
 
-namespace TeacherPouch.ViewModels
+namespace TeacherPouch.ViewModels;
+
+public class QuestionIndexViewModel
 {
-    public class QuestionIndexViewModel
-    {
-        public IEnumerable<Question> Questions { get; set; }
-        public bool DisplayAdminLinks { get; set; }
-    }
+    public IEnumerable<Question> Questions { get; set; } = Enumerable.Empty<Question>();
+    public bool DisplayAdminLinks { get; set; }
 }

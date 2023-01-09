@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+
+namespace TeacherPouch.Models;
 
 public class PaginatedList<T> : List<T>
 {
-    public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+    public PaginatedList(IEnumerable<T> items, int count, int pageIndex, int pageSize)
     {
         PageIndex = pageIndex;
         TotalPages = (int)Math.Ceiling(count / (double)pageSize);
@@ -21,14 +19,14 @@ public class PaginatedList<T> : List<T>
     public bool HasPreviousPage => PageIndex > 1;
     public bool HasNextPage => PageIndex < TotalPages;
 
-    public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
+    public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
     {
-        var count = await source.CountAsync();
+        var count = await source.CountAsync(cancellationToken);
 
         var items = await source
             .Skip((pageIndex - 1) * pageSize)
             .Take(pageSize)
-            .ToListAsync();
+            .ToArrayAsync(cancellationToken);
 
         return new PaginatedList<T>(items, count, pageIndex, pageSize);
     }

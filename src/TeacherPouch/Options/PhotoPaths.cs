@@ -1,8 +1,7 @@
-namespace TeacherPouch.Options
+namespace TeacherPouch.Options;
+
+public class PhotoPaths
 {
-    public class PhotoPaths
-    {
-        public string PhotoPath { get; set; }
-        public string PendingPhotoPath { get; set; }
-    }
+    public string PhotoPath { get; set; } = default!;
+    public string PendingPhotoPath { get; set; } = default!;
 }

@@ -1,8 +1,7 @@
-﻿namespace TeacherPouch.Models
+﻿namespace TeacherPouch.Models;
+
+public static class TeacherPouchRoles
 {
-    public static class TeacherPouchRoles
-    {
-        public const string Admin = "Admin";
-        public const string Friend = "Friend";
-    }
+    public const string Admin = "Admin";
+    public const string Friend = "Friend";
 }

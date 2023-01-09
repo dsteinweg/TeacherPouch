@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-namespace TeacherPouch.Models
+namespace TeacherPouch.Models;
+
+public class AdminRole : IdentityRole
 {
-    public class AdminRole : IdentityRole
+    public AdminRole() : base("Admin")
     {
-        public AdminRole() : base("Admin")
-        {
 
-        }
     }
 }

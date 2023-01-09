@@ -1,8 +1,7 @@
-﻿namespace TeacherPouch.Models
+﻿namespace TeacherPouch.Models;
+
+public enum PhotoSizes
 {
-    public enum PhotoSizes
-    {
-        Large,
-        Small
-    }
+    Large,
+    Small
 }

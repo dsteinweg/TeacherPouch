@@ -1,29 +1,27 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using TeacherPouch.ViewModels;
 
-namespace TeacherPouch.Controllers
+namespace TeacherPouch.Controllers;
+
+public class ErrorController : BaseController
 {
-    public class ErrorController : BaseController
+    public IActionResult Http404()
     {
-        public IActionResult Http404()
-        {
-            Response.StatusCode = (int)HttpStatusCode.NotFound;
+        Response.StatusCode = (int)HttpStatusCode.NotFound;
 
-            return View("Http404");
-        }
+        return View("Http404");
+    }
 
-        [Route("Error")]
-        public IActionResult Error(int? httpStatusCode, Exception exception = null)
-        {
-            var showErrorDetails = User.Identity.IsAuthenticated;
+    [Route("Error")]
+    public IActionResult Error(int? httpStatusCode, Exception? exception = null)
+    {
+        var showErrorDetails = User.Identity?.IsAuthenticated ?? false;
 
-            var viewModel = new ErrorViewModel(httpStatusCode, exception, showErrorDetails);
+        var viewModel = new ErrorViewModel(httpStatusCode, exception, showErrorDetails);
 
-            Response.StatusCode = viewModel.StatusCode;
+        Response.StatusCode = viewModel.StatusCode;
 
-            return View(viewModel);
-        }
+        return View(viewModel);
     }
 }

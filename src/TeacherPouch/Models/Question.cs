@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace TeacherPouch.Models
+namespace TeacherPouch.Models;
+
+public class Question : IValidatableObject
 {
-    public class Question : IValidatableObject
+    public int Id { get; set; }
+    public int PhotoId { get; set; }
+    public string Text { get; set; } = default!;
+    public string? SentenceStarters { get; set; }
+    public int? Order { get; set; }
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        public int Id { get; set; }
-        public int PhotoId { get; set; }
-        public string Text { get; set; }
-        public string SentenceStarters { get; set; }
-        public int? Order { get; set; }
+        var results = new List<ValidationResult>();
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            var results = new List<ValidationResult>();
+        if (PhotoId == default)
+            results.Add(new ValidationResult("Question needs to be associated to a photo."));
 
-            if (PhotoId == default(int))
-                results.Add(new ValidationResult("Question needs to be associated to a photo."));
+        if (string.IsNullOrWhiteSpace(Text))
+            results.Add(new ValidationResult("Question text cannot be blank."));
 
-            if (String.IsNullOrWhiteSpace(Text))
-                results.Add(new ValidationResult("Question text cannot be blank."));
-
-            return results;
-        }
-
-        public override string ToString()
-        {
-            return $"{Id} - {Text}";
-        }
+        return results;
     }
+
+    public override string ToString() => $"{Id} - {Text}";
 }

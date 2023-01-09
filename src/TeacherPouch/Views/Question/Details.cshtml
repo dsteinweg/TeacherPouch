@@ -1,5 +1,4 @@
 ﻿@model QuestionDetailsViewModel
-
 @{
     ViewBag.Title = "Question Details";
 }
@@ -16,17 +15,20 @@
     </header>
 
     <section>
-        <div>
-            <a asp-route="photo-details"
-               asp-route-id="@Model.Photo.Id"
-               asp-route-name="@Model.Photo.Name"
-               class="photo-thumb">
-                <img src="@Url.Action("Image", "Photo", new { id = Model.Photo.Id, size = PhotoSizes.Large, fileName = Model.Photo.Name + "_Small.jpg" })">
-            </a>
-        </div>
+        @if (Model.Photo is not null)
+        {
+            <div>
+                <a asp-route="photo-details"
+                   asp-route-id="@Model.Photo.Id"
+                   asp-route-name="@Model.Photo.Name"
+                   class="photo-thumb">
+                    <img src="@Url.Action("Image", "Photo", new { id = Model.Photo.Id, size = PhotoSizes.Large, fileName = Model.Photo.Name + "_Small.jpg" })">
+                </a>
+            </div>
+        }
 
         <div style="margin-top: 10px;">
-            @Html.Partial("_TagButtons", Model.Tags)
+            <partial name="_TagButtons" model="Model.Tags" />
         </div>
     </section>
 

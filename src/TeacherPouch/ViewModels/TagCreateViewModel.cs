@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TeacherPouch.ViewModels
+namespace TeacherPouch.ViewModels;
+
+public class TagCreateViewModel
 {
-    public class TagCreateViewModel
-    {
-        [Display(Name = "Tag Name")]
-        public string TagName { get; set; }
-        public bool Private { get; set; }
-        public string ErrorMessage { get; set; }
-    }
+    [Required]
+    [Display(Name = "Tag Name")]
+    public string? TagName { get; set; }
+    public bool Private { get; set; }
+    public string? ErrorMessage { get; set; }
 }

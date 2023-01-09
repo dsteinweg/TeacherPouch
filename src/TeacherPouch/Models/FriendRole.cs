@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-namespace TeacherPouch.Models
+namespace TeacherPouch.Models;
+
+public class FriendRole : IdentityRole
 {
-    public class FriendRole : IdentityRole
+    public FriendRole() : base("Friend")
     {
-        public FriendRole() : base("Friend")
-        {
 
-        }
     }
 }

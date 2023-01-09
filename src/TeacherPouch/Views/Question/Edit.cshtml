@@ -11,11 +11,11 @@
 
     <section>
         <div>
-            @Html.Partial("_PhotoThumbSmall", Model.Photo)
+            <partial name="_PhotoThumbSmall" model="Model.Photo" />
         </div>
 
         <div style="margin-top:10px;">
-            @Html.Partial("_TagButtons", Model.Tags)
+            <partial name="_TagButtons" model="Model.Tags" />
         </div>
     </section>
 
@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label asp-for="@Model.QuestionOrder" class="control-label"></label>
-                <input asp-for="@Model.QuestionOrder" class="form-control"></textarea>
+                <textarea asp-for="@Model.QuestionOrder" class="form-control"></textarea>
             </div>
 
             <div>

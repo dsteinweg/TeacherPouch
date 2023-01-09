@@ -1,8 +1,7 @@
-﻿namespace TeacherPouch.Models
+﻿namespace TeacherPouch.Models;
+
+public enum SearchOperator
 {
-    public enum SearchOperator
-    {
-        And,
-        Or
-    }
+    And,
+    Or
 }

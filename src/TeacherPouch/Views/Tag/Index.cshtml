@@ -9,7 +9,7 @@
         <h1>Tag Index</h1>
     </header>
 
-    @if (User.Identity.IsAuthenticated)
+    @if ((User.Identity?.IsAuthenticated).GetValueOrDefault())
     {
         <div class="form-group">
             <a asp-action="Create" class="btn btn-default">
@@ -27,6 +27,6 @@
     </div>
 
     <div>
-        @Html.Partial("_TagButtons", Model)
+        <partial name="_TagButtons" model="Model" />
     </div>
 </div>

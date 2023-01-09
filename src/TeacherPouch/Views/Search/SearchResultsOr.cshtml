@@ -15,8 +15,10 @@
         foreach (var tagResult in Model.TagResults)
         {
             <div class="search-result">
-                <h2>@Html.Partial("_TagButton", tagResult.Tag)</h2>
-                @if (tagResult.Photos != null && tagResult.Photos.Any())
+                <h2>
+                    <partial name="_TagButton" model="tagResult.Tag" />
+                </h2>
+                @if (tagResult.Photos is not null && tagResult.Photos.Any())
                 {
                     <ul class="photo-thumbs">
                         @foreach (var photo in tagResult.Photos)

@@ -17,11 +17,11 @@
 <div class="page-tag-details">
     <header class="page-header" style="margin-top: 0;">
         <h1>
-            Tag: @Html.Partial("_TagButton", Model.Tag)
+            Tag: <partial name="_TagButton" model="Model.Tag" />
         </h1>
     </header>
 
-    @if (User.Identity.IsAuthenticated)
+    @if ((User.Identity?.IsAuthenticated).GetValueOrDefault())
     {
         <section>
             <div class="form-group">

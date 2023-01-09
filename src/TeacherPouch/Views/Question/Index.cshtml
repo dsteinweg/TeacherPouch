@@ -9,7 +9,7 @@
         <h1>Question Index</h1>
     </header>
 
-    @if (User.Identity.IsAuthenticated)
+    @if ((User.Identity?.IsAuthenticated).GetValueOrDefault())
     {
         <div class="form-group">
             <a asp-controller="Admin" asp-action="Index" class="btn btn-default">

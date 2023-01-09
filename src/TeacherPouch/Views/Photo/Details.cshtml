@@ -9,10 +9,10 @@
         <h1>@Model.Photo.Name</h1>
     </header>
 
-    @if (Model.PreviousPhoto != null || Model.NextPhoto != null)
+    @if (Model.PreviousPhoto is not null || Model.NextPhoto is not null)
     {
         <ul class="pager">
-            @if (Model.PreviousPhoto != null)
+            @if (Model.PreviousPhoto is not null)
             {
                 <li class="previous">
                     <a asp-route="photo-details"
@@ -25,7 +25,7 @@
                 </li>
             }
 
-            @if (Model.NextPhoto != null)
+            @if (Model.NextPhoto is not null)
             {
                 <li class="next">
                     <a asp-route="photo-details"
@@ -47,7 +47,7 @@
     </div>
 
     <div>
-        @Html.Partial("_TagButtons", Model.Tags)
+        <partial name="_TagButtons" model="Model.Tags" />
     </div>
 
     @if (Model.Questions.Any())
@@ -78,7 +78,7 @@
         </section>
     }
 
-    @if (User.Identity.IsAuthenticated)
+    @if (User.Identity is not null && User.Identity.IsAuthenticated)
     {
         <div>
             @if (Model.Photo.IsPrivate)
@@ -132,8 +132,8 @@
 
 @section Script {
     <script>
-        var previousPhotoExists = @(@Model.PreviousPhoto != null ? "true" : "false");
-        var nextPhotoExists = @(@Model.NextPhoto != null ? "true" : "false");
+        var previousPhotoExists = @(@Model.PreviousPhoto is not null ? "true" : "false");
+        var nextPhotoExists = @(@Model.NextPhoto is not null ? "true" : "false");
 
         function previousPhoto() {
             window.location.href = $(".previous a").attr("href");

@@ -28,7 +28,7 @@
             <a asp-action="Index" class="btn btn-link">Cancel</a>
         </div>
 
-        @if (!String.IsNullOrWhiteSpace(Model.ErrorMessage))
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
         {
             <div style="color: red;">@Model.ErrorMessage</div>
         }

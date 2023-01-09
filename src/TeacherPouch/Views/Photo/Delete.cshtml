@@ -15,7 +15,7 @@
         <img src="@Model.PhotoUrl">
 
         <div>
-            @Html.Partial("_TagButtons", Model.Tags)
+            <partial name="_TagButtons" model="Model.Tags" />
         </div>
     </div>
 

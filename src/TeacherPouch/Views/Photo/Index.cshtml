@@ -12,7 +12,7 @@
         <h1>Photo Index</h1>
     </header>
 
-    @if (User.Identity.IsAuthenticated)
+    @if (User.Identity?.IsAuthenticated ?? false)
     {
         <div class="form-group">
             <a asp-action="Create" class="btn btn-default">
@@ -54,7 +54,7 @@
                 <th>ID</th>
                 <th>Thumbnail</th>
                 <th>Name</th>
-                @if (User.Identity.IsAuthenticated)
+                @if (User.Identity?.IsAuthenticated ?? false)
                 {
                     <th>Private</th>
                 }
@@ -69,12 +69,12 @@
                     @photo.Id
                 </td>
                 <td class="photo-cell">
-                    @Html.Partial("_PhotoThumbSmall", photo)
+                    <partial name="_PhotoThumbSmall" model="photo" />
                 </td>
                 <td>
                     <a asp-action="Details">@photo.Name</a>
                 </td>
-                @if (User.Identity.IsAuthenticated)
+                @if (User.Identity?.IsAuthenticated ?? false)
                 {
                     <td>
                         @if (photo.IsPrivate)
@@ -89,7 +89,7 @@
                 }
                 <td>
                     <a asp-action="Details" asp-route-id="@photo.Id" class="btn btn-default">Details</a>
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity?.IsAuthenticated ?? false)
                     {
                         <a asp-action="Edit" asp-route-id="@photo.Id" class="btn btn-default">Edit</a>
                         <a asp-action="Delete" asp-route-id="@photo.Id" class="btn btn-danger">Delete</a>

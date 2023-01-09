@@ -221,7 +221,7 @@ if ( !$( "<a>" ).outerWidth( 1 ).jquery ) {
 // support: jQuery <1.8
 if ( !$.fn.addBack ) {
 	$.fn.addBack = function( selector ) {
-		return this.add( selector == null ?
+		return this.add( selector is null ?
 			this.prevObject : this.prevObject.filter( selector )
 		);
 	};
@@ -319,7 +319,7 @@ var uuid = 0,
 	slice = Array.prototype.slice,
 	_cleanData = $.cleanData;
 $.cleanData = function( elems ) {
-	for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
+	for ( var i = 0, elem; (elem = elems[i]) is not null; i++ ) {
 		try {
 			$( elem ).triggerHandler( "remove" );
 		// http://bugs.jquery.com/ticket/8235
@@ -1509,7 +1509,7 @@ $.widget( "ui.accordion", {
 			.attr( "role", "tablist" );
 
 		// don't allow collapsible: false and active: false / null
-		if ( !options.collapsible && (options.active === false || options.active == null) ) {
+		if ( !options.collapsible && (options.active === false || options.active is null) ) {
 			options.active = 0;
 		}
 
@@ -2405,7 +2405,7 @@ $.widget( "ui.autocomplete", {
 	},
 
 	search: function( value, event ) {
-		value = value != null ? value : this._value();
+		value = value is not null ? value : this._value();
 
 		// always save the actual value, not the one passed as an argument
 		this.term = this._value();
@@ -3634,7 +3634,7 @@ $.extend(Datepicker.prototype, {
 
 		if ($.datepicker._get(inst, "constrainInput")) {
 			chars = $.datepicker._possibleChars($.datepicker._get(inst, "dateFormat"));
-			chr = String.fromCharCode(event.charCode == null ? event.keyCode : event.charCode);
+			chr = string.fromCharCode(event.charCode is null ? event.keyCode : event.charCode);
 			return event.ctrlKey || event.metaKey || (chr < " " || !chars || chars.indexOf(chr) > -1);
 		}
 	},
@@ -3977,7 +3977,7 @@ $.extend(Datepicker.prototype, {
 			target = $(id),
 			inst = this._getInst(target[0]);
 
-		dateStr = (dateStr != null ? dateStr : this._formatDate(inst));
+		dateStr = (dateStr is not null ? dateStr : this._formatDate(inst));
 		if (inst.input) {
 			inst.input.val(dateStr);
 		}
@@ -4055,7 +4055,7 @@ $.extend(Datepicker.prototype, {
 	 * @return  Date - the extracted date value or null if value is blank
 	 */
 	parseDate: function (format, value, settings) {
-		if (format == null || value == null) {
+		if (format is null || value is null) {
 			throw "Invalid arguments";
 		}
 
@@ -4473,7 +4473,7 @@ $.extend(Datepicker.prototype, {
 				}
 				return new Date(year, month, day);
 			},
-			newDate = (date == null || date === "" ? defaultDate : (typeof date === "string" ? offsetString(date) :
+			newDate = (date is null || date === "" ? defaultDate : (typeof date === "string" ? offsetString(date) :
 				(typeof date === "number" ? (isNaN(date) ? defaultDate : offsetNumeric(date)) : new Date(date.getTime()))));
 
 		newDate = (newDate && newDate.toString() === "Invalid Date" ? defaultDate : newDate);
@@ -4856,7 +4856,7 @@ $.extend(Datepicker.prototype, {
 	/* Determine the number of months to show. */
 	_getNumberOfMonths: function(inst) {
 		var numMonths = this._get(inst, "numberOfMonths");
-		return (numMonths == null ? [1, 1] : (typeof numMonths === "number" ? [1, numMonths] : numMonths));
+		return (numMonths is null ? [1, 1] : (typeof numMonths === "number" ? [1, numMonths] : numMonths));
 	},
 
 	/* Determine the current maximum date - ensure no time components are set. */
@@ -4971,7 +4971,7 @@ function bindHover(dpDiv) {
 function extendRemove(target, props) {
 	$.extend(target, props);
 	for (var name in props) {
-		if (props[name] == null) {
+		if (props[name] is null) {
 			target[name] = props[name];
 		}
 	}
@@ -7302,7 +7302,7 @@ each( spaces, function( spaceName, space ) {
 function clamp( value, prop, allowEmpty ) {
 	var type = propTypes[ prop.type ] || {};
 
-	if ( value == null ) {
+	if ( value is null ) {
 		return (allowEmpty || !prop.def) ? null : prop.def;
 	}
 
@@ -7414,7 +7414,7 @@ color.fn = jQuery.extend( color.prototype, {
 
 							// if the value was null, we don't need to copy it
 							// if the key was alpha, we don't need to copy it either
-							if ( key === "alpha" || red[ key ] == null ) {
+							if ( key === "alpha" || red[ key ] is null ) {
 								return;
 							}
 							inst[ cache ] = space.to( inst._rgba );
@@ -7449,7 +7449,7 @@ color.fn = jQuery.extend( color.prototype, {
 			if (isCache) {
 				localCache = inst[ space.cache ] || space.to && space.to( inst._rgba ) || [];
 				each( space.props, function( _, prop ) {
-					if ( isCache[ prop.idx ] != null ) {
+					if ( isCache[ prop.idx ] is not null ) {
 						same = ( isCache[ prop.idx ] === localCache[ prop.idx ] );
 						return same;
 					}
@@ -7521,7 +7521,7 @@ color.fn = jQuery.extend( color.prototype, {
 	toRgbaString: function() {
 		var prefix = "rgba(",
 			rgba = jQuery.map( this._rgba, function( v, i ) {
-				return v == null ? ( i > 2 ? 1 : 0 ) : v;
+				return v is null ? ( i > 2 ? 1 : 0 ) : v;
 			});
 
 		if ( rgba[ 3 ] === 1 ) {
@@ -7534,7 +7534,7 @@ color.fn = jQuery.extend( color.prototype, {
 	toHslaString: function() {
 		var prefix = "hsla(",
 			hsla = jQuery.map( this.hsla(), function( v, i ) {
-				if ( v == null ) {
+				if ( v is null ) {
 					v = i > 2 ? 1 : 0;
 				}
 
@@ -7590,7 +7590,7 @@ function hue2rgb( p, q, h ) {
 }
 
 spaces.hsla.to = function ( rgba ) {
-	if ( rgba[ 0 ] == null || rgba[ 1 ] == null || rgba[ 2 ] == null ) {
+	if ( rgba[ 0 ] is null || rgba[ 1 ] is null || rgba[ 2 ] is null ) {
 		return [ null, null, null, rgba[ 3 ] ];
 	}
 	var r = rgba[ 0 ] / 255,
@@ -7623,11 +7623,11 @@ spaces.hsla.to = function ( rgba ) {
 	} else {
 		s = diff / ( 2 - add );
 	}
-	return [ Math.round(h) % 360, s, l, a == null ? 1 : a ];
+	return [ Math.round(h) % 360, s, l, a is null ? 1 : a ];
 };
 
 spaces.hsla.from = function ( hsla ) {
-	if ( hsla[ 0 ] == null || hsla[ 1 ] == null || hsla[ 2 ] == null ) {
+	if ( hsla[ 0 ] is null || hsla[ 1 ] is null || hsla[ 2 ] is null ) {
 		return [ null, null, null, hsla[ 3 ] ];
 	}
 	var h = hsla[ 0 ] / 360,
@@ -7670,7 +7670,7 @@ each( spaces, function( spaceName, space ) {
 
 		each( props, function( key, prop ) {
 			var val = arr[ type === "object" ? key : prop.idx ];
-			if ( val == null ) {
+			if ( val is null ) {
 				val = local[ prop.idx ];
 			}
 			local[ prop.idx ] = clamp( val, prop );
@@ -7706,7 +7706,7 @@ each( spaces, function( spaceName, space ) {
 				value = value.call( this, cur );
 				vtype = jQuery.type( value );
 			}
-			if ( value == null && prop.empty ) {
+			if ( value is null && prop.empty ) {
 				return this;
 			}
 			if ( vtype === "string" ) {
@@ -7892,7 +7892,7 @@ function styleDifference( oldStyle, newStyle ) {
 // support: jQuery <1.8
 if ( !$.fn.addBack ) {
 	$.fn.addBack = function( selector ) {
-		return this.add( selector == null ?
+		return this.add( selector is null ?
 			this.prevObject : this.prevObject.filter( selector )
 		);
 	};
@@ -8204,7 +8204,7 @@ function _normalizeArguments( effect, options, speed, callback ) {
 	effect = { effect: effect };
 
 	// catch (effect, null, ...)
-	if ( options == null ) {
+	if ( options is null ) {
 		options = {};
 	}
 
@@ -9609,7 +9609,7 @@ $.widget( "ui.menu", {
 		default:
 			preventDefault = false;
 			prev = this.previousFilter || "";
-			character = String.fromCharCode( event.keyCode );
+			character = string.fromCharCode( event.keyCode );
 			skip = false;
 
 			clearTimeout( this.filterTimer );
@@ -9631,7 +9631,7 @@ $.widget( "ui.menu", {
 			// If no matches on the current filter, reset to the last character pressed
 			// to move down the menu to the first item that starts with that character
 			if ( !match.length ) {
-				character = String.fromCharCode( event.keyCode );
+				character = string.fromCharCode( event.keyCode );
 				regex = new RegExp( "^" + escape( character ), "i" );
 				match = this.activeMenu.children( ".ui-menu-item" ).filter(function() {
 					return regex.test( $( this ).children( "a" ).text() );

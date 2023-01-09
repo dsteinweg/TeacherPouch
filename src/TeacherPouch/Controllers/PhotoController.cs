@@ -1,276 +1,273 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using TeacherPouch.Models;
 using TeacherPouch.Services;
 using TeacherPouch.ViewModels;
 
-namespace TeacherPouch.Controllers
+namespace TeacherPouch.Controllers;
+
+[Route("photos")]
+public class PhotoController : BaseController
 {
-    [Route("photos")]
-    public class PhotoController : BaseController
+    public PhotoController(
+        PhotoService photoService,
+        TagService tagService,
+        IMemoryCache cache,
+        UserManager<IdentityUser> userManager)
     {
-        public PhotoController(
-            PhotoService photoService,
-            TagService tagService,
-            IMemoryCache cache,
-            UserManager<IdentityUser> userManager)
-        {
-            _photoService = photoService;
-            _tagService = tagService;
-            _cache = cache;
-            _userManager = userManager;
-        }
+        _photoService = photoService;
+        _tagService = tagService;
+        _cache = cache;
+        _userManager = userManager;
+    }
 
-        private readonly PhotoService _photoService;
-        private readonly TagService _tagService;
-        private readonly IMemoryCache _cache;
-        private readonly UserManager<IdentityUser> _userManager;
+    private readonly PhotoService _photoService;
+    private readonly TagService _tagService;
+    private readonly IMemoryCache _cache;
+    private readonly UserManager<IdentityUser> _userManager;
 
-        [HttpGet("index")]
-        public async Task<IActionResult> Index(int? page)
-        {
-            var photos = await _photoService.GetPhotoIndexPage(page.GetValueOrDefault(1));
+    [HttpGet("index")]
+    public async Task<IActionResult> Index(int? page)
+    {
+        var photos = await _photoService.GetPhotoIndexPage(page.GetValueOrDefault(1));
 
-            return View(photos);
-        }
+        return View(photos);
+    }
 
-        [HttpGet("{id:int}/{name?}", Name = "photo-details")]
-        public IActionResult Details(int id, string name = null, string tag = null, string tag2 = null)
-        {
-            // TODO: extract this into service
-            var photo = _photoService.FindPhoto(id);
-            if (photo == null)
-                return InvokeHttp404();
+    [HttpGet("{id:int}/{name?}", Name = "photo-details")]
+    public async Task<IActionResult> Details(
+        int id, string? name = null, string? tag = null, string? tag2 = null, CancellationToken cancellationToken = default)
+    {
+        var photo = await _photoService.FindPhoto(id, cancellationToken);
+        if (photo is null)
+            return InvokeHttp404();
 
-            var photoUrl = Url.Action(
-                nameof(Image),
-                new
-                {
-                    id,
-                    size = PhotoSizes.Large,
-                    fileName = photo.Name + ".jpg"
-                });
-
-            var smallFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Small);
-            var smallDownloadUrl = Url.Action(nameof(Download), new { id, size = PhotoSizes.Small, fileName = photo.Name });
-            var largeFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Large);
-            var largeDownloadUrl = Url.Action(nameof(Download), new { id, size = PhotoSizes.Large, fileName = photo.Name });
-
-            Tag firstTag = null;
-            var firstTagPhotos = Enumerable.Empty<Photo>();
-            if (!String.IsNullOrWhiteSpace(tag))
+        var photoUrl = Url.Action(
+            nameof(Image),
+            new
             {
-                firstTag = _tagService.FindTag(tag);
-                if (firstTag != null)
-                    firstTagPhotos = firstTag.PhotoTags.Select(pt => pt.Photo);
-            }
+                id,
+                size = PhotoSizes.Large,
+                fileName = photo.Name + ".jpg"
+            });
 
-            Tag secondTag = null;
-            var secondTagPhotos = Enumerable.Empty<Photo>();
-            if (!String.IsNullOrWhiteSpace(tag2))
-            {
-                secondTag = _tagService.FindTag(tag2);
-                if (secondTag != null)
-                    secondTagPhotos = secondTag.PhotoTags.Select(pt => pt.Photo);
-            }
+        var smallFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Small);
+        var smallDownloadUrl = Url.Action(nameof(Download), new { id, size = PhotoSizes.Small, fileName = photo.Name });
+        var largeFileSize = _photoService.GetPhotoFileSize(photo, PhotoSizes.Large);
+        var largeDownloadUrl = Url.Action(nameof(Download), new { id, size = PhotoSizes.Large, fileName = photo.Name });
 
-            var allTagPhotos = secondTagPhotos.Any()
-                ? firstTagPhotos.Intersect(secondTagPhotos).Distinct().OrderBy(p => p.Id).ToList()
-                : firstTagPhotos.OrderBy(p => p.Id).ToList();
-
-            var photoIndexInPhotosList = allTagPhotos.IndexOf(photo);
-
-            var previousPhoto = allTagPhotos.ElementAtOrDefault(photoIndexInPhotosList - 1);
-            if (previousPhoto == null && allTagPhotos.Count() > 1)
-                previousPhoto = allTagPhotos.LastOrDefault();
-
-            var nextPhoto = allTagPhotos.ElementAtOrDefault(photoIndexInPhotosList + 1);
-            if (nextPhoto == null && allTagPhotos.Count() > 1)
-                nextPhoto = allTagPhotos.FirstOrDefault();
-
-            var userIsAdmin = User.IsInRole(TeacherPouchRoles.Admin);
-
-            var viewModel = new PhotoDetailsViewModel(
-                photo,
-                photoUrl,
-                smallFileSize,
-                smallDownloadUrl,
-                largeFileSize,
-                largeDownloadUrl,
-                firstTag,
-                secondTag,
-                previousPhoto,
-                nextPhoto,
-                userIsAdmin);
-
-            return View(viewModel);
-        }
-
-        [HttpGet("create")]
-        [Authorize(Roles = TeacherPouchRoles.Admin)]
-        public IActionResult Create()
+        Tag? firstTag = null;
+        var firstTagPhotos = Enumerable.Empty<Photo>();
+        if (!string.IsNullOrWhiteSpace(tag))
         {
-            PhotoCreateViewModel viewModel;
-            if (!_cache.TryGetValue<PhotoCreateViewModel>("New Photo View Model", out viewModel))
-                viewModel = new PhotoCreateViewModel(_photoService.PendingPhotoPath);
-
-            return View(viewModel);
+            firstTag = await _tagService.FindTag(tag, cancellationToken);
+            if (firstTag is not null)
+                firstTagPhotos = firstTag.PhotoTags.Select(pt => pt.Photo);
         }
 
-        [HttpPost("create")]
-        [Authorize(Roles = TeacherPouchRoles.Admin)]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(PhotoCreateViewModel postedViewModel)
+        Tag? secondTag = null;
+        var secondTagPhotos = Enumerable.Empty<Photo>();
+        if (!string.IsNullOrWhiteSpace(tag2))
         {
-            postedViewModel.PendingPhotoPath = _photoService.PendingPhotoPath;
-
-            if (String.IsNullOrWhiteSpace(postedViewModel.PhotoName) ||
-                String.IsNullOrWhiteSpace(postedViewModel.FileName) ||
-                String.IsNullOrWhiteSpace(postedViewModel.Tags))
-            {
-                postedViewModel.Message = "All fields are required.";
-
-                return View(postedViewModel);
-            }
-
-            if (!postedViewModel.FileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
-                postedViewModel.FileName = postedViewModel.FileName + ".jpg";
-
-            var newPhoto = new Photo
-            {
-                Name = postedViewModel.PhotoName,
-                IsPrivate = postedViewModel.IsPrivate
-            };
-
-            _photoService.SavePhoto(newPhoto);
-            _photoService.MovePhoto(postedViewModel.FileName, newPhoto);
-            _photoService.GeneratePhotoSizes(newPhoto);
-
-            var photoNameParts = postedViewModel.PhotoName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            int photoNumber = 0;
-            if (Int32.TryParse(photoNameParts.Last(), out photoNumber))
-                photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
-
-            var newPhotoName = String.Join(" ", photoNameParts);
-            var photoUrl = Url.Action(nameof(Details), new { id = newPhoto.Id });
-
-            var nextCreateViewModel = new PhotoCreateViewModel(_photoService.PendingPhotoPath);
-            nextCreateViewModel.Message = $"<a href=\"{photoUrl}\">Photo \"{newPhoto.Name}\"</a> created.";
-            nextCreateViewModel.Tags = postedViewModel.Tags;
-            nextCreateViewModel.ProposedPhotoName = newPhotoName;
-
-            _cache.Set("New Photo View Model", nextCreateViewModel);
-
-            return RedirectToAction(nameof(Create));
+            secondTag = await _tagService.FindTag(tag2, cancellationToken);
+            if (secondTag is not null)
+                secondTagPhotos = secondTag.PhotoTags.Select(pt => pt.Photo);
         }
 
-        [HttpGet("{id:int}/edit")]
-        [Authorize(Roles = TeacherPouchRoles.Admin)]
-        public IActionResult Edit(int id)
+        var allTagPhotos = secondTagPhotos.Any()
+            ? firstTagPhotos.Intersect(secondTagPhotos).Distinct().OrderBy(p => p.Id).ToList()
+            : firstTagPhotos.OrderBy(p => p.Id).ToList();
+
+        var photoIndexInPhotosList = allTagPhotos.IndexOf(photo);
+
+        var previousPhoto = allTagPhotos.ElementAtOrDefault(photoIndexInPhotosList - 1);
+        if (previousPhoto is null && allTagPhotos.Count > 1)
+            previousPhoto = allTagPhotos.LastOrDefault();
+
+        var nextPhoto = allTagPhotos.ElementAtOrDefault(photoIndexInPhotosList + 1);
+        if (nextPhoto is null && allTagPhotos.Count > 1)
+            nextPhoto = allTagPhotos.FirstOrDefault();
+
+        var userIsAdmin = User.IsInRole(TeacherPouchRoles.Admin);
+
+        var viewModel = new PhotoDetailsViewModel(
+            photo,
+            photoUrl!,
+            smallFileSize,
+            smallDownloadUrl!,
+            largeFileSize,
+            largeDownloadUrl!,
+            firstTag!,
+            secondTag,
+            previousPhoto,
+            nextPhoto,
+            userIsAdmin);
+
+        return View(viewModel);
+    }
+
+    [HttpGet("create")]
+    [Authorize(Roles = TeacherPouchRoles.Admin)]
+    public IActionResult Create()
+    {
+        if (!_cache.TryGetValue<PhotoCreateViewModel>("New Photo View Model", out var viewModel))
+            viewModel = new PhotoCreateViewModel(_photoService.PendingPhotoPath);
+
+        return View(viewModel);
+    }
+
+    [HttpPost("create")]
+    [Authorize(Roles = TeacherPouchRoles.Admin)]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(PhotoCreateViewModel postedViewModel, CancellationToken cancellationToken)
+    {
+        postedViewModel.PendingPhotoPath = _photoService.PendingPhotoPath;
+
+        if (string.IsNullOrWhiteSpace(postedViewModel.PhotoName) ||
+            string.IsNullOrWhiteSpace(postedViewModel.FileName) ||
+            string.IsNullOrWhiteSpace(postedViewModel.Tags))
         {
-            var photo = _photoService.FindPhoto(id);
-            if (photo == null)
-                return InvokeHttp404();
+            postedViewModel.Message = "All fields are required.";
 
-            var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
-            var tags = photo.PhotoTags.Select(pt => pt.Tag);
-
-            var viewModel = new PhotoEditViewModel(photo, photoUrl, tags);
-
-            return View(viewModel);
+            return View(postedViewModel);
         }
 
-        [HttpPost("{id:int}/edit")]
-        [Authorize(Roles = TeacherPouchRoles.Admin)]
-        public IActionResult Edit(int id, PhotoEditViewModel postedViewModel)
+        if (!postedViewModel.FileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
+            postedViewModel.FileName += ".jpg";
+
+        var newPhoto = new Photo
         {
-            var photo = _photoService.FindPhoto(id);
-            if (photo == null)
-                return InvokeHttp404();
+            Name = postedViewModel.PhotoName,
+            IsPrivate = postedViewModel.IsPrivate
+        };
 
-            photo.Name = postedViewModel.Name;
-            photo.IsPrivate = postedViewModel.Private;
+        _photoService.SavePhoto(newPhoto);
+        _photoService.MovePhoto(postedViewModel.FileName, newPhoto);
+        await _photoService.GeneratePhotoSizes(newPhoto, cancellationToken);
 
-            //var tagNames = SplitTagNames(postedViewModel.Tags);
+        var photoNameParts = postedViewModel.PhotoName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        if (int.TryParse(photoNameParts.Last(), out var photoNumber))
+            photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
 
-            _photoService.SavePhoto(photo);
+        var newPhotoName = string.Join(" ", photoNameParts);
+        var photoUrl = Url.Action(nameof(Details), new { id = newPhoto.Id });
 
-            return RedirectToAction(nameof(Details), new { id = photo.Id });
-        }
-
-        [HttpGet("{id:int}/delete")]
-        [Authorize(Roles = TeacherPouchRoles.Admin)]
-        public IActionResult Delete(int id)
+        var nextCreateViewModel = new PhotoCreateViewModel(_photoService.PendingPhotoPath)
         {
-            var photo = _photoService.FindPhoto(id);
-            if (photo == null)
-                return InvokeHttp404();
+            Message = $"<a href=\"{photoUrl}\">Photo \"{newPhoto.Name}\"</a> created.",
+            Tags = postedViewModel.Tags,
+            ProposedPhotoName = newPhotoName
+        };
 
-            var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
-            var tags = photo.PhotoTags.Select(photoTag => _tagService.FindTag(photoTag.TagId));
-            var viewModel = new PhotoDeleteViewModel(photo, photoUrl, tags);
+        _ = _cache.Set("New Photo View Model", nextCreateViewModel);
 
-            return View(viewModel);
-        }
+        return RedirectToAction(nameof(Create));
+    }
 
-        [HttpPost("{id:int}/delete")]
-        [Authorize(Roles = TeacherPouchRoles.Admin)]
-        public IActionResult Delete(int id, bool confirmed = true)
-        {
-            var photo =  _photoService.FindPhoto(id);
-            if (photo == null)
-                return InvokeHttp404();
+    [HttpGet("{id:int}/edit")]
+    [Authorize(Roles = TeacherPouchRoles.Admin)]
+    public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
+    {
+        var photo = await _photoService.FindPhoto(id, cancellationToken);
+        if (photo is null)
+            return InvokeHttp404();
 
-            _photoService.DeletePhoto(photo);
+        var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
+        var tags = photo.PhotoTags.Select(pt => pt.Tag);
 
-            return RedirectToAction(nameof(Index));
-        }
+        var viewModel = new PhotoEditViewModel(photo, photoUrl!, tags);
 
-        [HttpGet("{id:int}/{size}/{fileName}")]
-        public IActionResult Image(int id, PhotoSizes size, string fileName)
-        {
-            var photo = _photoService.FindPhoto(id);
-            if (photo == null)
-                return InvokeHttp404();
+        return View(viewModel);
+    }
 
-            var bytes = _photoService.GetPhotoBytes(photo, size);
-            if (bytes == null || bytes.Length == 0)
-                return InvokeHttp404();
+    [HttpPost("{id:int}/edit")]
+    [Authorize(Roles = TeacherPouchRoles.Admin)]
+    public async Task<IActionResult> Edit(int id, PhotoEditViewModel postedViewModel, CancellationToken cancellationToken)
+    {
+        var photo = await _photoService.FindPhoto(id, cancellationToken);
+        if (photo is null)
+            return InvokeHttp404();
 
-            return File(bytes, "image/jpeg");
-        }
+        if (!ModelState.IsValid)
+            return View();
 
-        [HttpGet("{id:int}/{size}/download/{fileName}.jpg")]
-        public IActionResult Download(int id, PhotoSizes size, string fileName)
-        {
-            var photo = _photoService.FindPhoto(id);
-            if (photo == null)
-                return InvokeHttp404();
+        photo.Name = postedViewModel.Name!;
+        photo.IsPrivate = postedViewModel.Private;
 
-            var bytes = _photoService.GetPhotoBytes(photo, size);
-            if (bytes == null || bytes.Length == 0)
-                return InvokeHttp404();
+        _photoService.SavePhoto(photo);
 
-            return File(bytes, "image/jpeg", fileName + ".jpg");
-        }
+        return RedirectToAction(nameof(Details), new { id = photo.Id });
+    }
 
-        private List<string> SplitTagNames(string tagNames)
-        {
-            if (String.IsNullOrWhiteSpace(tagNames))
-                return null;
+    [HttpGet("{id:int}/delete")]
+    [Authorize(Roles = TeacherPouchRoles.Admin)]
+    public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+    {
+        var photo = await _photoService.FindPhoto(id, cancellationToken);
+        if (photo is null)
+            return InvokeHttp404();
 
-            return tagNames
-                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(tagName => tagName.Trim())
-                .Distinct()
-                .ToList();
-        }
+        var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
+        var tagsTasks = photo.PhotoTags.Select(async photoTag => (await _tagService.FindTag(photoTag.TagId))!);
+        var tags = await Task.WhenAll(tagsTasks);
+        var viewModel = new PhotoDeleteViewModel(photo, photoUrl!, tags);
+
+        return View(viewModel);
+    }
+
+    [HttpPost("{id:int}/delete")]
+    [Authorize(Roles = TeacherPouchRoles.Admin)]
+    public async Task<IActionResult> Delete(int id, bool confirmed = true, CancellationToken cancellationToken = default)
+    {
+        var photo = await _photoService.FindPhoto(id, cancellationToken);
+        if (photo is null)
+            return InvokeHttp404();
+
+        _photoService.DeletePhoto(photo);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet("{id:int}/{size}/{fileName}")]
+    public async Task<IActionResult> Image(int id, PhotoSizes size, string fileName, CancellationToken cancellationToken)
+    {
+        var photo = await _photoService.FindPhoto(id, cancellationToken);
+        if (photo is null)
+            return InvokeHttp404();
+
+        var bytes = await _photoService.GetPhotoBytes(photo, size, cancellationToken);
+        if (bytes is null || bytes.Length == 0)
+            return InvokeHttp404();
+
+        return File(bytes, MediaTypeNames.Image.Jpeg);
+    }
+
+    [HttpGet("{id:int}/{size}/download/{fileName}.jpg")]
+    public async Task<IActionResult> Download(int id, PhotoSizes size, string fileName, CancellationToken cancellationToken)
+    {
+        var photo = await _photoService.FindPhoto(id, cancellationToken);
+        if (photo is null)
+            return InvokeHttp404();
+
+        var bytes = await _photoService.GetPhotoBytes(photo, size, cancellationToken);
+        if (bytes is null || bytes.Length == 0)
+            return InvokeHttp404();
+
+        return File(bytes, MediaTypeNames.Image.Jpeg, fileName + ".jpg");
+    }
+
+    private static List<string> SplitTagNames(string tagNames)
+    {
+        if (string.IsNullOrWhiteSpace(tagNames))
+            return new List<string>();
+
+        return tagNames
+            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(tagName => tagName.Trim())
+            .Distinct()
+            .ToList();
     }
 }
