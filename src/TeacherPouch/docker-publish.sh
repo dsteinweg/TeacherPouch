@@ -1,6 +1,6 @@
-donet publish -c Release
+dotnet publish -c Release
 
 docker build \
-  -f ./bin/Release/netcoreapp1.1/publish/Dockerfile \
+  -f ./bin/Release/net7.0/publish/Dockerfile \
   -t registry.dsteinweg.com/teacherpouch \
-  bin/Release/netcoreapp1.1/publish
+  bin/Release/net7.0/publish
