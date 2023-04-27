@@ -33,7 +33,7 @@ public class Startup
             o.EnableSensitiveDataLogging();
             o.UseSqlite(Configuration.GetConnectionString("TeacherPouch"));
         });
-        services.AddDbContext<Data.IdentityDbContext>(o =>
+        services.AddDbContext<IdentityDbContext>(o =>
         {
             o.UseSqlite(Configuration.GetConnectionString("Identity"));
         });
@@ -43,7 +43,7 @@ public class Startup
             {
                 opts.Password.RequireNonAlphanumeric = false;
             })
-            .AddEntityFrameworkStores<Data.IdentityDbContext>()
+            .AddEntityFrameworkStores<IdentityDbContext>()
             .AddDefaultTokenProviders();
 
         services.AddRouting(opts => opts.LowercaseUrls = true);
@@ -58,26 +58,19 @@ public class Startup
         services.AddScoped<PhotoService>();
         services.AddScoped<TagService>();
         services.AddScoped<SearchService>();
-
-        // Add application services.
-        // TODO: implement me
-        //services.AddTransient<IEmailSender, AuthMessageSender>();
-        //services.AddTransient<ISmsSender, AuthMessageSender>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
-        {
             app.UseDeveloperExceptionPage();
-        }
         else
-        {
             app.UseExceptionHandler("/Error");
-        }
 
         app.UseStaticFiles();
         app.UseRouting();
+
+        app.UseStatusCodePages();
 
         app.UseAuthentication();
         app.UseAuthorization();

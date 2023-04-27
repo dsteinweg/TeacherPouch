@@ -8,7 +8,7 @@ namespace TeacherPouch.Controllers;
 
 [Route("tags")]
 [Authorize(Roles = TeacherPouchRoles.Admin)]
-public class TagController : BaseController
+public class TagController : Controller
 {
     public TagController(
         TagService tagService,
@@ -44,7 +44,7 @@ public class TagController : BaseController
     {
         var tag = await _tagService.FindTag(id, cancellationToken);
         if (tag is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var viewModel = new TagDetailsViewModel(
             tag,
@@ -85,7 +85,7 @@ public class TagController : BaseController
     {
         var tag = await _tagService.FindTag(id, cancellationToken);
         if (tag is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var viewModel = new TagEditViewModel(tag);
 
@@ -97,7 +97,7 @@ public class TagController : BaseController
     {
         var tag = await _tagService.FindTag(id, cancellationToken);
         if (tag is null)
-            return InvokeHttp404();
+            return NotFound();
 
         if (!string.IsNullOrWhiteSpace(postedViewModel.Name))
         {
@@ -125,7 +125,7 @@ public class TagController : BaseController
     {
         var tag = await _tagService.FindTag(id, cancellationToken);
         if (tag is null)
-            return InvokeHttp404();
+            return NotFound();
 
         return View(tag);
     }
@@ -135,7 +135,7 @@ public class TagController : BaseController
     {
         var tag = await _tagService.FindTag(id, cancellationToken);
         if (tag is null)
-            return InvokeHttp404();
+            return NotFound();
 
         await _tagService.DeleteTag(id, cancellationToken);
 

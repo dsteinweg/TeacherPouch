@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net.Mime;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -8,7 +9,7 @@ using TeacherPouch.ViewModels;
 
 namespace TeacherPouch.Controllers;
 
-public class HomeController : BaseController
+public class HomeController : Controller
 {
     public HomeController(
         TeacherPouchDbContext dbContext,
@@ -94,6 +95,6 @@ public class HomeController : BaseController
 
         var siteMapXml = siteMapService.GenerateSiteMapXml(HttpContext);
 
-        return Content(siteMapXml, "text/xml", Encoding.UTF8);
+        return Content(siteMapXml, MediaTypeNames.Text.Xml, Encoding.UTF8);
     }
 }

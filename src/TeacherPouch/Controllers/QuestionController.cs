@@ -9,7 +9,7 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers;
 
 [Authorize(Roles = TeacherPouchRoles.Admin)]
-public class QuestionController : BaseController
+public class QuestionController : Controller
 {
     public QuestionController(
         TeacherPouchDbContext dbContext,
@@ -44,11 +44,11 @@ public class QuestionController : BaseController
     {
         var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var photo = await _photoService.FindPhoto(question.PhotoId, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var viewModel = new QuestionDetailsViewModel(question, photo)
         {
@@ -63,7 +63,7 @@ public class QuestionController : BaseController
     {
         var photo = await _photoService.FindPhoto(photoId, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var viewModel = new QuestionCreateViewModel(photo);
 
@@ -71,12 +71,11 @@ public class QuestionController : BaseController
     }
 
     [HttpPost("questions/create")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(int photoId, QuestionCreateViewModel postedViewModel, CancellationToken cancellationToken)
     {
         var photo = await _photoService.FindPhoto(photoId, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         if (!ModelState.IsValid)
             return View(postedViewModel);
@@ -100,11 +99,11 @@ public class QuestionController : BaseController
     {
         var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var photo = await _photoService.FindPhoto(question.PhotoId, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var viewModel = new QuestionEditViewModel(question, photo);
 
@@ -112,18 +111,17 @@ public class QuestionController : BaseController
     }
 
     [HttpPost("questions/{id:int}/edit")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, QuestionEditViewModel postedViewModel, CancellationToken cancellationToken)
     {
         var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
-            return InvokeHttp404();
+            return NotFound();
 
         if (!ModelState.IsValid)
         {
             var photo = await _photoService.FindPhoto(question.PhotoId, cancellationToken);
             if (photo is null)
-                return InvokeHttp404();
+                return NotFound();
 
             var viewModel = new QuestionEditViewModel(question, photo);
 
@@ -145,11 +143,11 @@ public class QuestionController : BaseController
     {
         var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var photo = await _photoService.FindPhoto(question.PhotoId, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var viewModel = new QuestionDetailsViewModel(question, photo);
 
@@ -157,12 +155,11 @@ public class QuestionController : BaseController
     }
 
     [HttpPost("questions/{id:int}/delete")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id, QuestionDetailsViewModel postedViewModel, CancellationToken cancellationToken)
     {
         var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
-            return InvokeHttp404();
+            return NotFound();
 
         _ = _db.Remove(question);
         _ = await _db.SaveChangesAsync(cancellationToken);

@@ -4,7 +4,7 @@ using TeacherPouch.Services;
 
 namespace TeacherPouch.Controllers;
 
-public class SearchController : BaseController
+public class SearchController : Controller
 {
     public SearchController(SearchService searchService)
     {

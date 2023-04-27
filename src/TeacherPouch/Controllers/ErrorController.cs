@@ -4,15 +4,8 @@ using TeacherPouch.ViewModels;
 
 namespace TeacherPouch.Controllers;
 
-public class ErrorController : BaseController
+public class ErrorController : Controller
 {
-    public IActionResult Http404()
-    {
-        Response.StatusCode = (int)HttpStatusCode.NotFound;
-
-        return View("Http404");
-    }
-
     [Route("Error")]
     public IActionResult Error(int? httpStatusCode, Exception? exception = null)
     {

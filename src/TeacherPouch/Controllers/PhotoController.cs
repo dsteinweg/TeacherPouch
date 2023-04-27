@@ -10,7 +10,7 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers;
 
 [Route("photos")]
-public class PhotoController : BaseController
+public class PhotoController : Controller
 {
     public PhotoController(
         PhotoService photoService,
@@ -43,7 +43,7 @@ public class PhotoController : BaseController
     {
         var photo = await _photoService.FindPhoto(id, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var photoUrl = Url.Action(
             nameof(Image),
@@ -121,7 +121,6 @@ public class PhotoController : BaseController
 
     [HttpPost("create")]
     [Authorize(Roles = TeacherPouchRoles.Admin)]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(PhotoCreateViewModel postedViewModel, CancellationToken cancellationToken)
     {
         postedViewModel.PendingPhotoPath = _photoService.PendingPhotoPath;
@@ -173,7 +172,7 @@ public class PhotoController : BaseController
     {
         var photo = await _photoService.FindPhoto(id, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
         var tags = photo.PhotoTags.Select(pt => pt.Tag);
@@ -189,7 +188,7 @@ public class PhotoController : BaseController
     {
         var photo = await _photoService.FindPhoto(id, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         if (!ModelState.IsValid)
             return View();
@@ -208,7 +207,7 @@ public class PhotoController : BaseController
     {
         var photo = await _photoService.FindPhoto(id, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var photoUrl = Url.Action(nameof(Image), new { id, size = PhotoSizes.Large, fileName = photo.Name });
         var tagsTasks = photo.PhotoTags.Select(async photoTag => (await _tagService.FindTag(photoTag.TagId))!);
@@ -224,7 +223,7 @@ public class PhotoController : BaseController
     {
         var photo = await _photoService.FindPhoto(id, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         _photoService.DeletePhoto(photo);
 
@@ -236,11 +235,11 @@ public class PhotoController : BaseController
     {
         var photo = await _photoService.FindPhoto(id, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var bytes = await _photoService.GetPhotoBytes(photo, size, cancellationToken);
         if (bytes is null || bytes.Length == 0)
-            return InvokeHttp404();
+            return NotFound();
 
         return File(bytes, MediaTypeNames.Image.Jpeg);
     }
@@ -250,11 +249,11 @@ public class PhotoController : BaseController
     {
         var photo = await _photoService.FindPhoto(id, cancellationToken);
         if (photo is null)
-            return InvokeHttp404();
+            return NotFound();
 
         var bytes = await _photoService.GetPhotoBytes(photo, size, cancellationToken);
         if (bytes is null || bytes.Length == 0)
-            return InvokeHttp404();
+            return NotFound();
 
         return File(bytes, MediaTypeNames.Image.Jpeg, fileName + ".jpg");
     }

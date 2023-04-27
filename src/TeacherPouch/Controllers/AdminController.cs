@@ -8,7 +8,7 @@ namespace TeacherPouch.Controllers;
 
 [Authorize]
 [Route("admin")]
-public class AdminController : BaseController
+public class AdminController : Controller
 {
     public AdminController(
         UserManager<IdentityUser> userManager,
