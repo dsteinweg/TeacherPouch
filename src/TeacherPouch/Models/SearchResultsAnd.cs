@@ -1,15 +1,10 @@
 ﻿namespace TeacherPouch.Models;
 
-public class SearchResultsAnd
+public class SearchResultsAnd(string searchTerm)
 {
-    public SearchResultsAnd(string searchTerm)
-    {
-        SearchTerm = searchTerm;
-    }
-
-    public string SearchTerm { get; set; }
+    public string SearchTerm { get; set; } = searchTerm;
     public TimeSpan SearchDuration { get; set; }
-    public List<Tag> Tags { get; set; } = new List<Tag>();
-    public List<Photo> Photos { get; set; } = new List<Photo>();
+    public List<Tag> Tags { get; set; } = [];
+    public List<Photo> Photos { get; set; } = [];
     public bool HasAnyResults => Photos.Any();
 }

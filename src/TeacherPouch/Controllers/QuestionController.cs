@@ -9,29 +9,15 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers;
 
 [Authorize(Roles = TeacherPouchRoles.Admin)]
-public class QuestionController : Controller
+public class QuestionController(TeacherPouchDbContext _dbContext, PhotoService _photoService) : Controller
 {
-    public QuestionController(
-        TeacherPouchDbContext dbContext,
-        PhotoService photoService,
-        TagService tagService)
-    {
-        _db = dbContext;
-        _photoService = photoService;
-        _tagService = tagService;
-    }
-
-    private readonly TeacherPouchDbContext _db;
-    private readonly PhotoService _photoService;
-    private readonly TagService _tagService;
-
     [HttpGet("questions")]
     [AllowAnonymous]
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var viewModel = new QuestionIndexViewModel
         {
-            Questions = await _db.Questions.ToArrayAsync(cancellationToken),
+            Questions = await _dbContext.Questions.ToArrayAsync(cancellationToken),
             DisplayAdminLinks = User.IsInRole(TeacherPouchRoles.Admin)
         };
 
@@ -42,7 +28,7 @@ public class QuestionController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Details(int id, CancellationToken cancellationToken)
     {
-        var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
+        var question = await _dbContext.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
             return NotFound();
 
@@ -88,8 +74,8 @@ public class QuestionController : Controller
             Order = postedViewModel.QuestionOrder
         };
 
-        _ = _db.Questions.Add(question);
-        _ = await _db.SaveChangesAsync(cancellationToken);
+        _ = _dbContext.Questions.Add(question);
+        _ = await _dbContext.SaveChangesAsync(cancellationToken);
 
         return RedirectToAction(nameof(Details), new { id = question.Id });
     }
@@ -97,7 +83,7 @@ public class QuestionController : Controller
     [HttpGet("questions/{id:int}/edit")]
     public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
     {
-        var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
+        var question = await _dbContext.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
             return NotFound();
 
@@ -113,7 +99,7 @@ public class QuestionController : Controller
     [HttpPost("questions/{id:int}/edit")]
     public async Task<IActionResult> Edit(int id, QuestionEditViewModel postedViewModel, CancellationToken cancellationToken)
     {
-        var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
+        var question = await _dbContext.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
             return NotFound();
 
@@ -132,8 +118,8 @@ public class QuestionController : Controller
         question.SentenceStarters = postedViewModel.QuestionSentenceStarters;
         question.Order = postedViewModel.QuestionOrder;
 
-        _ = _db.Questions.Update(question);
-        _ = await _db.SaveChangesAsync(cancellationToken);
+        _ = _dbContext.Questions.Update(question);
+        _ = await _dbContext.SaveChangesAsync(cancellationToken);
 
         return RedirectToAction(nameof(Details), new { id });
     }
@@ -141,7 +127,7 @@ public class QuestionController : Controller
     [HttpGet("questions/{id:int}/delete")]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
-        var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
+        var question = await _dbContext.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
             return NotFound();
 
@@ -157,12 +143,12 @@ public class QuestionController : Controller
     [HttpPost("questions/{id:int}/delete")]
     public async Task<IActionResult> Delete(int id, QuestionDetailsViewModel postedViewModel, CancellationToken cancellationToken)
     {
-        var question = await _db.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
+        var question = await _dbContext.Questions.FirstOrDefaultAsync(q => q.Id == id, cancellationToken);
         if (question is null)
             return NotFound();
 
-        _ = _db.Remove(question);
-        _ = await _db.SaveChangesAsync(cancellationToken);
+        _ = _dbContext.Remove(question);
+        _ = await _dbContext.SaveChangesAsync(cancellationToken);
 
         return RedirectToAction(nameof(Index));
     }

@@ -1,6 +1,5 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using TeacherPouch.Models;
@@ -10,25 +9,8 @@ using TeacherPouch.ViewModels;
 namespace TeacherPouch.Controllers;
 
 [Route("photos")]
-public class PhotoController : Controller
+public class PhotoController(PhotoService _photoService, TagService _tagService, IMemoryCache _cache) : Controller
 {
-    public PhotoController(
-        PhotoService photoService,
-        TagService tagService,
-        IMemoryCache cache,
-        UserManager<IdentityUser> userManager)
-    {
-        _photoService = photoService;
-        _tagService = tagService;
-        _cache = cache;
-        _userManager = userManager;
-    }
-
-    private readonly PhotoService _photoService;
-    private readonly TagService _tagService;
-    private readonly IMemoryCache _cache;
-    private readonly UserManager<IdentityUser> _userManager;
-
     [HttpGet("index")]
     public async Task<IActionResult> Index(int? page)
     {
@@ -147,9 +129,9 @@ public class PhotoController : Controller
         _photoService.MovePhoto(postedViewModel.FileName, newPhoto);
         await _photoService.GeneratePhotoSizes(newPhoto, cancellationToken);
 
-        var photoNameParts = postedViewModel.PhotoName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        var photoNameParts = postedViewModel.PhotoName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (int.TryParse(photoNameParts.Last(), out var photoNumber))
-            photoNameParts[photoNameParts.Length - 1] = (photoNumber + 1).ToString();
+            photoNameParts[^1] = (photoNumber + 1).ToString();
 
         var newPhotoName = string.Join(" ", photoNameParts);
         var photoUrl = Url.Action(nameof(Details), new { id = newPhoto.Id });
@@ -230,6 +212,7 @@ public class PhotoController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+#pragma warning disable IDE0060 // Remove unused parameter
     [HttpGet("{id:int}/{size}/{fileName}")]
     public async Task<IActionResult> Image(int id, PhotoSizes size, string fileName, CancellationToken cancellationToken)
     {
@@ -243,6 +226,7 @@ public class PhotoController : Controller
 
         return File(bytes, MediaTypeNames.Image.Jpeg);
     }
+#pragma warning restore IDE0060 // Remove unused parameter
 
     [HttpGet("{id:int}/{size}/download/{fileName}.jpg")]
     public async Task<IActionResult> Download(int id, PhotoSizes size, string fileName, CancellationToken cancellationToken)
@@ -261,10 +245,10 @@ public class PhotoController : Controller
     private static List<string> SplitTagNames(string tagNames)
     {
         if (string.IsNullOrWhiteSpace(tagNames))
-            return new List<string>();
+            return [];
 
         return tagNames
-            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            .Split(',', StringSplitOptions.RemoveEmptyEntries)
             .Select(tagName => tagName.Trim())
             .Distinct()
             .ToList();

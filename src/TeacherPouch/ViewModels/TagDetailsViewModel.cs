@@ -2,20 +2,11 @@
 
 namespace TeacherPouch.ViewModels;
 
-public class TagDetailsViewModel
+public class TagDetailsViewModel(Tag tag, IEnumerable<Photo> photos)
 {
-    public TagDetailsViewModel(Tag tag, IEnumerable<Photo> photos)
-    {
-        Tag = tag;
-        TagId = tag.Id;
-        TagName = tag.Name;
-        IsPrivateHtml = tag.IsPrivate ? "<strong>Yes</strong>" : "<span>No</span>";
-        Photos = photos;
-    }
-
-    public Tag Tag { get; }
-    public int TagId { get; }
-    public string TagName { get; }
-    public string IsPrivateHtml { get; }
-    public IEnumerable<Photo> Photos { get; }
+    public Tag Tag { get; } = tag;
+    public int TagId { get; } = tag.Id;
+    public string TagName { get; } = tag.Name;
+    public string IsPrivateHtml { get; } = tag.IsPrivate ? "<strong>Yes</strong>" : "<span>No</span>";
+    public IEnumerable<Photo> Photos { get; } = photos;
 }

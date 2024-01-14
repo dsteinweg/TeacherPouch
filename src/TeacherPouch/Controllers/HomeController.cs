@@ -1,31 +1,14 @@
 ﻿using System.Net.Mime;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using TeacherPouch.Data;
 using TeacherPouch.Services;
 using TeacherPouch.ViewModels;
 
 namespace TeacherPouch.Controllers;
 
-public class HomeController : Controller
+public class HomeController(TeacherPouchDbContext _dbContext, IWebHostEnvironment _env) : Controller
 {
-    public HomeController(
-        TeacherPouchDbContext dbContext,
-        IUrlHelperFactory urlHelperFactory,
-        IActionContextAccessor actionContextAccessor,
-        IWebHostEnvironment env)
-    {
-        _db = dbContext;
-        _urlHelper = urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext!);
-        _env = env;
-    }
-
-    private readonly TeacherPouchDbContext _db;
-    private readonly IUrlHelper _urlHelper;
-    private readonly IWebHostEnvironment _env;
-
     [HttpGet("")]
     public IActionResult Home()
     {
@@ -91,7 +74,7 @@ public class HomeController : Controller
     [HttpGet("sitemap.xml")]
     public IActionResult Sitemap()
     {
-        var siteMapService = new SiteMapService(_db, _urlHelper);
+        var siteMapService = new SiteMapService(_dbContext, Url);
 
         var siteMapXml = siteMapService.GenerateSiteMapXml(HttpContext);
 

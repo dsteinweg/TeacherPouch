@@ -4,14 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TeacherPouch.Data;
 
-public class IdentityDbContext : IdentityDbContext<IdentityUser>
+public class IdentityDbContext(DbContextOptions<IdentityDbContext> options) : IdentityDbContext<IdentityUser>(options)
 {
-    public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
-        : base(options)
-    {
-
-    }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

@@ -97,76 +97,16 @@ public class PhotoService(IOptions<PhotoPaths> _photoPaths, TeacherPouchDbContex
 
     public void SavePhoto(Photo photo)
     {
-        /*
-        if (photo.ID == 0)
+        if (photo.Id == default)
         {
             // Save the photo.
-            var insertPhotoQuery = SQL.INSERT_INTO(string.Format("{0}({1})", PHOTO_TABLE_NAME, "Name, UniqueID, IsPrivate"))
-                                      .VALUES(photo.Name, photo.UniqueID, photo.IsPrivate);
-
-            using (var connection = ConnectionHelper.GetSQLiteConnection())
-            {
-                connection.Execute(insertPhotoQuery);
-            }
-
-            // Retrieve the photo to get its ID.
-            var retrievedPhoto = FindPhoto(photo.UniqueID, true);
-
-            if (retrievedPhoto is null)
-                throw new ApplicationException("Unable to retrieve photo that was just saved.");
-
-            photo.ID = retrievedPhoto.ID;
+            _dbContext.Photos.Add(photo);
+            _dbContext.SaveChanges();
         }
         else
         {
-            // Update the photo name.
-            var updateQuery = SQL.UPDATE(PHOTO_TABLE_NAME)
-                                 .SET("Name = {0}", photo.Name)
-                                 .SET("IsPrivate = {0}", photo.IsPrivate)
-                                 .WHERE("ID = {0}", photo.ID);
-
-            using (var connection = ConnectionHelper.GetSQLiteConnection())
-            {
-                connection.Execute(updateQuery);
-            }
+            _dbContext.SaveChanges();
         }
-
-        // Delete all existing tag associations for the photo; we'll add them back below.
-        PhotoTagAssociation.DeleteTagAssociationsForPhoto(photo);
-
-        if (tagNames.Any())
-        {
-            var photoTags = new List<Tag>();
-
-            // Create new tags.
-            foreach (var tagName in tagNames)
-            {
-                var existingTag = FindTag(tagName, true);
-                if (existingTag is null)
-                {
-                    var newTag = new Tag()
-                    {
-                        Name = tagName,
-                        IsPrivate = false
-                    };
-
-                    SaveTag(newTag);
-
-                    photoTags.Add(newTag);
-                }
-                else
-                {
-                    photoTags.Add(existingTag);
-                }
-            }
-
-            // Associate the photo to all tags.
-            foreach (var tag in photoTags)
-            {
-                PhotoTagAssociation.EnsurePhotoTagAssociation(photo, tag);
-            }
-        }
-        */
     }
 
     public void DeletePhoto(Photo photo)
@@ -174,19 +114,8 @@ public class PhotoService(IOptions<PhotoPaths> _photoPaths, TeacherPouchDbContex
         if (photo is null || photo.Id == 0)
             return;
 
-        // TODO: implement delete
-
-        /*
-        PhotoTagAssociation.DeleteTagAssociationsForPhoto(photo);
-
-        var deleteQuery = SQL.DELETE_FROM(PHOTO_TABLE_NAME)
-                                .WHERE("ID = {0}", photo.ID);
-
-        using (var connection = ConnectionHelper.GetSQLiteConnection())
-        {
-            connection.Execute(deleteQuery);
-        }
-        */
+        _dbContext.Photos.Remove(photo);
+        _dbContext.SaveChanges();
     }
 
     public void MovePhoto(string fileName, Photo photo)

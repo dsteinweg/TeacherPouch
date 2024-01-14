@@ -3,14 +3,8 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.Data;
 
-public class TeacherPouchDbContext : DbContext
+public class TeacherPouchDbContext(DbContextOptions<TeacherPouchDbContext> options) : DbContext(options)
 {
-    public TeacherPouchDbContext(DbContextOptions<TeacherPouchDbContext> options)
-        : base(options)
-    {
-
-    }
-
     public DbSet<Photo> Photos => Set<Photo>();
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<PhotoTag> PhotoTags => Set<PhotoTag>();

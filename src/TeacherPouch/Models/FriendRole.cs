@@ -4,7 +4,7 @@ namespace TeacherPouch.Models;
 
 public class FriendRole : IdentityRole
 {
-    public FriendRole() : base("Friend")
+    public FriendRole() : base(roleName: TeacherPouchRoles.Friend)
     {
 
     }

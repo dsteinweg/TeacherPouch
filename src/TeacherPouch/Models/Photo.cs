@@ -6,13 +6,10 @@ public class Photo
     public string Name { get; set; } = default!;
     public Guid UniqueId { get; set; } = Guid.NewGuid();
     public bool IsPrivate { get; set; }
-    public List<PhotoTag> PhotoTags { get; set; } = new();
-    public List<Question> Questions { get; set; } = new();
+    public List<PhotoTag> PhotoTags { get; set; } = [];
+    public List<Question> Questions { get; set; } = [];
 
-    public override string ToString()
-    {
-        return $"{Id} - {Name}";
-    }
+    public override string ToString() => $"{Id} - {Name}";
 
     public override bool Equals(object? obj)
     {
@@ -27,8 +24,5 @@ public class Photo
         return false;
     }
 
-    public override int GetHashCode()
-    {
-        return Id;
-    }
+    public override int GetHashCode() => Id;
 }

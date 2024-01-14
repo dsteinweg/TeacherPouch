@@ -2,18 +2,10 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.ViewModels;
 
-public class PhotoDeleteViewModel
+public class PhotoDeleteViewModel(Photo photo, string photoUrl, IEnumerable<Tag> tags)
 {
-    public PhotoDeleteViewModel(Photo photo, string photoUrl, IEnumerable<Tag> tags)
-    {
-        Id = photo.Id;
-        Name = photo.Name;
-        PhotoUrl = photoUrl;
-        Tags = tags;
-    }
-
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string PhotoUrl { get; set; }
-    public IEnumerable<Tag> Tags { get; set; }
+    public int Id { get; set; } = photo.Id;
+    public string Name { get; set; } = photo.Name;
+    public string PhotoUrl { get; set; } = photoUrl;
+    public IEnumerable<Tag> Tags { get; set; } = tags;
 }

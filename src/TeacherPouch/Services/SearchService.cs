@@ -3,15 +3,8 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.Services;
 
-public class SearchService
+public class SearchService(TagService _tagService)
 {
-    public SearchService(TagService tagService)
-    {
-        _tagService = tagService;
-    }
-
-    private readonly TagService _tagService;
-
     public async Task<SearchResultsOr> SearchOr(string query, CancellationToken cancellationToken = default)
     {
         query = query.ToLower();
@@ -29,7 +22,7 @@ public class SearchService
 
         Tag? pluralSuffixTagMatch = null;
         Tag? singularSuffixTagMatch = null;
-        if (!query.EndsWith("s"))
+        if (!query.EndsWith('s'))
         {
             pluralSuffixTagMatch = await _tagService.FindTag(query + "s", cancellationToken);
             if (pluralSuffixTagMatch is not null)
@@ -84,7 +77,7 @@ public class SearchService
         // try splitting the search query into tokens and search for multiple tags.
         if (!results.HasAnyResults)
         {
-            var searchWords = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var searchWords = query.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             var tagSearchResults = new List<TagSearchResult>(searchWords.Length);
             foreach (var searchWord in searchWords)
@@ -106,7 +99,7 @@ public class SearchService
     {
         var stopwatch = Stopwatch.StartNew();
 
-        var searchWords = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        var searchWords = query.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
         var matchingTags = new List<Tag>();
         foreach (var searchWord in searchWords)

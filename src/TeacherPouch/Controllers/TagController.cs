@@ -8,38 +8,25 @@ namespace TeacherPouch.Controllers;
 
 [Route("tags")]
 [Authorize(Roles = TeacherPouchRoles.Admin)]
-public class TagController : Controller
+public class TagController(TagService _tagService, SearchService _searchService) : Controller
 {
-    public TagController(
-        TagService tagService,
-        PhotoService photoService,
-        SearchService searchService)
-    {
-        _tagService = tagService;
-        _photoService = photoService;
-        _searchService = searchService;
-    }
-
-    private readonly TagService _tagService;
-    private readonly PhotoService _photoService;
-    private readonly SearchService _searchService;
-
     [HttpGet("~/api/tags")]
     public async Task<ActionResult<string[]>> Get(string q, CancellationToken cancellationToken)
     {
         return await _searchService.TagAutocompleteSearch(q, cancellationToken);
     }
 
-    [HttpGet("")]
     [AllowAnonymous]
+    [HttpGet("")]
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var allTags = await _tagService.GetAllTags(cancellationToken);
         return View(allTags.OrderBy(tag => tag.Name));
     }
 
-    [HttpGet("{id:int}/{name?}")]
+#pragma warning disable IDE0060 // Remove unused parameter
     [AllowAnonymous]
+    [HttpGet("{id:int}/{name?}")]
     public async Task<IActionResult> Details(int id, string name, CancellationToken cancellationToken)
     {
         var tag = await _tagService.FindTag(id, cancellationToken);
@@ -52,6 +39,7 @@ public class TagController : Controller
 
         return View(viewModel);
     }
+#pragma warning restore IDE0060 // Remove unused parameter
 
     [HttpGet("create")]
     public IActionResult Create()

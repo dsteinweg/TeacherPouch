@@ -6,19 +6,8 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.Services;
 
-public class SiteMapService
+public class SiteMapService(TeacherPouchDbContext _dbContext, IUrlHelper _urlHelper)
 {
-    public SiteMapService(
-        TeacherPouchDbContext dbContext,
-        IUrlHelper urlHelper)
-    {
-        _db = dbContext;
-        _urlHelper = urlHelper;
-    }
-
-    private readonly TeacherPouchDbContext _db;
-    private readonly IUrlHelper _urlHelper;
-
     private static readonly XNamespace RootNamespace = XNamespace.Get("http://www.sitemaps.org/schemas/sitemap/0.9");
     private static readonly XNamespace ImagesNamespace = XNamespace.Get("http://www.google.com/schemas/sitemap-image/1.1");
 
@@ -52,28 +41,26 @@ public class SiteMapService
         }
 
         // Photos
-        var photos = _db.Photos.Where(photo => !photo.IsPrivate);
+        var photos = _dbContext.Photos.Where(photo => !photo.IsPrivate);
         foreach (var photo in photos)
         {
             root.Add(CreatePhotoSiteMapNode(_urlHelper.PhotoDetails(photo), _urlHelper.LargePhotoUrl(photo), _urlHelper.License()));
         }
 
         // Tags
-        var tags = _db.Tags.Where(tag => !tag.IsPrivate);
+        var tags = _dbContext.Tags.Where(tag => !tag.IsPrivate);
         foreach (var tag in tags)
         {
             root.Add(CreateSiteMapNode(_urlHelper.TagDetails(tag)));
         }
 
-        using (var ms = new MemoryStream())
+        using var ms = new MemoryStream();
+        using (var writer = new StreamWriter(ms, Encoding.UTF8))
         {
-            using (var writer = new StreamWriter(ms, Encoding.UTF8))
-            {
-                root.Save(writer);
-            }
-
-            return Encoding.UTF8.GetString(ms.ToArray());
+            root.Save(writer);
         }
+
+        return Encoding.UTF8.GetString(ms.ToArray());
     }
 
     private static XElement CreateSiteMapNode(string siteRelativeUrl)

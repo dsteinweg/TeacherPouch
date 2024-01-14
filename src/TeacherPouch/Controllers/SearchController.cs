@@ -4,15 +4,8 @@ using TeacherPouch.Services;
 
 namespace TeacherPouch.Controllers;
 
-public class SearchController : Controller
+public class SearchController(SearchService _searchService) : Controller
 {
-    public SearchController(SearchService searchService)
-    {
-        _searchService = searchService;
-    }
-
-    private readonly SearchService _searchService;
-
     [HttpGet("search")]
     public async Task<IActionResult> Search(string q, SearchOperator op = SearchOperator.Or, CancellationToken cancellationToken = default)
     {

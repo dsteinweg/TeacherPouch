@@ -4,32 +4,21 @@ using TeacherPouch.Models;
 
 namespace TeacherPouch.Services;
 
-public class TagService
+public class TagService(IHttpContextAccessor _httpContextAccessor, TeacherPouchDbContext _dbContext)
 {
-    public TagService(
-        IHttpContextAccessor httpContextAccessor,
-        TeacherPouchDbContext dbContext)
-    {
-        _httpContextAccessor = httpContextAccessor;
-        _db = dbContext;
-    }
-
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly TeacherPouchDbContext _db;
-
     public async Task<Tag[]> GetAllTags(CancellationToken cancellationToken = default)
     {
         if ((_httpContextAccessor.HttpContext?.User.Identity?.IsAuthenticated).GetValueOrDefault())
-            return await _db.Tags.ToArrayAsync(cancellationToken);
+            return await _dbContext.Tags.ToArrayAsync(cancellationToken);
 
-        return await _db.Tags
+        return await _dbContext.Tags
             .Where(tag => !tag.IsPrivate)
             .ToArrayAsync(cancellationToken);
     }
 
     public async Task<Tag?> FindTag(int id, CancellationToken cancellationToken = default)
     {
-        var tag = await _db.Tags
+        var tag = await _dbContext.Tags
             .Where(t => t.Id == id)
             .Include(t => t.PhotoTags)
             .ThenInclude(pt => pt.Photo)
@@ -46,7 +35,7 @@ public class TagService
 
     public async Task<Tag?> FindTag(string name, CancellationToken cancellationToken = default)
     {
-        var tags = await _db.Tags
+        var tags = await _dbContext.Tags
             .Where(t => t.Name == name)
             .OrderBy(t => t.Id)
             .Include(t => t.PhotoTags)
@@ -71,7 +60,7 @@ public class TagService
 
     public async Task<Tag[]> FindTagsLike(string name, CancellationToken cancellationToken = default)
     {
-        var tags = await _db.Tags.Where(t => t.Name.Contains(name)).ToArrayAsync(cancellationToken);
+        var tags = await _dbContext.Tags.Where(t => t.Name.Contains(name)).ToArrayAsync(cancellationToken);
 
         if (!(_httpContextAccessor.HttpContext?.User.Identity?.IsAuthenticated).GetValueOrDefault())
             return tags.Where(tag => !tag.IsPrivate).ToArray();
@@ -82,25 +71,22 @@ public class TagService
     public async Task SaveTag(Tag tag, CancellationToken cancellationToken = default)
     {
         if (tag.Id == default)
-            _ = _db.Tags.Add(tag);
+            _ = _dbContext.Tags.Add(tag);
         else
-            _ = _db.Update(tag);
+            _ = _dbContext.Update(tag);
 
-        _ = await _db.SaveChangesAsync(cancellationToken);
+        _ = await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteTag(int id, CancellationToken cancellationToken = default)
     {
-        var tag = await _db.Tags.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
-        if (tag is null)
-            throw new Exception($"Tag with ID {id} not found.");
-
-        var photoTags = await _db.PhotoTags
+        var tag = await _dbContext.Tags.FirstAsync(t => t.Id == id, cancellationToken);
+        var photoTags = await _dbContext.PhotoTags
             .Where(pt => pt.TagId == id)
             .ToArrayAsync(cancellationToken);
 
-        _db.RemoveRange(photoTags);
-        _ = _db.Remove(tag);
-        _ = _db.SaveChangesAsync(cancellationToken);
+        _dbContext.RemoveRange(photoTags);
+        _ = _dbContext.Remove(tag);
+        _ = _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

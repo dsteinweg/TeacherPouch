@@ -8,22 +8,8 @@ namespace TeacherPouch.Controllers;
 
 [Authorize]
 [Route("admin")]
-public class AdminController : Controller
+public class AdminController(UserManager<IdentityUser> _userManager, SignInManager<IdentityUser> _signInManager, RoleManager<IdentityRole> _roleManager) : Controller
 {
-    public AdminController(
-        UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager,
-        RoleManager<IdentityRole> roleManager)
-    {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _roleManager = roleManager;
-    }
-
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
-
     [HttpGet("")]
     public async Task<IActionResult> Index()
     {

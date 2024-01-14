@@ -9,7 +9,6 @@ public class ContactSubmission : IValidatableObject
     public string? ReasonForContacting { get; set; }
     public string? Comment { get; set; }
 
-
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         var errors = new List<ValidationResult>();

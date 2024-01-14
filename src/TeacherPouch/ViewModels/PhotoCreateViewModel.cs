@@ -1,13 +1,8 @@
 ﻿namespace TeacherPouch.ViewModels;
 
-public class PhotoCreateViewModel
+public class PhotoCreateViewModel(string pendingPhotoPath)
 {
-    public PhotoCreateViewModel(string pendingPhotoPath)
-    {
-        PendingPhotoPath = pendingPhotoPath;
-    }
-
-    public string PendingPhotoPath { get; set; }
+    public string PendingPhotoPath { get; set; } = pendingPhotoPath;
     public string? PhotoName { get; set; }
     public string? FileName { get; set; }
     public string? Tags { get; set; }
