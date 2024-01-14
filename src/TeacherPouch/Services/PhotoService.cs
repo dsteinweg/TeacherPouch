@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using TeacherPouch.Data;
@@ -9,30 +10,17 @@ using TeacherPouch.Options;
 
 namespace TeacherPouch.Services;
 
-public class PhotoService
+public class PhotoService(IOptions<PhotoPaths> _photoPaths, TeacherPouchDbContext _dbContext, IHttpContextAccessor _httpContextAccessor)
 {
-    public PhotoService(
-        IOptions<PhotoPaths> photoPaths,
-        TeacherPouchDbContext dbContext,
-        IHttpContextAccessor httpContextAccessor)
-    {
-        PhotoPath = photoPaths.Value.PhotoPath;
-        PendingPhotoPath = photoPaths.Value.PendingPhotoPath;
-        _db = dbContext;
-        _httpContextAccessor = httpContextAccessor;
-    }
-
-    private readonly string PhotoPath;
-    public readonly string PendingPhotoPath;
-    private readonly TeacherPouchDbContext _db;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly string PhotoPath = _photoPaths.Value.PhotoPath;
+    public readonly string PendingPhotoPath = _photoPaths.Value.PendingPhotoPath;
 
     public async Task<Photo[]> GetAllPhotos(CancellationToken cancellationToken = default)
     {
         if ((_httpContextAccessor.HttpContext?.User.Identity?.IsAuthenticated).GetValueOrDefault())
-            return await _db.Photos.ToArrayAsync(cancellationToken);
+            return await _dbContext.Photos.ToArrayAsync(cancellationToken);
 
-        return await _db.Photos
+        return await _dbContext.Photos
             .Where(photo => !photo.IsPrivate)
             .ToArrayAsync(cancellationToken);
     }
@@ -41,7 +29,7 @@ public class PhotoService
     {
         var includePrivatePhotos = (_httpContextAccessor.HttpContext?.User.Identity?.IsAuthenticated).GetValueOrDefault();
 
-        var query = _db.Photos
+        var query = _dbContext.Photos
             .AsNoTracking()
             .Where(photo => includePrivatePhotos || !photo.IsPrivate);
 
@@ -50,7 +38,7 @@ public class PhotoService
 
     public async Task<Photo?> FindPhoto(int id, CancellationToken cancellationToken = default)
     {
-        var photo = await _db.Photos
+        var photo = await _dbContext.Photos
             .Where(p => p.Id == id)
             .Include(p => p.PhotoTags)
             .ThenInclude(pt => pt.Tag)
@@ -249,33 +237,25 @@ public class PhotoService
         var destinationPath = Path.Combine(Path.GetDirectoryName(pathToOriginalPhoto)!, size.ToString().ToLower() + ".jpg");
 
         using var originalImageStream = File.OpenRead(pathToOriginalPhoto);
-        var (originalImage, format) = await Image.LoadWithFormatAsync(originalImageStream, cancellationToken);
-        using (originalImage)
+        var image = await Image.LoadAsync(originalImageStream, cancellationToken);
+        using (image)
         {
             using var resizedImageStream = File.OpenWrite(destinationPath);
 
             var resizeOptions = new ResizeOptions
             {
                 Mode = ResizeMode.Max,
-                Sampler = new WelchResampler()
+                Sampler = new WelchResampler(),
+                Size = size switch
+                {
+                    PhotoSizes.Small => new Size(width: 200, height: 200),
+                    PhotoSizes.Large => new Size(width: 800, height: 800),
+                    _ => throw new Exception("Unrecognized photo size."),
+                }
             };
 
-            switch (size)
-            {
-                case PhotoSizes.Small:
-                    resizeOptions.Size = new Size(200, 200);
-                    break;
-
-                case PhotoSizes.Large:
-                    resizeOptions.Size = new Size(800, 800);
-                    break;
-
-                default:
-                    throw new Exception("Unrecognized photo size.");
-            }
-
-            originalImage.Mutate(context => context.Resize(resizeOptions));
-            await originalImage.SaveAsync(resizedImageStream, format, cancellationToken);
+            image.Mutate(context => context.Resize(resizeOptions));
+            await image.SaveAsync(resizedImageStream, new JpegEncoder(), cancellationToken);
         }
     }
 }
