@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using TeacherPouch.Data;
 using TeacherPouch.Options;
@@ -35,7 +34,6 @@ services.AddControllersWithViews();
 services.AddMemoryCache();
 
 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 services.AddScoped<PhotoService>();
 services.AddScoped<TagService>();
