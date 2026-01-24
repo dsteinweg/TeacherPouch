@@ -1,0 +1,19 @@
+{
+  "name": "teacherpouch",
+  "version": "1.0.0",
+  "scripts": {
+    "postinstall": "pwsh ./npm-postinstall.ps1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "help": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.29",
+    "@types/jqueryui": "^1.12.21"
+  },
+  "description": ""
+}

@@ -1,0 +1,11 @@
+{
+    "dependentFileProviders": {
+        "add": {
+            "fileToFile": {
+                "add": {
+                    "npm-postinstall.ps1": ["package.json"]
+                }
+            }
+        }
+    }
+}

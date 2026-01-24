@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeacherPouch", "src\TeacherPouch\TeacherPouch.csproj", "{6211856A-D604-4615-8BD8-72F44CAA9AC2}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TeacherPouch.FSharp", "src\TeacherPouch.FSharp\TeacherPouch.FSharp.fsproj", "{6B38C707-00E4-EF49-3247-688EEDCD63C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6211856A-D604-4615-8BD8-72F44CAA9AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6211856A-D604-4615-8BD8-72F44CAA9AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6211856A-D604-4615-8BD8-72F44CAA9AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B38C707-00E4-EF49-3247-688EEDCD63C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B38C707-00E4-EF49-3247-688EEDCD63C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B38C707-00E4-EF49-3247-688EEDCD63C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B38C707-00E4-EF49-3247-688EEDCD63C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
